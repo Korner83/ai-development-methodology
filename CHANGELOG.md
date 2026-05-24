@@ -9,6 +9,12 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
+(nothing yet)
+
+---
+
+## v1.1.0 — 2026-05-24
+
 ### Feat — New doc `methodology/11_human_roles.md` (2026-05-24)
 
 Adds the methodology's missing "human side": how human contributors stay meaningfully engaged when AI agents do most of the implementation work. The bottleneck has shifted from execution to specification and supervision; this doc says what humans *do* now that AI does most of the typing.
