@@ -16,7 +16,7 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **A fix-test loop for the UI** because "tests pass" doesn't mean "the page renders."
 - **Cross-AI validation + user testing** as the final gates — automated tests are necessary, never sufficient.
 - **Plan before executing** non-trivial work. Use your tool's plan mode.
-- Battle-tested in one production project. See [EVALUATION.md](EVALUATION.md) for what worked, what didn't, and what was missing.
+- Battle-tested in one production project. Currently at v1.2.0 — see [CHANGELOG.md](CHANGELOG.md) for what's shipped and when.
 
 ---
 
@@ -62,7 +62,6 @@ ai-development-methodology/
 ├── CHANGELOG.md              # version history (self-applies the methodology)
 ├── LICENSE                   # CC BY 4.0
 ├── STATUS.md                 # maintenance posture
-├── EVALUATION.md             # field notes: what was missing, what got added
 ├── methodology/              # the 12 methodology docs
 │   ├── 00_README.md          #   index + mental model
 │   ├── 01_strategy.md        #   strategy docs
@@ -82,7 +81,7 @@ ai-development-methodology/
     └── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions
 ```
 
-Total: ~6,000 lines across 20 files (12 methodology docs + 3 instruction-file templates + repo meta). The longest single doc is ~700 lines. Each doc is self-contained — you don't have to read them in order.
+Total: ~6,100 lines across 19 files (12 methodology docs + 3 instruction-file templates + repo meta). The longest single doc is ~700 lines. Each doc is self-contained — you don't have to read them in order.
 
 ---
 
@@ -306,7 +305,7 @@ This is the only obligation the license imposes. Use it commercially, in client 
 
 ## Status
 
-See [STATUS.md](STATUS.md). Short version: battle-tested in one production project; the [EVALUATION.md](EVALUATION.md) is the honest field report (what worked, what was missing, what got added). Maintenance is lean — PRs welcome, but no SLA. The CC BY 4.0 license exists precisely so you can fork it if you want a more actively-maintained version.
+See [STATUS.md](STATUS.md). Short version: battle-tested in one production project, currently at v1.2.0 — see [CHANGELOG.md](CHANGELOG.md) for the version history. Maintenance is lean — PRs welcome, but no SLA. The CC BY 4.0 license exists precisely so you can fork it if you want a more actively-maintained version.
 
 For direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 
@@ -324,4 +323,4 @@ You are free to share and adapt for any purpose, commercial or not, provided you
 
 Extracted from a real production project's working practice, then republished as a portable abstract version. The source project name and domain appear nowhere in the methodology — by design. The intent is for anyone (human or AI agent) to read these and apply them to any codebase.
 
-What you're reading isn't a theoretical framework. It's what worked. Specifically, it's what worked *after* it had failed in other shapes. The [EVALUATION.md](EVALUATION.md) lists what was added when real practice exposed gaps in earlier versions — and what's still uncovered today.
+What you're reading isn't a theoretical framework. It's what worked. Specifically, it's what worked *after* it had failed in other shapes. See [CHANGELOG.md](CHANGELOG.md) for the running record of what's been added, refined, or rolled back as understanding sharpens.

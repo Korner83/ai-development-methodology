@@ -9,7 +9,13 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-(nothing yet)
+### Chore — Remove `EVALUATION.md` from public repo (2026-05-24)
+
+The gap-analysis report that triggered v1.1.0 and v1.2.0 is no longer worth carrying as a top-level repo artifact. The gaps it identified are mostly closed (see those releases); a stale "here's what's missing" doc at the root would mislead new readers about the current state of the methodology.
+
+Internal copy preserved as a dated snapshot in the source project's docs folder. Ongoing maintenance flows through this `CHANGELOG.md` instead — release-by-release, in the format the methodology itself prescribes (see [methodology/07_definition_of_done.md](methodology/07_definition_of_done.md) "Changelog — the practical patterns").
+
+`README.md` updated: four references to `EVALUATION.md` rewritten (now pointing at `CHANGELOG.md` where appropriate); file tree no longer lists `EVALUATION.md`; line count refreshed (~6,100 lines across 19 files).
 
 ---
 
