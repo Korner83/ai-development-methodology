@@ -16,7 +16,7 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **A fix-test loop for the UI** because "tests pass" doesn't mean "the page renders."
 - **Cross-AI validation + user testing** as the final gates — automated tests are necessary, never sufficient.
 - **Plan before executing** non-trivial work. Use your tool's plan mode.
-- Battle-tested in one production project. Currently at v1.2.0 — see [CHANGELOG.md](CHANGELOG.md) for what's shipped and when.
+- Battle-tested in one production project. Currently at v1.3.1 — see [CHANGELOG.md](CHANGELOG.md) for what's shipped and when.
 
 ---
 
@@ -81,7 +81,7 @@ ai-development-methodology/
     └── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions
 ```
 
-Total: ~6,100 lines across 19 files (12 methodology docs + 3 instruction-file templates + repo meta). The longest single doc is ~700 lines. Each doc is self-contained — you don't have to read them in order.
+Total: ~7,100 lines across 19 files (12 methodology docs + 3 instruction-file templates + repo meta). The longest single doc is ~780 lines. Each doc is self-contained — you don't have to read them in order.
 
 ---
 
@@ -260,13 +260,29 @@ This methodology is **tool-agnostic.** The protocols work for any AI agent that 
 | Continue.dev | `.continue/context.md` | Adapt [templates/AGENTS.md](templates/AGENTS.md) |
 | Any other tool | Whatever it reads (often any `.md` in the repo root) | Either template |
 
-The two templates have identical content. If your team uses multiple tools, either:
+The two templates have substantially identical content; AGENTS.md includes a few extra vendor-neutral sections (plan-mode discipline, tool-install guidance, an explicit verification order, and an operational-safety rule on destructive commands) that Claude Code's harness covers implicitly. If your team uses multiple tools, either:
 
-- Maintain both `CLAUDE.md` and `AGENTS.md` with identical content (small duplication cost), or
-- Symlink one to the other (`ln -s AGENTS.md CLAUDE.md` on Unix), or
+- Maintain both `CLAUDE.md` and `AGENTS.md`, accepting the small duplication cost, or
+- Symlink one to the other (`ln -s AGENTS.md CLAUDE.md` on Unix) — recommend symlinking *to* AGENTS.md so the vendor-neutral superset stays the source of truth, or
 - Pick one filename and leave the other tools unconfigured (most modern AI tools fall back gracefully).
 
 The *content* is what matters — the project-instruction file. The filename is a tool-specific detail.
+
+---
+
+## Permissions and vendor compatibility
+
+Three things people often want spelled out before adopting.
+
+**1. The methodology's own license.** [CC BY 4.0](LICENSE). You can use it in private, commercial, or open-source projects; fork, modify, restructure, rename, redistribute, charge for derivatives; ship it inside a paid product or service; use it with paid, free, self-hosted, or on-prem AI tools. The only obligation is the attribution described in [Attribution](#attribution) below — no field-of-use restrictions, no new obligations layered on top.
+
+**2. Compatibility with AI tool vendor policies.** This methodology is markdown and git. It calls no vendor's API and instructs no AI agent to do anything restricted under any major vendor's acceptable-use policy. What it asks AI agents to do — follow project conventions, write code per spec, run tests, pass code review, file PRs — is exactly what those tools are sold to do. The project-instruction file each tool reads (`CLAUDE.md` for Claude Code, `AGENTS.md` for OpenAI Codex and Google Antigravity, `.cursor/rules/` or `.cursorrules` for Cursor, `.continue/context.md` for Continue.dev) is the vendor-supported mechanism for project context; filling it with this methodology's working principles, DoD, and conventions is the intended path, not a workaround.
+
+This methodology is **not** endorsed by, partnered with, or affiliated with any AI tool vendor. It is an independent published artifact that works alongside their tools by design.
+
+**3. The methodology actively prescribes safety practices.** AI agents never run production deploys; never force-push to the trunk; never bypass pre-commit hooks without explicit authorization; never steal a live lock; never run destructive commands autonomously. Branch protection and PR-only merges by default. Cross-AI validation and user testing as the final gates before ship. (See [09_git_workflow.md](methodology/09_git_workflow.md), [05_locks_and_parallel_work.md](methodology/05_locks_and_parallel_work.md), [10_testing_and_verification.md](methodology/10_testing_and_verification.md).) A team adopting this methodology ends up *more* aligned with vendor AUPs around safe agent operation, not less.
+
+*Not legal advice.* This section describes how the methodology coexists with vendor policies as of this revision. If you operate under specific compliance requirements (regulated industry, data residency, classified work, government procurement), confirm fit with your legal team before adoption. Vendor AUPs change; this section will not auto-update with them.
 
 ---
 
@@ -315,7 +331,7 @@ This is the only obligation the license imposes. Use it commercially, in client 
 
 ## Status
 
-See [STATUS.md](STATUS.md). Short version: battle-tested in one production project, currently at v1.2.0 — see [CHANGELOG.md](CHANGELOG.md) for the version history. Maintenance is lean — PRs welcome, but no SLA. The CC BY 4.0 license exists precisely so you can fork it if you want a more actively-maintained version.
+See [STATUS.md](STATUS.md). Short version: battle-tested in one production project, currently at v1.3.1 — see [CHANGELOG.md](CHANGELOG.md) for the version history. Maintenance is lean — PRs welcome, but no SLA. The CC BY 4.0 license exists precisely so you can fork it if you want a more actively-maintained version.
 
 For direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 

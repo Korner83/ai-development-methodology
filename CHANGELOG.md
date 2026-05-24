@@ -13,6 +13,29 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.3.1 — 2026-05-24
+
+### Docs — Add "Permissions and vendor compatibility" section to README (2026-05-24)
+
+New README section addresses three reader questions: (1) what the CC BY 4.0 license actually permits in practice (private, commercial, open-source use; fork, modify, redistribute, charge for derivatives; ship inside a paid product; use with paid, free, self-hosted, or on-prem AI tools — only obligation is attribution); (2) whether the methodology is compatible with AI tool vendor acceptable-use policies (Anthropic, OpenAI, Google, Cursor, Continue, Aider, etc.) — yes, because the methodology calls no vendor API and asks AI agents to do nothing restricted under any major AUP, and the project-instruction file (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `.continue/context.md`) is the vendor-supported mechanism for project context; (3) how the methodology's safety practices (no production deploys by agents, no force-push to trunk, no hook bypass, no destructive commands autonomously, branch protection + PR-only by default, cross-AI validation + user testing as final gates) align with vendor AUPs rather than conflicting with them.
+
+Includes a clear "not endorsed by, partnered with, or affiliated with any AI tool vendor" disclaimer and a "not legal advice" disclaimer for adopters operating under specific compliance requirements (regulated industry, data residency, classified work, government procurement).
+
+Added because adopters considering the methodology were uncertain whether using it with their preferred AI tool would put them at odds with vendor policies. The answer is no, and the answer should live in the README rather than be left for adopters to infer.
+
+### Chore — Honesty pass on v1.3.0 (2026-05-24)
+
+Three small fixes for facts that drifted or never matched reality. The methodology applies to itself; a repo whose README mis-states its own size and whose CHANGELOG links to a deleted file fails its own DoD Gate 4.
+
+- `README.md:84` — line-count claim updated from ~6,100 to ~7,100 (actual: 7,115 lines across 19 files; v1.3.0's "refreshed" claim was 16.5% low). "Longest single doc" updated from ~700 to ~780 (actual longest: `methodology/04_backlog_items.md` at 778 lines).
+- `README.md:263–267` — "The two templates have identical content" softened to "substantially identical." AGENTS.md is the superset by 22 lines (~11%), with vendor-neutral sections on plan-mode discipline, tool-install guidance, verification order, and an operational-safety rule that Claude Code's harness covers implicitly. Symlink advice updated to recommend pointing CLAUDE.md → AGENTS.md so the superset stays the source of truth.
+- `CHANGELOG.md:151` — broken link `[EVALUATION.md](EVALUATION.md)` in the v1.0.0 historical entry rewritten to plain text + parenthetical pointing to the v1.3.0 removal entry. Historical narrative preserved; broken link removed.
+- `README.md:19, 334` — two stale "Currently at v1.2.0" references bumped to v1.3.1 (this release). These should have been bumped at v1.3.0 ship; they weren't, completing the picture of v1.3.0 documentation drift that this honesty pass closes.
+
+Discovered via an external fresh-eyes audit on 2026-05-24 (the same day v1.3.0 shipped). Each fix would have been caught at the time by stricter Gate 4 / Gate 5 application; this release closes that gap and the audit findings are now folded back into the project's working practice.
+
+---
+
 ## v1.3.0 — 2026-05-24
 
 ### Docs — README: new Step 0 (the brief is a prerequisite) + Step 3 made realistic (2026-05-24)
@@ -148,7 +171,7 @@ The README's "AI tool support" section maps each AI tool to its expected filenam
 
 ### Feat — Field-tested in production
 
-[EVALUATION.md](EVALUATION.md) is the honest field report: what the methodology covers, what was missing when compared to real practice, what got added in this release, and what remains deliberately out of scope. Coverage mapping plus practical pros and cons.
+`EVALUATION.md` was the honest field report shipped in v1.0.0: what the methodology covered, what was missing when compared to real practice, what got added in this release, and what remained deliberately out of scope. Coverage mapping plus practical pros and cons. (Removed in v1.3.0 — see that entry above for rationale.)
 
 ### Chore — Repo scaffolding
 
