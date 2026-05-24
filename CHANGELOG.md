@@ -9,6 +9,12 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
+### Docs — README "How this relates to specific methodologies" comparison (2026-05-24)
+
+The "What makes this different" section now includes a comparison table mapping the major prior methodologies (Agile Manifesto, Scrum, Kanban, Shape Up, Extreme Programming) to what this methodology adopts vs. what it does differently. Plus a coexistence paragraph: runs inside Scrum (sprints as scheduling overlay), layers on top of Kanban (adds upstream planning), complements XP directly, not designed to replace SAFe or other enterprise frameworks.
+
+Addresses the common first-read question: "where does this fit relative to what I already know?"
+
 ### Chore — Remove `EVALUATION.md` from public repo (2026-05-24)
 
 The gap-analysis report that triggered v1.1.0 and v1.2.0 is no longer worth carrying as a top-level repo artifact. The gaps it identified are mostly closed (see those releases); a stale "here's what's missing" doc at the root would mislead new readers about the current state of the methodology.

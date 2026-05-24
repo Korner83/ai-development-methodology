@@ -288,6 +288,20 @@ This set explicitly accounts for:
 
 Common ground with prior methodologies: small deliberate iterations, explicit definition of done, outcome-based gating. The shape is familiar; the AI-agent integration is new.
 
+### How this relates to specific methodologies
+
+| Methodology | What we adopt | What we do differently |
+|---|---|---|
+| **Agile Manifesto** | The values: working software, responding to change, individuals over process | We add explicit artifacts (strategy → pillars → epics → items) and gates (DoD) — values alone don't bind AI agents |
+| **Scrum** | Outcome-based work, Definition of Done, retrospectives | No fixed sprints, no Scrum Master role, no story points; ceremonies replaced by async artifacts |
+| **Kanban** | Pull-based work, WIP limits (we cap active epics at 3), flow visualization (`EPICS.md` rollup) | We add a planning hierarchy upstream — pure Kanban has no upstream constraint, just the board |
+| **Shape Up** | Outcome-based pitches (≈ epic charters), explicit out-of-scope, fixed appetite (≈ effort enum) | Epics close on binary exit criteria, not on a calendar-based appetite |
+| **Extreme Programming (XP)** | Test-first discipline, frequent commits, simple design, refactoring | Adds cross-AI validation + user-testing-as-final-gate; pair programming becomes human + AI pairing |
+
+**Coexistence:** this methodology can run *inside* a Scrum team (treat sprints as a scheduling overlay; the artifact layer below stays the same). It can layer *on top of* a Kanban-only workflow by adding the upstream planning layers. It complements XP practices directly. It's not designed to replace enterprise frameworks like SAFe — those operate above the team level, and this stays at the team level.
+
+**Net:** if you know one of the above, you'll find this familiar. The differences are not philosophical — they're concrete additions that came from running multi-contributor AI-assisted projects long enough to see what breaks under that specific shape of work.
+
 ---
 
 ## Attribution
