@@ -56,6 +56,7 @@ Three properties make the set hold together:
 ```
 ai-development-methodology/
 ├── README.md                 # this file
+├── CHANGELOG.md              # version history (self-applies the methodology)
 ├── LICENSE                   # CC BY 4.0
 ├── STATUS.md                 # maintenance posture
 ├── EVALUATION.md             # field notes: what was missing, what got added
@@ -73,7 +74,8 @@ ai-development-methodology/
 │   └── 10_testing_and_verification.md
 └── templates/
     ├── CLAUDE.md             # project-instruction file (Claude Code)
-    └── AGENTS.md             # same content, vendor-neutral filename
+    ├── AGENTS.md             # same content, vendor-neutral filename
+    └── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions
 ```
 
 Total: ~5,200 lines across 14 files. The longest single doc is ~700 lines. Each doc is self-contained — you don't have to read them in order.
@@ -218,6 +220,14 @@ This one line routinely surfaces:
 - Tool / library / pattern choices where the AI sees multiple reasonable options.
 
 A 30-second exchange of questions saves hours of rework later. The working principles already require the AI to raise questions when uncertain ([06 — Principle 1: Think before coding](methodology/06_working_principles.md)), but you prompting "any questions?" is the social cue that gives the AI permission to surface them. Use it liberally — especially before plan-mode approvals, before large refactors, and at the start of any new session.
+
+---
+
+### For long autonomous sessions
+
+When you want the AI to grind toward a milestone without you reviewing every step, use the [autonomous-loop prompt template](templates/AUTONOMOUS_LOOP.md). It tells the AI to apply the methodology as a continuous *analyze → prioritize → execute → validate → repeat* loop, with a milestone-level stop condition (not per-task completion). Includes the integrity rule: never claim what wasn't actually verified.
+
+Not for exploratory work — for that, the "Step 2" prompt above is the right shape.
 
 ---
 

@@ -9,7 +9,15 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-(nothing yet)
+### Feat — `templates/AUTONOMOUS_LOOP.md` (2026-05-24)
+
+Adds a paste-and-adapt prompt template for long autonomous AI dev sessions. Tells the AI to apply the methodology as a continuous *analyze → prioritize → execute → validate → repeat* loop with a milestone-level stop condition (not per-task completion). Includes the integrity rule: never claim something is tested / secure / complete / production-ready unless actually verified.
+
+Compressed from a real production-tested ~85-line autonomous-engineer prompt down to ~50 lines, with most rules referenced via methodology docs rather than restated inline.
+
+Use cases: focused milestone work where the goal is agreed and the AI should grind toward it autonomously between check-ins. Not for exploratory work where each step needs review.
+
+README updated to mention the new template (file tree + new "For long autonomous sessions" subsection).
 
 ---
 
