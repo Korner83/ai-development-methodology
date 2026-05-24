@@ -9,6 +9,22 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
+(nothing yet)
+
+---
+
+## v1.3.0 — 2026-05-24
+
+### Docs — README: new Step 0 (the brief is a prerequisite) + Step 3 made realistic (2026-05-24)
+
+Two substantive README changes that close a methodology-honesty gap.
+
+**New Step 0 — "Before this methodology kicks in (the brief)":** explicit acknowledgment that the methodology does NOT solve the upstream work — product / market / user / business / tech stack decisions. Lists the 7 questions a project needs written, defensible answers to before Step 1 can produce anything useful (what / who / success / competitors / viability / stack / capability layers → pillars). Names a common failure mode (treating `docs/strategy/` and `docs/pillars/` as a substitute for upstream thinking rather than the *recording layer* for already-validated decisions) and the resulting velocity illusion (shipping confidently-built wrong product). Mentions Lean Canvas, JTBD interviews, Five Forces, etc. as candidate frameworks without prescribing.
+
+**Revised Step 3 — "Ongoing development":** removed the unrealistic "paste this 30-line prompt at the start of every session" framing. The project-instruction file (`CLAUDE.md` / `AGENTS.md`) is what AI tools read automatically; nothing to paste. Replaced with four short steering phrases for when the AI drifts ("Do you have any questions?", "What's wrong with this plan?", "Use plan mode", "Stop — split this item"). AUTONOMOUS_LOOP remains the explicit-paste path for dedicated milestone work; everything else runs from the instruction file.
+
+Adjacent cleanup: the "small tip that pays off" intro no longer references a "prompt above."
+
 ### Docs — README "How this relates to specific methodologies" comparison (2026-05-24)
 
 The "What makes this different" section now includes a comparison table mapping the major prior methodologies (Agile Manifesto, Scrum, Kanban, Shape Up, Extreme Programming) to what this methodology adopts vs. what it does differently. Plus a coexistence paragraph: runs inside Scrum (sprints as scheduling overlay), layers on top of Kanban (adds upstream planning), complements XP directly, not designed to replace SAFe or other enterprise frameworks.

@@ -100,6 +100,30 @@ Total: ~6,100 lines across 19 files (12 methodology docs + 3 instruction-file te
 
 This is the highest-leverage path: hand the methodology to an AI agent in planning mode *before* you write any code. Let the agent produce the initial strategy, pillars, and first epic. By the time you start implementing, the structure is in place.
 
+### Step 0 — Before this methodology kicks in (the brief)
+
+**This methodology does not solve the upstream work.** It executes on already-defined goals. It does not tell you what to build, who to build it for, or how to validate that anyone wants it. Those decisions need real thinking *before* any of the steps below can produce anything useful.
+
+Concretely, before Step 1, you need at least rough written answers to:
+
+- **What** are we building, and **why** does it matter?
+- **Who** is it for? What problem do they have today, and how do you know they have it?
+- **What does success look like** at the 1-year horizon, the 3-year horizon?
+- **Who else is in this space?** What do they do better or worse? What's your wedge?
+- **Is this financially viable?** Revenue model? Cost structure? Unit economics that survive scrutiny?
+- **What's the tech stack?** Frontend, backend, database, hosting, AI tooling — choices that fit the product, the budget, and the team.
+- **What are the 5–10 capability layers** the product will need? (These become your [pillars](methodology/02_pillars.md).)
+
+How you produce these answers is your own work. Founder intuition, structured frameworks (Lean Canvas, Business Model Canvas, JTBD interviews, Porter's Five Forces, customer-discovery calls, paid market research, advisor conversations) — pick what fits the situation. This methodology is silent on the *method* of getting to a solid brief; it just assumes you have one.
+
+**A common failure mode** is treating `docs/strategy/` and `docs/pillars/` as a substitute for upstream thinking. They're not — they're the *recording layer* for decisions you've already made and validated externally. If you populate them with hand-wavy guesses, every layer below (epics, items, code) executes confidently on a shaky foundation, and you find out the foundation was wrong many months later when the product doesn't fit the market.
+
+**The honest deliverable from Step 0:** a written brief — covering the bullets above — that you'd be willing to hand to an investor, an advisor, or your future self. Could be a one-pager, could be a 20-page document, could be a Notion workspace. Format doesn't matter; the discipline of having written, defensible answers does.
+
+**If you don't have answers yet: stop.** Do that work first. The methodology will be here when you're ready. Skipping Step 0 to "just start coding with AI" produces a velocity illusion: you ship a lot of working code that builds the wrong product.
+
+---
+
 ### Step 1 — Set up the repo
 
 ```bash
@@ -166,52 +190,24 @@ Your job, in order:
 
 The agent reads the methodology, asks the right questions, produces a complete planning skeleton. You review and refine. By the time you sit down to write code, you have strategy, pillars, an epic, and items — all in the right places.
 
-### Step 3 — During development
+### Step 3 — Ongoing development
 
-Add this to your AI agent's per-session instructions, or paste it at the start of any new session:
+After Steps 0–2 are done, the project-instruction file (`CLAUDE.md` or `AGENTS.md` at the repo root) is what carries the methodology into every AI session. **Modern AI coding tools read it automatically — you don't paste anything at the start of each session.** The file's contents (working principles, lock protocol, DoD, verification order) become the AI's standing context.
 
-```
-This project follows the AI development methodology at docs/methodology/.
+What you actually do during development is **steer when the AI drifts.** Four short phrases worth keeping handy:
 
-Before picking up any item:
-- Read its Lock field (docs/methodology/05_locks_and_parallel_work.md).
-  If locked by someone else and the lock is still valid, skip and pick
-  another item. Never steal a live lock.
-- Acquire the lock atomically (one commit) before starting work.
+- **"Do you have any questions before you start?"** — surfaces ambiguities before they become code (see the small-tip section below).
+- **"What's wrong with this plan? What's the strongest case against it?"** — counters the AI agreement bias (see [Challenge before consenting](methodology/06_working_principles.md)).
+- **"Use plan mode and show me the plan before executing."** — when the AI is about to start non-trivial work without planning.
+- **"Stop. Split this item — you're growing scope."** — when scope creep appears mid-task.
 
-For non-trivial work (more than ~3 files, new abstractions, schema
-changes, anything with multiple reasonable approaches): use plan mode.
-Produce a written plan, wait for approval, then execute.
+These are session-time interventions, not setup ceremony. The methodology runs continuously from the project-instruction file; your job is to *steer* when the AI drifts and to *approve* when it pauses for review.
 
-During every change:
-- Apply the four working principles
-  (docs/methodology/06_working_principles.md).
-  Especially: surgical scope, no speculative abstractions, no drive-by
-  edits.
-
-Before marking any item done:
-- Pass every gate in the Definition of Done
-  (docs/methodology/07_definition_of_done.md).
-- Hard rule: Status: done REQUIRES Test: pass. No exceptions.
-- Verification order: automated tests → UI verification loop →
-  cross-AI validation → user testing → ship. The user is the final
-  gate; "tests pass" alone is never enough.
-
-If a tool would significantly help (MCP server, plugin, library, skill):
-install it or ask. Don't reinvent.
-
-If you spot a recurring lesson worth saving, file a memory entry per
-docs/methodology/08_lessons_and_memory.md.
-
-When in doubt about HOW to do something, consult the corresponding
-methodology doc — it is the source of truth for process.
-```
-
-Paste once per session (or pin as a system message if your tool supports that). It tells the agent everything it needs to operate inside the methodology.
+For dedicated milestone-pushing where you want the AI to grind autonomously between check-ins, see [For long autonomous sessions](#for-long-autonomous-sessions) below — that's the one case where pasting an explicit prompt is the right move.
 
 ### A small tip that pays off
 
-After pasting the prompt above and giving the AI its first task — *before letting it proceed* — ask:
+When you give the AI its first task in a new session — *before letting it proceed* — ask:
 
 > **"Do you have any questions before you start?"**
 
