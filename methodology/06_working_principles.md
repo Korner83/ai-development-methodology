@@ -199,6 +199,41 @@ When in doubt: ask. The cost of a question is small; the cost of an unwanted pac
 
 ---
 
+## Challenge before consenting
+
+AI models are trained to be helpful and agreeable. That bias toward agreement is useful most of the time and dangerous when it matters: in a crisis, debugging a baffling failure, or evaluating a load-bearing architectural decision, an AI that defaults to "yes, that sounds right" can produce a false consensus while the actual system fails.
+
+### The pattern
+
+When the stakes are high — production incident, architectural choice, security-sensitive change — invert the default. Prompt the AI to *challenge* rather than confirm:
+
+```
+"Before we proceed: what's wrong with this plan?
+What am I missing?
+What's the strongest case AGAINST doing it this way?
+What would a senior engineer at a competing company poke holes in?"
+```
+
+The AI is fully capable of producing the contrarian case. It just won't by default — you have to ask.
+
+### When to use it
+
+- Before approving any plan for non-trivial work (alongside the "any questions?" prompt — see README "A small tip that pays off").
+- Mid-incident when a fix attempt is being proposed.
+- When evaluating which of two architectures to choose.
+- After the AI has produced a confident-sounding answer to an ambiguous question.
+- When you notice you're agreeing with the AI a lot — that's the signal.
+
+### Why this matters
+
+Consensus between you and the AI is not validation. You may both be wrong in the same way. A flawed theory you both believe is harder to escape than a flawed theory that one of you doubts.
+
+The methodology already has mechanisms for this at the systemic level — [cross-AI validation](10_testing_and_verification.md) uses a different model to catch what the implementing model missed, and [user testing](10_testing_and_verification.md) is the final gate. *Challenge before consenting* is the per-decision version of the same idea: don't let a single conversation's agreement substitute for genuine review.
+
+See [11_human_roles.md](11_human_roles.md) "The yes-man (the agreement bias)" for the deeper framing.
+
+---
+
 ## How the four principles interact
 
 The principles compose. A change that violates none of them looks like this:

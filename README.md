@@ -2,7 +2,7 @@
 
 How to run a software project when some of your contributors are AI agents — and one of them just panic-refactored your auth middleware at 2am while a different one was halfway through the same task.
 
-Eleven short docs. Markdown + git. No SaaS, no signup, no vendor lock-in. Read in 90 minutes; use forever (or until you find something better).
+Twelve short docs. Markdown + git. No SaaS, no signup, no vendor lock-in. Read in 90 minutes; use forever (or until you find something better).
 
 By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com)) — [CC BY 4.0](LICENSE). Fork it, ship it, charge for it, teach it. Just keep the credit.
 
@@ -34,6 +34,9 @@ Most software projects accumulate the same failure modes once they last more tha
 | **Lessons evaporate.** Same mistake every six months. Tribal knowledge stays in heads. | No system for capturing recurring fixes. | [Two-layer memory system](methodology/08_lessons_and_memory.md) — instruction file + memory directory. Lessons survive sessions and contributors. |
 | **Parallel contributors collide.** Two agents grab the same item; both do the work. | Markdown backlogs have no coordination primitive; chat-based "I've got this" is invisible. | [File-based locks with TTL](methodology/05_locks_and_parallel_work.md) — works for humans and AI agents identically. |
 | **AI agents wander off-task.** Without explicit constraints, they speculate, refactor adjacent code, build cathedrals for one-line problems. | The default "helpful" LLM tendency is to add abstraction and defensive scaffolding. | [Four working principles](methodology/06_working_principles.md) — distilled from real LLM-coding failure modes. |
+| **Humans drift out of the loop as AI does more coding.** Reviews become rubber stamps; the team becomes strangers in its own codebase; AI confidently proposes the same broken approach you tried two years ago. | When AI generates code faster than humans can meaningfully review it, supervisory work gets squeezed without anyone noticing. | [Human roles in an AI-driven workflow](methodology/11_human_roles.md) — supervisory layer, spec-as-primary-artifact, four anti-patterns (cheating agent, yes-man, stranger in own code, tribal-knowledge loss), and the skills that matter now. |
+| **AI agrees with you and you're both wrong.** Production incident; you propose a theory; the AI agrees; the system keeps failing. | AI models default to helpful agreement; consensus between you and the AI is not validation. | [Challenge before consenting](methodology/06_working_principles.md) + [cross-AI validation](methodology/10_testing_and_verification.md) — invert the default; prompt for the contrarian case. |
+| **AI writes broken code AND broken tests that validate it.** Green test suite hides bugs. | When the same AI writes implementation and tests, the tests can be subtly tuned to validate the broken code. | [The "cheating agent" anti-pattern](methodology/10_testing_and_verification.md) — write tests first, cross-AI validate, human-review test names. |
 | **AI agents start without a plan and you find out three hours later they went the wrong way.** | No required planning step. | [Plan before executing non-trivial work](methodology/06_working_principles.md) — use your tool's plan mode. |
 | **Design work has no home.** Features ship with vague scope because the design wasn't finished before the charter. | The four planning layers don't fit "design exploration." | [Pre-epic planning](methodology/03_epics.md) — `docs/planning/` as the incubation layer. |
 | **Scope creep.** Epics absorb every adjacent suggestion and never finish. | "Out of scope" is vague intent, not documentation. | [Epic charters](methodology/03_epics.md) — every charter has an explicit out-of-scope section with pointers. |
@@ -60,7 +63,7 @@ ai-development-methodology/
 ├── LICENSE                   # CC BY 4.0
 ├── STATUS.md                 # maintenance posture
 ├── EVALUATION.md             # field notes: what was missing, what got added
-├── methodology/              # the 11 methodology docs
+├── methodology/              # the 12 methodology docs
 │   ├── 00_README.md          #   index + mental model
 │   ├── 01_strategy.md        #   strategy docs
 │   ├── 02_pillars.md         #   pillars
@@ -71,14 +74,15 @@ ai-development-methodology/
 │   ├── 07_definition_of_done.md
 │   ├── 08_lessons_and_memory.md
 │   ├── 09_git_workflow.md    #   git + operational work
-│   └── 10_testing_and_verification.md
+│   ├── 10_testing_and_verification.md
+│   └── 11_human_roles.md     #   human roles in AI-driven workflow
 └── templates/
     ├── CLAUDE.md             # project-instruction file (Claude Code)
     ├── AGENTS.md             # same content, vendor-neutral filename
     └── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions
 ```
 
-Total: ~5,200 lines across 14 files. The longest single doc is ~700 lines. Each doc is self-contained — you don't have to read them in order.
+Total: ~6,000 lines across 20 files (12 methodology docs + 3 instruction-file templates + repo meta). The longest single doc is ~700 lines. Each doc is self-contained — you don't have to read them in order.
 
 ---
 

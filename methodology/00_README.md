@@ -51,6 +51,12 @@ Three practices wrap all four planning layers. They are orthogonal — they appl
 
 These are not separate workstreams. They are constraints that bind every contribution: every change is shaped by the working principles, every item passes the Definition of Done, every recurring lesson is captured in memory.
 
+### Plus: the applied dimension
+
+The four layers and three disciplines describe *how the work flows.* [11_human_roles.md](11_human_roles.md) describes *how humans stay meaningfully involved* when AI agents do most of the implementation — the supervisory layer, the spec-as-primary-artifact shift, anti-patterns (cheating agent, yes-man, stranger in own code, tribal knowledge loss), and the skills that grow in value vs. those that don't.
+
+Read it alongside the disciplines for the full picture of working in this methodology.
+
 ---
 
 ## How the layers connect
@@ -115,7 +121,7 @@ Different readers need different paths. Pick the one that fits your situation.
 |--------|---------------|
 | **New contributor on an existing project** | 00 → 06 → 07 → 04 → 05 → 09 → 10. Skim 01–03 for context but don't memorize them; the work you'll touch first is at the item layer. |
 | **Picking up a specific item to work** | 04 → 05 → 07 → 10. You need to know the item format, how to acquire it, what "done" means, and how to verify. |
-| **Starting a new project from scratch** | 00 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 → 10. Top-down. You're building the whole stack. |
+| **Starting a new project from scratch** | 00 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 → 10 → 11. Top-down. You're building the whole stack. |
 | **Setting up the disciplines on an existing project** | 06 → 07 → 08 → 09 → 10. The disciplines are the highest-leverage starting point — most projects already have some planning structure. |
 | **Adapting the methodology to a different domain** | 00 → all docs in order. You'll need the whole picture to know what to keep and what to adapt. |
 | **AI agent landing in a new session on this codebase** | 00 → 06 → 07. Then load specifics on demand based on the task. |
@@ -140,6 +146,7 @@ The docs are designed to be readable in any order — each cross-links to the ot
 | [08_lessons_and_memory.md](08_lessons_and_memory.md) | Two-layer memory: a project instruction file plus a per-agent memory directory of focused entries. |
 | [09_git_workflow.md](09_git_workflow.md) | Branch protection, PR discipline, worktrees for parallel agents, destructive-command rules, deploy boundaries. |
 | [10_testing_and_verification.md](10_testing_and_verification.md) | Automated tests plus the actual-UI fix-test loop. What "tests pass" does and does not prove. |
+| [11_human_roles.md](11_human_roles.md) | How humans stay meaningfully involved when AI agents drive most of the implementation. Supervisory layer, spec-as-primary-artifact, four anti-patterns (cheating agent, yes-man, stranger in own code, tribal-knowledge loss), and the skills that matter now. |
 
 Each doc is self-contained — you can read any one without having read the others, given the framing in this README. Cross-references between docs are markdown links.
 

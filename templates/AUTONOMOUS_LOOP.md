@@ -107,6 +107,8 @@ plan → user approves → execute → validate → next item
 
 You're not reviewing every keystroke, but you ARE reviewing each plan before execution. Asking *"do you have any questions?"* before approving a plan still applies (see [README](../README.md) — "A small tip that pays off").
 
+When the AI produces a confident-sounding answer to a complex problem, also apply *challenge before consenting* — explicitly prompt for the contrarian case before approving. See [methodology/06_working_principles.md](../methodology/06_working_principles.md) "Challenge before consenting" and [methodology/11_human_roles.md](../methodology/11_human_roles.md) "The yes-man (the agreement bias)" for the deeper framing.
+
 ---
 
 ## What this prompt is NOT

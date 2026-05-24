@@ -496,6 +496,27 @@ Key properties:
 
 ---
 
+## The "cheating agent" anti-pattern
+
+When an AI agent writes both the implementation AND the tests for the same change, a failure mode appears: the AI may write a test that validates the *broken* code it wrote. The test passes; the code is wrong; the loop is self-consistent. No human in the loop catches it because the green test suite looks like done.
+
+This is the AI-coding equivalent of marking your own homework.
+
+### Defenses
+
+- **Write tests first, ideally by a human.** When the test exists and fails before the implementation, the AI cannot tune the test to match its eventual (wrong) implementation. Test-first / TDD applied as an AI-collaboration discipline.
+- **Cross-AI validate the tests.** Have a different AI (or the same model in a different session with no prior context) review the test suite for: *does this test actually exercise the intended behavior? Could a broken implementation slip through?* See "Cross-AI validation" below for the broader practice.
+- **Human review of test names and acceptance criteria.** Even if the AI writes the test body, the test *name* and the acceptance criteria it asserts should come from human intent. "Test does the right thing" is the gap; "test asserts that X happens when Y" is the fix.
+- **Audit a sample of AI-written test/implementation pairs periodically.** Pick a random sample and read both halves cold. If the test looks suspiciously specific to one implementation choice, dig deeper.
+
+### The deeper implication
+
+The test suite is the durable artifact — when it accurately captures intent, it can survive a language rewrite or framework migration. Implementation is replaceable; the test suite (assuming it tests behavior, not implementation) is not. That makes test quality MORE important in an AI-assisted workflow, not less.
+
+See [11_human_roles.md](11_human_roles.md) "The cheating agent" for the human-role framing and "Specification as the primary artifact" for the related shift in what the team should be best at producing.
+
+---
+
 ## Cross-AI validation
 
 A separate AI system, periodically, audits the work that the implementing AI did. The audit catches blind spots the implementer missed — pattern-recognition gaps, security oversights, performance regressions, accessibility issues.
