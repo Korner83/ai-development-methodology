@@ -9,7 +9,11 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-(nothing yet)
+### Chore — Document workflow exception in `STATUS.md` (2026-05-24)
+
+The methodology's own [09_git_workflow.md](methodology/09_git_workflow.md) requires PR-only merges to the trunk and forbids direct commits, but this repo is solo-maintained and has been using direct-to-main commits since v1.0.0. `STATUS.md` now names the exception explicitly: why it's deliberate, why the rule's reason-for-existing doesn't apply in a solo-maintained context, and the trigger for revisiting (second contributor joins → adopt branch protection + PR flow). Frames the exception via the methodology's own authority hierarchy.
+
+Also fixed a stale `MIT license` reference in `STATUS.md` (license is CC BY 4.0; the wrong name slipped through when the license was switched from MIT during v1.0 prep).
 
 ---
 

@@ -25,7 +25,25 @@ What that means in practice:
 - **No support.** I cannot help you adapt the methodology to your specific project. The docs are intended to be self-sufficient.
 - **No deprecation policy.** Versions, if they happen, will be tagged. Old versions stay forever.
 
-If this approach to maintenance doesn't work for you: **fork freely.** The MIT license exists for exactly this case. You don't need permission to maintain your own fork; you can rename it, restructure it, and adapt it to your needs without involving the upstream.
+If this approach to maintenance doesn't work for you: **fork freely.** The CC BY 4.0 license exists for exactly this case. You don't need permission to maintain your own fork; you can rename it, restructure it, and adapt it to your needs without involving the upstream — just keep the attribution.
+
+## Workflow exception: this repo uses direct-to-main
+
+The methodology's own [09_git_workflow.md](methodology/09_git_workflow.md) requires PR-only merges to the trunk and forbids direct commits. **This repo deliberately doesn't follow that rule** — every commit here lands directly on `main` without a feature branch or PR.
+
+Why the exception: this repo is solo-maintained. With one human + a paired AI session working the same branch, a PR-self-review adds no value:
+
+- It doesn't add a second human reviewer.
+- It doesn't trigger CI gates that aren't already running locally.
+- It adds round-trip delay between authoring and shipping.
+
+The methodology's PR-only rule exists for **multi-contributor projects** where the PR is the artifact that brings independent eyes to a change. With a single contributor pairing with their own AI, the rule's reason for existing isn't present.
+
+**Trigger for revisiting:** when a second contributor (human or independent AI session) starts working in this repo, the exception ends. Branch protection gets enabled, feature-branch + PR flow gets adopted, the methodology's rule applies in full.
+
+This is the methodology's own [authority hierarchy](methodology/00_README.md#authority-across-the-methodology) at work: explicit user direction can override a general rule for a specific scope when the deviation is documented and the rationale is sound. The failure mode the rule guards against ("the trunk breaks because someone pushed a bad commit with nobody watching") is mitigated here by working tree size: one contributor, small focused changes, immediate post-push verification.
+
+Don't take this as license to skip PRs on multi-contributor projects. It's not. The exception is narrow.
 
 ## Stability
 
