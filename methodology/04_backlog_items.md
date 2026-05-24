@@ -44,6 +44,29 @@ Use three to four digits with zero padding (`BL-0001`, `BL-0042`, `BL-1247`). Ke
 
 ---
 
+## FUTURE.md numbering: two valid schemes
+
+Items in `FUTURE.md` (deferred to a later phase) can use one of two ID schemes. Pick one per project and stay consistent.
+
+### Scheme A — monotonic, same as `BACKLOG.md`
+
+Items in `FUTURE.md` use the same project-wide monotonic numbering as active items. Example: `BL-0428` lives in `FUTURE.md` until it's promoted to `BACKLOG.md`, at which point it keeps the same ID.
+
+- *Pro:* every item has a stable, repo-wide identifier from the moment it's filed. Cross-references to the ID survive promotion.
+- *Con:* the monotonic counter inflates with items that may never ship.
+
+### Scheme B — epic-scoped, F-prefixed
+
+Items in `FUTURE.md` use scoped IDs like `BL-E02-F01`, `BL-E02-F04`. When promoted to `BACKLOG.md`, the item is renumbered to a real `BL-###` from the monotonic counter.
+
+- *Pro:* clear visual distinction between "filed but deferred" and "scheduled work."
+- *Pro:* the monotonic counter only counts items that actually entered active scope.
+- *Con:* identifier changes at promotion; any cross-references to the future-ID become stale at the moment of promotion.
+
+Either is fine. The project picks one in its instruction file or backlog README and stays consistent. Mixing schemes inside the same project produces confusion.
+
+---
+
 ## Item heading format
 
 The item begins with a level-3 heading:
@@ -276,6 +299,34 @@ Acquiring an item to work on it requires setting this field. Releasing it requir
 
 ---
 
+## Coupled fields: `Lock` + `Status` + `Test`
+
+The three state-bearing fields are not independent — they move together. **Never edit one without checking the others.** The table below shows valid combinations for typical outcomes:
+
+| Outcome                                                              | `Lock`                       | `Status`         | `Test`                  |
+|----------------------------------------------------------------------|------------------------------|------------------|-------------------------|
+| Item just picked up; work starting                                   | `<id>@<now+TTL>`             | `in-progress`    | `not-tested`            |
+| Code complete; PR open; awaiting review                              | `<id>@<refreshed TTL>`       | `under-review`   | `not-tested`            |
+| Reviewer requested changes; back to work                             | `<id>@<refreshed TTL>`       | `in-progress`    | (unchanged)             |
+| Code merged; automated tests green; no UI to verify                  | `—`                          | `done`           | `pass`                  |
+| Code merged; manual UI verification pending                          | `—`                          | `to-be-tested`   | `not-tested`            |
+| Code merged; UI verified per [DoD](07_definition_of_done.md)         | `—`                          | `done`           | `pass`                  |
+| Tests revealed a bug; fix coming in same PR                          | `<id>@<refreshed TTL>`       | `in-progress`    | `fail: <one-line>`      |
+| Bug-fix shipped; regression test not yet written                     | `<id>@<refreshed TTL>`       | `in-progress`    | `regression-needed`     |
+| External blocker discovered                                          | `—` *(release the lock)*    | `blocked`        | (unchanged)             |
+| Abandoning the work entirely                                          | `—`                          | `backlog` or `rejected` | (unchanged)      |
+
+### Why the coupling matters
+
+- **`Status: done` + `Test: not-tested`** is a half-truth. The hard rule forbids it.
+- **`Status: in-progress` + `Lock: —`** means no one is actually holding it. Acquire the lock or revert the status.
+- **`Status: blocked` + `Lock: <future-timestamp>`** is broken. Blocked work shouldn't hold a lock because the wait time will exceed the TTL — release it so other items aren't starved.
+- **`Status: under-review` + `Lock: —`** means the reviewer is in limbo. Refresh the lock during review so it's clear who's responsible for the next move.
+
+When changing any one of these three fields, ask: *which of the other two should change with it?*
+
+---
+
 ## Body sections
 
 Below the frontmatter table, the item body has these sections, in this order:
@@ -407,6 +458,59 @@ If the item is decided against, set `Status: rejected`, add a one-line note expl
 
 ---
 
+## When things go sideways
+
+The happy path is `backlog` → `ready` → `in-progress` → `under-review` → `to-be-tested` → `done`. Real items deviate. Unified recovery guide:
+
+### Tests fail (automated or UI verification)
+
+- **Keep the lock.** You're still actively working on the item.
+- **Set `Status: in-progress` and `Test: fail: <one-line detail>`.** Be specific: not "tests failed" but "fail: trip-summary card throws on empty trips array."
+- **Fix in the same PR** that originally landed the work. Don't open a separate item for the fix — it's part of finishing the original.
+- **Only release-and-re-backlog** if the failure reveals the original scope was wrong. Then: shrink the original's scope and mark `done` on the shrunk version, file follow-up items for the rest per the splitting rules below.
+
+### External blocker discovered
+
+You hit something you can't unblock yourself: missing credential, pending decision, upstream PR, legal review.
+
+- **Release the lock** (`Lock: —`). Blocked work shouldn't hold a lock because the wait will exceed the TTL — and you don't want to starve other contributors who could be doing unrelated work.
+- **Set `Status: blocked`.**
+- **Add a `**Blocker:**` line to the body** — one sentence saying what's blocking and what resolves it. *"Blocked on API spec from team X — expected by Y."*
+- When the blocker resolves, transition back to `ready` and re-acquire the lock fresh.
+
+### Scope creep mid-task
+
+You started implementing and realized the item is bigger than `Effort` implied (or touches things you didn't expect).
+
+- **Stop.** Don't silently grow scope — see [06 — Principle 3: Surgical changes](06_working_principles.md).
+- **Split.** The original item narrows to what you actually committed to doing; the extras become new items.
+- **Update the original's `**Why / Description:**` body** to describe what shipped, not what was originally proposed.
+- **File new items** per the filing rules above. Each chunk gets its own item with its own frontmatter; all link to the same epic.
+- **Don't mark the original `done` until its narrowed scope is actually verified.**
+
+### Lost or expired your own lock
+
+You held longer than the TTL and forgot to refresh, or you crashed and resumed later.
+
+- **Pull and check the current `Lock:` field.** If it's still your ID with an expired timestamp, just refresh and continue.
+- **If it's someone else's ID with a future timestamp, stop.** They have it now. Coordinate out-of-band; don't commit on top of theirs.
+- **If it's `—`, the previous-holder protocol applies:** `git blame` the item to see what partial work exists before continuing. (See [05 — Expired locks](05_locks_and_parallel_work.md).)
+
+### A `done` item turns out to not actually be done
+
+Post-merge, someone discovers the item didn't really work.
+
+- **Reopen it** by setting `Status: done` → `Status: in-progress` and `Test: pass` → `Test: fail: <detail>`.
+- **Acquire the lock** if you're picking up the rework.
+- **Re-archive** when the fix lands per the normal flow.
+- Add a `**Resolution:**` note (see [Resolution notes](#resolution-notes-for-rejected-and-non-obvious-done-items)) explaining what was missed the first time — useful for future contributors who might wonder why the item appears twice in the audit trail.
+
+### General principle
+
+In all these recovery flows, **the three coupled fields (`Lock`, `Status`, `Test`) move together.** Never change one in isolation without considering the others. The "Coupled fields" table above shows the valid joint states.
+
+---
+
 ## Where new items go
 
 Always into a specific epic's `BACKLOG.md`. Never into:
@@ -423,6 +527,57 @@ Two cases:
 2. **The work doesn't fit any existing epic.** Create a new epic *first.* Charter it. Then file the item. Items without a parent epic are orphans; orphans get neglected.
 
 The friction of "must create an epic first" is intentional. It prevents random items from accumulating without a home, and it forces the team to think about scope before working.
+
+---
+
+## `BACKLOG.md` structure (the per-epic active-items file)
+
+Each epic's `BACKLOG.md` opens with a **summary table** — one line per item — followed by the detailed item blocks. The summary is a navigation index that lets a reader see "what's open in this epic" without scrolling.
+
+### Skeleton
+
+```markdown
+# E<NN> — <Epic name> — Active Backlog
+
+_Items currently in scope for this epic. See [charter](README.md) for exit criteria._
+
+## Summary
+
+| ID      | Title                                                    | Priority | Effort | Status       |
+|---------|----------------------------------------------------------|----------|--------|--------------|
+| BL-0428 | Add CSV export to the activity report                    | P2       | M      | done/pass    |
+| BL-0517 | Fix off-by-one in date parser                            | P1       | S      | in-progress  |
+| BL-0518 | Document the export feature in the user guide            | P3       | XS     | backlog      |
+| BL-0519 | Stale-data audit on the activity report                  | P2       | M      | rejected (covered by BL-0428) |
+
+---
+
+### BL-0428 — Add CSV export to the activity report
+
+<full item block — frontmatter table + body sections>
+
+### BL-0517 — Fix off-by-one in date parser
+
+<full item block>
+
+### BL-0518 — Document the export feature in the user guide
+
+<full item block>
+
+### BL-0519 — Stale-data audit on the activity report
+
+<full item block, including the `**Resolution:**` note>
+```
+
+### Notes on the summary
+
+- **Status column may combine `Status/Test`** when convenient — e.g., `done/pass` for a fully-closed item. Shorthand only; the canonical state lives in the per-item frontmatter table.
+- The summary is **maintained by hand alongside the detailed items.** When an item's state changes, both update in the same commit.
+- **Rejected items** can either stay in the summary (annotated `rejected (reason)`) or move directly to `ARCHIVE.md` — project choice. Keeping them visible briefly helps prevent the same idea from being re-filed.
+
+### Why this matters
+
+A `BACKLOG.md` with 30 items and no summary table requires scrolling and `Ctrl+F`. With the summary at the top, the at-a-glance scan is one screen. For epics that accumulate items quickly, the summary is the difference between a usable backlog and an opaque scroll.
 
 ---
 
@@ -534,6 +689,47 @@ A healthy ratio is roughly one item to one PR, plus or minus a small constant.
 
 ---
 
+## Greppable metadata — specific query patterns
+
+The frontmatter table is designed to grep cleanly. Common queries:
+
+```bash
+# All items advancing a given pillar (cross-epic)
+rg "^\| \*\*Pillar\*\* +\| P7"  backlog/
+
+# All P0 (ship-blocking) items
+rg "^\| \*\*Priority\*\* +\| P0" backlog/
+
+# All currently free (unlocked) items
+rg "^\| \*\*Lock\*\* +\| —"      backlog/
+
+# All currently in-progress items
+rg "^\| \*\*Status\*\* +\| \`in-progress\`" backlog/
+
+# All items held by a specific agent (find stale locks)
+rg "^\| \*\*Lock\*\* +\| claude-session" backlog/
+
+# All blocked items, with 12 lines of context (to read the Blocker line)
+rg "^\| \*\*Status\*\* +\| \`blocked\`" -A 12 backlog/
+
+# All items rejected with a specific resolution pattern
+rg "^\*\*Resolution:\*\*.*covered by" backlog/
+
+# Find the next BL-ID to use (largest current + 1)
+rg -oN "^### BL-\d+" backlog/ | grep -oE "[0-9]+" | sort -n | tail -1
+
+# All items in a specific effort bucket
+rg "^\| \*\*Effort\*\* +\| L" backlog/
+```
+
+When designing a new field or value, design it to grep cleanly: predictable position in the frontmatter, predictable value format, simple regex anchors. Avoid free-form values where grep would need to parse English.
+
+### ID collision under concurrency
+
+If two contributors file new items in parallel and both compute the same "next" BL-ID, the second to merge bumps to the next number in their PR (single-file edit, cheap to fix). The first contributor to push wins the ID; the second renumbers. Never reuse a previously-rejected ID — even if the rejected item's ID becomes "gappy" in the sequence, the gap stays. Rejected IDs remain in the audit trail.
+
+---
+
 ## How items connect to the rest of the methodology
 
 - **Items → Epics** ([03_epics.md](03_epics.md)). Items live inside epics. Open/done counts in `EPICS.md` reflect item state.
@@ -560,6 +756,12 @@ A healthy ratio is roughly one item to one PR, plus or minus a small constant.
 | Item is in two epics' `BACKLOG.md`. | An item lives in exactly one epic. Pick one; delete the duplicate (preserving the ID in the chosen one). |
 | Item IDs are not monotonic (someone reused `BL-0042`). | Find the duplicate. Renumber the newer one. Reuse breaks every grep-based query going forward. |
 | Acceptance criteria are vague ("works correctly"). | Replace with specifics ("returns CSV with these columns," "renders without console errors"). |
+
+---
+
+## TL;DR for a fresh contributor (human or AI)
+
+> Open the epic's `BACKLOG.md`. Scan the summary table at the top. Find an item with `Status: backlog` or `ready` AND `Lock: —` (or an expired-timestamp lock). Acquire the lock in one commit: set `Lock: <your-id>@<now+TTL>` and `Status: in-progress` together. Read the item body for the goal. Use plan mode for anything non-trivial (see [06 — Plan before executing](06_working_principles.md)). Do the work. Pass every gate in the [Definition of Done](07_definition_of_done.md). Release the lock in the merging PR: set `Lock: —`, `Status: done`, `Test: pass` together. Move the item block from `BACKLOG.md` to `ARCHIVE.md`. Bump the epic's `Open/Done` count in [`EPICS.md`](03_epics.md). If blocked: `Status: blocked`, `Lock: —`, add a one-line `**Blocker:**` to the body. If scope creeps mid-task: stop, split, file follow-up items.
 
 ---
 

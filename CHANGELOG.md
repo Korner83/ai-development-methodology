@@ -9,6 +9,28 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
+### Feat — Backlog mechanics: practical artifacts from real-practice comparison (2026-05-24)
+
+Closes nine gaps identified by comparing the methodology's backlog spec against an actual production project's backlog. The methodology had the conceptual model right; these additions provide the operational templates and recovery guidance that real practice has invented.
+
+**`methodology/03_epics.md` additions:**
+
+- **Rollup table now has a "Next milestone" column** — human-readable "what's the next visible shipment" gives at-a-glance status without opening the epic. Open/Done collapsed to one combined column to keep the table readable.
+- **Pillar Coverage section** — inverse table showing which epics touch each pillar. Useful for "what's active on pillar X right now?" queries and pillar audits.
+- **Last-refresh metadata** — pattern for the freshness note at the top of `EPICS.md` so readers see what shipped since the last sweep and any known count drift.
+- **`TEST.md` template** — proper template with two sections: "Acceptance tests for exit criteria" + "Regression scenarios to protect (with last-verified date)." Plus when-to-use and when-to-skip guidance.
+
+**`methodology/04_backlog_items.md` additions:**
+
+- **`BACKLOG.md` structure section** — defines the summary-table-at-top pattern (one line per item: `ID | Title | Priority | Effort | Status`) before the detailed item blocks. Massively improves scannability for epics with 20+ items.
+- **Coupled fields: `Lock` + `Status` + `Test`** — table of valid combinations for typical outcomes (item picked up, code merged, blocked, etc.). The three fields are coupled; the table shows what valid joint states look like for each outcome.
+- **"When things go sideways" recovery patterns** — unified guidance for: tests fail (keep lock, fix in same PR), external blocker (release lock, set blocked, leave `**Blocker:**` note), scope creep (stop, split, file follow-ups), expired-own-lock recovery, reopening a `done` item.
+- **Greppable metadata: specific `rg` query patterns** — example commands for "all P0 items," "all unlocked items," "all in-progress items," "all blocked items with context," "find next BL-ID," etc. Plus the ID collision rule.
+- **`FUTURE.md` numbering: two valid schemes** — names the choice between monotonic project-wide IDs vs. epic-scoped F-prefixed IDs. Both are valid; project picks one and documents it.
+- **TL;DR for a fresh contributor** — one-paragraph quick-start so a contributor (human or AI) can pick up an item cold without reading the rest of the doc.
+
+Synthesized from focused gap analysis between the methodology's backlog docs (03_epics, 04_backlog_items) and a real production project's `backlog/README.md` + `EPICS.md` + sample epic folder.
+
 ### Chore — Document workflow exception in `STATUS.md` (2026-05-24)
 
 The methodology's own [09_git_workflow.md](methodology/09_git_workflow.md) requires PR-only merges to the trunk and forbids direct commits, but this repo is solo-maintained and has been using direct-to-main commits since v1.0.0. `STATUS.md` now names the exception explicitly: why it's deliberate, why the rule's reason-for-existing doesn't apply in a solo-maintained context, and the trigger for revisiting (second contributor joins → adopt branch protection + PR flow). Frames the exception via the methodology's own authority hierarchy.

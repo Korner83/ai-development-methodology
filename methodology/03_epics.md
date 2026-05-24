@@ -105,6 +105,47 @@ The slug is a short kebab-case identifier. `<NN>-<slug>` together must be unique
 
 ---
 
+## TEST.md template
+
+`TEST.md` (optional, per epic) holds the structured test inventory when item-level tests aren't enough — typically because exit criteria need end-to-end scenarios that span multiple items, or because the epic touches a surface where regressions have happened before.
+
+The template is two tables:
+
+```markdown
+# E<NN> — <Epic name> — Test Scenarios
+
+_Epic-specific acceptance scenarios. Cross-epic manual QA queues live
+elsewhere if your project has them._
+
+## Acceptance tests for exit criteria
+
+| ID  | Scenario                                                     | Status     |
+|-----|--------------------------------------------------------------|------------|
+| AT1 | <Scenario verifying a binary exit criterion from the charter>| pending    |
+| AT2 | <Scenario verifying a binary exit criterion>                 | pass       |
+
+## Regression scenarios to protect
+
+| Area              | Scenario                                              | Last verified  |
+|-------------------|-------------------------------------------------------|----------------|
+| <surface or flow> | <what to keep working as the epic evolves>            | YYYY-MM-DD     |
+```
+
+### When to use TEST.md
+
+- **Exit criteria need verification beyond what individual item tests cover.** End-to-end flows that span multiple items, integration tests that exercise the epic's outputs as a whole.
+- **The epic touches a surface where regressions have happened before.** Capture the failure modes; re-test on every meaningful change.
+
+### When to skip TEST.md
+
+- Item-level tests are sufficient.
+- The epic is small enough that a few sentences in the charter cover verification needs.
+- The project's testing approach already covers the epic's scope through automated suites.
+
+The file is part of the epic folder. When the epic closes, `TEST.md` is the audit record of what was verified to support the exit-criteria sign-off.
+
+---
+
 ## Epic charter template
 
 The `README.md` inside each epic folder is the charter. The template below is the canonical shape. Paste it verbatim into a new epic and fill in the placeholders.
@@ -272,14 +313,14 @@ A single file at `backlog/EPICS.md` is the at-a-glance index of every epic. It i
 
 Last updated: YYYY-MM-DD
 
-| ID   | Title                         | Pillar | Status   | Phase | Open | Done | Owner                  |
-|------|-------------------------------|--------|----------|-------|------|------|------------------------|
-| E01  | <Epic title>                  | P1     | done     | 1     | 0    | 14   | product + agent        |
-| E02  | <Epic title>                  | P2     | active   | 2     | 7    | 22   | product + agent        |
-| E03  | <Epic title>                  | P3     | active   | 2     | 4    | 11   | product + agent        |
-| E04  | <Epic title>                  | P9     | active   | 2     | 6    | 9    | product + agent        |
-| E05  | <Epic title>                  | P7     | planned  | 2     | 0    | 0    | product + agent        |
-| ...  | ...                           | ...    | ...      | ...   | ...  | ...  | ...                    |
+| ID   | Title             | Pillar | Status   | Phase | Open / Done | Next milestone                   | Owner            |
+|------|-------------------|--------|----------|-------|-------------|----------------------------------|------------------|
+| E01  | <Epic title>      | P1     | done     | 1     | 0 / 14      | (closed)                         | product + agent  |
+| E02  | <Epic title>      | P2     | active   | 2     | 7 / 22      | <next visible shipment>          | product + agent  |
+| E03  | <Epic title>      | P3     | active   | 2     | 4 / 11      | <next visible shipment>          | product + agent  |
+| E04  | <Epic title>      | P9     | active   | 2     | 6 / 9       | <next visible shipment>          | product + agent  |
+| E05  | <Epic title>      | P7     | planned  | 2     | 0 / 0       | <first item to land>             | product + agent  |
+| ...  | ...               | ...    | ...      | ...   | ...         | ...                              | ...              |
 ```
 
 ### Update discipline
@@ -295,6 +336,42 @@ Stale counts erode trust. If `EPICS.md` says 7 open and there are 4, contributor
 ### Active count vs. WIP limit
 
 The WIP limit is enforced by counting rows where `Status` is `active`. If that count would exceed the cap with a new `active` row, the transition is blocked until another active epic closes or parks.
+
+---
+
+### Pillar Coverage (inverse view)
+
+Below the per-epic rollup, include a small "Pillar Coverage" table — the inverse view of the per-epic primary-pillar field. It answers "which epics are currently advancing pillar X?" in one glance.
+
+```markdown
+## Pillar Coverage
+
+| Pillar                          | Epics touching it          |
+|---------------------------------|----------------------------|
+| P1 <pillar name>                | E01                        |
+| P2 <pillar name>                | E01, E02                   |
+| P3 <pillar name>                | E03                        |
+| P4 <pillar name>                | E06                        |
+| ...                             | ...                        |
+```
+
+Useful for:
+
+- **Pillar audits.** "Which pillars are getting attention this phase? Which are starved?"
+- **Cross-epic coordination.** "Both E03 and E07 touch P8 — should they coordinate?"
+- **Strategic re-evaluation.** When the strategy re-evaluation protocol runs (see [01_strategy.md](01_strategy.md)), this table shows where execution capacity is actually going.
+
+The table is hand-maintained alongside the rollup. When an epic is added, removed, or changes primary pillar, both update.
+
+### Last-refresh metadata
+
+A short "Last refresh" note at the top of the rollup makes the file's freshness visible at a glance and lets readers see what changed since the last sweep:
+
+```markdown
+> **Last refresh:** YYYY-MM-DD — <one-paragraph summary of what shipped since last refresh, what's currently in flight, and any known drift between summary counts and per-item state>.
+```
+
+When stale counts accumulate (a common backlog failure mode), the next refresh notes the drift explicitly and resets the table to ground truth.
 
 ---
 
