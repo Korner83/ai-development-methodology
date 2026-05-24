@@ -9,6 +9,12 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
+(nothing yet)
+
+---
+
+## v1.2.0 — 2026-05-24
+
 ### Feat — Backlog mechanics: practical artifacts from real-practice comparison (2026-05-24)
 
 Closes nine gaps identified by comparing the methodology's backlog spec against an actual production project's backlog. The methodology had the conceptual model right; these additions provide the operational templates and recovery guidance that real practice has invented.
