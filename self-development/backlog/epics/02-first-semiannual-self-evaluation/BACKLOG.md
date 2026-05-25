@@ -9,8 +9,8 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 | BL-0006 | Create `evaluations/` folder + first eval report skeleton          | P1       | XS     | to-be-tested   |
 | BL-0007 | Cross-AI cold-read of methodology docs 00–05 (planning + locks)    | P1       | M      | to-be-tested   |
 | BL-0008 | Cross-AI cold-read of methodology docs 06–11 (disciplines + ops)   | P1       | M      | to-be-tested   |
-| BL-0009 | Classify surfaced gaps + assign dispositions + patch tiers         | P1       | M      | backlog        |
-| BL-0010 | Finalize eval report + close epic                                  | P1       | S      | backlog        |
+| BL-0009 | Classify surfaced gaps + assign dispositions + patch tiers         | P1       | M      | to-be-tested   |
+| BL-0010 | Finalize eval report + close epic                                  | P1       | S      | to-be-tested   |
 
 ---
 
@@ -152,10 +152,12 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 | Pillar   | P3                                 |
 | Priority | P1                                 |
 | Effort   | M                                  |
-| Status   | backlog                            |
-| Test     | not-tested                         |
+| Status   | to-be-tested                       |
+| Test     | pass                               |
 | Deps     | BL-0007, BL-0008                   |
 | Lock     | —                                  |
+
+**Run-4 execution note:** Two-axis classification completed by a fresh Opus 4.7 general-purpose agent on 2026-05-25 against all 59 findings (54 cold-read + 5 cross-batch). Initial split: T0=6, T1=30, T2=23, T3=0; 36 patches planned for v1.14.0. Tier classifications cross-AI verified by a fresh Sonnet 4.6 Explore agent per escalate-on-doubt — sampled 10 findings, **flagged 5 T1 → T2 escalations** (F07, F13, F14, F21, F40). Final split: T0=6, T1=25, T2=28, T3=0; **30 patches in v1.14.0 ship plan, 28 deferred to maintainer authorship.** Classification table populated in `self-development/evaluations/2026-05-first-pass.md`. Awaiting maintainer review before flip to `Status: done` and move to `ARCHIVE.md`.
 
 **Why / Description:** Read the combined findings from BL-0007 + BL-0008, classify each gap on **two axes** — (a) the practice/docs framework from [`methodology/07_definition_of_done.md "Methodology self-evaluation"`](../../../../methodology/07_definition_of_done.md#methodology-self-evaluation-semi-annual), and (b) the patch-tier from [`templates/AUTONOMOUS_LOOP.md` "Tiered autonomy"](../../../../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts) — and assign a disposition. Effort raised from S to M to reflect the additional tier-classification work and the ~50-finding corpus (BL-0007 produced 23–25; BL-0008 expected to produce a similar count).
 
@@ -200,10 +202,12 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 | Pillar   | P3                                 |
 | Priority | P1                                 |
 | Effort   | S                                  |
-| Status   | backlog                            |
-| Test     | not-tested                         |
+| Status   | to-be-tested                       |
+| Test     | pass                               |
 | Deps     | BL-0009                            |
 | Lock     | —                                  |
+
+**Run-4 execution note:** Eval report finalized on 2026-05-25. Populated `## Summary statistics` (59 findings, distribution by axis, patches shipped per release), `## Next eval date` (2026-11-25 target per semi-annual cadence + process improvements from this pass), and `## Maintainer signoff` block (awaiting signature). 30 T0/T1 patches landed on `methodology-patch/2026-05-25-01` branch and cross-AI diff-verified for v1.14.0 release. **E02 charter exit criteria all satisfied** — epic ready for maintainer-led close (`Status: active → done`) once signoff lands. Per AUTONOMOUS_LOOP.md, the loop does not autonomously close epics; this item halts at `to-be-tested` for maintainer's final approval.
 
 **Why / Description:** Complete the eval report (summary statistics, next eval date, maintainer signoff), ship any patch releases for `docs-wrong` gaps marked for immediate fix, and bring the epic to `to-be-tested` for maintainer approval. **The epic's final `Status: done` flip happens after maintainer review** — this item completes the *work* but does not itself close the epic autonomously.
 

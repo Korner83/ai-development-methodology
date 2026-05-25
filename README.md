@@ -16,7 +16,7 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Fix-test loop for the actual UI** because "tests pass" doesn't mean "the page renders."
 - **Cross-AI validation + user testing** as the final gates.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project. Currently [v1.13.0](CHANGELOG.md).
+- Battle-tested in one production project. Currently [v1.14.0](CHANGELOG.md).
 
 ---
 
@@ -293,7 +293,7 @@ For modified versions, indicate you've made changes. Only obligation the license
 
 ## Status
 
-Battle-tested in one production project. Currently v1.13.0 — see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean — PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.14.0 — see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean — PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 

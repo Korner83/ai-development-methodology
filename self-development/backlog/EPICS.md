@@ -1,12 +1,12 @@
 # Epics
 
-_Last refreshed: 2026-05-25 (post Run 3 — BL-0006 + BL-0007 + BL-0008 at to-be-tested; v1.13.0 tier matrix in effect)._
+_Last refreshed: 2026-05-25 (post Run 4 — all 5 E02 items at to-be-tested; v1.14.0 ready to ship; E02 awaits maintainer close)._
 
 ## Rollup
 
 | Epic | Title | Pillar (primary + secondary) | Status | Phase | Items (open/done) | Next milestone |
 |---|---|---|---|---|---|---|
-| [E02](epics/02-first-semiannual-self-evaluation/README.md) | First semi-annual methodology self-evaluation pass | P3 Doc currency + P2 Doc clarity | **active** | Phase 1 | 2 / 0 (+3 to-be-tested) | BL-0006/0007/0008 awaiting maintainer review; BL-0009 next loop pickup (two-axis classification per v1.13.0) |
+| [E02](epics/02-first-semiannual-self-evaluation/README.md) | First semi-annual methodology self-evaluation pass | P3 Doc currency + P2 Doc clarity | **active → done (pending maintainer signoff)** | Phase 1 | 0 / 0 (+5 to-be-tested) | All work complete; 30 patches on `methodology-patch/2026-05-25-01` branch + eval report finalized + 28 T2 findings logged for next maintainer-authored cycle. Maintainer signoff in eval report → flip BL-0006..0010 to done → move to ARCHIVE → flip E02 to done → WIP cap rises to 2 → promote E01/E03/E04/E05 candidate. |
 | [E01](epics/01-examples-folder/README.md) | Examples folder | P1 Doc completeness + P6 Example richness | planned | Phase 1 | 5 / 0 | Promoted to active after E02 closes |
 | [E03](epics/03-git-workflow-trim/README.md) | Trim or split `09_git_workflow.md` | P2 Doc clarity | planned | Phase 1 | 4 / 0 | Promoted after E02 closes; note BL-0012 touches `methodology/` and requires maintainer handoff |
 | [E04](epics/04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | planned | Phase 1 | 0 / 0 | Promoted after E02 closes; competes with E01 + E03 for the active slot |

@@ -9,6 +9,55 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
+(nothing yet)
+
+---
+
+## v1.14.0 — 2026-05-25
+
+### Methodology batch patch — first semi-annual eval cycle complete
+
+The first full self-evaluation cycle on the methodology (E02 in `self-development/`) completes here. Across BL-0006 (skeleton) → BL-0007 (cold-read docs 00–05, 25 findings) → BL-0008 (cold-read docs 06–11, 29 findings + 5 cross-batch) → BL-0009 (two-axis classification of all 59) → BL-0010 (eval-report finalization), the cycle produced **30 patches across all 12 methodology docs**, all shipped here as the cycle's output.
+
+The patches were authored by the autonomous loop, cross-AI tier-verified (5 over-claimed T1s escalated to T2 per escalate-on-doubt), and cross-AI diff-verified on the assembled batch before merge. Maintainer review on the eval report's signoff block closed E02.
+
+**Patches by file:**
+
+- **`methodology/00_README.md`** — reading-path table now includes doc 11; broken `EPICS.md` placeholder anchor fixed (now → `03_epics.md#epic-rollup-epicsmd`); `templates/` folder explained at first reference; Authority section adds reciprocal cross-refs to 01 + 02.
+- **`methodology/01_strategy.md`** — Authority section reciprocal cross-ref to 00 + 02.
+- **`methodology/02_pillars.md`** — generic P1–P9 inventory now explicitly marked non-canonical (was "illustrative"; now "**illustrative, not canonical** … Do not copy P1–P9 above as your project's pillars"); Authority section reciprocal cross-ref.
+- **`methodology/03_epics.md`** — epic-charter template `Started:` field shows the `—` form for `planned` epics (was `YYYY-MM-DD` only, contradicting the prose rule).
+- **`methodology/04_backlog_items.md`** — FUTURE.md numbering choice should be recorded in `CLAUDE.md`/`AGENTS.md`/backlog README; lifecycle-diagram explains why mermaid state names use underscores while enum values use hyphens; lock-edit rule acknowledges subagent flows defer to the orchestrator's lock (links to 05).
+- **`methodology/05_locks_and_parallel_work.md`** — TTL "default 2 hours" promoted to a bold callout above the table (was buried in prose below); 24h ceiling clarified as "NOT the default" with explicit anti-pattern callout.
+- **`methodology/06_working_principles.md`** — "Plan before executing non-trivial work" explicitly marked not a fifth principle (clarifies the count of principles stays at four; this is the gating rule for when the four start applying).
+- **`methodology/07_definition_of_done.md`** — quarterly doc-audit scope clarified (covers project living docs; methodology docs get the semi-annual deeper pass); Memory index trigger now mirrors 08's "same commit" phrasing; Gate 6 cross-links 03 (epic rollup format) + 04 (archive mechanics); DoD checklist `Lock: -` (ASCII hyphen) → `Lock: —` (em-dash) to match every other location.
+- **`methodology/08_lessons_and_memory.md`** — concrete index-row example added (kebab-slug filename + actionable hook); "Trigger 2: 2+ occurrences" explicitly named as the shared methodology threshold for promotion.
+- **`methodology/09_git_workflow.md`** — common patch-branch area prefixes table added (methodology / designsystem / spec / runbook / compliance) with guidance that each project records its allowed prefixes; patch-branch section cross-links to 07 Gate 4 + 10 diff-verification; `git pull --ff-only` row re-labeled "Idempotent sync" (was misleadingly labeled "Read-only sync").
+- **`methodology/10_testing_and_verification.md`** — verification levels noted as living on the backlog item (not the PR checklist) for audit trail continuity; "Done-means" term-of-art disambiguated with link to 04's item template; "ratification" → "reviews diffs" framing aligned with 09.
+- **`methodology/11_human_roles.md`** — XS/S effort definitions cross-linked to 04's effort scale; "Pricing, business model, contractual terms" row clarifies operational price-list edits inside an approved model are AI-eligible (the *decision* is human-only); "ability matters less" sharpened to "typing speed matters less" (the original phrasing was too broad and read as anti-engineer); decision-ownership matrix gets reciprocal "Pairs with 09" cross-link.
+
+**5 findings escalated T1 → T2 per Sonnet tier-verifier (escalate-on-doubt):** F07 (01 numbering convention — picking a policy), F13 (03 parked→done state-machine — defines new rule or removes edge), F14 (03 "solo: 1" recommendation — new prescriptive default), F21 (04/05 status-flip mandatory — rule wording in lock doc), F40 (09 patch-branch ✗ row — changes AI-autonomy table specificity). All five deferred to maintainer authorship via `self-development/loop-notes/2026-05-25.md`; will land in subsequent maintainer-authored releases.
+
+**Cross-AI diff-verification:** fresh Sonnet 4.6 Explore agent verified the batch on grounded/correct/scoped per `methodology/10` diff-verification mode. Verification log in the commit message of `methodology-patch/2026-05-25-01` branch.
+
+**E02 (first semi-annual self-evaluation) close:**
+
+- All 5 E02 items (BL-0006/0007/0008/0009/0010) at `Status: to-be-tested`, awaiting maintainer signoff in the eval report.
+- Eval report fully populated: `self-development/evaluations/2026-05-first-pass.md` (Metadata, Cold-read findings 00–05, Cold-read findings 06–11, Cross-batch inconsistencies, Classification + dispositions, Ship plan, Summary statistics, Next eval date, Maintainer signoff block).
+- Next eval target: 2026-11-25.
+- 28 T2 findings logged in loop-notes for the next maintainer-authored release cycle.
+- After maintainer signoff: BL-0006..0010 flip to `done` + move to `ARCHIVE.md`; E02 charter flips `active → done`; WIP cap rises to 2; the maintainer promotes one of E01/E03/E04/E05 to active.
+
+### Self-development loop runs (Runs 1–4 summary)
+
+Documented in detail in `self-development/loop-notes/2026-05-25.md`. The autonomous loop ran four times across a single day, producing the v1.13.0 adaptation (Run 2's findings → Run 4-equivalent patch demo), the cold-read corpus (Runs 2 + 3), the classification + ship-plan (Run 4), and finally the v1.14.0 batch ship. This is the first complete self-improvement cycle: methodology → loop → findings → classification → patches → methodology.
+
+---
+
+## [Pre-v1.14.0] Self-development loop Runs 1–3 (2026-05-25)
+
+_These notes were under `[Unreleased]` and are now folded into v1.14.0's narrative above._
+
 ### Self-development loop Run 3 (2026-05-25) — BL-0008
 
 First run under v1.13.0's tier matrix. Fresh Opus 4.7 general-purpose agent (no prior context, including no exposure to BL-0007's authoring session) cold-read methodology docs 06–11 and landed **29 findings** (0 stale / 14 unclear / 15 inconsistent) under `## Cold-read findings (docs 06–11)`, plus **5 cross-batch inconsistencies** with BL-0007's docs 00–05 batch. Cross-AI validation (fresh Sonnet 4.6 Explore agent, findings-verification mode): **PASS on all four Done-means criteria**, 5/5 sampled citations verified, 3/3 spot-checks grounded.

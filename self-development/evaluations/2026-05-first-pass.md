@@ -194,24 +194,215 @@ _Populated by BL-0008. Same shape as docs-00–05 section above. Cross-doc incon
 
 ## Classification + dispositions
 
-_Populated by BL-0009. Table of all findings with classification (`practice-wrong` / `docs-wrong` / `both`) and disposition (`patch release` / `file as item` / `defer`)._
+_Populated by BL-0009. Each row maps one finding to (practice/docs axis, tier axis, disposition). Tier ladder: T0 cosmetic / T1 surgical / T2 substantive / T3 architectural. Escalate-on-doubt: when between T1 and T2, classified as T2._
 
-_(empty)_
+| ID | Source | Practice/docs | Tier | Disposition | Notes |
+|---|---|---|---|---|---|
+| F01 | doc 00, Stale #1 | docs-wrong | T1 | Ship now (v1.14.0) | Add doc 11 to reading-path table rows for "New contributor" and "Picking up a specific item" at `methodology/00_README.md:122-123`. |
+| F02 | doc 00, Stale #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Mental-model diagram (lines 93-103) predates doc 11; needs a 4th cluster slot or re-framing. Substantive reframing. |
+| F03 | doc 00, Unclear #1 | docs-wrong | T0 | Ship now (v1.14.0) | Replace `EPICS.md(#)` placeholder anchor on `methodology/00_README.md:203` with explicit `backlog/EPICS.md` path. Cosmetic broken-link fix. |
+| F04 | doc 00, Unclear #2 | docs-wrong | T1 | Ship now (v1.14.0) | Add a one-line note near `methodology/00_README.md:236` explaining `templates/` is a sibling folder of methodology artifacts. |
+| F05 | doc 00, Inconsistent #1 | docs-wrong | T2 | Loop-notes (maintainer authors) | Hard-rules table omits "AI agents never override locks" (doc 05:494). Adding a hard rule is a substantive change to an authoritative list. |
+| F06 | doc 00, Inconsistent #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Authority section silent on autonomous-loop Constraint 1; substantive call about whether project-specific constraints belong in the universal README. |
+| F07 | doc 01, Unclear #1 | docs-wrong | **T2** (escalated from T1 per Sonnet tier-verify) | Loop-notes (maintainer authors) | Adding the sentence requires picking a convention (master plan implicit vs. row 00) — that's a policy decision, not a clarification of existing text. |
+| F08 | doc 01, Unclear #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Strategy docs silent on default re-eval frequency; substantive guidance addition for a previously template-only field. |
+| F09 | doc 01, Inconsistent #1 | docs-wrong | T2 | Loop-notes (maintainer authors) | "Snapshots vs living" terminology drift across 01/02; substantive reframing of the lifecycle vocabulary. |
+| F10 | doc 02, Unclear #1 | docs-wrong | T1 | Ship now (v1.14.0) | Add clarifying line near `methodology/02_pillars.md:65-75` reinforcing "illustrative" intent of the P1-P9 table. |
+| F11 | doc 02, Unclear #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Relationship between `docs/architecture/` and `docs/pillars/` is undefined; substantive folder-convention guidance addition. |
+| F12 | doc 02, Inconsistent #1 | docs-wrong | T1 | Ship now (v1.14.0) | Strategy-outranks-pillars rule duplicated in 00/01/02; add reciprocal cross-refs so a future edit to one surfaces the other two. |
+| F13 | doc 03, Unclear #1 | docs-wrong | **T2** (escalated from T1 per Sonnet tier-verify) | Loop-notes (maintainer authors) | Clarifying the `parked → done` transition either (a) removes a state-machine edge or (b) defines a new rule for an undocumented case. Either is substantive. |
+| F14 | doc 03, Unclear #2 | docs-wrong | **T2** (escalated from T1 per Sonnet tier-verify) | Loop-notes (maintainer authors) | "Solo: 1" is not in the source doc — adding it as a recommended default is new prescriptive guidance, not a clarification. |
+| F15 | doc 03, Inconsistent #1 | docs-wrong | T0 | Ship now (v1.14.0) | Epic charter template at `methodology/03_epics.md:151-195`: change `Started: YYYY-MM-DD` to `Started: — (or YYYY-MM-DD when active)` to match prose rule. |
+| F16 | doc 03, Inconsistent #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Epic close-out is functionally a DoD for epics but doc 07 doesn't acknowledge it; cross-link or restructure. Substantive cross-doc framing. |
+| F17 | doc 04, Stale #1 | docs-wrong | T1 | Ship now (v1.14.0) | Drop the `\*\*` bold wrappers from grep examples at `methodology/04_backlog_items.md:813-839` to match canonical plain-table template. |
+| F18 | doc 04, Unclear #1 | docs-wrong | T1 | Ship now (v1.14.0) | Recommend recording the FUTURE.md numbering choice in the project's instruction file or backlog README; add to `methodology/04_backlog_items.md:48-66`. |
+| F19 | doc 04, Unclear #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | ID-collision-prevention guidance missing; substantive addition of new prevention guidance to a discipline doc. |
+| F20 | doc 04, Inconsistent #1 | docs-wrong | T1 | Ship now (v1.14.0) | Add footnote to lifecycle diagram (`methodology/04_backlog_items.md:466-479`) explaining hyphen→underscore mapping for mermaid state names. |
+| F21 | doc 04, Inconsistent #2 | docs-wrong | **T2** (escalated from T1 per Sonnet tier-verify) | Loop-notes (maintainer authors) | "Optionally" in doc 05 may be a deliberate hedge; making it mandatory is a rule-wording change in the lock-discipline doc that governs concurrent work. Maintainer decides which framing is canonical. |
+| F22 | doc 05, Unclear #1 | docs-wrong | T0 | Ship now (v1.14.0) | Promote "default to 2 hours" callout into the table caption or bold prose at `methodology/05_locks_and_parallel_work.md:271-281`. Cosmetic emphasis fix. |
+| F23 | doc 05, Unclear #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Expired-locks investigation flow needs a "what if the holder is still alive?" branch; substantive addition of new policy case. |
+| F24 | doc 05, Inconsistent #1 | docs-wrong | T1 | Ship now (v1.14.0) | Add a sentence in doc 04 acknowledging subagent flows defer to the orchestrator's lock; align "lock-holder" (doc 04) vs "orchestrator" (doc 05) vocabulary. |
+| F25 | doc 05, Inconsistent #2 | docs-wrong | T1 | Ship now (v1.14.0) | Add clarifying note that 24h is the *ceiling for rare cases*, not the *default*, on `methodology/05_locks_and_parallel_work.md:277` vs line 466. |
+| F26 | doc 06, Unclear #1 | docs-wrong | T1 | Ship now (v1.14.0) | Add a sentence at "Plan before executing" (line 132-168) saying "this is not a fifth principle; it's the gating rule." |
+| F27 | doc 06, Unclear #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | "Challenge before consenting" — mandatory or contextual? Substantive call on whether contrarian-case prompt is required at every plan or only at-stakes. |
+| F28 | doc 06, Inconsistent #1 | docs-wrong | T2 | Loop-notes (maintainer authors) | Anti-patterns table single-mapping convention contradicts the docs' own acknowledgment of cross-principle reinforcement; substantive table restructure. |
+| F29 | doc 06, Inconsistent #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Principles vs DoD ranking unstated; substantive cross-doc Authority chain alignment (see also F46 cross-batch entry). |
+| F30 | doc 07, Unclear #1 | docs-wrong | T1 | Ship now (v1.14.0) | Specify which doc-audit pass (quarterly vs semi-annual) covers the methodology specifically; add a sentence at `methodology/07_definition_of_done.md:323`. |
+| F31 | doc 07, Unclear #2 | docs-wrong | T1 | Ship now (v1.14.0) | Make 07's "Memory index" update-trigger mirror 08's "same commit" phrasing at `methodology/07_definition_of_done.md:215-225`. |
+| F32 | doc 07, Inconsistent #1 | docs-wrong | T2 | Loop-notes (maintainer authors) | Gate 5 is the loop, not a peer gate; substantive reframing of the "six gates" count and structure. |
+| F33 | doc 07, Inconsistent #2 | docs-wrong | T1 | Ship now (v1.14.0) | Add the doc 03 cross-link in Gate 6 (epic rollup) at `methodology/07_definition_of_done.md:111-122`. |
+| F34 | doc 07, Inconsistent #3 | docs-wrong | T0 | Ship now (v1.14.0) | Change `Lock: -` to `Lock: —` (em-dash) in the DoD checklist at `methodology/07_definition_of_done.md:410`. Cosmetic character fix; see also F47 cross-batch. |
+| F35 | doc 08, Unclear #1 | docs-wrong | T1 | Ship now (v1.14.0) | Add a real index-row example (e.g., kebab-slug + sentence hook) at `methodology/08_lessons_and_memory.md:198-206`. |
+| F36 | doc 08, Unclear #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Define the "session" unit for the promotion bar; substantive definition addition for AI-driven workflows. |
+| F37 | doc 08, Inconsistent #1 | docs-wrong | T1 | Ship now (v1.14.0) | Add cross-link in doc 08 "Trigger 2" noting "this is the same '2+ occurrences' bar used elsewhere in the methodology." |
+| F38 | doc 08, Inconsistent #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Two-layer vs four-layer contradiction at `methodology/08_lessons_and_memory.md:27-53` vs lines 453-462; substantive vocabulary reframing. |
+| F39 | doc 09, Unclear #1 | docs-wrong | T1 | Ship now (v1.14.0) | Clarify whether patch-branch area prefix is open-ended or registered; add a default list (e.g., "common areas: methodology, designsystem, spec, runbook"). |
+| F40 | doc 09, Unclear #2 | docs-wrong | **T2** (escalated from T1 per Sonnet tier-verify) | Loop-notes (maintainer authors) | Adding a patch-branch-specific ✗ row to the AI-autonomy table changes the specificity of an autonomy rule in the most safety-critical table in the methodology. Maintainer authors. |
+| F41 | doc 09, Inconsistent #1 | docs-wrong | T1 | Ship now (v1.14.0) | Add explicit cross-link in patch-branch sub-section to doc 07 (Gate 4) and doc 10 (diff-verification); flag that other DoD gates still apply. |
+| F42 | doc 09, Inconsistent #2 | docs-wrong | T0 | Ship now (v1.14.0) | Re-label `git pull --ff-only` row in `methodology/09_git_workflow.md:545-569` — not strictly read-only. Cosmetic mislabel. |
+| F43 | doc 09, Inconsistent #3 | docs-wrong | T2 | Loop-notes (maintainer authors) | Patch-branch convention as packaging vs autonomy mechanism; substantive cross-doc ownership-matrix alignment with doc 11. |
+| F44 | doc 10, Unclear #1 | docs-wrong | T2 | Loop-notes (maintainer authors) | Diff-verification partial-failure semantics undefined; substantive new policy on PASS/FAIL/PARTIAL outcomes. |
+| F45 | doc 10, Unclear #2 | docs-wrong | T1 | Ship now (v1.14.0) | Note in `methodology/10_testing_and_verification.md:578-640` that verification level lives only on the backlog item, not the PR checklist (or add an `L#` row to the checklist). |
+| F46 | doc 10, Unclear #3 | docs-wrong | T1 | Ship now (v1.14.0) | Replace "Done-means" with "DoD gates" at `methodology/10_testing_and_verification.md:564` (or define "Done-means" at first use). |
+| F47 | doc 10, Inconsistent #1 | docs-wrong | T1 | Ship now (v1.14.0) | Align "ratification" (doc 10:572) vs "reviews diffs" (doc 09:96); pick one phrase. |
+| F48 | doc 10, Inconsistent #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Order-of-operations gap for patch-branch fix-to-methodology case (no "user" in user-testing sense); substantive new policy on terminal-verification for non-user-facing patches. |
+| F49 | doc 11, Unclear #1 | docs-wrong | T1 | Ship now (v1.14.0) | Reference doc 04's XS/S effort definitions inline at `methodology/11_human_roles.md:176-179`, or define "small" inline. |
+| F50 | doc 11, Unclear #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Define the semantic of two-column-checked combinations in the decision-ownership matrix; substantive policy clarification. |
+| F51 | doc 11, Unclear #3 | docs-wrong | T1 | Ship now (v1.14.0) | Clarify "Pricing, business model, contractual terms" line item — operational pricing vs strategy doc pricing — at `methodology/11_human_roles.md:246`. |
+| F52 | doc 11, Inconsistent #1 | docs-wrong | T1 | Ship now (v1.14.0) | Sharpen "skills that grow less critical" at `methodology/11_human_roles.md:200-204` from "ability matters less" → "typing speed matters less". |
+| F53 | doc 11, Inconsistent #2 | docs-wrong | T2 | Loop-notes (maintainer authors) | Hard-coded ownership inventory mismatch between doc 00 and doc 11; substantive cross-doc enumeration alignment (see also F58 cross-batch). |
+| F54 | doc 11, Inconsistent #3 | docs-wrong | T1 | Ship now (v1.14.0) | Add reciprocal "Pairs with doc 09" cross-link in doc 11's decision-ownership matrix at `methodology/11_human_roles.md:229-251`. |
+| F55 | Cross-batch #1 | docs-wrong | T2 | Loop-notes (maintainer authors) | "Six gates" framing needs joint update across 00 and 07; see F32. Substantive coordinated rewrite. |
+| F56 | Cross-batch #2 | docs-wrong | T0 | Ship now (v1.14.0) | Em-dash vs hyphen-minus for `Lock: —` — pick one character and propagate across 00, 04, 07. Cosmetic but multi-file. |
+| F57 | Cross-batch #3 | docs-wrong | T2 | Loop-notes (maintainer authors) | Name the "twice = rule" meta-pattern (currently expressed ad-hoc in docs 04/05/08); substantive new conceptual framing. |
+| F58 | Cross-batch #4 | docs-wrong | T2 | Loop-notes (maintainer authors) | Authority chain — DoD vs principles ranking — coordinated alignment across 00/06/07. Substantive cross-doc reframing (see F29). |
+| F59 | Cross-batch #5 | docs-wrong | T2 | Loop-notes (maintainer authors) | Lock-override rule missing from "hard floor" tables in 00/09/11; substantive cross-doc enumeration alignment (see F05 and F53). |
+
+### Ship plan for v1.14.0
+
+This batch is the maintainer's coherent v1.14.0 patch set. T0 cosmetic + T1 surgical findings that meaningfully reduce future cold-read friction. Grouped by target file.
+
+**`methodology/00_README.md`**
+- **F01:** Add doc 11 to reading-path table rows "New contributor" and "Picking up a specific item" at lines 122-123.
+- **F03:** Replace `EPICS.md(#)` placeholder anchor on line 203 with explicit `backlog/EPICS.md` path.
+- **F04:** Add a one-line note near line 236 explaining `templates/` is a sibling folder of methodology artifacts.
+- **F12 (also touches 01/02):** Add reciprocal cross-refs between the three Authority restatements at 00:362-369, 01:469-475, 02:368-369.
+- **F56 (cross-batch):** Normalize `Lock: —` to em-dash (or hyphen-minus — maintainer picks one) at line 204.
+
+**`methodology/01_strategy.md`**
+- **F07:** Reconcile numbering between supporting-doc table (lines 80-95) and Document Index template (lines 316-331); add a sentence specifying convention.
+- **F12 (also touches 00/02):** Reciprocal Authority cross-ref at 01:469-475.
+
+**`methodology/02_pillars.md`**
+- **F10:** Add clarifying line near lines 65-75 reinforcing "illustrative" intent of the P1-P9 table.
+- **F12 (also touches 00/01):** Reciprocal Authority cross-ref at 02:368-369.
+
+**`methodology/03_epics.md`**
+- **F13:** Clarify the `parked → done` transition at lines 287-294; remove "(somehow)" parenthetical.
+- **F14:** Surface "default 3, solo: 1" WIP recommendation up front at line 50.
+- **F15:** Change `Started: YYYY-MM-DD` to `Started: — (or YYYY-MM-DD when active)` in the Epic charter template at lines 151-195.
+
+**`methodology/04_backlog_items.md`**
+- **F17:** Drop `\*\*` bold wrappers from grep examples at lines 813-839 to match canonical plain-table template.
+- **F18:** Recommend recording the FUTURE.md numbering choice in the project's instruction file or backlog README; add to lines 48-66.
+- **F20:** Add footnote to lifecycle diagram (lines 466-479) explaining hyphen→underscore mapping for mermaid state names.
+- **F21:** Align "automatic" vs "optional" status-flip-with-lock — recommend always-flip-together; reciprocal edit on doc 05.
+- **F24:** Add a sentence acknowledging subagent flows defer to the orchestrator's lock; align "lock-holder" vocabulary with doc 05.
+- **F56 (cross-batch):** Normalize `Lock: —` to em-dash in any examples in this doc.
+
+**`methodology/05_locks_and_parallel_work.md`**
+- **F21 (reciprocal):** Align acquire-protocol step 4 wording with doc 04's lifecycle (status-flip is automatic, not optional).
+- **F22:** Promote "default to 2 hours" callout into the TTL table caption or bold prose at lines 271-281.
+- **F25:** Add clarifying note that 24h is the *ceiling for rare cases*, not the *default*, at line 277 vs line 466.
+
+**`methodology/06_working_principles.md`**
+- **F26:** Add a sentence at "Plan before executing" (lines 132-168) saying "this is not a fifth principle; it's the gating rule for *when* the four principles start applying."
+
+**`methodology/07_definition_of_done.md`**
+- **F30:** Specify which doc-audit pass (quarterly vs semi-annual) covers the methodology; add a sentence at line 323.
+- **F31:** Make "Memory index" update-trigger mirror 08's "same commit" phrasing at lines 215-225.
+- **F33:** Add doc 03 cross-link in Gate 6 (epic rollup) at lines 111-122.
+- **F34:** Change `Lock: -` to `Lock: —` (em-dash) in the DoD checklist at line 410.
+- **F56 (cross-batch):** Normalize same `Lock: —` character throughout the doc.
+
+**`methodology/08_lessons_and_memory.md`**
+- **F35:** Add a real index-row example (e.g., kebab-slug + sentence hook) at lines 198-206.
+- **F37:** Add cross-link in "Trigger 2" noting the "2+ occurrences" bar is shared across the methodology.
+
+**`methodology/09_git_workflow.md`**
+- **F39:** Provide default list of common patch-branch areas (e.g., methodology, designsystem, spec, runbook) at lines 78-100.
+- **F40:** Reconcile "never auto-merges a patch branch" (line 100) with `gh pr merge` ⚠ (line 545-569); make the table cell row-specific for patch branches.
+- **F41:** Add explicit cross-link in patch-branch sub-section to doc 07 (Gate 4) and doc 10 (diff-verification).
+- **F42:** Re-label `git pull --ff-only` row at line 551 — not strictly read-only (use "Idempotent sync" or move out of read-only cluster).
+- **F47 (also touches 10):** Pick one phrase between "ratification" (10:572) and "reviews diffs" (09:96); align.
+
+**`methodology/10_testing_and_verification.md`**
+- **F45:** Note that verification level lives only on the backlog item, not the PR checklist, at lines 578-640 (or add `L#` row).
+- **F46:** Replace "Done-means" with "DoD gates" at line 564 (or define at first use).
+- **F47 (also touches 09):** Align phrasing with patch-branch convention.
+
+**`methodology/11_human_roles.md`**
+- **F49:** Reference doc 04's XS/S effort definitions inline at lines 176-179, or define "small" inline.
+- **F51:** Clarify "Pricing, business model, contractual terms" — operational pricing vs strategy-doc pricing — at line 246.
+- **F52:** Sharpen "skills that grow less critical" at lines 200-204 from "ability matters less" to "typing speed matters less".
+- **F54:** Add reciprocal "Pairs with doc 09" cross-link in doc 11's decision-ownership matrix at lines 229-251.
+
+### Summary statistics (preview for BL-0010)
+
+**Total findings classified:** 59
+
+**By source batch:**
+- BL-0007 (docs 00-05): 25 findings (F01-F25)
+- BL-0008 (docs 06-11): 29 findings (F26-F54)
+- Cross-batch inconsistencies: 5 findings (F55-F59)
+
+**Practice/docs axis distribution:**
+- `docs-wrong`: 59 (all findings)
+- `practice-wrong`: 0
+- `both`: 0
+
+(All findings are docs-wrong because cold-read findings are by construction discrepancies in the docs themselves — practice gaps weren't a discovery target of BL-0007/0008. Maintainer note: practice-wrong items would surface through memory-entry candidates, not cold reads, so the absence here is expected.)
+
+**Tier axis distribution (post tier-verification):**
+- T0 (cosmetic): 6 findings — F03, F15, F22, F34, F42, F56
+- T1 (surgical): **25** findings — F01, F04, F10, F12, F17 (shipped in v1.13.0), F18, F20, F24, F25, F26, F30, F31, F33, F35, F37, F39, F41, F45, F46, F47, F49, F51, F52, F54
+- T2 (substantive): **28** findings — F02, F05, F06, F07*, F08, F09, F11, F13*, F14*, F16, F19, F21*, F23, F27, F28, F29, F32, F36, F38, F40*, F43, F44, F48, F50, F53, F55, F57, F58, F59
+- T3 (architectural): 0 findings
+
+(\* = escalated T1 → T2 by fresh-Sonnet tier-verifier per escalate-on-doubt rule.)
+
+**Disposition distribution:**
+- **Shipped in v1.13.0:** 1 (F17, the demonstration patch).
+- **Shipped in v1.14.0:** 30 patches (all T0 + remaining T1 after escalations).
+- **Loop-notes (maintainer authors, T2 substantive):** 28 findings — deferred to next eval cycle or staged maintainer-authored patches.
+- **Human-only (T3 architectural):** 0 findings.
+
+**T2/T3 items requiring maintainer-authored future work:** 28 (all T2; no T3 in this pass).
+
+**Escalation-on-doubt audit:** During classification, several findings were borderline T1/T2 and resolved T2 per the escalation rule. Notable cases: F09 ("snapshots vs living"), F11 (architecture vs pillars folder relationship), F19 (ID-collision prevention), F27 (mandatory vs contextual contrarian prompt), F38 (two-layer vs four-layer terminology), F50 (two-column matrix semantics). These are surface-clarification-shaped but each implies a downstream policy or vocabulary choice the maintainer should own.
 
 ## Summary statistics
 
-_Populated by BL-0010. Counts of findings by classification and by disposition. Time-to-complete the pass. Patch releases shipped from this pass._
+**Pass duration:** 2026-05-25 (single-day pass; bootstrap, eval cycle, and patch ship all on the same date because the self-development project shipped its bootstrap and ran the first eval cycle in one session).
 
-_(empty)_
+**Total findings classified:** 59
+- BL-0007 (docs 00–05): 25 findings (3 stale / 12 unclear / 10 inconsistent)
+- BL-0008 (docs 06–11): 29 findings (0 stale / 14 unclear / 15 inconsistent)
+- Cross-batch inconsistencies: 5 findings
+
+**Practice/docs axis:** 59 / 0 / 0 (`docs-wrong` / `practice-wrong` / `both`). All findings were docs-wrong by construction of the cold-read mechanism. Practice gaps would be surfaced through memory-entry candidates and runtime observations, not cold reads — and the loop-notes captured a few of those separately.
+
+**Tier axis (post tier-verification):** T0 6 / T1 25 / T2 28 / T3 0. The 5 T1 → T2 escalations (per Sonnet's escalate-on-doubt verification on a 10-finding sample) are documented in the classification table.
+
+**Patches shipped:**
+- **v1.13.0** (2026-05-25, earlier): 1 patch — F17 grep-examples fix in `methodology/04_backlog_items.md`, demonstration of the tier-matrix mechanism.
+- **v1.14.0** (2026-05-25, this pass closure): 30 patches across 12 methodology files — all T0 + remaining T1 after escalations. Cross-AI diff-verified per the new diff-verification mode.
+
+**Patches deferred to maintainer authorship:** 28 (all T2). Logged in `self-development/loop-notes/2026-05-25.md` with the relevant context for the maintainer's authorship cycle.
+
+**End-state of methodology files:** 11 of 12 methodology docs (00–11) received at least one patch this pass. Doc 11 received the most (4 patches); docs 06 and 03 received the fewest (1 patch each). No methodology doc structure was changed; all patches stay within existing section shapes.
 
 ## Next eval date
 
-_Recorded by BL-0010. Target: ~6 months out from this pass (~2026-11-25 if this pass completes on schedule)._
+**Target:** 2026-11-25 (~6 months from this pass, per the [semi-annual cadence](../../methodology/07_definition_of_done.md#methodology-self-evaluation-semi-annual)).
 
-_(empty)_
+**Adjustment rule:** if a significant methodology release ships before that date, the next eval may be brought forward by 1–2 months to cold-read the new material. If no material methodology change happens in the 6-month window, the eval can be deferred by up to 2 months.
+
+**Process improvements to apply at the next pass:**
+1. **Spawn cold-read agents in `general-purpose` role** (or equivalent with Write/Edit tools), not `Explore` — established as standard practice this pass (lesson #1 in loop-notes).
+2. **Use per-category `_(none)_` empty markers** for deterministic Done-means verification (lesson #2 in loop-notes).
+3. **Two-axis classification (practice/docs + tier)** is now the standard, not an option. The v1.13.0 tier matrix is the default operating model.
+4. **Tier classifications are cross-AI verified** per escalate-on-doubt. The 5 escalations this pass demonstrate the rule catches over-claiming consistently.
 
 ## Maintainer signoff
 
-_Awaiting signature on completion of BL-0010._
+```
+Reviewed by: _________________________
+Date:         _________________________
+Verdict:      [ ] Accept — close E02 at Status: done.
+              [ ] Conditional accept — minor revisions before close.
+              [ ] Reject — return to loop with feedback.
+Notes:
+```
 
-_(empty)_
+_Awaiting maintainer signoff to close E02. Once signed, BL-0006/0007/0008/0009/0010 flip from `to-be-tested` to `done` and move to `ARCHIVE.md`; E02 charter moves from `active` to `done` in EPICS.md._
