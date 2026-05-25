@@ -9,7 +9,19 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-(nothing yet)
+### Self-development loop Run 3 (2026-05-25) — BL-0008
+
+First run under v1.13.0's tier matrix. Fresh Opus 4.7 general-purpose agent (no prior context, including no exposure to BL-0007's authoring session) cold-read methodology docs 06–11 and landed **29 findings** (0 stale / 14 unclear / 15 inconsistent) under `## Cold-read findings (docs 06–11)`, plus **5 cross-batch inconsistencies** with BL-0007's docs 00–05 batch. Cross-AI validation (fresh Sonnet 4.6 Explore agent, findings-verification mode): **PASS on all four Done-means criteria**, 5/5 sampled citations verified, 3/3 spot-checks grounded.
+
+- Zero stale findings — the methodology's content holds up to current practice; gaps are at clarity and cross-doc consistency axes.
+- The two new v1.13.0 sub-sections (patch-branch convention in 09; two-modes diff-verification in 10) were evaluated with full rigor and surfaced real gaps (unspecified area-prefix policy, ambiguous partial-diff PASS/FAIL, conflicting "never auto-merge" framing).
+- Per-category `_(none)_` convention from Run 2's loop-notes applied throughout — Done-means verification is now deterministic.
+- Sequential two-batch structure (BL-0007 → BL-0008) did real work: 4 cross-batch findings can only be produced by reading the prior batch first.
+- BL-0008 now at `Status: to-be-tested`, Test: `pass` (pending cross-AI return); awaiting maintainer done-flip + ARCHIVE move.
+
+Combined corpus across BL-0007 + BL-0008: **~54 findings** queued for BL-0009's two-axis classification (practice/docs framework + patch-tier T0–T3 per v1.13.0). T0/T1 + docs-wrong findings will spawn `methodology-patch/*` branches with cross-AI diff-verification; T2/T3 findings stay in loop-notes for maintainer authorship.
+
+Next run target: BL-0009 + BL-0010 (close E02). EPICS rollup: E02 at 2/0 (+3 to-be-tested).
 
 ---
 

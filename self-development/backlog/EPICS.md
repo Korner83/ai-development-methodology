@@ -1,12 +1,12 @@
 # Epics
 
-_Last refreshed: 2026-05-25 (post Run 2 — BL-0006 + BL-0007 at to-be-tested, awaiting maintainer done-flip)._
+_Last refreshed: 2026-05-25 (post Run 3 — BL-0006 + BL-0007 + BL-0008 at to-be-tested; v1.13.0 tier matrix in effect)._
 
 ## Rollup
 
 | Epic | Title | Pillar (primary + secondary) | Status | Phase | Items (open/done) | Next milestone |
 |---|---|---|---|---|---|---|
-| [E02](epics/02-first-semiannual-self-evaluation/README.md) | First semi-annual methodology self-evaluation pass | P3 Doc currency + P2 Doc clarity | **active** | Phase 1 | 3 / 0 (+2 to-be-tested) | BL-0006 + BL-0007 awaiting maintainer review; BL-0008 next loop pickup |
+| [E02](epics/02-first-semiannual-self-evaluation/README.md) | First semi-annual methodology self-evaluation pass | P3 Doc currency + P2 Doc clarity | **active** | Phase 1 | 2 / 0 (+3 to-be-tested) | BL-0006/0007/0008 awaiting maintainer review; BL-0009 next loop pickup (two-axis classification per v1.13.0) |
 | [E01](epics/01-examples-folder/README.md) | Examples folder | P1 Doc completeness + P6 Example richness | planned | Phase 1 | 5 / 0 | Promoted to active after E02 closes |
 | [E03](epics/03-git-workflow-trim/README.md) | Trim or split `09_git_workflow.md` | P2 Doc clarity | planned | Phase 1 | 4 / 0 | Promoted after E02 closes; note BL-0012 touches `methodology/` and requires maintainer handoff |
 | [E04](epics/04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | planned | Phase 1 | 0 / 0 | Promoted after E02 closes; competes with E01 + E03 for the active slot |

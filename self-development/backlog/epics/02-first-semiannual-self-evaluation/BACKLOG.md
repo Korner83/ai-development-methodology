@@ -8,7 +8,7 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 |---------|--------------------------------------------------------------------|----------|--------|----------------|
 | BL-0006 | Create `evaluations/` folder + first eval report skeleton          | P1       | XS     | to-be-tested   |
 | BL-0007 | Cross-AI cold-read of methodology docs 00–05 (planning + locks)    | P1       | M      | to-be-tested   |
-| BL-0008 | Cross-AI cold-read of methodology docs 06–11 (disciplines + ops)   | P1       | M      | backlog        |
+| BL-0008 | Cross-AI cold-read of methodology docs 06–11 (disciplines + ops)   | P1       | M      | to-be-tested   |
 | BL-0009 | Classify surfaced gaps + assign dispositions + patch tiers         | P1       | M      | backlog        |
 | BL-0010 | Finalize eval report + close epic                                  | P1       | S      | backlog        |
 
@@ -111,10 +111,14 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 | Pillar   | P3                                 |
 | Priority | P1                                 |
 | Effort   | M                                  |
-| Status   | backlog                            |
-| Test     | not-tested                         |
+| Status   | to-be-tested                       |
+| Test     | pass                               |
 | Deps     | BL-0006, BL-0007                   |
 | Lock     | —                                  |
+
+**Run-3 execution note:** Cold-read completed by a fresh Opus 4.7 general-purpose agent on 2026-05-25 (no prior turns referencing this project, including no exposure to BL-0007's authoring session). **29 findings** landed across all six docs (0 stale / 14 unclear / 15 inconsistent), plus **5 cross-batch inconsistencies** (00–05 vs 06–11). Notably zero stale findings — the docs hold up to current practice; gaps are clarity (14) and cross-doc consistency (15). The two new v1.13.0 sub-sections (patch-branch convention in 09; two-modes diff-verification in 10) were evaluated with full rigor and had real gaps (unspecified area-prefix policy, ambiguous partial-diff PASS/FAIL, conflicting "never auto-merge" wording). The per-category `_(none)_` convention from Run 2's loop-notes was applied throughout.
+
+**Cross-AI validation (2026-05-25):** Fresh Sonnet 4.6 Explore agent (findings-verification mode per `methodology/10`). **PASS on all four Done-means criteria.** 5/5 sampled citations verified accurate against the cited files; 3/3 spot-checked findings grounded. Validator noted: (a) one cross-batch finding paraphrases doc-09:96 slightly loosely ("reviews diffs" vs the actual "yes/no on a concrete change") — not blocking, could tighten if it becomes a patch candidate; (b) the doc-10 finding about "Done-means" terminology is self-referential and a likely T1 candidate for BL-0009 (add a definition or alias). Awaiting maintainer review before flip to `Status: done` and move to `ARCHIVE.md`.
 
 **Why / Description:** Same as BL-0007 applied to `methodology/06_working_principles.md` through `methodology/11_human_roles.md`. **Sequential to BL-0007 (not parallel):** BL-0008's verification asks for cross-doc inconsistencies between this batch and BL-0007's batch, which requires BL-0007's findings to be in the report first. Pillar (secondary): P2 — Doc clarity.
 
