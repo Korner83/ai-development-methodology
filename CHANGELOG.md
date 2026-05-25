@@ -13,6 +13,32 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.6.0 — 2026-05-25
+
+### Feat — Methodology self-evaluation cadence + five git-workflow additions (2026-05-25)
+
+Closes two gaps: a meta-layer for keeping the methodology docs honest as practice evolves, and five concrete git practices that adopters routinely re-derive.
+
+**`methodology/07_definition_of_done.md` — new section "Methodology self-evaluation (semi-annual)"** (~40 lines)
+
+Sits as a parallel concept to the existing "Periodic repo health audits (quarterly)" subsection — same shape, different surface. The quarterly audit checks code health; the semi-annual self-evaluation checks doc health. Names the failure mode (methodology and practice drift apart over months), the cadence (every six months), the protocol (re-read every doc cold; classify gaps as "practice is wrong" / "docs are wrong" / "both"; ship updates via the existing promotion loop), and the reverse case (a doc that gets ahead of practice and never gets used). Explicit cross-references to the existing "Memory as a leading indicator" and "Promotion path" patterns so the new section sits within the lessons-learned ecosystem rather than standing alone.
+
+**`methodology/09_git_workflow.md` — five new sections** (~260 lines total)
+
+The doc was solid on day-to-day flow but missing several patterns adopters consistently hit. Each new section sits at its natural point in the existing flow:
+
+- **"Lock-file management"** (~60 lines) — after Commit message convention. The rule (lock files are committed), a table of when agents should update them (yes for explicit dependency changes, no for spurious `npm install` diffs), how to discard spurious lock-file diffs, what to do when the diff is huge, and why this matters specifically for AI-agent workflows where unintended transitive bumps bloat PRs.
+- **"Squash, merge, or rebase — picking the trunk-merge strategy"** (~40 lines) — after PR discipline. Comparison of the three GitHub merge strategies with a default recommendation (squash) and explicit exceptions (monorepos, multi-step refactors where per-commit attribution matters, `git bisect` precision needs).
+- **"What AI agents can and can't do in git — the affirmative list"** (~60 lines) — after Destructive command discipline (which is the negative list). A 23-row table pairing each common git/`gh` operation with an autonomy level (✓ / ⚠ / ✗) and the principle that *reversibility maps to autonomy*. Pairs with the decision-ownership matrix in `11_human_roles.md`.
+- **"Release tagging and semantic versioning"** (~70 lines) — after Production deploys. When to cut a release (three triggers); SemVer rules with a heuristic for when to bump MAJOR vs MINOR vs PATCH ("if an adopter who pinned to the previous version would have to do work to upgrade, it's at least a MINOR; if they'd have to change their existing usage, it's a MAJOR"); release commit shape; annotated vs lightweight tags; two-step push pattern (commit then tag); release-notes-vs-CHANGELOG relationship; four anti-patterns including sequential patch releases for trivial fixes (the day's own bad habit, now codified as a thing not to do).
+- **"Hot-fix workflow"** (~50 lines) — right after Release tagging. When justified (high bar: outage, security vuln, regression, data-integrity issue); eight-step protocol (branch from tag not main, scope ruthlessly, test per DoD, file P0 item, PR review at urgency-not-skipped pace, cherry-pick to release branches if any, tag patch release, archive); post-mortem write-up with three concrete questions; what hot-fixes are NOT (not a DoD bypass, not an audit-trail skip, not a scope-expansion vehicle).
+
+**Mechanical:** README line-count claim refreshed (~8,000 → ~8,200); longest-doc claim refreshed (~900 → ~1,000) — `methodology/09_git_workflow.md` is now the longest at 986 lines, taking the spot from `methodology/04_backlog_items.md` (895).
+
+Discovery: user asked "what would you add to `09_git_workflow.md`?" plus an explicit ask for a self-evaluation cadence that "merges smoothly with existing logic." Both addressed; all five git-workflow proposals shipped together.
+
+---
+
 ## v1.5.1 — 2026-05-25
 
 ### Docs — Decouple `HUMAN_NEEDED.md` from the autonomous loop (2026-05-25)

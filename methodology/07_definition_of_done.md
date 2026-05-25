@@ -336,6 +336,40 @@ Beyond doc audits, a quarterly *repo health audit* catches imbalances and decay 
 
 A small scripted `repo-stats` utility that emits these numbers as a markdown summary is worth writing once. The methodology doesn't ship one — your stack determines the right implementation — but the *practice* of measuring is what matters.
 
+### Methodology self-evaluation (semi-annual)
+
+The audit above checks the *codebase*. A complementary practice checks the *methodology docs themselves* — do they still describe how the team actually works?
+
+Methodology and practice naturally drift. The team learns shortcuts that aren't in the docs. New patterns emerge that the docs don't acknowledge. Old rules survive in the docs after their reason for existing has gone. Without a deliberate self-evaluation pass, the methodology becomes a fossil: technically correct as of when it was written, less and less descriptive of what's actually happening.
+
+**Cadence:** semi-annual (every six months). More often is overhead; less often lets drift compound. The cadence is half that of the quarterly repo health audit because methodology docs change more slowly than code — and they *should* change slowly, since stability is part of their value.
+
+**What to do:**
+
+1. **Re-read every methodology doc cold.** Pretend you're a new contributor. Mark every rule that doesn't match what you've actually been doing.
+2. **Classify each gap:**
+   - **Practice is wrong** — the doc rule is sound; practice has drifted. Re-anchor: file a memory entry capturing the recurring gap, train the team, or strengthen the instruction file.
+   - **Docs are wrong or incomplete** — the doc no longer matches reality. Update via the promotion loop (see [08_lessons_and_memory.md — The promotion path](08_lessons_and_memory.md#the-promotion-path-from-one-off-correction-to-durable-rule)). If the same gap appears as multiple memory entries already, the path is even shorter: it's a methodology addition waiting to be made.
+   - **Both** — the rule was right at the time but context changed (new tooling, new model capabilities, new team composition). Rewrite for the new reality; note explicitly what changed.
+3. **Ship the methodology updates as a release.** Same CHANGELOG entry shape as any other change. Tag the commit so future audits can find the lineage — e.g., `chore(methodology): semi-annual self-evaluation — close drift around <area>`.
+4. **Note any rule the team consistently ignores.** A rule everyone routes around may not be the right rule. Investigate before reinforcing.
+
+**The reverse case.** Sometimes a methodology doc gets *ahead* of practice — a section was written but the team hasn't yet needed it. That's fine; the methodology is aspirational on those edges. But if a year passes and the section was never needed, consider whether it should be pruned or marked as optional. Aspirational forever becomes clutter.
+
+**What this is NOT:**
+
+- **A rewrite.** Methodology stability matters; rewriting every six months trains the team not to trust the docs. Self-evaluation is about *closing gaps*, not about *redesigning*.
+- **An audit of individual contributors.** The artifact under review is the docs, not the people.
+- **A planning exercise.** The methodology describes *how* work is done; it doesn't decide *what* to do next.
+
+**Connection to the existing patterns:**
+
+- **[Memory as a leading indicator](08_lessons_and_memory.md#memory-as-a-leading-indicator-for-methodology-gaps)** is the *bottom-up* signal that the methodology has a gap. Self-evaluation is the *top-down* check that catches gaps memory hasn't flagged yet.
+- **[The promotion path](08_lessons_and_memory.md#the-promotion-path-from-one-off-correction-to-durable-rule)** is the mechanism for landing the methodology changes self-evaluation surfaces. Self-evaluation is the trigger; the promotion path is the execution.
+- **[Periodic repo health audits](#periodic-repo-health-audits-quarterly)** (above) and self-evaluation cover complementary surfaces: code health vs. doc health. Run both; they catch different things.
+
+The healthy state: docs and practice inform each other continuously. Each self-evaluation pass moves the docs ~5% closer to current reality; the cumulative effect across years is what keeps the methodology alive instead of stale.
+
 ### A practical checklist (paste into your project's PR template)
 
 ```

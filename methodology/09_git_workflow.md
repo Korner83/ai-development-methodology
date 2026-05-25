@@ -203,6 +203,55 @@ Initial draft of the git practices doc.
 
 ---
 
+## Lock-file management
+
+Most modern package managers produce a lock file (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`, `Cargo.lock`, `Gemfile.lock`, `composer.lock`, `poetry.lock`, `uv.lock`). The lock file pins exact versions across all dependencies, ensuring `install` produces the same tree every time.
+
+Lock files are an underrated source of confusion in AI-collaborated workflows: agents touch dependencies, lock files change, and the resulting diffs are huge and inscrutable.
+
+### The rule
+
+**Lock files are committed to the repo.** They're not generated artifacts to gitignore. The whole point is reproducibility — the lock file *is* the dependency snapshot. The exception is for libraries that are themselves installed as dependencies in other projects (where the lock file would interfere with downstream consumers); applications and end-user tools commit the lock file.
+
+### When AI agents should update the lock file
+
+| Operation | Update lock file? |
+|---|---|
+| Adding a new dependency (`npm install foo`) | ✓ Yes — the new dependency requires the lock update. |
+| Removing a dependency (`npm uninstall foo`) | ✓ Yes — remove the dead entries. |
+| Explicit upgrade (version bump in `package.json`, `npm update foo`) | ✓ Yes — that's the point of the upgrade. |
+| Unrelated work that happened to regenerate the lock file (you ran `npm install` just to fetch deps) | ✗ No — discard the spurious lock-file diff. |
+| Security patch (`npm audit fix`) | ⚠ Only with explicit user OK and only if scoped to the patch — security fixes can cascade unexpectedly. |
+
+### Discarding spurious lock-file diffs
+
+If you ran `npm install` for unrelated reasons and the lock file changed:
+
+```bash
+git checkout -- package-lock.json    # or: git restore package-lock.json
+```
+
+Then re-fetch dependencies from the unchanged lock — most package managers have a "clean install" command for exactly this (`npm ci`, `pnpm install --frozen-lockfile`, `yarn install --frozen-lockfile`, `cargo build --locked`).
+
+### When the diff is huge
+
+A massive lock-file diff usually indicates a dependency cascade — one dependency upgraded transitively forced many others to shift. Read the top of the diff to find the root cause:
+
+- **Deliberate upgrade you initiated** → keep the diff; ship it.
+- **Didn't initiate any upgrade** → investigate before committing. Possibly someone else pushed a `package.json` change you haven't pulled; reset your working tree and pull first.
+
+### Why this matters specifically for AI agents
+
+A single agent session that runs `npm install` to set up the workspace can produce a lock-file diff that:
+
+- Includes upgrades the agent didn't intend (transitive bumps from registry changes since the last update).
+- Conflicts with the user's pinned versions.
+- Bloats the agent's PR with hundreds of lines of lock-file noise that obscure the actual work.
+
+**Defensive pattern:** agents do not commit lock-file changes unless their work directly involved dependency changes. When in doubt, discard the lock-file diff and reinstall from the committed lock.
+
+---
+
 ## PR discipline
 
 Pull requests are the unit of review. Each PR should be readable, scoped, and traceable.
@@ -273,6 +322,38 @@ Never include co-author credit unless explicitly agreed. Auto-adding a `Co-autho
 - **WIP commits left in.** Squash or rewrite before opening.
 - **Debug code left in.** `console.log`, commented-out blocks, scratch comments.
 - **Secrets, generated files, lock-file changes unrelated to the work.**
+
+---
+
+## Squash, merge, or rebase — picking the trunk-merge strategy
+
+GitHub (and most hosting platforms) offer three ways to land a PR onto the trunk: squash merge, merge commit, or rebase-and-merge. They produce different shapes of history and different tradeoffs.
+
+| Strategy | What it produces | When to prefer |
+|---|---|---|
+| **Squash merge** | One commit on the trunk per PR. The PR's individual commits are collapsed into a single commit with the PR title + body. | Most projects, most of the time. Clean linear history; easy to revert (`git revert <commit>`); simple `git log`. |
+| **Merge commit** | The PR's individual commits land on the trunk plus a merge commit marking the integration point. | When the PR's individual commits are meaningful and you want to preserve them (e.g., a multi-step refactor where each step is independently valuable). Produces a branchy graph. |
+| **Rebase and merge** | The PR's individual commits land on the trunk as if they had been written there directly. No merge commit. | When you want per-commit granularity AND a linear history. Rewrites the PR's commit hashes — coordinate before adopting if collaborators have pulled the PR branch. |
+
+### Pick one and stay consistent
+
+Mixing strategies on the same trunk produces a confusing history (some PRs squashed, some preserved, no apparent rule). **Decide once per project; the project instruction file should name the choice** ("This project uses squash-merge for all PRs to main.").
+
+### Default recommendation
+
+**Squash merge** is the default for most projects. The benefits (clean trunk, easy revert, simple `git log`) outweigh the loss of intra-PR commit granularity — which is usually noise (WIP commits, "fix typo", "address review") that the squash usefully discards.
+
+Exceptions where merge-commit or rebase-merge make sense:
+
+- Monorepos where individual commits per package matter for changelog generation.
+- Long-running PRs from contributors who want multi-commit work attributed individually.
+- Projects where `git bisect` precision matters at the per-commit level.
+
+### What this is NOT a choice about
+
+- **PR review.** All three strategies still require the PR to be reviewed before merging.
+- **Branch protection.** All three still require the trunk to be protected against direct commits and force-pushes.
+- **Conventional commit format.** The squash-merge commit subject should still follow [conventional commits](#commit-message-convention) — usually it's the PR title.
 
 ---
 
@@ -431,6 +512,50 @@ Move fast on recovery. Move slow on the original destructive command.
 
 ---
 
+## What AI agents can and can't do in git — the affirmative list
+
+The [Destructive command discipline](#destructive-command-discipline) section above is a *negative* list (forbidden operations). This section is the matching *affirmative* table — what agents are explicitly allowed and expected to do without asking.
+
+Pairs with the [decision-ownership matrix in 11_human_roles.md](11_human_roles.md#the-decision-ownership-matrix), which covers decisions broadly. This table is git-operation-specific.
+
+| Operation | Agent autonomy | Notes |
+|---|:---:|---|
+| `git status` / `git diff` / `git log` / `git show` | ✓ | Read-only inspection. Anytime. |
+| `git add <specific files>` | ✓ | Staging known files. Prefer this over `git add .` which can stage unintended files. |
+| `git commit` (on a feature branch) | ✓ | The agent's normal flow per [commit cadence](#commit-cadence). |
+| `git push origin <feature-branch>` | ✓ | Pushing the agent's own feature branch. |
+| `git fetch` / `git pull --ff-only` | ✓ | Read-only sync. The `--ff-only` flag prevents accidental merges. |
+| `git checkout <branch>` (in a worktree the agent owns) | ✓ | In its own worktree, not the user's primary checkout. |
+| `git worktree add` / `git worktree remove` (own worktrees) | ✓ | Manage agent's own isolation. |
+| `git merge <other>` (into agent's own feature branch) | ✓ | Bringing trunk into feature is normal. |
+| `git rebase <upstream>` (own feature branch, not pushed-and-shared) | ✓ | Rewriting your own un-shared history is fine. |
+| `gh pr create` / `gh pr comment` / `gh pr view` | ✓ | Standard PR workflow on agent's own branch. |
+| `gh issue view` / `gh issue comment` | ✓ | Read + non-destructive write on issues. |
+| `git tag -a <annotated>` (release tag) | ⚠ | Only with the user's explicit OK for *this* release. Tags are durable references. |
+| `git push origin <tag>` | ⚠ | Same. Tag pushes are public. |
+| `gh pr merge` (squash / merge / rebase) | ⚠ | Merging to main is consequential; user-led decision. |
+| `gh release create` | ⚠ | Release pages are durable; user-authorized. |
+| `git push --force` / `git push --force-with-lease` | ✗ | Never autonomously. Always requires explicit user authorization for the specific operation. |
+| `git reset --hard` | ✗ | Discards uncommitted work. Always confirm with the user. |
+| `git checkout -- <file>` / `git restore <file>` | ✗ | Discards working changes. Always confirm. |
+| `git clean -fd` | ✗ | Removes untracked files (which may be the user's). |
+| `git branch -D` | ✗ | Force-deletes a branch; commits may become unreachable. |
+| `git filter-branch` / `git filter-repo` | ✗ | History rewriting. Heavy-handed; always user-led. |
+| Any direct push to the trunk | ✗ | Trunk lands via PR only. See [Branch protection](#branch-protection). |
+| Production deploys (`./deploy prod`, etc.) | ✗ | See [Production deploys](#production-deploys). |
+
+### The principle
+
+**Reversibility maps to autonomy.** If an operation can be cleanly undone (a revert, a new commit, a reset of the agent's own feature branch), the agent can do it. If it can't be cleanly undone (force-push, hard reset, history rewrite, branch deletion, production deploy), the agent waits for the user.
+
+This is the same threshold the [decision-ownership matrix in 11_human_roles.md](11_human_roles.md#the-decision-ownership-matrix) uses — reversibility is the dominant factor in deciding what belongs to the human vs. the agent.
+
+### What "with user OK" means in practice
+
+When the table says ⚠ "only with the user's explicit OK," the agent doesn't infer the OK from prior conversation. The agent surfaces the intent ("I'm about to cut release v1.2.3 — tag, push, and create the GitHub release page. Confirm?") and waits for an explicit yes. The OK applies to *that* operation, not to future operations of the same kind.
+
+---
+
 ## Production deploys
 
 ### The hard rule
@@ -479,6 +604,140 @@ The warning is not subtle on purpose. It tells future contributors immediately t
 - Verify the deploy after the human runs it.
 
 What the agent cannot do is push the button. The button is the human's.
+
+---
+
+## Release tagging and semantic versioning
+
+Commits accumulate continuously; releases are deliberate snapshots. The release-tag commit makes a specific point in history easy to refer back to, easy to deploy from, and easy for adopters to pin against.
+
+### When to cut a release
+
+Three reliable triggers:
+
+1. **A coherent batch of changes hits the trunk.** Multiple related commits (a feature + its docs + a CHANGELOG entry) bundled into one release rather than one tag per commit.
+2. **A milestone is reached.** An epic closes, a phase exits, a documented goal lands.
+3. **A bug needs to be fixed in a way that adopters will reference.** Hot-fix release — see [Hot-fix workflow](#hot-fix-workflow) below.
+
+What NOT to release: every commit, every WIP push, every small refactor. Releases should be referenceable.
+
+### Semantic versioning (SemVer)
+
+Use [SemVer 2.0](https://semver.org/): `MAJOR.MINOR.PATCH`.
+
+| Bump | When to use |
+|---|---|
+| **MAJOR** (X.0.0) | Breaking change. Adopters who pinned to the previous major need to actively migrate. For a methodology-style project: a renamed doc, a removed section, a restructure of artifacts adopters link to. For code: a breaking API change. |
+| **MINOR** (X.Y.0) | New feature, new section, new artifact — backward-compatible. Adopters who upgrade get more; nothing they depend on breaks. |
+| **PATCH** (X.Y.Z) | Fix that doesn't change the surface. Typo, link repair, factual correction, doc clarification. |
+
+A useful heuristic: **if an adopter who pinned to the previous version would have to do work to upgrade, it's at least a MINOR; if they'd have to change their existing usage, it's a MAJOR.**
+
+### The release commit
+
+A single commit per release on the trunk. The conventional-commit type is `release:`, no scope needed:
+
+```
+release: vX.Y.Z — <short summary, under 70 chars>
+
+<Body summarizing what's in the release, grouped by category
+ (Feat / Fix / Docs / Chore). Bullet style with file references.>
+
+CHANGELOG renamed [Unreleased] -> vX.Y.Z in this commit.
+```
+
+The body should match the corresponding CHANGELOG entry — they're describing the same thing for two different audiences (git readers vs. CHANGELOG readers).
+
+### Annotated tags, not lightweight
+
+```bash
+git tag -a vX.Y.Z -m "vX.Y.Z - <same short summary as commit subject>"
+```
+
+Annotated tags carry the tagger's identity, timestamp, and message. Lightweight tags (`git tag vX.Y.Z`) are just refs to a commit, with no metadata. Annotated tags are the standard for releases. If your project signs tags (`git tag -s`), use that; otherwise unsigned-annotated is the baseline.
+
+### Pushing the release
+
+Two pushes — never combined into one:
+
+```bash
+git push origin main           # the release commit
+git push origin vX.Y.Z         # the tag
+```
+
+Combining via `git push --follow-tags` works if configured, but the explicit two-step form makes the order visible and intentional.
+
+### Release notes vs. CHANGELOG
+
+Same content, two audiences:
+
+- **CHANGELOG.md** — durable, in the repo, structured (categorized entries with dates and references). The canonical record.
+- **Release notes on the hosting platform** (GitHub Releases, GitLab Releases, etc.) — polished for browsing; can include media (screenshots, demo links) the CHANGELOG doesn't.
+
+Generate release notes from the CHANGELOG entry — don't write them twice. Release notes can be shorter (executive summary linking to the CHANGELOG for full detail) and that's fine.
+
+### Anti-patterns
+
+- **Sequential patch releases for trivial fixes** (v1.4.1, v1.4.2, v1.4.3 within an hour) — symptom of not batching coherent changes. Acceptable when each patch genuinely needs its own version for adopter reference; noise otherwise.
+- **MAJOR bumps for additions.** Additions are MINOR. MAJOR is reserved for breaking changes.
+- **Tagging without a release commit** — leaves the tag without context in the CHANGELOG or commit message.
+- **Force-pushing over an existing tag.** Breaks adopters who pinned to it. Never.
+
+---
+
+## Hot-fix workflow
+
+The normal flow is: item → branch → PR → merge → eventual release. A hot-fix bypasses parts of this for genuine emergencies.
+
+### When a hot-fix is justified
+
+The bar should be high. Reserve hot-fixes for:
+
+- Production outage or significant degradation.
+- Security vulnerability that adopters or users are exposed to.
+- Recent release introduced a regression that breaks existing flows.
+- Data-integrity issue (corrupt writes, lost records).
+
+Do NOT hot-fix for: ordinary bugs, feature requests, "while we're at it" improvements. Those go through the normal flow.
+
+### The protocol
+
+1. **Branch from the last released tag**, not from `main`:
+   ```bash
+   git checkout -b fix/hotfix-<slug> v<last-released-version>
+   ```
+   Branching from `main` would include unreleased work that hasn't been verified for the production environment. Branching from the tag isolates the hot-fix to a known-good base.
+
+2. **Scope ruthlessly.** The hot-fix touches only what's needed to resolve the immediate problem. Defer everything else — even adjacent improvements — to follow-up items.
+
+3. **Test the fix** per the [DoD](07_definition_of_done.md). `Status: done` requires `Test: pass` — hot-fixes do not skip this. The verification loop is faster (because the scope is tight), not absent.
+
+4. **File the item with `Priority: P0`** so the bypass-of-normal-flow is visible in the backlog. The item closes in the same hot-fix PR.
+
+5. **Merge the hot-fix branch to main via PR.** The PR is reviewed under hot-fix urgency (faster than normal, not skipped).
+
+6. **Cherry-pick to release branches if you maintain any.** If your project has long-lived release branches (e.g., `release/v1.x`), the hot-fix needs to land on each affected one: `git cherry-pick <commit-hash>`.
+
+7. **Tag a new patch release** (see [Release tagging](#release-tagging-and-semantic-versioning)). The hot-fix gets its own version so adopters can pin to "the version that has the fix."
+
+8. **Archive the item to the originating epic's `ARCHIVE.md`** — or to a dedicated `epics/00-hotfixes/` epic if your project sees enough hot-fixes to warrant one.
+
+### Write down what happened
+
+After the hot-fix lands, the AI-collaborated equivalent of a post-mortem:
+
+- **What broke and how.** One paragraph. Concrete.
+- **Why it wasn't caught earlier.** Test gap? Verification dimension skipped? Cross-AI validation absent? Recently changed area with stale tests?
+- **What changes prevent recurrence.** New test? New DoD overlay? New memory entry? Methodology addition?
+
+This is a strong memory-entry candidate (see [08_lessons_and_memory.md](08_lessons_and_memory.md) "When to write a new memory" — Trigger 4: validated judgment call after an incident).
+
+### What hot-fixes are NOT
+
+- **A way to bypass DoD.** The hot-fix still gets tested and reviewed.
+- **A way to skip the audit trail.** The hot-fix still gets a commit, a PR, a CHANGELOG entry, a release.
+- **A way to skip cross-AI validation for high-stakes fixes.** Speed up the loop; don't drop gates.
+- **An excuse to expand scope.** "While we're hot-fixing X, let's also fix Y" is how hot-fixes turn into landmines.
 
 ---
 

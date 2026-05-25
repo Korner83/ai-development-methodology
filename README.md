@@ -124,7 +124,7 @@ ai-development-methodology/
     └── PROJECT_STRUCTURE.md  # recommended folder layout + naming conventions
 ```
 
-~8,000 lines across 21 files. Longest doc ~900 lines. Each doc is self-contained — read in any order.
+~8,200 lines across 21 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
 
 ---
 
