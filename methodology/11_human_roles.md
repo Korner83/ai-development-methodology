@@ -174,7 +174,7 @@ Format suggestion: an "Architecture Decision Record" (ADR) per non-trivial choic
 
 ### When to skip
 
-- The change is small (effort `XS` or `S` per the [item effort scale in `04_backlog_items.md`](04_backlog_items.md#effort-enum) — `XS` is under one focused session; `S` is one focused session).
+- The change is small (effort `XS` or `S` per the [item effort scale in `04_backlog_items.md`](04_backlog_items.md#effort-enum) — `XS` is under 2 hours; `S` is a half-day).
 - The architectural decisions are obvious (one reasonable answer, no judgment call).
 - The work is a pure replacement for existing well-tested code with the same shape.
 

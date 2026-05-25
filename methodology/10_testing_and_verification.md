@@ -561,7 +561,7 @@ Cross-AI validation is *not* a substitute for code review by a human or for actu
 
 Cross-AI validation has two distinct modes, each appropriate at a different step:
 
-**Findings-verification (the usual mode).** The implementing session produces work; the fresh session verifies the work meets a checklist (e.g., "this BL-#### item's `**Done means:**` checkboxes — see [`04_backlog_items.md` item template](04_backlog_items.md#item-skeleton) — are all satisfied," or "this PR's described changes match what the diff actually does"). The validator is checking *completeness and correctness of claims.* Output: PASS / FAIL per checklist item, with grounded citations.
+**Findings-verification (the usual mode).** The implementing session produces work; the fresh session verifies the work meets a checklist (e.g., "this BL-#### item's `**Done means:**` checkboxes — see [`04_backlog_items.md` item skeleton](04_backlog_items.md#item-heading--frontmatter-table-skeleton) — are all satisfied," or "this PR's described changes match what the diff actually does"). The validator is checking *completeness and correctness of claims.* Output: PASS / FAIL per checklist item, with grounded citations.
 
 **Diff-verification (when a loop or agent proposes an autonomous patch to authoritative content).** The implementing session produces a *proposed patch* — typically a branch with an edit, a CHANGELOG entry, and a finding the patch addresses. The fresh session reads the original cited content, the proposed edit, and the finding, then verifies three things:
 

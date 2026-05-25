@@ -63,7 +63,7 @@ Items in `FUTURE.md` use scoped IDs like `BL-E02-F01`, `BL-E02-F04`. When promot
 - *Pro:* the monotonic counter only counts items that actually entered active scope.
 - *Con:* identifier changes at promotion; any cross-references to the future-ID become stale at the moment of promotion.
 
-Either is fine. The project picks one in its instruction file or backlog README and stays consistent. **Record the choice explicitly** — a one-line entry in `CLAUDE.md` / `AGENTS.md` / the backlog `README.md` saves every future contributor the cost of greppping `FUTURE.md` and guessing from the IDs they see. Mixing schemes inside the same project produces confusion.
+Either is fine. The project picks one in its instruction file or backlog README and stays consistent. **Record the choice explicitly** — a one-line entry in `CLAUDE.md` / `AGENTS.md` / the backlog `README.md` saves every future contributor the cost of grepping `FUTURE.md` and guessing from the IDs they see. Mixing schemes inside the same project produces confusion.
 
 ---
 
