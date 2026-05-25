@@ -33,9 +33,9 @@ flowchart TB
     subgraph PLANNING [" PLANNING — cascades downward "]
         direction TB
         S["<b>Strategy</b><br/><i>why · phases · outcomes</i>"]
-        P["<b>Pillars</b><br/><i>capability layers · evergreen</i>"]
+        P["<b>Pillars</b><br/><i>long-term capability goals · evergreen</i>"]
         E["<b>Epics</b><br/><i>3–12 week containers</i>"]
-        I["<b>Items</b><br/><i>1–2 week units of work</i>"]
+        I["<b>Items</b><br/><i>1–2 weeks for humans · daily for AI</i>"]
         S --> P --> E --> I
     end
 
@@ -136,7 +136,7 @@ flowchart TB
 
     STRAT ==>|"strategy defines which capabilities matter"| PIL
 
-    PIL["🏛 <b>docs/pillars/</b> &nbsp; (the WHAT-CAPABILITIES)<br/>P1_&lt;area&gt;.md · P2_&lt;area&gt;.md · ... PN_&lt;area&gt;.md<br/><i>5–10 evergreen capability layers, sequentially dependent</i>"]
+    PIL["🏛 <b>docs/pillars/</b> &nbsp; (the LONG-TERM GOALS)<br/>P1_&lt;area&gt;.md · P2_&lt;area&gt;.md · ... PN_&lt;area&gt;.md<br/><i>5–10 evergreen capability goals, sequentially dependent</i>"]
 
     PIL ==>|"each pillar advanced by epics"| EPICS
     PIL -.->|"design exploration first"| PLAN
@@ -147,7 +147,7 @@ flowchart TB
 
     EPICS ==>|"items live inside each epic's BACKLOG.md"| ITEMS
 
-    ITEMS["🔖 <b>Items — BL-XXXX format</b> &nbsp; (1–2 week units of work)<br/><br/>Summary table at top — one line per item: <code>ID │ Title │ Priority │ Effort │ Status</code><br/><br/>Each item's detailed block has frontmatter fields:<br/>· <b>Pillar:</b> P3 &nbsp;&nbsp; · <b>Priority:</b> P0–P3 &nbsp;&nbsp; · <b>Effort:</b> XS–XL<br/>· <b>Status:</b> backlog → ready → in-progress → under-review → to-be-tested → done<br/>· <b>Test:</b> not-tested → pass &nbsp;&nbsp; · <b>Lock:</b> &lt;holder&gt;@&lt;TTL-expiry&gt;<br/>+ body: goal · plan · verification step per substep<br/><br/><i>No separate ticket types — features, bug fixes, tasks, and user stories all use the same BL-XXXX shape.</i>"]
+    ITEMS["🔖 <b>Items — BL-XXXX format</b> &nbsp; (sized to the contributor: 1–2 weeks for humans · daily for AI)<br/><br/>Summary table at top — one line per item: <code>ID │ Title │ Priority │ Effort │ Status</code><br/><br/>Each item's detailed block has frontmatter fields:<br/>· <b>Pillar:</b> P3 &nbsp;&nbsp; · <b>Priority:</b> P0–P3 &nbsp;&nbsp; · <b>Effort:</b> XS–XL<br/>· <b>Status:</b> backlog → ready → in-progress → under-review → to-be-tested → done<br/>· <b>Test:</b> not-tested → pass &nbsp;&nbsp; · <b>Lock:</b> &lt;holder&gt;@&lt;TTL-expiry&gt;<br/>+ body: goal · plan · verification step per substep<br/><br/><i>No separate ticket types — features, bug fixes, tasks, and user stories all use the same BL-XXXX shape.</i>"]
 ```
 
 **Step 0 is foundational.** The brief (product, target user, market, viability, tech stack, capability layers) is *your* work, not the methodology's. The methodology *records and operationalizes* those decisions; it does not invent them. Skipping this produces a velocity illusion — shipping confidently-built wrong product. See the "Step 0" callout in [How to use it](#how-to-use-it) for the long version.

@@ -13,6 +13,19 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.4.2 — 2026-05-25
+
+### Docs — Diagram refinements: pillars labeled as long-term goals + items sized by contributor type (2026-05-25)
+
+Two diagram-label refinements based on maintainer feedback:
+
+- **Pillars relabeled "long-term capability goals"** (was "capability layers · evergreen"). Both diagrams. Pillars are the closest thing the methodology has to long-term goals; making that explicit helps adopters see the link to their own product roadmap.
+- **Items sized by contributor type, not by calendar.** Was "1–2 week units of work"; now "1–2 weeks for humans · daily for AI" (Diagram 1) and "sized to the contributor: 1–2 weeks for humans · daily for AI" (Diagram 2). Reflects what's true in mixed-contributor projects — the same backlog item that takes a human 1–2 weeks of focused work might take an AI agent hours-to-days. Item *scope* is the constant; calendar time is contributor-dependent.
+
+Diagram-only change in this release. If the underlying methodology docs (especially `methodology/04_backlog_items.md` and the "Effort: XS–XL" sizing guidance) should be updated to reflect contributor-aware sizing more explicitly, that's a separate follow-up.
+
+---
+
 ## v1.4.1 — 2026-05-25
 
 ### Docs — Two Mermaid diagrams added to README + v1.3.1 → v1.4.0 reference bumps (2026-05-25)
