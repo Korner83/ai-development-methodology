@@ -22,10 +22,12 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 | Pillar   | P3                                 |
 | Priority | P1                                 |
 | Effort   | XS                                 |
-| Status   | ready                              |
+| Status   | to-be-tested                       |
 | Test     | not-tested                         |
 | Deps     | —                                  |
 | Lock     | —                                  |
+
+**Run-1 execution note:** Work completed by the autonomous loop's first run on 2026-05-25. Three deliverables created (folder + 2 files); no methodology docs read; cross-AI validation gate is next. Awaiting maintainer review before flip to `Status: done` and move to `ARCHIVE.md`.
 
 **Why / Description:** The methodology added a [semi-annual self-evaluation cadence](../../../../methodology/07_definition_of_done.md#methodology-self-evaluation-semi-annual) in v1.6.0; that cadence has no operating surface yet. This item creates the folder + skeleton that subsequent items (BL-0007, BL-0008, BL-0009) populate with findings. **This is skeleton-only work — no findings data is recorded in this item; no methodology docs are read; the cold-read happens in BL-0007/0008.** Pillar (secondary): P2 — Doc clarity.
 
