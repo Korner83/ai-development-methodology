@@ -116,15 +116,17 @@ ai-development-methodology/
 ├── LICENSE                   # CC BY 4.0
 ├── STATUS.md                 # maintenance posture
 ├── methodology/              # the 12 methodology docs (00–11)
-└── templates/
-    ├── CLAUDE.md             # project-instruction file (Claude Code)
-    ├── AGENTS.md             # vendor-neutral version (extra plan/tool/safety sections)
-    ├── AGENT_KICKOFF.md      # planning-mode prompt for new projects
-    ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions
-    └── PROJECT_STRUCTURE.md  # recommended folder layout + naming conventions
+├── templates/
+│   ├── CLAUDE.md             # project-instruction file (Claude Code)
+│   ├── AGENTS.md             # vendor-neutral version (extra plan/tool/safety sections)
+│   ├── AGENT_KICKOFF.md      # planning-mode prompt for new projects
+│   ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions
+│   └── PROJECT_STRUCTURE.md  # recommended folder layout + naming conventions
+└── self-development/         # the methodology applied to its own development (worked example)
+    └── brief/                # Step 0 outputs — vision, audience, competitive landscape, etc.
 ```
 
-~8,200 lines across 21 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
+~9,100 lines across 30 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
 
 ---
 

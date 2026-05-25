@@ -13,6 +13,42 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.7.0 — 2026-05-25
+
+### Feat — Self-development bootstrap, Step 0: the brief (2026-05-25)
+
+The methodology is now applied to its own development as a self-improving cycle. A new top-level `self-development/` folder hosts the work; this release ships Step 0 (the brief), which back-engineers the project's intent into the eight inputs the methodology's own Step 0 prescribes.
+
+**New folder `self-development/`** — top-level folder for the methodology applied to itself. Mirrors the layout in [`templates/PROJECT_STRUCTURE.md`](templates/PROJECT_STRUCTURE.md). Grows as subsequent bootstrap steps complete (Step 1: strategy + pillars → v1.8.0; Step 2: epics; Step 3: items; Step 4: autonomous loop; Step 5+: continuous loop runs).
+
+**Nine new files in `self-development/brief/`** — eight detail files plus one TL;DR index:
+
+- `00_brief.md` — TL;DR index with at-a-glance table linking the eight detail files.
+- `01_vision.md` — what the methodology is for; 1-year and 3-year success horizons; what success is NOT.
+- `02_audience.md` — four primary segments (solo + AI; small mixed teams; indie hackers / startup founders; engineering leaders adding AI to existing workflows) plus three secondary (AI-tool builders, educators, researchers) plus explicit non-audience.
+- `03_competitive_landscape.md` — nine named alternatives surveyed: GitHub Spec Kit (~106k★), BMAD, Ralph loop, stdlib pattern, AGENTS.md standard, GSD, nano-spec, vendor docs, academic papers. Each entry: what it does well, where it falls short, relationship to this methodology.
+- `04_market_gaps.md` — nine concrete gaps the alternatives leave unaddressed (cheating-agent anti-pattern, locks for humans+agents, challenge-before-consenting prompt, four-layer planning, DoD coupled to item, HUMAN_NEEDED.md, ROI heuristic, self-evaluation cadence, decision-ownership matrix).
+- `05_success_metrics.md` — concrete 1-year (6 metrics) and 3-year (6 metrics) outcomes plus what's NOT a metric plus counter-signals plus review cadence.
+- `06_distribution.md` — distribution channels (primary + secondary + out of scope), lean-maintainer sustainability model (≤40 hours/quarter target), when this transitions from "reference artifact" to "shared infrastructure."
+- `07_tech.md` — markdown + git substrate, in-scope tooling, deliberate non-goals (no CI for docs, no translation infrastructure, no CLI for the methodology itself).
+- `08_capability_layers.md` — nine capability layers that become pillars in Step 1, with explicit sequential dependencies.
+
+**Cross-AI review applied before ship.** Per the bootstrap plan's DoD, a fresh Explore agent reviewed the brief cold (no prior context from the authoring session) and reported four minor revisions, all applied before this release:
+
+1. `01_vision.md` — hedged "twice as fast" claim (was presented as fact; now framed as a hypothesis worth acting on, with adopter telemetry called out as a thing the 1-year metrics aim to surface).
+2. `03_competitive_landscape.md` — added explicit snapshot-in-time note (the inverse "no peer has X" claims needed this hedge so future readers don't treat them as permanent statements).
+3. `02_audience.md` — added problem-bridge paragraph linking the four segments to a single underlying problem ("software projects accumulate methodology debt fast when AI agents are in the contributor mix").
+4. `08_capability_layers.md` — resequenced Tool compatibility from P6 → P4 (prerequisite for adoption, not downstream of examples). Adopter discoverability and Example richness shifted to P5 and P6 accordingly. Dependency diagram and 00_brief.md TL;DR table updated to match.
+
+**README updates:**
+
+- `What's in the repo` tree now shows `self-development/`.
+- Line-count claim refreshed (~8,200 → ~9,100); file count 21 → 30 (per the convention of excluding `.github/` from the tree count).
+
+**Bootstrap plan reference.** This release is Step 0 of the gated bootstrap plan described in the maintainer's harness plan file. Step 1 (strategy + pillars) is gated on this brief being stable. Each subsequent step gates on the previous step's DoD passing (cross-AI review + maintainer approval).
+
+---
+
 ## v1.6.0 — 2026-05-25
 
 ### Feat — Methodology self-evaluation cadence + five git-workflow additions (2026-05-25)
