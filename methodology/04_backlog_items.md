@@ -812,22 +812,22 @@ The frontmatter table is designed to grep cleanly. Common queries:
 
 ```bash
 # All items advancing a given pillar (cross-epic)
-rg "^\| \*\*Pillar\*\* +\| P7"  backlog/
+rg "^\| Pillar +\| P7"  backlog/
 
 # All P0 (ship-blocking) items
-rg "^\| \*\*Priority\*\* +\| P0" backlog/
+rg "^\| Priority +\| P0" backlog/
 
 # All currently free (unlocked) items
-rg "^\| \*\*Lock\*\* +\| —"      backlog/
+rg "^\| Lock +\| —"      backlog/
 
 # All currently in-progress items
-rg "^\| \*\*Status\*\* +\| \`in-progress\`" backlog/
+rg "^\| Status +\| in-progress" backlog/
 
 # All items held by a specific agent (find stale locks)
-rg "^\| \*\*Lock\*\* +\| claude-session" backlog/
+rg "^\| Lock +\| claude-session" backlog/
 
 # All blocked items, with 12 lines of context (to read the Blocker line)
-rg "^\| \*\*Status\*\* +\| \`blocked\`" -A 12 backlog/
+rg "^\| Status +\| blocked" -A 12 backlog/
 
 # All items rejected with a specific resolution pattern
 rg "^\*\*Resolution:\*\*.*covered by" backlog/
@@ -836,7 +836,7 @@ rg "^\*\*Resolution:\*\*.*covered by" backlog/
 rg -oN "^### BL-\d+" backlog/ | grep -oE "[0-9]+" | sort -n | tail -1
 
 # All items in a specific effort bucket
-rg "^\| \*\*Effort\*\* +\| L" backlog/
+rg "^\| Effort +\| L" backlog/
 ```
 
 When designing a new field or value, design it to grep cleanly: predictable position in the frontmatter, predictable value format, simple regex anchors. Avoid free-form values where grep would need to parse English.

@@ -75,6 +75,30 @@ test/regression-for-bl-0517
 - Tooling (CI, deployment pipelines, automation) often keys off branch prefix. A consistent prefix scheme makes the tooling reliable.
 - When picking up someone else's abandoned branch, a clear name tells you what they were working on without reading commits.
 
+### Patch-branch convention for authoritative artifacts
+
+When an AI agent (especially an autonomous loop) is allowed to propose a fix to an artifact the project treats as authoritative — methodology docs, design-system tokens, regulatory checklists, upstream spec mirrors — the fix lands on a **patch branch**, not directly on the trunk.
+
+```
+<area>-patch/YYYY-MM-DD-NN
+```
+
+Examples:
+
+```
+methodology-patch/2026-05-25-01    # first methodology patch of the day
+designsystem-patch/2026-05-25-01   # first design-system patch of the day
+spec-patch/2026-05-25-02           # second upstream-spec patch of the day
+```
+
+The convention enables three things:
+
+1. **The maintainer reviews diffs, not findings.** A patch branch already contains the proposed edit, the CHANGELOG entry, and (where applicable) a cross-AI verification note. Review is yes/no on a concrete change, not translate-finding-into-fix.
+2. **The patch is reversible at any point before merge.** Branch delete = patch dropped. No trunk state ever touched.
+3. **The branch name carries the audit context** — area (which authoritative artifact), date (when proposed), sequence number (multiple patches same day get distinct names).
+
+The patch branch follows all other rules in this doc: trunk protection still applies (no force-push, no direct trunk commit), commits still have clear messages, CHANGELOG entry lands in the same commit as the patch. The autonomous loop **never auto-merges a patch branch** — that's always the maintainer's gate. See [`AUTONOMOUS_LOOP.md` "Tiered autonomy for authoritative artifacts"](../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts) for the tier matrix that decides whether a finding becomes a patch branch (T0/T1) or stays as advice (T2/T3).
+
 ---
 
 ## Commit cadence

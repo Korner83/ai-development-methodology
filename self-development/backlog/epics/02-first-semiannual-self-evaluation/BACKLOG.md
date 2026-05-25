@@ -9,7 +9,7 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 | BL-0006 | Create `evaluations/` folder + first eval report skeleton          | P1       | XS     | to-be-tested   |
 | BL-0007 | Cross-AI cold-read of methodology docs 00–05 (planning + locks)    | P1       | M      | to-be-tested   |
 | BL-0008 | Cross-AI cold-read of methodology docs 06–11 (disciplines + ops)   | P1       | M      | backlog        |
-| BL-0009 | Classify surfaced gaps + assign dispositions                       | P1       | S      | backlog        |
+| BL-0009 | Classify surfaced gaps + assign dispositions + patch tiers         | P1       | M      | backlog        |
 | BL-0010 | Finalize eval report + close epic                                  | P1       | S      | backlog        |
 
 ---
@@ -140,42 +140,51 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 
 ---
 
-### BL-0009 — Classify surfaced gaps + assign dispositions
+### BL-0009 — Classify surfaced gaps + assign dispositions + patch tiers
 
 | Field    | Value                              |
 |----------|------------------------------------|
 | Epic     | E02-first-semiannual-self-evaluation |
 | Pillar   | P3                                 |
 | Priority | P1                                 |
-| Effort   | S                                  |
+| Effort   | M                                  |
 | Status   | backlog                            |
 | Test     | not-tested                         |
 | Deps     | BL-0007, BL-0008                   |
 | Lock     | —                                  |
 
-**Why / Description:** Read the combined findings from BL-0007 + BL-0008, classify each gap as `practice-wrong` / `docs-wrong` / `both`, and assign a disposition (patch release / file as item / defer to FUTURE.md). The classification framework comes from [`methodology/07_definition_of_done.md "Methodology self-evaluation"`](../../../../methodology/07_definition_of_done.md#methodology-self-evaluation-semi-annual).
+**Why / Description:** Read the combined findings from BL-0007 + BL-0008, classify each gap on **two axes** — (a) the practice/docs framework from [`methodology/07_definition_of_done.md "Methodology self-evaluation"`](../../../../methodology/07_definition_of_done.md#methodology-self-evaluation-semi-annual), and (b) the patch-tier from [`templates/AUTONOMOUS_LOOP.md` "Tiered autonomy"](../../../../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts) — and assign a disposition. Effort raised from S to M to reflect the additional tier-classification work and the ~50-finding corpus (BL-0007 produced 23–25; BL-0008 expected to produce a similar count).
 
 **Approach:**
 
 1. Read all findings under both "Cold-read findings" sections of the eval report.
-2. For each finding, classify per the three-way framework.
-3. For each classification, assign a disposition:
-   - `practice-wrong` → file as a memory entry candidate; surface to maintainer; no methodology change.
-   - `docs-wrong` → either patch release immediately (severity-based) OR file as item in appropriate epic (E02 itself, or follow-up epic).
-   - `both` → file an item to update both; severity-triaged.
-4. Output a "Classification + dispositions" table in the eval report.
+2. For each finding, **classify on two axes:**
+   - **Practice/docs axis:** `practice-wrong` / `docs-wrong` / `both`.
+   - **Patch tier axis:** `T0` (cosmetic — typos, dead anchors), `T1` (surgical — stale examples, single-paragraph clarifications), `T2` (substantive — rule rewording, new constraints), `T3` (architectural — new/removed docs, discipline restructure).
+3. For each classification, **assign a disposition** consistent with the tier:
+   - `T0` or `T1` + `docs-wrong` → patch branch (`methodology-patch/YYYY-MM-DD-NN`) with edit + CHANGELOG + cross-AI diff-verification; maintainer fast-forwards.
+   - `T2` + `docs-wrong` → file as item in appropriate follow-up epic; maintainer authors the change.
+   - `T3` + `docs-wrong` → flag in `loop-notes/` for maintainer; do not draft.
+   - `practice-wrong` (any tier) → file as a memory entry candidate; surface to maintainer; no methodology edit.
+   - `both` (any tier) → file an item to update both, sequenced docs-first; tier governs how the docs side is handled.
+4. **Tier classification must itself be cross-AI verified** per the escalate-on-doubt rule: if the implementing session calls a finding T1 but the validator calls it T2, T2 wins.
+5. Output a "Classification + dispositions" table in the eval report with columns: Finding ID, Practice/docs, Tier, Disposition, Target branch / item / loop-note.
+6. **Do NOT execute T0/T1 patches in this item** — BL-0009 is classification + planning. The patches themselves are separate follow-up items (or, if trivial in number, a single batch item) so each patch branch gets its own cross-AI diff-verification gate.
 
 **Done means:**
 
-- [ ] Every finding from BL-0007 + BL-0008 has a classification (`practice-wrong` / `docs-wrong` / `both`).
-- [ ] Every classification has a disposition (patch / item / defer).
+- [ ] Every finding from BL-0007 + BL-0008 has a practice/docs classification.
+- [ ] Every finding has a patch tier (T0/T1/T2/T3).
+- [ ] Tier classifications cross-AI verified by a fresh session (escalate-on-doubt rule applied).
+- [ ] Every finding has a disposition consistent with its tier.
 - [ ] No `both` gaps lack an open item (per E02 charter exit criterion 5).
-- [ ] The eval report's "Classification + dispositions" table is populated.
+- [ ] The eval report's "Classification + dispositions" table is populated with both axes.
+- [ ] A separate sub-list enumerates the T0/T1 findings that BL-0010 (or follow-up items) will materialize as patch branches.
 - [ ] Item moved from `BACKLOG.md` to `ARCHIVE.md` after cross-AI validation passes.
 
 **Files (probable):**
 
-- `self-development/evaluations/2026-05-first-pass.md` (populate Classification table)
+- `self-development/evaluations/2026-05-first-pass.md` (populate Classification + dispositions table on both axes)
 
 ---
 

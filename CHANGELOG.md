@@ -9,6 +9,34 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
+### Methodology adaptation — tiered autonomy on authoritative artifacts (2026-05-25)
+
+A maintainer-authored adaptation in response to a structural critique surfaced after Run 2: the original `Constraint 1` ("loop never edits `methodology/` autonomously") was over-broad, reducing self-*development* to self-*evaluation*. The loop could discover methodology gaps but couldn't translate them into fixes — every improvement became maintainer homework, breaking the compounding promise of self-improving cycles.
+
+**The adaptation: tiered autonomy with maintainer-merge gate.**
+
+The loop's permission to *change* the methodology now scales with patch risk (T0/T1 enabled with cross-AI diff-verification, T2/T3 advice-only). The maintainer's role shifts from *translator* (read finding → write fix → verify) to *reviewer* (yes/no on a verified diff). Trunk protection is preserved — the loop never merges, the maintainer ratifies every patch.
+
+**Methodology changes:**
+
+- **`templates/AUTONOMOUS_LOOP.md`** — new section "Tiered autonomy for authoritative artifacts" with the four-tier matrix (T0 cosmetic / T1 surgical / T2 substantive / T3 architectural) and the three safety rules (tier classification cross-AI verified, never auto-merge, CHANGELOG in same commit).
+- **`methodology/09_git_workflow.md`** — new section "Patch-branch convention for authoritative artifacts" defining the `<area>-patch/YYYY-MM-DD-NN` branch naming (generic — adopters can apply to methodology, design systems, regulatory checklists, etc.).
+- **`methodology/10_testing_and_verification.md`** — extended cross-AI validation with a "Two modes: findings-verification and diff-verification" sub-section. Diff-verification is the gate for the patch-branch convention; the validator checks grounded/correct/scoped on every loop-proposed edit.
+- **`self-development/AUTONOMOUS_LOOP.md`** — Constraints 1, 2, 2a rewritten from "never modify autonomously" to the tier matrix applied to methodology/templates/brief+strategy+pillars respectively. T0/T1 enabled with diff-verification; T2/T3 disabled (loop drafts in `loop-notes/`, maintainer authors).
+
+**Demonstration patch (first self-improvement output of the cycle):**
+
+- **`methodology/04_backlog_items.md` lines 813–839 — stale grep examples fixed.** Run 2's cold-read identified this as the only Tier-A finding: the grep patterns used `\| \*\*Pillar\*\* +\|` regex against `**bold**` field names, but v1.12.0's C1 fix rewrote items to plain-table form (no markdown bold). Examples returned zero matches against compliant items. Patch removes the `\*\*` wrappers (and stale `\`backtick\`` wrappers around status values) from all eight examples. This is the *first* methodology change produced by the self-development cycle — discovered by the loop, fixed on this adaptation branch as the proof of concept, will land via the same patch-branch convention going forward.
+  - **Cross-AI diff-verification (2026-05-25):** Fresh Sonnet 4.6 Explore agent verified per the new diff-verification mode in `methodology/10`. **PASS on all three axes:** grounded (canonical template + real BL items confirm plain field names; pre-patch examples would return zero matches), correct (patched examples mentally match BL-0007's real `Lock` and BL-0008's real `Status` lines; the one intentional non-change at line 833 — `\*\*Resolution:\*\*` for body-text headings — correctly preserved), scoped (git diff is exactly 8 line changes confined to the cited code block; no whitespace or adjacent-text drift). No follow-up needed in other docs.
+
+**Backlog updates:**
+
+- **BL-0009 charter extended** — classification now happens on two axes (practice/docs framework + patch tier T0–T3). Tier classification is itself cross-AI verified per escalate-on-doubt. Effort raised S → M to reflect dual-axis work and the ~50-finding corpus. T0/T1 findings spawn separate patch-branch items rather than executing in BL-0009 (each patch gets its own diff-verification gate).
+
+**Why this is a methodology release, not a self-development internal change:** the tier matrix + patch-branch convention + diff-verification mode are generic patterns. Any adopter with authoritative artifacts (design systems, regulatory checklists, upstream contracts, upstream specs, or — in our case — a methodology) can apply them. They don't depend on this project's specific shape.
+
+---
+
 ### Self-development loop runs (2026-05-25) — Run 1 + Run 2
 
 The autonomous loop ran twice on 2026-05-25 against the E02 (first semi-annual self-evaluation) backlog. No methodology files changed — both runs operate on `self-development/` only, per the loop's hard constraints. Surfaced findings + observations queued for the next maintainer-reviewed methodology release.

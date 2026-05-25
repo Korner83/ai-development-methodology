@@ -97,6 +97,31 @@ For projects with project-specific gates (specific security scanner, accessibili
 
 ---
 
+## Tiered autonomy for authoritative artifacts
+
+Some projects have artifacts the loop reads as authority — a methodology spec, a design system, an upstream contract, a regulatory checklist, or (in the meta-case) the methodology that's being applied to itself. The naive rule "loop never edits authoritative artifacts" prevents accidents but also prevents the loop from compounding: every methodology improvement becomes maintainer homework.
+
+The tiered-autonomy pattern preserves safety (maintainer's merge gate stays) while restoring compounding (loop translates findings into patches itself). Pick a tier per change risk:
+
+| Tier | Examples | Loop autonomy |
+|---|---|---|
+| **T0 — Cosmetic** | Typos, broken anchor `#section`, dead relative path, version-number drift across files. | Loop opens a patch branch (see [`methodology/09_git_workflow.md` "Patch-branch convention"](../methodology/09_git_workflow.md#patch-branch-convention-for-authoritative-artifacts)) with the edit, CHANGELOG entry, and diff-verification request. Maintainer fast-forwards. |
+| **T1 — Surgical** | Stale regex pattern, template/example mismatch, missing-default callout, single-paragraph clarification grounded in a specific finding. | Same as T0 — patch branch + cross-AI diff-verification (per [`methodology/10_testing_and_verification.md` "Diff-verification"](../methodology/10_testing_and_verification.md#two-modes-findings-verification-and-diff-verification)) before the branch is offered for merge. |
+| **T2 — Substantive** | Rule wording changes, new constraints, removed concepts, multi-paragraph reframing. | Loop drafts the proposal in `loop-notes/` as advice. Maintainer authors the actual change. |
+| **T3 — Architectural** | New doc, removed doc, discipline restructure, breaking-change to the artifact's shape. | Human-only. Loop can flag the need, can't draft the change. |
+
+Three rules make the tier matrix safe:
+
+1. **Tier classification is itself cross-AI verified.** If the implementing session calls something T1 but the validator calls it T2, T2 wins. Escalate-on-doubt.
+2. **The loop never auto-merges a patch branch.** Trunk protection from [`09_git_workflow.md` "Branch protection"](../methodology/09_git_workflow.md#branch-protection) still applies; the maintainer ratifies every patch before merge.
+3. **CHANGELOG entry lands in the same commit as the patch.** Every loop-authored change is auditable from the changelog without git archaeology.
+
+Why this works: maintainer review shifts from *translator* (read finding → write fix → verify) to *reviewer* (yes/no on a verified diff). Across hundreds of T0/T1 patches over years of methodology life, the maintainer's time-per-fix drops by ~30×. T2/T3 still gets the full human-authorship treatment, so substantive judgment is never automated away.
+
+**Default for new adopters:** start with the matrix in "loop never edits authoritative artifacts" mode (all tiers locked to advice-only). Promote T0 first after one full evaluation cycle; promote T1 after a second cycle confirms diff-verification catches what the loop misses. Don't unlock T2/T3 — those exist as labels so the matrix is complete, not as autonomy targets.
+
+---
+
 ## Pairing with plan mode
 
 Even in autonomous mode, the AI uses plan mode for non-trivial work (methodology/06). The loop is:

@@ -22,31 +22,46 @@ When this loop runs, it grinds through items in `self-development/backlog/` betw
 
 These are the load-bearing safety rules. **Violating any of these means the loop must halt and surface to the maintainer.** They override all other guidance below.
 
-### Constraint 1 — Never modify abstract methodology docs autonomously
+### Constraint 1 — Tiered autonomy on abstract methodology docs
 
-The abstract methodology in `methodology/` (docs 00 through 11 and the README/index there) is **read-only from this loop's perspective.** The loop reads them as the operating contract, never edits them.
+The abstract methodology in `methodology/` (docs 00 through 11 and the README/index there) is **authoritative** from this loop's perspective. The loop reads it as the operating contract. The loop's autonomy to *change* the methodology is **tiered** per [`templates/AUTONOMOUS_LOOP.md` "Tiered autonomy for authoritative artifacts"](../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts):
 
-If a loop run produces insight that the abstract methodology should change (e.g., a new pattern emerged that warrants a methodology addition), the loop:
+| Tier | Applies to | Loop autonomy in this project |
+|---|---|---|
+| **T0 — Cosmetic** | Typos, broken anchors, dead relative paths, version-number drift across methodology files. | **Enabled.** Loop opens a `methodology-patch/YYYY-MM-DD-NN` branch with the edit, CHANGELOG entry, cross-AI diff-verification log, and the source finding (cold-read citation or runtime observation). Maintainer fast-forwards. |
+| **T1 — Surgical** | Stale grep examples, template/example mismatch, single-paragraph clarifications grounded in a specific finding (e.g., "Lock+Status coupling described inconsistently across 04 and 05" — patch one to match the other). | **Enabled with cross-AI diff-verification required.** Same branch convention as T0. The validator must PASS on grounded/correct/scoped before the branch is offered for merge. |
+| **T2 — Substantive** | Rule wording changes, new constraints, removed concepts, multi-paragraph reframing of an existing discipline. | **Disabled.** Loop drafts the proposal in `loop-notes/YYYY-MM-DD.md` as advice. The maintainer authors the actual methodology change through the normal human-reviewed cycle. |
+| **T3 — Architectural** | New methodology doc, removed doc, discipline restructure, breaking change to the methodology's shape (e.g., changing the 4-layer planning model). | **Disabled.** Loop can flag the need in `loop-notes/`, can't draft the change. Human-only. |
 
-1. Records the insight as a memory entry or in a "for next maintainer check-in" notes file at `self-development/loop-notes/YYYY-MM-DD.md`.
-2. Does NOT edit `methodology/*.md`.
-3. Surfaces the insight at the next check-in for the maintainer to ship as a normal methodology release through human-reviewed PR / commit cycle.
+The same matrix applies to `templates/` (Constraint 2 below was a hard "never" — now tiered per above).
 
-The reason: the abstract methodology's stability is part of its value. Methodology changes have to go through deliberate human-reviewed cycles per the [stdlib growth loop](../methodology/08_lessons_and_memory.md#the-promotion-path-from-one-off-correction-to-durable-rule), not happen as a side effect of self-development work.
+The same matrix applies to `self-development/brief/`, `self-development/strategy/`, and `self-development/pillars/` (Constraint 2a below).
 
-### Constraint 2 — Never modify templates autonomously
+The `self-development/backlog/`, `self-development/evaluations/`, and `self-development/loop-notes/` folders remain freely editable by the loop (no tier matrix needed — these are the loop's own worksurfaces).
 
-Same logic as Constraint 1, applied to `templates/`. The five template files (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md) are adopter-facing artifacts that support six AI tools (three natively, three via adaptation from AGENTS.md). Changes go through human-reviewed cycles.
+**Why this preserves safety:** trunk protection still applies — the loop never merges a patch branch into `main`. The maintainer ratifies every patch before merge. Tier classification itself is cross-AI verified — if the loop calls a change T1 but the validator calls it T2, T2 wins (escalate-on-doubt).
 
-The loop can edit templates **only when** the item explicitly authorizes it (e.g., a future E04 item to add `.cursorrules`). When in doubt, surface to maintainer.
+**Why this restores compounding:** maintainer review shifts from translating findings into fixes (15+ minutes per finding) to ratifying verified diffs (~30 seconds per diff). Over the methodology's lifetime, the compound benefit is large. T2/T3 still gets full human-authorship treatment, so substantive judgment is never automated away.
 
-### Constraint 2a — Never modify `self-development/brief/`, `self-development/strategy/`, or `self-development/pillars/` autonomously
+**Operational rule when in doubt:** if a finding could plausibly be T1 *or* T2, classify it T2. The cost of an over-classified T2 (maintainer does it manually as they would have anyway) is much smaller than the cost of an under-classified T1 (maintainer ratifies a substantive change without the deliberation it deserved).
 
-The brief (Step 0 outputs), strategy master plan, and 9 pillar definitions are *upstream conceptual artifacts* — they describe the methodology project's intent, direction, and capability shape. Like the abstract methodology and the templates, they change through human-reviewed cycles, not as side effects of loop work.
+### Constraint 2 — Tiered autonomy on templates
 
-The loop reads these as authority (e.g., to understand audience and competitive positioning from the brief, to derive priority for an item per the pillar roadmap, to honor phase exit criteria from the master plan). It does not edit them. Methodology-project-strategy insights surfaced during a loop run go into `self-development/loop-notes/YYYY-MM-DD.md` and are promoted via the same maintainer-reviewed cycle as methodology changes.
+The five template files in `templates/` (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md) are adopter-facing artifacts that support six AI tools (three natively, three via adaptation from AGENTS.md). Same tier matrix as Constraint 1:
 
-The loop **can** edit `self-development/backlog/` (items move between Status values, BACKLOG ↔ ARCHIVE, EPICS.md rollup updates) — that's the loop's primary worksurface. It can also edit `self-development/evaluations/` and `self-development/loop-notes/` (its own output surfaces).
+- **T0 / T1 enabled:** typos, broken anchors, version drift, stale examples grounded in a cold-read finding. Patch branch + cross-AI diff-verification → maintainer fast-forwards.
+- **T2 / T3 disabled:** new template, removed template, change in template shape, addition of a new tool's native support. Loop drafts in `loop-notes/`; maintainer authors.
+
+A new template (e.g., adding `.cursorrules` for native Cursor support, which is what E04 plans) is T3 — loop's role is to prepare via supporting items, not to author the template file itself.
+
+### Constraint 2a — Tiered autonomy on `self-development/brief/`, `self-development/strategy/`, `self-development/pillars/`
+
+The brief (Step 0 outputs), strategy master plan, and 9 pillar definitions are *upstream conceptual artifacts* — they describe the methodology project's intent, direction, and capability shape. Same tier matrix as Constraint 1:
+
+- **T0 / T1 enabled:** typos, broken cross-references, drift between brief/strategy/pillars and the methodology they paraphrase. Patch branch + diff-verification.
+- **T2 / T3 disabled:** rewording of vision/audience/success-metrics, addition or removal of a pillar, restructure of phases. Substantive direction changes belong to the maintainer.
+
+The loop continues to read these as authority (audience and competitive positioning from the brief, item priority from the pillar roadmap, phase exit criteria from the master plan). The loop **can** edit `self-development/backlog/`, `self-development/evaluations/`, and `self-development/loop-notes/` freely — those are the loop's own worksurfaces, no tier matrix applies.
 
 ### Operational definition of "fresh session" (used throughout this loop)
 

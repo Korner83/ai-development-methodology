@@ -557,6 +557,22 @@ Cross-AI validation is *not* a substitute for code review by a human or for actu
 - Cross-AI validation will produce false positives. Treat findings as candidates for investigation, not as ground truth.
 - Cross-AI validation cannot judge user experience. Only actual users can.
 
+### Two modes: findings-verification and diff-verification
+
+Cross-AI validation has two distinct modes, each appropriate at a different step:
+
+**Findings-verification (the usual mode).** The implementing session produces work; the fresh session verifies the work meets a checklist (e.g., "this BL-#### item's Done-means are all satisfied," or "this PR's described changes match what the diff actually does"). The validator is checking *completeness and correctness of claims.* Output: PASS / FAIL per checklist item, with grounded citations.
+
+**Diff-verification (when a loop or agent proposes an autonomous patch to authoritative content).** The implementing session produces a *proposed patch* — typically a branch with an edit, a CHANGELOG entry, and a finding the patch addresses. The fresh session reads the original cited content, the proposed edit, and the finding, then verifies three things:
+
+1. **Grounded:** does the cited content actually have the problem the finding describes?
+2. **Correct:** does the proposed edit actually fix the cited problem without introducing a new one?
+3. **Scoped:** does the edit touch *only* the cited content (no scope creep into adjacent text)?
+
+Diff-verification is the cross-AI gate for the patch-branch convention in [`09_git_workflow.md` "Patch-branch convention for authoritative artifacts"](09_git_workflow.md#patch-branch-convention-for-authoritative-artifacts). Without it, an autonomous loop's "I fixed the typo" claim is unverified. With it, the maintainer can review the cross-AI's PASS/FAIL on grounded/correct/scoped before reviewing the diff themselves — the maintainer's role becomes ratification, not original review.
+
+Both modes use the same "fresh session, different model where possible" setup. The difference is the input shape (a checklist vs. an original + proposed-edit + finding triple) and the output shape (PASS/FAIL per checklist item vs. PASS/FAIL on grounded/correct/scoped).
+
 ---
 
 ## Verification levels: matching depth to risk
