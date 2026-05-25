@@ -73,7 +73,7 @@ The concrete payoffs after a week or two of adoption:
 - **Work stops drifting.** Items trace from today's commit back to a phase in the strategy. "Why are we doing this?" is answerable without re-arguing it every quarter.
 - **The backlog tells the truth.** `Status: done` requires `Test: pass` — no partial credit. Trust in the backlog comes back.
 - **Parallel agents stop colliding.** File-based locks with TTL handle the coordination that chat-based "I've got this" can't.
-- **The same mistake stops happening every six months.** Memory entries make recurring fixes a one-time cost.
+- **The same mistake doesn't come back.** Memory entries make recurring fixes a one-time cost.
 - **AI agents stay on task.** Four working principles forbid the speculative-abstraction / scope-creep / "let me also clean this up" pattern that LLMs default to.
 - **Verification catches what tests miss.** White pages, broken dark mode, bypassed auth gates, missing imports — caught at the actual-UI gate, not in production.
 - **AI-as-yes-man becomes visible.** A copy-paste counter-prompt ("what's wrong with this plan?") makes you challenge before approving.

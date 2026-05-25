@@ -13,6 +13,14 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.4.3 — 2026-05-25
+
+### Docs — Drop oddly-specific "every six months" claim from README benefits bullet (2026-05-25)
+
+The "What you get" section had a bullet reading *"The same mistake stops happening every six months. Memory entries make recurring fixes a one-time cost."* The "every six months" cadence was an oddly specific claim that implied measured frequency. Replaced with *"The same mistake doesn't come back."* — same point, no false precision.
+
+---
+
 ## v1.4.2 — 2026-05-25
 
 ### Docs — Diagram refinements: pillars labeled as long-term goals + items sized by contributor type (2026-05-25)
