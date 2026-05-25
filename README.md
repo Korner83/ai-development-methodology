@@ -129,7 +129,7 @@ ai-development-methodology/
     └── backlog/              # Step 2 — 5 epic charters (3 active, 2 planned) + rollup + HUMAN_NEEDED.md
 ```
 
-~10,600 lines across 48 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
+~11,000 lines across 51 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
 
 ---
 

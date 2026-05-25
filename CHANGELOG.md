@@ -13,6 +13,45 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.10.0 — 2026-05-25
+
+### Feat — Self-development bootstrap, Step 3: 14 BL-#### items across 3 active epics (2026-05-25)
+
+Step 3 of the self-development bootstrap. Populates each active epic's `BACKLOG.md` with 4–5 BL-#### items, each with full frontmatter (Pillar / Priority / Effort / Status / Test / Lock / Deps) and body (Goal / Plan / Verification). Total: 14 items, BL-0001 through BL-0014.
+
+**Three new `BACKLOG.md` files** in `self-development/backlog/epics/`:
+
+- **`01-examples-folder/BACKLOG.md`** (5 items, BL-0001 to BL-0005, all P2 — epic doesn't gate Phase 1 exit) — folder setup → strategy/pillars example → epic + items example → cross-AI abstract-voice review → close. Sequentially dependent.
+- **`02-first-semiannual-self-evaluation/BACKLOG.md`** (5 items, BL-0006 to BL-0010, all P1 — epic gates Phase 1 exit per master plan criterion 2) — eval folder + template → cross-AI cold-read of methodology docs 00–05 → cold-read of docs 06–11 (parallelizable) → classify gaps → finalize report + close.
+- **`03-git-workflow-trim/BACKLOG.md`** (4 items, BL-0011 to BL-0014, all P2) — analyze + decide trim-vs-split → execute → update cross-references → closure note with clarity assessment.
+
+**Priority discipline** follows the master plan's Phase 1 exit criteria: E02 items P1 (semi-annual self-evaluation gates Phase 1 exit), E01 + E03 items P2 (planned but not blocking). ROI ordering follows: pick P1 items first (BL-0006 first, then BL-0007/0008 in parallel, then BL-0009, then BL-0010), then move to P2 work within E01 and E03.
+
+**Cross-AI review applied before ship.** Per the bootstrap plan's DoD ("specific enough for cold pickup? Effort realistic? ROI ordering coherent?"), a fresh Explore agent reviewed all 14 items cold. Verdict: **ship with no revisions required.** Spot-checks:
+
+- **Cold pickup:** all 14 items workable without asking maintainer for clarification. Three items (BL-0007, BL-0008, BL-0012) flagged with minor guidance-tightening opportunities but explicitly non-blocking.
+- **Effort estimates:** all defensible (XS/S/M/L distribution matches plan scope per item).
+- **ROI ordering:** Phase-aware, dependency-clean, no circular deps; correctly front-loads P1 work in E02.
+- **Frontmatter completeness:** all 14 items have complete tables (Pillar, Priority, Effort, Status, Test, Lock, Deps where relevant).
+- **Hard-rule compliance:** no item has `Status: done` inappropriately; dependency graph acyclic.
+
+**README updates:**
+
+- Line-count claim refreshed (~10,600 → ~11,000); file count 48 → 51.
+- Tree unchanged (no new folders this release; only `BACKLOG.md` files added inside existing epic folders).
+
+**Bootstrap status:**
+
+- ✓ Step 0 (brief) — v1.7.0
+- ✓ Step 1 (strategy + pillars) — v1.8.0
+- ✓ Step 2 (first epics) — v1.9.0
+- ✓ Step 3 (first items) — this release (v1.10.0)
+- Pending: Step 4 (autonomous loop setup) — `self-development/AUTONOMOUS_LOOP.md` adapted from the template with this project's targets + constraints. **This is the last step before the cycle becomes operational.**
+
+Step 4 ships as the next minor release; after Step 4, the autonomous loop can start running between user check-ins.
+
+---
+
 ## v1.9.0 — 2026-05-25
 
 ### Feat — Self-development bootstrap, Step 2: first 5 epic charters (2026-05-25)
