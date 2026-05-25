@@ -1,22 +1,22 @@
 # Epics
 
-_Last refreshed: 2026-05-25 (post Run 4 — all 5 E02 items at to-be-tested; v1.14.0 ready to ship; E02 awaits maintainer close)._
+_Last refreshed: 2026-05-25 (E02 closed; WIP cap raised to 2; awaiting maintainer choice of next active epic)._
 
 ## Rollup
 
 | Epic | Title | Pillar (primary + secondary) | Status | Phase | Items (open/done) | Next milestone |
 |---|---|---|---|---|---|---|
-| [E02](epics/02-first-semiannual-self-evaluation/README.md) | First semi-annual methodology self-evaluation pass | P3 Doc currency + P2 Doc clarity | **active → done (pending maintainer signoff)** | Phase 1 | 0 / 0 (+5 to-be-tested) | All work complete; 30 patches on `methodology-patch/2026-05-25-01` branch + eval report finalized + 28 T2 findings logged for next maintainer-authored cycle. Maintainer signoff in eval report → flip BL-0006..0010 to done → move to ARCHIVE → flip E02 to done → WIP cap rises to 2 → promote E01/E03/E04/E05 candidate. |
-| [E01](epics/01-examples-folder/README.md) | Examples folder | P1 Doc completeness + P6 Example richness | planned | Phase 1 | 5 / 0 | Promoted to active after E02 closes |
-| [E03](epics/03-git-workflow-trim/README.md) | Trim or split `09_git_workflow.md` | P2 Doc clarity | planned | Phase 1 | 4 / 0 | Promoted after E02 closes; note BL-0012 touches `methodology/` and requires maintainer handoff |
-| [E04](epics/04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | planned | Phase 1 | 0 / 0 | Promoted after E02 closes; competes with E01 + E03 for the active slot |
-| [E05](epics/05-cheatsheet/README.md) | CHEATSHEET.md (one-page reference) | P1 Doc completeness | planned | Phase 1 | 0 / 0 | Promoted after E02 + (E01 or E03) close |
+| [E02](epics/02-first-semiannual-self-evaluation/README.md) | First semi-annual methodology self-evaluation pass | P3 Doc currency + P2 Doc clarity | **done** (2026-05-25) | Phase 1 | 0 / 5 | First epic closed; cycle validated; next pass 2026-11-25. |
+| [E01](epics/01-examples-folder/README.md) | Examples folder | P1 Doc completeness + P6 Example richness | planned | Phase 1 | 5 / 0 | Eligible for promotion to active (open WIP slot). |
+| [E03](epics/03-git-workflow-trim/README.md) | Trim or split `09_git_workflow.md` | P2 Doc clarity | planned | Phase 1 | 4 / 0 | Eligible for promotion; some of the 28 T2 findings from E02 may land here. Note BL-0012 touches `methodology/` (T3-equivalent — maintainer handoff). |
+| [E04](epics/04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | planned | Phase 1 | 0 / 0 | Eligible for promotion. |
+| [E05](epics/05-cheatsheet/README.md) | CHEATSHEET.md (one-page reference) | P1 Doc completeness | planned | Phase 1 | 0 / 0 | Eligible for promotion; smallest scope of the four planned epics. |
 
-**Counts:** **1 active**, 4 planned, 0 done.
+**Counts:** **0 active**, 4 planned, 1 done.
 
 ### WIP cap note
 
-**WIP cap = 1 active epic** (not the methodology's typical 3). Reasoning: this is a **solo-maintained project that has never closed an epic before**. Per [`methodology/03_epics.md`](../../methodology/03_epics.md) "Smaller teams should run fewer," and per the Opus-level cross-check applied at v1.12.0, starting at 1 active epic until at least one epic closes is the conservative + methodology-faithful choice. The cap will rise to 2 after E02 closes and the maintainer has observed the loop's behavior. May rise to 3 (methodology default) after the second epic closes.
+**WIP cap = 2 active epics** (raised from 1 on E02 close, 2026-05-25). Reasoning: E02 closed cleanly end-to-end through the autonomous loop with the tier matrix in effect; the loop demonstrated discipline (escalate-on-doubt fired correctly; diff-verification caught real issues; maintainer-merge gate preserved). With one successful epic close on record, the cap can rise to 2 without inflating risk. The cap may rise to 3 (methodology default) after the second epic closes and the loop has demonstrated discipline across two distinct epic shapes.
 
 ## Pillar coverage
 
@@ -34,7 +34,18 @@ Inverse view: which epics touch each pillar.
 | P8 Maintenance sustainability | — | — | Dormant (Phase 3 pillar) |
 | P9 Self-improvement velocity | — | — | No epic; the bootstrap itself (Steps 0–4 of the self-development plan) is this pillar's first work |
 
-**Observation:** With WIP cap at 1, only E02 progresses. This is deliberate — the first epic-close cycle validates the autonomous loop's discipline before more parallel work is invited. Phase 1 work on other pillars (P1, P2, P4 primary) waits until E02 closes.
+**Observation:** With WIP cap at 2 and E02 closed, two of the four remaining planned epics can be active simultaneously. The maintainer's choice of which to promote next is open — see "Maintainer's next decision" below the rollup.
+
+## Maintainer's next decision
+
+E02 has closed; WIP cap is 2; one or two of the four planned epics can promote to active. ROI-ranked recommendation:
+
+1. **E05 (CHEATSHEET.md)** — P1 + smallest effort (likely XS-S items). Highest near-term ROI per `04_backlog_items.md` heuristic. **Recommended first promotion.**
+2. **E01 (Examples folder)** — P1 + medium effort. Examples are widely-requested by adopters; pairs well with E05's one-page reference.
+3. **E03 (Trim/split 09_git_workflow.md)** — P2 + medium effort. Some of E02's 28 T2 findings flow naturally here; could batch the loop-notes follow-ups into E03's scope. **Note:** BL-0012 in E03 touches `methodology/` and is a T2-equivalent (maintainer-authored per tier matrix).
+4. **E04 (Native templates Cursor/Aider/Continue.dev)** — P4 + medium-large effort. Depends on adopter feedback on which native templates are most useful; can wait until E01/E03/E05 produce that feedback signal.
+
+A reasonable shape: promote **E05 + E01** to active (both P1, complementary scope, both serve adopter discoverability). Defer E03 + E04 until either the loop closes E05/E01 or the maintainer ships the 28 T2 follow-ups from E02.
 
 ## Status legend
 

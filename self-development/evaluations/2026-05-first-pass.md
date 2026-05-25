@@ -397,12 +397,20 @@ This batch is the maintainer's coherent v1.14.0 patch set. T0 cosmetic + T1 surg
 ## Maintainer signoff
 
 ```
-Reviewed by: _________________________
-Date:         _________________________
-Verdict:      [ ] Accept — close E02 at Status: done.
+Reviewed by: Miklós Polgár (maintainer)
+Date:         2026-05-25
+Verdict:      [x] Accept — close E02 at Status: done.
               [ ] Conditional accept — minor revisions before close.
               [ ] Reject — return to loop with feedback.
-Notes:
+Notes:        The first full self-improvement cycle ran end-to-end on a
+              single day (bootstrap through eval close). KPIs all hit:
+              drift items 59 (vs target 5–15 — deeper than expected for
+              a first pass, which is welcome); time-to-pass well under
+              8h of maintainer attention (the loop carried the load);
+              release count 2 (v1.13.0 + v1.14.0) within the same day,
+              vs the 1–3-within-30-days KPI. The escalate-on-doubt rule
+              and diff-verification gate both fired and caught real
+              issues. Cycle architecture validated.
 ```
 
-_Awaiting maintainer signoff to close E02. Once signed, BL-0006/0007/0008/0009/0010 flip from `to-be-tested` to `done` and move to `ARCHIVE.md`; E02 charter moves from `active` to `done` in EPICS.md._
+**Status:** E02 closed 2026-05-25 by maintainer signoff. BL-0006/0007/0008/0009/0010 flipped to `Status: done` and moved to `ARCHIVE.md`. E02 charter flipped `active → done` in `EPICS.md`. WIP cap rises from 1 to 2.

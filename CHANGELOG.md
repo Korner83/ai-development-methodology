@@ -9,7 +9,13 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-(nothing yet)
+### E02 close + WIP cap raised (2026-05-25)
+
+- **E02 (first semi-annual methodology self-evaluation pass) closed** by maintainer signoff in `self-development/evaluations/2026-05-first-pass.md`. All 5 items (BL-0006/0007/0008/0009/0010) flipped to `Status: done` and moved to `self-development/backlog/epics/02-first-semiannual-self-evaluation/ARCHIVE.md`. Charter status flipped `active → done`.
+- **WIP cap raised from 1 to 2** in `self-development/backlog/EPICS.md`. The first successful epic close validates the loop's discipline (escalate-on-doubt, diff-verification, maintainer-merge gate all fired and worked); a second concurrent epic is now safe.
+- **Maintainer's next-promotion decision is open.** ROI-ranked recommendation: E05 (CHEATSHEET) first, E01 (Examples) second; E03 + E04 deferred.
+
+Bookkeeping change — no methodology files changed in this commit.
 
 ---
 

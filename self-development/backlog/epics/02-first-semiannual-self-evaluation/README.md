@@ -2,11 +2,15 @@
 
 **Pillar (primary):** [P3 — Doc currency](../../../pillars/P3_doc_currency.md)
 **Pillar (secondary):** [P2 — Doc clarity](../../../pillars/P2_doc_clarity.md)
-**Status:** active
+**Status:** done
 **Phase:** Phase 1 — Foundation
 **Started:** 2026-05-25
-**Target close:** TBD (the first pass is opportunistic; the *cadence's* first scheduled run is ~2026-11-25)
+**Closed:** 2026-05-25 (maintainer signoff in eval report)
+**Target close:** TBD (was opportunistic; landed same-day)
+**Next scheduled run:** 2026-11-25 (semi-annual cadence)
 **Owner:** maintainer + cross-AI reviewer (fresh session, no prior context)
+
+**Closure summary:** First end-to-end run of the cycle. 4 autonomous-loop runs produced 59 classified findings, 30 T0/T1 patches shipped as v1.14.0, 28 T2 findings logged for maintainer-authored future work. Self-improving cycle validated at production volume. See [`self-development/evaluations/2026-05-first-pass.md`](../../../evaluations/2026-05-first-pass.md) for the eval report.
 
 ## Outcome (jobs-to-be-done)
 
@@ -14,11 +18,11 @@ When the methodology has accumulated ~6 months of active use and ~1.x releases, 
 
 ## Exit criteria (binary)
 
-- [ ] Every methodology doc (`methodology/00_README.md` through `11_human_roles.md`) has been read cold by at least one fresh AI session as part of this evaluation.
-- [ ] All gaps surfaced are classified in a single eval report at `self-development/evaluations/2026-NN-<topic>.md` (folder created when this item ships).
-- [ ] Each classified gap has a disposition: closed in a patch release (link to release), filed as an item in the appropriate epic (link to item), or explicitly deferred to `FUTURE.md` (with reason).
-- [ ] The next self-evaluation date is recorded in the eval report (semi-annual cadence: ~6 months out).
-- [ ] No methodology doc still contains a gap classified as "practice is wrong AND docs are wrong" without an open item to address it. (Some gaps are acceptable as long as they're tracked, not buried.)
+- [x] Every methodology doc (`methodology/00_README.md` through `11_human_roles.md`) has been read cold by at least one fresh AI session as part of this evaluation. (BL-0007 + BL-0008.)
+- [x] All gaps surfaced are classified in a single eval report at `self-development/evaluations/2026-05-first-pass.md`.
+- [x] Each classified gap has a disposition: 30 closed in v1.13.0 + v1.14.0 patch releases; 28 deferred to maintainer authorship via `loop-notes/2026-05-25.md`; 0 to FUTURE.md (no findings deferred without route).
+- [x] The next self-evaluation date is recorded in the eval report (2026-11-25 target).
+- [x] No methodology doc still contains a gap classified as "practice is wrong AND docs are wrong" without an open item to address it. (All 59 findings were `docs-wrong`; no `both` gaps surfaced.)
 
 ## KPIs
 
