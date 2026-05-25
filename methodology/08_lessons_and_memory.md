@@ -205,6 +205,16 @@ The index file at the root of the memory directory (`MEMORY.md`) lists every ent
 - ...
 ```
 
+A concrete example (note the kebab-slug filename + actionable hook):
+
+```markdown
+# Memory Index
+
+- [definition-of-done.md](definition-of-done.md) — Every task tested on actual UI in fix-test loop before commit; CHANGELOG + README updated after each meaningful change.
+- [git-branch-protection.md](git-branch-protection.md) — Feature branches for new work; merge to master only via PRs; never force-push.
+- [feedback-no-permission-prompts.md](feedback-no-permission-prompts.md) — Skip "may I…?" — just make the change unless it's destructive.
+```
+
 ### Rules for the index
 
 - **One line per entry, under ~150 characters.**
@@ -236,6 +246,8 @@ The user says "remember this" or "save this as a memory" or words to that effect
 ### Trigger 2: Same correction or fix has appeared 2+ times
 
 If you've had to correct the same kind of error in two different sessions or two different contexts, that's a pattern. Write a `feedback` entry capturing the fix.
+
+(The "2+ occurrences ⇒ promote" bar is the same one used elsewhere in the methodology — e.g., backlog items that recur land as patterns rather than one-offs. It's the threshold that separates "noise" from "rule.")
 
 The bar for this is *category of error,* not literal identical error. If the same kind of CSS variable mistake has happened twice (different specific variables, but same pattern), it counts.
 

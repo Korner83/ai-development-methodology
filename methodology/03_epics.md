@@ -157,7 +157,7 @@ The `README.md` inside each epic folder is the charter. The template below is th
 **Pillar (secondary, optional):** P<#> — <pillar name>
 **Status:** planned | active | done | parked
 **Phase:** Phase <#>
-**Started:** YYYY-MM-DD
+**Started:** — (or YYYY-MM-DD once Status flips to active)
 **Target close:** YYYY-MM-DD or TBD
 **Owner:** <human role> + <agent role>
 

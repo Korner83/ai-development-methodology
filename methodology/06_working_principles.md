@@ -131,7 +131,7 @@ Strong success criteria let a contributor — human or AI — loop independently
 
 ## Plan before executing non-trivial work
 
-The four principles above govern *how* you work moment-to-moment. This rule governs *when* you start.
+The four principles above govern *how* you work moment-to-moment. This rule governs *when* you start. **It is not a fifth principle** — the count of principles stays at four. It is the gating rule that decides when the four principles begin applying to a piece of work.
 
 **Rule:** for any task larger than a small focused change, produce a written plan and get approval before executing. The plan names what you'll do, in what order, and how each step will be verified.
 

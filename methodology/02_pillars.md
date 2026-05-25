@@ -74,7 +74,7 @@ A common shape for a content-and-experience product:
 | P8 | Monetization | Pricing, tiers, conversion, billing. |
 | P9 | Quality and feedback loops | Analytics, metrics, dashboards, learning. |
 
-The set above is illustrative. Any given project will have its own pillar list. The shape — 5–12 noun-phrase capabilities forming a chain — is what generalizes.
+The set above is **illustrative, not canonical**. Any given project will have its own pillar list — different names, different count, different ordering, different content. The shape — 5–12 noun-phrase capabilities forming a chain — is what generalizes. Do not copy P1-P9 above as your project's pillars; derive yours from your strategy's capability layers.
 
 ---
 
@@ -366,7 +366,7 @@ A pillar with no diagram is harder to read than a pillar with one. If the pillar
 
 ## Authority
 
-Pillars are bound by strategy. If a pillar's design contradicts the strategy it operationalizes, the strategy wins — but the contradiction should be surfaced, because the strategy may need to evolve too.
+Pillars are bound by strategy. If a pillar's design contradicts the strategy it operationalizes, the strategy wins — but the contradiction should be surfaced, because the strategy may need to evolve too. (The same precedence rule is restated in [`00_README.md` "Authority across the methodology"](00_README.md#authority-across-the-methodology) and [`01_strategy.md` "Authority"](01_strategy.md#authority); a change here should propagate to both.)
 
 Pillars constrain epics. An epic that contradicts a pillar's design must either change to comply or trigger a pillar refinement. Either is fine; silently violating a pillar is not.
 

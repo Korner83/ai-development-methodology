@@ -119,8 +119,8 @@ Different readers need different paths. Pick the one that fits your situation.
 
 | Reader | Reading order |
 |--------|---------------|
-| **New contributor on an existing project** | 00 → 06 → 07 → 04 → 05 → 09 → 10. Skim 01–03 for context but don't memorize them; the work you'll touch first is at the item layer. |
-| **Picking up a specific item to work** | 04 → 05 → 07 → 10. You need to know the item format, how to acquire it, what "done" means, and how to verify. |
+| **New contributor on an existing project** | 00 → 06 → 07 → 04 → 05 → 09 → 10 → 11. Skim 01–03 for context but don't memorize them; the work you'll touch first is at the item layer. Read 11 once to know who decides what when a judgment call surfaces. |
+| **Picking up a specific item to work** | 04 → 05 → 07 → 10 → 11. You need to know the item format, how to acquire it, what "done" means, how to verify, and which decisions need human judgment. |
 | **Starting a new project from scratch** | 00 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 → 10 → 11. Top-down. You're building the whole stack. |
 | **Setting up the disciplines on an existing project** | 06 → 07 → 08 → 09 → 10. The disciplines are the highest-leverage starting point — most projects already have some planning structure. |
 | **Adapting the methodology to a different domain** | 00 → all docs in order. You'll need the whole picture to know what to keep and what to adapt. |
@@ -200,7 +200,7 @@ The smallest set of inviolable constraints. If a change violates one of these, i
 A working day under this methodology looks like:
 
 1. **Pull the latest from the repo.**
-2. **Read [`EPICS.md`](#) for the current state of active epics.** Identify which epic you are picking from.
+2. **Read [`EPICS.md`](03_epics.md#epic-rollup-epicsmd) for the current state of active epics.** Identify which epic you are picking from.
 3. **Open the epic's `BACKLOG.md`.** Find an item with `Status: ready`, `Lock: —`, and no unresolved `Deps:`.
 4. **Acquire the lock** ([05](05_locks_and_parallel_work.md)): set `Lock: <holder>@<now + TTL>`, set `Status: in-progress`, commit, push.
 5. **Read the item body.** Understand the goal. State assumptions if any (Principle 1, [06](06_working_principles.md)).
@@ -233,7 +233,7 @@ Three mechanisms make this work:
 
 2. **The backlog is the work queue.** An item filed by one contributor in one session can be picked up by another contributor in another session weeks later. The item's frontmatter (`Status`, `Lock`, `Test`, `Effort`, `Priority`) and body (goal, plan, verification) carry forward everything needed to resume. The [lock TTL](05_locks_and_parallel_work.md) ensures no item is held hostage by a contributor who never came back.
 
-3. **The autonomous loop runs unsupervised between check-ins.** The [autonomous-loop prompt template](../templates/AUTONOMOUS_LOOP.md) lets an AI agent grind through the backlog toward a milestone-level stopping condition — picking the highest-impact-per-effort item ([the ROI heuristic](04_backlog_items.md#prioritization--the-roi-heuristic)), executing through the DoD, archiving, repeating. Suitable for long unattended runs (overnight, weekends, multi-day milestone pushes) where the human supervises at the milestone level rather than per-item. Blocked items leave the ready set via the normal protocol (see [`HUMAN_NEEDED.md`](04_backlog_items.md#human_neededmd--work-blocked-on-human-agency)) — the loop doesn't manage them; it just stops touching them.
+3. **The autonomous loop runs unsupervised between check-ins.** The [autonomous-loop prompt template](../templates/AUTONOMOUS_LOOP.md) (kept in the `templates/` folder — a sibling of `methodology/` at the repo root, holding drop-in artifacts each project copies once and adapts) lets an AI agent grind through the backlog toward a milestone-level stopping condition — picking the highest-impact-per-effort item ([the ROI heuristic](04_backlog_items.md#prioritization--the-roi-heuristic)), executing through the DoD, archiving, repeating. Suitable for long unattended runs (overnight, weekends, multi-day milestone pushes) where the human supervises at the milestone level rather than per-item. Blocked items leave the ready set via the normal protocol (see [`HUMAN_NEEDED.md`](04_backlog_items.md#human_neededmd--work-blocked-on-human-agency)) — the loop doesn't manage them; it just stops touching them.
 
 The implication: **work compounds across time without depending on a single contributor's continuous attention.** Items dropped into the system today are picked up by whatever contributor is available tomorrow, next week, or next quarter.
 
@@ -362,7 +362,7 @@ When constraints conflict, they resolve in this order:
 1. **Explicit user direction** — overrides everything. The user can authorize exceptions to any rule for a specific operation. The exception applies to that operation only.
 2. **Hard rules** (see the table above) — bind every contributor, regardless of context, absent explicit user direction.
 3. **Working principles and Definition of Done** — apply to every change.
-4. **Strategy, pillars, and epic charters** — constrain what work is in scope. Strategy outranks pillars when they conflict; pillars outrank epics; epics outrank items.
+4. **Strategy, pillars, and epic charters** — constrain what work is in scope. Strategy outranks pillars when they conflict; pillars outrank epics; epics outrank items. (The same precedence rule is restated in [`01_strategy.md` "Authority"](01_strategy.md#authority) and [`02_pillars.md` "Authority"](02_pillars.md#authority); a change here should propagate to both.)
 5. **Project-specific rules** in the instruction file or memory — apply on top of the universal layer.
 6. **Memory entries** — advisory. They are accumulated experience, not authoritative rules. They can be overridden by current direction (and probably need updating when overridden).
 

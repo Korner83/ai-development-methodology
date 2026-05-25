@@ -63,7 +63,7 @@ Items in `FUTURE.md` use scoped IDs like `BL-E02-F01`, `BL-E02-F04`. When promot
 - *Pro:* the monotonic counter only counts items that actually entered active scope.
 - *Con:* identifier changes at promotion; any cross-references to the future-ID become stale at the moment of promotion.
 
-Either is fine. The project picks one in its instruction file or backlog README and stays consistent. Mixing schemes inside the same project produces confusion.
+Either is fine. The project picks one in its instruction file or backlog README and stays consistent. **Record the choice explicitly** — a one-line entry in `CLAUDE.md` / `AGENTS.md` / the backlog `README.md` saves every future contributor the cost of greppping `FUTURE.md` and guessing from the IDs they see. Mixing schemes inside the same project produces confusion.
 
 ---
 
@@ -112,7 +112,7 @@ The table comes *before* any body text. It is the at-a-glance summary of the ite
 - **Required.** Every field above is present. Use `—` (em dash) for "not applicable" rather than omitting the row.
 - **One value per field.** "P1/P2" or "M-L" is not allowed. Decide.
 - **Pipe character.** The table uses `|` as the markdown separator. Inside values that need a literal pipe, escape with `\|` or use a different character.
-- **Edited only by contributors with the lock.** Once an item is locked (see [05_locks_and_parallel_work.md](05_locks_and_parallel_work.md)), only the lock-holder may change `Status`, `Test`, and the body. Other fields (Pillar, Epic) can be edited by anyone but should not be edited without reason.
+- **Edited only by contributors with the lock.** Once an item is locked (see [05_locks_and_parallel_work.md](05_locks_and_parallel_work.md)), only the lock-holder may change `Status`, `Test`, and the body. Other fields (Pillar, Epic) can be edited by anyone but should not be edited without reason. For subagent flows ([05 "Subagent delegation"](05_locks_and_parallel_work.md#subagent-delegation)), the orchestrator is the lock-holder — subagents inherit edit rights through the orchestrator and do not acquire their own lock.
 
 ---
 
@@ -477,6 +477,8 @@ stateDiagram-v2
   done --> [*] : moved to ARCHIVE.md
   rejected --> [*] : moved to ARCHIVE.md
 ```
+
+> **Diagram-vs-enum note:** Mermaid state names cannot contain hyphens, so the diagram uses `in_progress`, `under_review`, `to_be_tested` with underscores. The corresponding `Status:` enum values in actual items use hyphens (`in-progress`, `under-review`, `to-be-tested`). Same states, different rendering — match the enum form, not the diagram form, when filling in a `Status:` field.
 
 ### Stage-by-stage
 

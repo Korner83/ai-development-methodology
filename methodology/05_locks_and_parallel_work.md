@@ -268,17 +268,19 @@ Give each agent its own holder ID. `claude-session-a4f2` and `claude-session-b19
 
 The TTL is the duration of the lock — how long from acquire until the lock expires unless refreshed.
 
+**If unsure, use 2 hours.** That's the right default for ~80% of cases. The table below is for when you have a reason to deviate.
+
 | Holder type | Recommended TTL | Rationale |
 |-------------|-----------------|-----------|
-| AI agent session | 2 hours | Matches a typical session length. If the agent finishes faster, it releases. If it runs longer, it refreshes (which is one commit). |
+| **AI agent session** (default) | **2 hours** | Matches a typical session length. If the agent finishes faster, it releases. If it runs longer, it refreshes (which is one commit). |
 | Human contributor — focused work | 4 hours | Comfortably covers a focused work block without forcing refreshes. |
 | Human contributor — open-ended | 8 hours (one workday) | Covers a full day's intermittent attention on the item. |
 | Automation (CI, scripted backfill) | 30 minutes | Automation is fast and crashes loud; short TTL bounds blast radius. |
-| Coordinated multi-day work (rare) | Maximum 24 hours, refreshed | The TTL ceiling. Long work should be split or refreshed daily. |
+| Coordinated multi-day work (rare) | Maximum 24 hours, refreshed daily | The TTL **ceiling for rare cases** — NOT the default. Long work should be split into smaller items or refreshed daily; a TTL of 24h chosen because "the work might take that long" is the anti-pattern. |
 
 ### Picking a TTL
 
-If unsure, default to 2 hours. It is small enough that a forgotten lock is forgiven quickly; it is long enough to cover a non-trivial unit of work.
+If unsure, default to 2 hours (see callout above). It is small enough that a forgotten lock is forgiven quickly; it is long enough to cover a non-trivial unit of work.
 
 ### Refreshing
 

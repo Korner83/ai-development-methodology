@@ -174,7 +174,7 @@ Format suggestion: an "Architecture Decision Record" (ADR) per non-trivial choic
 
 ### When to skip
 
-- The change is small (effort `XS` or `S`).
+- The change is small (effort `XS` or `S` per the [item effort scale in `04_backlog_items.md`](04_backlog_items.md#effort-enum) — `XS` is under one focused session; `S` is one focused session).
 - The architectural decisions are obvious (one reasonable answer, no judgment call).
 - The work is a pure replacement for existing well-tested code with the same shape.
 
@@ -197,12 +197,12 @@ Not all human skills transfer equally to an AI-assisted workflow. Some that were
 
 ### Skills that grow less critical
 
-- **Pure code-writing speed.** AI is faster.
+- **Pure typing speed.** AI generates code faster than any human types; the time to *write* a function is no longer the bottleneck.
 - **Memorizing framework APIs.** AI looks them up reliably.
 - **Boilerplate and ceremony.** Tests with obvious shapes, setup code, configuration files. AI does this well.
 - **Stylistic consistency.** Linters + AI conventions handle this.
 
-This isn't a claim that writing code is obsolete. It's a claim that *being fast at writing code* is no longer the differentiator it used to be. The differentiator is the upstream and supervisory work — the architecture, the spec, the review, the judgment.
+This isn't a claim that writing code is obsolete — engineers still write code, sometimes a lot of it. It's a claim that *being fast at producing keystrokes* is no longer the differentiator it used to be. The differentiator is the upstream and supervisory work — the architecture, the spec, the review, the judgment.
 
 ---
 
@@ -222,7 +222,7 @@ The point isn't to rank these tiers. The point is that the *shape of work* chang
 
 The [supervisory layer](#the-new-supervisory-layer) lists *what humans do.* This section gets concrete about *which decisions are theirs.* Without an explicit ownership map, two failure modes appear: AI agents quietly making decisions that turn out to need human judgment, or humans bottlenecking decisions an AI is fully capable of making.
 
-The map below is a starting point — a default that fits most projects. Adapt to your team's risk tolerance.
+The map below is a starting point — a default that fits most projects. Adapt to your team's risk tolerance. **Pairs with [`09_git_workflow.md` "What AI agents can and can't do in git"](09_git_workflow.md#what-ai-agents-can-and-cant-do-in-git--the-affirmative-list)** — that table maps the same ownership logic to specific git operations; this table maps it to decision types.
 
 ### A default matrix
 
@@ -242,7 +242,7 @@ The map below is a starting point — a default that fits most projects. Adapt t
 | Performance-critical optimization | ✓ | | ✓ | ✓ | |
 | New architectural pattern (where data lives, async vs sync, etc.) | ✓ | | ✓ | ✓ | |
 | Pillar definition / strategy phase shift | | | | | ✓ |
-| Pricing, business model, contractual terms | | | | | ✓ |
+| Pricing, business model, contractual terms (the *decision* — operational price-list edits inside an approved model are AI-eligible) | | | | | ✓ |
 | Hiring / firing / team composition | | | | | ✓ |
 | Production deploy execution | | | | | ✓ |
 | Destructive operations (`rm -rf`, `DROP TABLE`, force-push, etc.) | | | | | ✓ |

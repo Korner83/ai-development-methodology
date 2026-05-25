@@ -561,7 +561,7 @@ Cross-AI validation is *not* a substitute for code review by a human or for actu
 
 Cross-AI validation has two distinct modes, each appropriate at a different step:
 
-**Findings-verification (the usual mode).** The implementing session produces work; the fresh session verifies the work meets a checklist (e.g., "this BL-#### item's Done-means are all satisfied," or "this PR's described changes match what the diff actually does"). The validator is checking *completeness and correctness of claims.* Output: PASS / FAIL per checklist item, with grounded citations.
+**Findings-verification (the usual mode).** The implementing session produces work; the fresh session verifies the work meets a checklist (e.g., "this BL-#### item's `**Done means:**` checkboxes — see [`04_backlog_items.md` item template](04_backlog_items.md#item-skeleton) — are all satisfied," or "this PR's described changes match what the diff actually does"). The validator is checking *completeness and correctness of claims.* Output: PASS / FAIL per checklist item, with grounded citations.
 
 **Diff-verification (when a loop or agent proposes an autonomous patch to authoritative content).** The implementing session produces a *proposed patch* — typically a branch with an edit, a CHANGELOG entry, and a finding the patch addresses. The fresh session reads the original cited content, the proposed edit, and the finding, then verifies three things:
 
@@ -569,7 +569,7 @@ Cross-AI validation has two distinct modes, each appropriate at a different step
 2. **Correct:** does the proposed edit actually fix the cited problem without introducing a new one?
 3. **Scoped:** does the edit touch *only* the cited content (no scope creep into adjacent text)?
 
-Diff-verification is the cross-AI gate for the patch-branch convention in [`09_git_workflow.md` "Patch-branch convention for authoritative artifacts"](09_git_workflow.md#patch-branch-convention-for-authoritative-artifacts). Without it, an autonomous loop's "I fixed the typo" claim is unverified. With it, the maintainer can review the cross-AI's PASS/FAIL on grounded/correct/scoped before reviewing the diff themselves — the maintainer's role becomes ratification, not original review.
+Diff-verification is the cross-AI gate for the patch-branch convention in [`09_git_workflow.md` "Patch-branch convention for authoritative artifacts"](09_git_workflow.md#patch-branch-convention-for-authoritative-artifacts). Without it, an autonomous loop's "I fixed the typo" claim is unverified. With it, the maintainer reviews a *verified diff* — yes/no on a concrete change, not translate-finding-into-fix (matching the [09 framing](09_git_workflow.md#patch-branch-convention-for-authoritative-artifacts)).
 
 Both modes use the same "fresh session, different model where possible" setup. The difference is the input shape (a checklist vs. an original + proposed-edit + finding triple) and the output shape (PASS/FAIL per checklist item vs. PASS/FAIL on grounded/correct/scoped).
 
@@ -611,7 +611,7 @@ These are not absolute. A trivial typo in a security-critical place still warran
 
 ### Recording the level
 
-The item's `Test:` field can carry the level reached:
+The level annotation lives on the **backlog item's `Test:` field** — not on the PR description, not on the commit message:
 
 ```
 Test: pass (L2)             — actual-UI verified, no cross-AI, no user
@@ -621,7 +621,7 @@ Test: pass                  — assumed L2 minimum (default for user-observable)
 Test: pass (L1, refactor)   — explicit lower bar with reason
 ```
 
-The level annotation is optional but useful for risk-tracking. A PR that ships a security-sensitive change at L2 is a red flag the reviewer can catch.
+Storing the level on the item (not the PR) keeps the audit trail in the backlog where the rest of the item's history lives. A reviewer looking at a PR can glance at the linked BL-#### item to see which level was reached; the level travels with the item, not the (eventually-closed) PR. The level annotation is optional but useful for risk-tracking. A PR that ships a security-sensitive change at L2 is a red flag the reviewer can catch.
 
 ### Why graduate the gate
 

@@ -89,7 +89,20 @@ Examples:
 methodology-patch/2026-05-25-01    # first methodology patch of the day
 designsystem-patch/2026-05-25-01   # first design-system patch of the day
 spec-patch/2026-05-25-02           # second upstream-spec patch of the day
+runbook-patch/2026-05-25-01        # first runbook patch of the day
 ```
+
+**Common area prefixes (pick from these or register your own in the project's instruction file):**
+
+| Area prefix | Authoritative artifact |
+|---|---|
+| `methodology` | The methodology docs themselves (in a self-applying project — see Constraint 1 of `templates/AUTONOMOUS_LOOP.md` "Tiered autonomy"). |
+| `designsystem` | Design tokens, component spec docs, brand guidelines. |
+| `spec` | Upstream contract mirrors, OpenAPI specs the project ingests. |
+| `runbook` | On-call runbooks, incident-response checklists, escalation maps. |
+| `compliance` | Regulatory checklists, audit manifests, license inventories. |
+
+Each project records its allowed area prefixes in `CLAUDE.md` / `AGENTS.md` (or equivalent) so the autonomous loop knows which areas it can patch and which it must escalate.
 
 The convention enables three things:
 
@@ -97,7 +110,9 @@ The convention enables three things:
 2. **The patch is reversible at any point before merge.** Branch delete = patch dropped. No trunk state ever touched.
 3. **The branch name carries the audit context** — area (which authoritative artifact), date (when proposed), sequence number (multiple patches same day get distinct names).
 
-The patch branch follows all other rules in this doc: trunk protection still applies (no force-push, no direct trunk commit), commits still have clear messages, CHANGELOG entry lands in the same commit as the patch. The autonomous loop **never auto-merges a patch branch** — that's always the maintainer's gate. See [`AUTONOMOUS_LOOP.md` "Tiered autonomy for authoritative artifacts"](../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts) for the tier matrix that decides whether a finding becomes a patch branch (T0/T1) or stays as advice (T2/T3).
+The patch branch follows all other rules in this doc: trunk protection still applies (no force-push, no direct trunk commit), commits still have clear messages, CHANGELOG entry lands in the same commit as the patch. **All DoD gates still apply** — Gate 4 (documentation updated, see [`07_definition_of_done.md` "Gate 4 — Documentation updated"](07_definition_of_done.md#gate-4--documentation-updated)) and the diff-verification mode of Gate 5 (see [`10_testing_and_verification.md` "Two modes: findings-verification and diff-verification"](10_testing_and_verification.md#two-modes-findings-verification-and-diff-verification)) gate the merge.
+
+The autonomous loop **never auto-merges a patch branch** — that's always the maintainer's gate. See [`AUTONOMOUS_LOOP.md` "Tiered autonomy for authoritative artifacts"](../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts) for the tier matrix that decides whether a finding becomes a patch branch (T0/T1) or stays as advice (T2/T3).
 
 ---
 
@@ -548,7 +563,7 @@ Pairs with the [decision-ownership matrix in 11_human_roles.md](11_human_roles.m
 | `git add <specific files>` | ✓ | Staging known files. Prefer this over `git add .` which can stage unintended files. |
 | `git commit` (on a feature branch) | ✓ | The agent's normal flow per [commit cadence](#commit-cadence). |
 | `git push origin <feature-branch>` | ✓ | Pushing the agent's own feature branch. |
-| `git fetch` / `git pull --ff-only` | ✓ | Read-only sync. The `--ff-only` flag prevents accidental merges. |
+| `git fetch` / `git pull --ff-only` | ✓ | Idempotent sync (not strictly read-only — `pull --ff-only` does update local refs and the working tree, but only if a fast-forward is possible; the `--ff-only` flag prevents accidental merges). |
 | `git checkout <branch>` (in a worktree the agent owns) | ✓ | In its own worktree, not the user's primary checkout. |
 | `git worktree add` / `git worktree remove` (own worktrees) | ✓ | Manage agent's own isolation. |
 | `git merge <other>` (into agent's own feature branch) | ✓ | Bringing trunk into feature is normal. |

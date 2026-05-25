@@ -466,7 +466,7 @@ Paste this as the starting point for any new strategy doc (e.g., `09_risk.md`):
 
 ## Authority
 
-Strategy outranks pillars when they conflict. Pillars outrank epics when they conflict. Epics outrank items when they conflict.
+Strategy outranks pillars when they conflict. Pillars outrank epics when they conflict. Epics outrank items when they conflict. (The same precedence rule is restated in [`00_README.md` "Authority across the methodology"](00_README.md#authority-across-the-methodology) and [`02_pillars.md` "Authority"](02_pillars.md#authority); a change here should propagate to both.)
 
 If a backlog item appears to require violating a pillar, the pillar wins — but the conflict should be surfaced; the strategy or pillar may need updating, not the item suppressed.
 

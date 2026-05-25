@@ -115,8 +115,8 @@ The item's metadata must match reality:
 - `Status: done`
 - `Test: pass` (never flip `Status: done` from any other Test value — see hard rule below)
 - `Lock: —` (lock released)
-- The item moved from the epic's `BACKLOG.md` to `ARCHIVE.md` (see [04_backlog_items.md](04_backlog_items.md)).
-- The epic's rollup count incremented (`done` count up by one, `open` count down by one — see [03_epics.md](03_epics.md)).
+- The item moved from the epic's `BACKLOG.md` to `ARCHIVE.md` (see [`04_backlog_items.md` "Lifecycle of an item"](04_backlog_items.md#lifecycle-of-an-item) for the archive mechanics).
+- The epic's rollup count incremented (`done` count up by one, `open` count down by one — see [`03_epics.md` "Epic rollup (`EPICS.md`)"](03_epics.md#epic-rollup-epicsmd) for the rollup format).
 - If the change closes additional items as a side effect, those items are also moved with the same care.
 
 The backlog is a source of truth. If the file says `done` but the work is half-finished, the backlog has lied — and every future decision based on that state is poisoned. Update metadata accurately or do not flip the status.
@@ -221,7 +221,7 @@ This section is the practical playbook for keeping them honest. It expands Gate 
 | **Epic rollup** | `backlog/EPICS.md` | Active epics + open/done counts | When any item changes state |
 | **Backlog README** | `backlog/README.md` | Workflow and item-format conventions | When the workflow changes |
 | **Strategy master plan** | `docs/strategy/00_master_plan.md` | Vision + phases + supporting-doc index | On re-evaluation (quarterly or trigger-driven) |
-| **Memory index** | `memory/MEMORY.md` | The lessons-learned index | When a memory entry is added or removed |
+| **Memory index** | `memory/MEMORY.md` | The lessons-learned index | Same commit as the memory entry's add / remove / rename (per [`08_lessons_and_memory.md` "Index update discipline"](08_lessons_and_memory.md#index-update-discipline)) |
 
 Each row is enforced by either the per-item DoD (CHANGELOG, README, STATUS, EPICS) or by its own re-evaluation protocol (strategy, memory).
 
@@ -320,7 +320,7 @@ Defense:
 
 - **Update all relevant docs in the same PR.** Gate 4 of the DoD requires this. A PR that updates one doc but contradicts another is incomplete.
 - **One source of truth per topic.** Don't repeat the same fact in multiple docs — link instead. Two copies will always drift; one copy + N links won't.
-- **Periodic doc audits.** Quarterly, do a pass: read every living document and ask "is this still true?" Fix what isn't. This is itself a backlog item with effort `S`.
+- **Periodic doc audits.** Quarterly, do a pass: read every living document and ask "is this still true?" Fix what isn't. This is itself a backlog item with effort `S`. **The quarterly pass covers the *project's* living docs (CHANGELOG, README, STATUS, instruction files, backlog).** The *methodology* docs themselves are out of scope for the quarterly pass — they get the deeper semi-annual evaluation described in "Methodology self-evaluation (semi-annual)" below.
 
 ### Periodic repo health audits (quarterly)
 
@@ -407,7 +407,7 @@ Definition of Done (every item, no exceptions):
     instruction file updated where relevant.
 [ ] Final verification loop: one more clean pass of review + tests + UI
     after all per-gate work.
-[ ] Backlog state correct: Status: done, Test: pass, Lock: -, item moved
+[ ] Backlog state correct: Status: done, Test: pass, Lock: —, item moved
     to ARCHIVE.md, epic rollup counts updated.
 
 Hard rule: Status: done REQUIRES Test: pass. If you cannot tick Test: pass,
