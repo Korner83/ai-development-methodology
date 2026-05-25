@@ -2,11 +2,13 @@
 
 **Pillar (primary):** [P1 — Doc completeness](../../../pillars/P1_doc_completeness.md)
 **Pillar (secondary):** [P6 — Example richness](../../../pillars/P6_example_richness.md)
-**Status:** active
+**Status:** done
 **Phase:** Phase 1 — Foundation
 **Started:** 2026-05-25
-**Target close:** TBD (discovery-driven; not calendar-bound)
+**Closed:** 2026-05-25 (v1.15.0 maintainer-authored batch)
 **Owner:** maintainer + AI coding agent
+
+**Closure summary:** Shipped [`examples/`](../../../../examples/) folder containing a fictional `tinker` developer-notes CLI as the worked example. Includes README + comparison table; example-project README; strategy master plan with 4 phases + binary exit criteria; 2 pillar files (P1 Capture, P2 Retrieval); EPICS rollup; 1 epic charter; 5 BL items in canonical table-form frontmatter demonstrating all major Status values (done / in-progress / ready / backlog / blocked) and the lock format. All content abstract-voice-compliant.
 
 ## Outcome (jobs-to-be-done)
 

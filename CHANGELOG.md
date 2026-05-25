@@ -9,13 +9,56 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-### E02 close + WIP cap raised (2026-05-25)
+(nothing yet)
 
-- **E02 (first semi-annual methodology self-evaluation pass) closed** by maintainer signoff in `self-development/evaluations/2026-05-first-pass.md`. All 5 items (BL-0006/0007/0008/0009/0010) flipped to `Status: done` and moved to `self-development/backlog/epics/02-first-semiannual-self-evaluation/ARCHIVE.md`. Charter status flipped `active → done`.
-- **WIP cap raised from 1 to 2** in `self-development/backlog/EPICS.md`. The first successful epic close validates the loop's discipline (escalate-on-doubt, diff-verification, maintainer-merge gate all fired and worked); a second concurrent epic is now safe.
-- **Maintainer's next-promotion decision is open.** ROI-ranked recommendation: E05 (CHEATSHEET) first, E01 (Examples) second; E03 + E04 deferred.
+---
 
-Bookkeeping change — no methodology files changed in this commit.
+## v1.15.0 — 2026-05-25
+
+### New methodology pattern: milestone-driven evaluation + scoring rubric
+
+**Doc 12 introduced.** A new methodology doc — [`methodology/12_milestone_evaluation.md`](methodology/12_milestone_evaluation.md) — operationalizes the aggregate gate that per-item DoD (doc 07) does not cover. Per-item DoD catches single-change defects; per-milestone evaluation catches compounded UI debt, cross-cutting perf regressions, security drift, strategy drift, content-quality erosion, and the rest of the "all items green; product unfit to ship" failure mode.
+
+The pattern operationalizes four ideas:
+
+1. **Milestones are named waypoints with binary readiness criteria.** Default sequence: pre-alpha → alpha → closed-beta wave 1 → closed-beta wave 2 → open beta → first public (v1.0) → GA. Adapters adjust per project.
+2. **Periodic deep-eval runs every Nth loop iteration** — N = 3 for early phase, 5 for stable, 10 for late. Score the project on a 0–10 rubric per area against the *next milestone's* readiness criteria.
+3. **Scoring rubric per area** — defaults: UX/UI, frontend, backend, security, performance, test coverage, content quality, documentation, operational readiness, accessibility. Adopters add/drop areas per project domain. AI can help define areas during strategy setup.
+4. **Default thresholds** — minimum 8/10 per area, average 9/10 across all. No area can be averaged away. Projects raise thresholds for high-stakes milestones (GA: 9/9.5), lower for early (alpha: 6/7).
+
+**Unsolvable issues are first-class.** Three legitimate dispositions when a fix resists multiple loop attempts: **handle** (workaround + Limitation note), **postpone** (FUTURE.md with reason), **mark** (Status: rejected + Known issue documentation). The methodology's stance: marking is honest; forced progression is dishonest.
+
+**Human review remains the final gate** even when the rubric scores at threshold. The maintainer verifies the *unmeasured* dimensions: real user testing, strategy alignment, trade-offs the rubric didn't see, intuition-grade confidence. Goodhart's law applies to rubrics too.
+
+**Feedback triage flow** — once users exist (alpha+), inbound feedback lands in a single inbox (`backlog/FEEDBACK.md`) and gets triaged on a cadence appropriate to the milestone (weekly alpha → 48h closed beta → daily public). Each item routes to bug / feature / question / praise / spam.
+
+### New artifacts shipped
+
+- **[`CHEATSHEET.md`](CHEATSHEET.md)** — one-page quick reference at repo root. ~80 lines (under 100-line cap per E05 charter). Covers all hard rules, the tier matrix, ROI heuristic, lock format, milestones + scoring, and links to full docs for each topic. **Reference, not learning** — full docs remain the source of truth.
+- **[`examples/`](examples/)** — fictional `tinker` project (developer-notes CLI) showing the methodology applied end-to-end. Includes strategy master plan with 4 phases + binary exit criteria; 2 pillar files (P1 Capture, P2 Retrieval); EPICS rollup; 1 epic charter; 5 BL items in canonical table-form frontmatter demonstrating all major Status values. All content abstract-voice-compliant (no real product/company references).
+
+### Methodology changes
+
+- **`methodology/00_README.md`** — new section "Why foundational work matters" with a mermaid diagram showing the cascade from brief → goals/milestones → planning → execution → periodic gates → milestone declaration. The diagram explicitly contrasts the foundation-first path with the ad-hoc-work-no-compass failure mode (drift → rework → abandonment). New mental-model sub-section "Plus: the evaluation dimension" introduces doc 12. The main "How the layers connect" diagram extended with a fourth grouping for milestone evaluation. Reading-path table extended with two new rows: "Auditing existing project's process health" and "Running an autonomous loop / scaling AI-assisted work" — both anchored on doc 12.
+- **`methodology/12_milestone_evaluation.md`** (new file) — full pattern documented; ~330 lines covering milestones, rubric, periodic-eval cadence, unsolvable handling, human-review gate, feedback triage, worked example.
+- **`templates/AUTONOMOUS_LOOP.md`** — extended with: explicit fix-and-adjust gate after each item's verify step (step 5); periodic deep-eval cadence after every Nth loop (step 6); unsolvable-issue handling (step 7); feedback triage (step 9). Stop conditions now include "milestone deep-eval at threshold + maintainer human review confirms ready."
+- **`self-development/AUTONOMOUS_LOOP.md`** — adopted the pattern for this project specifically: N = 3 during Phase 1; project-tailored rubric (doc completeness, doc clarity, doc currency, cross-doc consistency, adopter discoverability, tool compatibility, self-improvement velocity, governance integrity); explicit milestone sequence with current state (Alpha met; Closed beta pending external adopters).
+
+### E02 close + WIP cap raised + E01 + E05 close (all three in same release)
+
+- **E02 (first semi-annual self-evaluation pass)** closed earlier this day post-v1.14.0 by maintainer signoff in `self-development/evaluations/2026-05-first-pass.md`. All 5 items (BL-0006/0007/0008/0009/0010) flipped to `Status: done` and moved to E02's `ARCHIVE.md`. **WIP cap raised from 1 to 2** in `self-development/backlog/EPICS.md`.
+- **E01 (Examples folder)** closed in v1.15.0; all 5 items in `ARCHIVE.md`; charter Status: active → done.
+- **E05 (CHEATSHEET.md)** closed via single-artifact ship; charter Status: planned → done.
+- **EPICS rollup** updated: 3 done (E01, E02, E05), 2 planned (E03, E04). The maintainer's next-promotion decision recommends E03 first if continuing autonomous loop work; defer E04 until closed-beta milestone work reveals which native templates adopters actually need.
+
+### Notable for adopters
+
+If you adopt the methodology after v1.15.0:
+
+- Read [`methodology/12_milestone_evaluation.md`](methodology/12_milestone_evaluation.md) when you start your second epic. Doc 12 is the gate that prevents your fast-shipping AI loop from drifting from your strategy.
+- The default thresholds (8 min per area, 9 average) are starting points — tune per project, document the choice in strategy.
+- The unsolvable-issue heuristic (handle/postpone/mark) is the most-frequently-needed-but-least-applied rule on AI-assisted projects. Make it part of the team's vocabulary.
+- The feedback triage flow is load-bearing once you have users. Set the cadence per milestone before you announce alpha.
 
 ---
 

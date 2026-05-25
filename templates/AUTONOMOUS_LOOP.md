@@ -50,7 +50,35 @@ Mission (loop; do NOT stop at single-task completion):
 4. AFTER EVERY 3 LARGER UPDATES — commit and push per methodology/09.
    Each commit message clearly states what changed.
 
-5. AFTER EVERY 10 MEANINGFUL IMPROVEMENTS — re-run analysis + gap
+5. FIX-AND-ADJUST AFTER EACH ITEM'S VERIFY STEP — when verification
+   surfaces issues (failing tests, broken UI, performance regressions,
+   incomplete acceptance criteria), do not move on. Fix the issue in
+   the same loop iteration; re-run verification; only mark Test: pass
+   when the verification is actually green. The fix-test loop runs
+   until clean — see methodology/10 "Fix-test loop flow."
+
+6. AFTER EVERY Nth LOOP — run a milestone deep-eval per methodology/12:
+   - Default N = 3 (early-phase projects), N = 5 (stable), N = 10 (late).
+   - Score the project on the rubric defined for its current milestone
+     (UX / frontend / backend / security / perf / content / tests /
+     docs / ops / accessibility — adapt per project).
+   - Use cross-AI for scoring; the implementing session is biased.
+   - For under-threshold areas (default: 8/10 minimum, 9/10 average),
+     file new items at P0/P1 priority for next loops.
+   - Produce a deep-eval report at evaluations/YYYY-MM-DD-eval-NN.md.
+   - Halt for maintainer signoff before declaring a milestone reached.
+
+7. UNSOLVABLE-ISSUE HANDLING — when an issue resists multiple loop
+   attempts, do not force progression. Pick one of:
+   - Handle: workaround acceptable; close with Limitation: note.
+   - Postpone: real fix needed but priority doesn't justify blocking;
+     move to FUTURE.md with reason.
+   - Mark: cannot fix cleanly; close with Status: rejected + a
+     Known issue: entry in CHANGELOG/README.
+   Forcing a fix when these dispositions are honest makes things worse.
+   See methodology/12 "Unsolvable issues" for the heuristic.
+
+8. AFTER EVERY 10 MEANINGFUL IMPROVEMENTS — re-run analysis + gap
    review against the milestone target, reprioritize, continue.
 
 6. KEEP LIVING DOCS HONEST — CHANGELOG, README, STATUS, project
@@ -64,11 +92,24 @@ Mission (loop; do NOT stop at single-task completion):
    - schema / persistence → migration safety + backward compatibility
    Add fixes and tests to the active loop; don't defer.
 
-8. BLOCKERS — document the blocker, continue all unblocked work,
+9. FEEDBACK TRIAGE — once the project has real users (alpha+), the
+   inbound feedback inbox (backlog/FEEDBACK.md or equivalent) is
+   triaged on cadence:
+   - Pre-alpha / alpha: weekly.
+   - Closed beta: every 48 hours.
+   - Open beta / public: daily inbox; weekly synthesis for patterns.
+   Each feedback item routes to: bug → BL-#### in epic, feature →
+   FUTURE.md or pillar backlog, question → response + doc update,
+   praise → log, spam → drop. See methodology/12 "Feedback triage."
+
+10. BLOCKERS — document the blocker, continue all unblocked work,
    make only bounded safe assumptions. Don't guess on credentials,
    business rules, or legal questions.
 
 STOP CONDITION:
+- Milestone deep-eval scores the rubric at threshold (default: every
+  area ≥ 8, average ≥ 9) AND maintainer human review confirms
+  milestone-ready.
 - Milestone-level review shows >99% readiness against the target.
 - Single-task completion is NOT the stop condition.
 

@@ -1,11 +1,13 @@
 # E05 — CHEATSHEET.md (one-page reference)
 
 **Pillar (primary):** [P1 — Doc completeness](../../../pillars/P1_doc_completeness.md)
-**Status:** planned
+**Status:** done
 **Phase:** Phase 1 — Foundation
-**Started:** — (not yet active)
-**Target close:** TBD (depends on E01, E02, or E03 closing to free a WIP slot)
+**Started:** 2026-05-25
+**Closed:** 2026-05-25 (v1.15.0 maintainer-authored batch — single-artifact epic, no formal items charted)
 **Owner:** maintainer + AI coding agent
+
+**Closure summary:** Shipped [`CHEATSHEET.md`](../../../../CHEATSHEET.md) at repo root. ~80 lines (under the 100-line cap). Covers: 4 planning layers, 3 discipline overlays + applied + evaluation, 4 working principles, hard rules, lock format + TTL, ROI heuristic, challenge-before-consenting prompt, tier matrix, milestones + scoring rubric, AUTONOMOUS_LOOP / HUMAN_NEEDED / FEEDBACK references, cross-AI two modes. Linked from main README. Methodology version v1.15.0 pinned.
 
 ## Outcome (jobs-to-be-done)
 

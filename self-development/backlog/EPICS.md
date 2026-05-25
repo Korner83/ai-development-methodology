@@ -1,18 +1,18 @@
 # Epics
 
-_Last refreshed: 2026-05-25 (E02 closed; WIP cap raised to 2; awaiting maintainer choice of next active epic)._
+_Last refreshed: 2026-05-25 (E01 + E05 closed in v1.15.0; 3 epics done total; WIP cap at 2; E03 + E04 eligible for next active slots)._
 
 ## Rollup
 
 | Epic | Title | Pillar (primary + secondary) | Status | Phase | Items (open/done) | Next milestone |
 |---|---|---|---|---|---|---|
 | [E02](epics/02-first-semiannual-self-evaluation/README.md) | First semi-annual methodology self-evaluation pass | P3 Doc currency + P2 Doc clarity | **done** (2026-05-25) | Phase 1 | 0 / 5 | First epic closed; cycle validated; next pass 2026-11-25. |
-| [E01](epics/01-examples-folder/README.md) | Examples folder | P1 Doc completeness + P6 Example richness | planned | Phase 1 | 5 / 0 | Eligible for promotion to active (open WIP slot). |
-| [E03](epics/03-git-workflow-trim/README.md) | Trim or split `09_git_workflow.md` | P2 Doc clarity | planned | Phase 1 | 4 / 0 | Eligible for promotion; some of the 28 T2 findings from E02 may land here. Note BL-0012 touches `methodology/` (T3-equivalent — maintainer handoff). |
-| [E04](epics/04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | planned | Phase 1 | 0 / 0 | Eligible for promotion. |
-| [E05](epics/05-cheatsheet/README.md) | CHEATSHEET.md (one-page reference) | P1 Doc completeness | planned | Phase 1 | 0 / 0 | Eligible for promotion; smallest scope of the four planned epics. |
+| [E01](epics/01-examples-folder/README.md) | Examples folder | P1 Doc completeness + P6 Example richness | **done** (2026-05-25) | Phase 1 | 0 / 5 | Shipped in v1.15.0 (examples/ folder with tinker fictional project). |
+| [E05](epics/05-cheatsheet/README.md) | CHEATSHEET.md (one-page reference) | P1 Doc completeness | **done** (2026-05-25) | Phase 1 | — / 1 | Shipped in v1.15.0 (CHEATSHEET.md at repo root, ~80 lines). |
+| [E03](epics/03-git-workflow-trim/README.md) | Trim or split `09_git_workflow.md` | P2 Doc clarity | planned | Phase 1 | 4 / 0 | Eligible for promotion (open WIP slot). Some E02 T2 findings flow here. BL-0012 touches `methodology/` (T3-equivalent — maintainer handoff). |
+| [E04](epics/04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | planned | Phase 1 | 0 / 0 | Eligible for promotion (open WIP slot). |
 
-**Counts:** **0 active**, 4 planned, 1 done.
+**Counts:** **0 active**, 2 planned, 3 done.
 
 ### WIP cap note
 
@@ -34,18 +34,18 @@ Inverse view: which epics touch each pillar.
 | P8 Maintenance sustainability | — | — | Dormant (Phase 3 pillar) |
 | P9 Self-improvement velocity | — | — | No epic; the bootstrap itself (Steps 0–4 of the self-development plan) is this pillar's first work |
 
-**Observation:** With WIP cap at 2 and E02 closed, two of the four remaining planned epics can be active simultaneously. The maintainer's choice of which to promote next is open — see "Maintainer's next decision" below the rollup.
+**Observation:** With WIP cap at 2 and 3 epics now done, 2 planned epics remain. The maintainer may promote either or both per ROI heuristic. WIP cap may rise to 3 (methodology default) after one more epic closes if the loop's discipline holds.
 
 ## Maintainer's next decision
 
-E02 has closed; WIP cap is 2; one or two of the four planned epics can promote to active. ROI-ranked recommendation:
+ROI-ranked recommendation for the remaining 2 planned epics:
 
-1. **E05 (CHEATSHEET.md)** — P1 + smallest effort (likely XS-S items). Highest near-term ROI per `04_backlog_items.md` heuristic. **Recommended first promotion.**
-2. **E01 (Examples folder)** — P1 + medium effort. Examples are widely-requested by adopters; pairs well with E05's one-page reference.
-3. **E03 (Trim/split 09_git_workflow.md)** — P2 + medium effort. Some of E02's 28 T2 findings flow naturally here; could batch the loop-notes follow-ups into E03's scope. **Note:** BL-0012 in E03 touches `methodology/` and is a T2-equivalent (maintainer-authored per tier matrix).
-4. **E04 (Native templates Cursor/Aider/Continue.dev)** — P4 + medium-large effort. Depends on adopter feedback on which native templates are most useful; can wait until E01/E03/E05 produce that feedback signal.
+1. **E03 (Trim/split 09_git_workflow.md)** — P2 + medium effort. Some of E02's 28 T2 findings flow naturally here; could batch the loop-notes follow-ups into E03's scope. **Note:** BL-0012 in E03 touches `methodology/` and is a T2-equivalent (maintainer-authored per tier matrix).
+2. **E04 (Native templates Cursor/Aider/Continue.dev)** — P4 + medium-large effort. Depends on adopter feedback on which native templates are most useful; might pair well with closed-beta milestone work once external adopters provide signal.
 
-A reasonable shape: promote **E05 + E01** to active (both P1, complementary scope, both serve adopter discoverability). Defer E03 + E04 until either the loop closes E05/E01 or the maintainer ships the 28 T2 follow-ups from E02.
+Both can be active simultaneously (WIP cap at 2). Suggested: **promote E03 first** (closes more methodology-level cleanup); **defer E04** until alpha → closed-beta milestone work reveals which native templates adopters actually want.
+
+Alternatively the maintainer may pause new-epic promotion and prioritize Phase 1 → Phase 2 milestone work (closed beta readiness per `methodology/12`): activate distribution plan, recruit ≥ 2 external adopters, collect structured feedback. The `FEEDBACK.md` triage flow becomes load-bearing at this transition.
 
 ## Status legend
 

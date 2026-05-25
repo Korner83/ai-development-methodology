@@ -22,6 +22,72 @@ The whole system runs on **markdown files plus git.** No external services. No s
 
 ---
 
+## Why foundational work matters — the cascade from brief to shipped product
+
+A common failure mode for AI-assisted projects: jump straight to "let's build features." The AI is fast; building feels productive; weeks pass; the team realizes they've built the wrong product, or built the right product in a way that doesn't compose, or shipped features no one uses. Direction was never anchored. Quality was never measured. Drift compounded silently.
+
+The methodology insists on **foundational work up front** — not as ceremony, but because each foundational artifact prevents a specific downstream failure. The cascade:
+
+```mermaid
+flowchart TB
+  classDef foundation fill:#fef3c7,stroke:#b45309,color:#78350f
+  classDef planning fill:#dbeafe,stroke:#1e40af,color:#1e3a8a
+  classDef exec fill:#dcfce7,stroke:#15803d,color:#14532d
+  classDef gate fill:#fce7f3,stroke:#9d174d,color:#831843
+  classDef bad fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d
+
+  subgraph FOUND["Foundation (decide before building)"]
+    direction TB
+    BR["Brief<br/>vision · audience · market gaps ·<br/>success metrics · distribution · tech"]:::foundation
+    GO["Long-term goals + milestones<br/>alpha → beta → public → GA<br/>with binary readiness criteria"]:::foundation
+    BR --> GO
+  end
+
+  subgraph PLAN["Planning (derived from foundation)"]
+    direction TB
+    ST["Strategy master plan<br/>phases with exit criteria"]:::planning
+    PI["Pillars<br/>capability layers"]:::planning
+    EP["Epics<br/>3–12 week containers"]:::planning
+    IT["Items<br/>1–2 week units"]:::planning
+    ST --> PI --> EP --> IT
+  end
+
+  subgraph EXEC["Execution (loops produce work)"]
+    direction TB
+    LP["Autonomous loop<br/>pick → plan → execute → DoD → ship"]:::exec
+    DOD["Per-item DoD<br/>code review · tests · UI · docs"]:::exec
+    LP --> DOD
+  end
+
+  subgraph GATES["Periodic gates (measure against foundation)"]
+    direction TB
+    DE["Deep eval every Nth loop<br/>rubric 0–10 per area"]:::gate
+    MC["Milestone readiness check<br/>min 8/area, avg 9/total"]:::gate
+    HR["Human review<br/>actual user testing"]:::gate
+    DE --> MC --> HR
+  end
+
+  GO --> ST
+  IT --> LP
+  DOD --> DE
+  HR -->|"declare milestone reached"| GO
+
+  subgraph BAD["What happens without the foundation"]
+    direction TB
+    AH["Ad-hoc work<br/>(no compass)"]:::bad --> DR["Drift<br/>(building the wrong thing)"]:::bad
+    DR --> RW["Rework<br/>(rip-and-replace cycles)"]:::bad
+    RW --> AB["Abandonment<br/>(team loses confidence)"]:::bad
+  end
+```
+
+The foundation (yellow) is the part most projects skip and most pay for later. The brief decides *what we're building and why*; long-term goals + milestones decide *how we'll know we've arrived*. Skip these and you skip the ability to verify direction. The planning cascade (blue) derives from the foundation — if foundation is missing or vague, planning becomes guesswork. Execution (green) without foundation is the AI-coding-era anti-pattern: fast motion, no destination. Periodic gates (pink) close the loop by measuring execution output against the foundation's goals.
+
+**Practical implication for AI-assisted projects:** the time savings AI provides on execution make the foundational work *more* important, not less. Without the foundation, the AI accelerates the team toward the wrong destination. The brief and goal-setting time is the highest-leverage time the project will ever spend.
+
+The rest of this doc set is the operational detail behind each box.
+
+---
+
 ## The mental model
 
 The methodology has two interlocking mental models. Once you have both, the docs are easier to navigate.
@@ -56,6 +122,12 @@ These are not separate workstreams. They are constraints that bind every contrib
 The four layers and three disciplines describe *how the work flows.* [11_human_roles.md](11_human_roles.md) describes *how humans stay meaningfully involved* when AI agents do most of the implementation — the supervisory layer, the spec-as-primary-artifact shift, anti-patterns (cheating agent, yes-man, stranger in own code, tribal knowledge loss), and the skills that grow in value vs. those that don't.
 
 Read it alongside the disciplines for the full picture of working in this methodology.
+
+### Plus: the evaluation dimension
+
+Per-item DoD (doc 07) catches single-change defects. It does not catch the *aggregate* problems that emerge across many items — compounded UX debt, cross-cutting perf regressions, security drift, strategy drift. [12_milestone_evaluation.md](12_milestone_evaluation.md) defines the periodic deep-eval that runs every Nth loop iteration, scoring the project against the next milestone's readiness criteria across multiple dimensions (UX, security, performance, content quality, etc.) on a 0–10 rubric, and routing unsolvable issues to *handled / postponed / marked* rather than forcing progression.
+
+Read it once you have a project running loops; it's the gate that decides when a project actually graduates from one milestone (alpha, closed beta, etc.) to the next.
 
 ---
 
@@ -101,15 +173,29 @@ flowchart TB
   I -.recorded in.-> G
   I -.verified by.-> T
   D -.enforces.-> T
+
+  subgraph EVAL["Milestone evaluation (periodic — every Nth loop)"]
+    direction TB
+    MS[Milestone readiness criteria<br/>alpha → beta → public → GA]
+    RB[Rubric: 0–10 per area<br/>UX, frontend, security, perf, ...]
+    UR[Unsolvable triage:<br/>handle / postpone / mark]
+    HR[Human review<br/>final gate]
+  end
+
+  I -.aggregates feed.-> RB
+  RB --> MS
+  MS --> HR
+  UR -.routes blockers from.-> RB
 ```
 
-The diagram shows three groupings:
+The diagram shows four groupings:
 
 - **Planning** flows top-down. Strategy informs pillars; pillars are advanced by epics; epics contain items.
 - **Disciplines** apply across the planning stack. The working principles bind every contribution at every layer. The Definition of Done gates items and epics. Memory captures lessons that emerge anywhere.
 - **Operational supports** make the system work day-to-day. Locks coordinate parallel contributors at the item level. Git is the substrate that records everything. Testing and verification operationalize the DoD's `Test: pass` requirement.
+- **Milestone evaluation** is the periodic aggregate gate. Per-item DoD catches per-change defects; the periodic deep-eval (every Nth autonomous-loop iteration) scores the aggregate against the next milestone's readiness criteria, routes unsolvable issues to *handle / postpone / mark*, and surfaces for human review before milestone declaration.
 
-Read across the docs and you see the same flow: planning artifacts are produced and consumed in the cascade; disciplines apply at every layer; operational supports make the daily work navigable.
+Read across the docs and you see the same flow: planning artifacts are produced and consumed in the cascade; disciplines apply at every layer; operational supports make the daily work navigable; milestone evaluation periodically asks "are we actually where we said we'd be."
 
 ---
 
@@ -119,13 +205,14 @@ Different readers need different paths. Pick the one that fits your situation.
 
 | Reader | Reading order |
 |--------|---------------|
-| **New contributor on an existing project** | 00 → 06 → 07 → 04 → 05 → 09 → 10 → 11. Skim 01–03 for context but don't memorize them; the work you'll touch first is at the item layer. Read 11 once to know who decides what when a judgment call surfaces. |
+| **New contributor on an existing project** | 00 → 06 → 07 → 04 → 05 → 09 → 10 → 11. Skim 01–03 for context but don't memorize them; the work you'll touch first is at the item layer. Read 11 once to know who decides what when a judgment call surfaces. (Read 12 only when you start participating in milestone-evaluation cycles.) |
 | **Picking up a specific item to work** | 04 → 05 → 07 → 10 → 11. You need to know the item format, how to acquire it, what "done" means, how to verify, and which decisions need human judgment. |
-| **Starting a new project from scratch** | 00 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 → 10 → 11. Top-down. You're building the whole stack. |
-| **Setting up the disciplines on an existing project** | 06 → 07 → 08 → 09 → 10. The disciplines are the highest-leverage starting point — most projects already have some planning structure. |
+| **Starting a new project from scratch** | 00 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 → 10 → 11 → 12. Top-down. You're building the whole stack including the milestone-evaluation cadence. |
+| **Setting up the disciplines on an existing project** | 06 → 07 → 08 → 09 → 10 → 12. The disciplines are the highest-leverage starting point — most projects already have some planning structure; doc 12 adds the milestone gate. |
 | **Adapting the methodology to a different domain** | 00 → all docs in order. You'll need the whole picture to know what to keep and what to adapt. |
 | **AI agent landing in a new session on this codebase** | 00 → 06 → 07. Then load specifics on demand based on the task. |
-| **Auditing an existing project's process health** | 03 → 04 → 07 → 05. These layers contain the most observable signals of process health. |
+| **Auditing an existing project's process health** | 03 → 04 → 07 → 12 → 05. These layers contain the most observable signals of process health; doc 12's rubric is the aggregate health check. |
+| **Running an autonomous loop / scaling AI-assisted work** | 00 → 06 → 07 → 10 → 12 → `templates/AUTONOMOUS_LOOP.md`. The loop runs items through DoD; doc 12 defines the periodic deep-eval that runs every Nth loop. |
 
 The docs are designed to be readable in any order — each cross-links to the others. The reading paths above are recommendations to keep the first read efficient.
 
@@ -147,6 +234,7 @@ The docs are designed to be readable in any order — each cross-links to the ot
 | [09_git_workflow.md](09_git_workflow.md) | Branch protection, PR discipline, worktrees for parallel agents, destructive-command rules, deploy boundaries. |
 | [10_testing_and_verification.md](10_testing_and_verification.md) | Automated tests plus the actual-UI fix-test loop. What "tests pass" does and does not prove. |
 | [11_human_roles.md](11_human_roles.md) | How humans stay meaningfully involved when AI agents drive most of the implementation. Supervisory layer, spec-as-primary-artifact, four anti-patterns (cheating agent, yes-man, stranger in own code, tribal-knowledge loss), and the skills that matter now. |
+| [12_milestone_evaluation.md](12_milestone_evaluation.md) | Milestone-driven evaluation cadence: named milestones (alpha → beta → public → GA) with binary readiness criteria; 0–10 scoring rubric per area; periodic deep-eval every Nth loop; unsolvable-issue handling (handle/postpone/mark); human-review gate; feedback triage flow. The aggregate gate that complements per-item DoD. |
 
 Each doc is self-contained — you can read any one without having read the others, given the framing in this README. Cross-references between docs are markdown links.
 

@@ -119,6 +119,7 @@ The loop halts and surfaces to the maintainer when **any** of these is true:
 5. **An item enters cross-AI validation** — the loop never *self*-validates; cross-AI requires a separate fresh session. The loop completes the work and surfaces the item for cross-AI before marking done.
 6. **`HUMAN_NEEDED.md` accumulates ≥3 new entries in one run** — that's a signal the loop is encountering more human-blocked work than productive work; check in.
 7. **Maintainer-triggered halt** (any signal in chat / git / external).
+8. **A periodic deep-eval cycle is due.** This project runs the deep-eval (per [`methodology/12_milestone_evaluation.md`](../methodology/12_milestone_evaluation.md)) **every 3rd loop iteration** during Phase 1. The cycle scores the methodology project on a project-tailored rubric (areas: doc completeness, doc clarity, doc currency, cross-doc consistency, adopter discoverability, tool compatibility, self-improvement velocity, governance integrity). Thresholds: minimum 8/10 per area, average 9/10. Under-threshold areas spawn new items at P0/P1. Halt for maintainer signoff before declaring any milestone.
 
 When the loop halts, it produces the **post-run report** described below.
 
@@ -146,11 +147,26 @@ So the first run's target is **deliberately minimal**: complete one item end-to-
 After the first run validates the loop:
 
 - **Run 2:** complete BL-0007 (P1-M). Stop after BL-0007 closes; do not start BL-0008 in the same run — BL-0008 references BL-0007's findings, and starting BL-0008 in the same session would risk contaminating the cold-read.
-- **Run 3:** complete BL-0008 (P1-M, with BL-0007's findings now in the eval report).
+- **Run 3:** complete BL-0008 (P1-M, with BL-0007's findings now in the eval report). **Deep-eval cycle due at end of Run 3** — score project on the rubric per `methodology/12`.
 - **Run 4:** complete BL-0009 + BL-0010 (close E02; surface for user approval of the close). After E02 closes, WIP cap rises from 1 to 2; maintainer decides which of E01 / E03 / E04 / E05 promotes to active next.
-- **Run 5+:** work in the now-active second epic per ROI heuristic; primary target is "close one epic per run" once the cadence is established.
+- **Run 5+:** work in the now-active second epic per ROI heuristic; primary target is "close one epic per run" once the cadence is established. Deep-eval at Run 6, 9, 12, ... (every 3rd).
 
 Maintainer adjusts targets at each check-in based on what the prior run produced. Targets are not a fixed schedule.
+
+### Milestones (project-specific)
+
+The methodology project's own milestones (per `methodology/12`):
+
+| Milestone | Definition (binary) | Current state |
+|---|---|---|
+| **Pre-alpha** | Bootstrap complete; first loop run succeeded. | ✅ Met (v1.11.0). |
+| **Alpha** | First full eval cycle completes end-to-end; methodology is internally coherent. | ✅ Met (v1.14.0). |
+| **Closed beta** | At least 2 external adopters provide structured feedback; methodology survives use by non-author. | ⏳ Not yet — depends on activation of distribution plan. |
+| **Open beta** | Publicly promoted (Show HN, awesome-list, blog post); ≥ 10 stars + ≥ 3 discussions. | ⏳ Not yet. |
+| **First public final** | All P0/P1 items closed across all active epics; rubric ≥ 9 average; maintainer signs off as v2.0.0. | ⏳ Not yet. |
+| **GA** | Multi-project adopter base; deprecation policy published; semi-annual cadence ≥ 2 cycles run. | ⏳ Not yet. |
+
+Each deep-eval scores against the **next** milestone's readiness.
 
 ---
 
