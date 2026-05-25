@@ -266,6 +266,49 @@ The order is intentional: highest-leverage changes first. A project that adopts 
 
 ---
 
+## Brownfield reality check (when adoption fights headwinds)
+
+The adoption guides above assume reasonable team buy-in. Some brownfield projects don't have that:
+
+- Pre-existing backlog in a tracker that nobody wants to migrate.
+- Conventions the team has used for years that conflict with the methodology's rules.
+- Multiple contributors who didn't ask for new process and won't read 12 docs.
+- A codebase old enough that "small surgical changes" sometimes touch 20 files because of accumulated coupling.
+- Compliance, contractual, or org-political reasons that certain rules can't apply directly.
+
+The methodology still applies — it just needs a sequencing that doesn't ask the team to adopt everything at once.
+
+### A staged brownfield adoption
+
+**Stage A — Adopt without announcing.** For the changes *you* personally make, follow the working principles ([06](06_working_principles.md)), write a `CLAUDE.md` or `AGENTS.md` for your AI sessions, file memory entries when you learn something. Nobody else has to participate. You'll ship better code on your own changes; the rest of the team notices the diff quality eventually.
+
+**Stage B — Adopt for parallel-AI work.** The single highest-leverage adoption point is the [lock protocol](05_locks_and_parallel_work.md) when multiple AI sessions (or AI + human) start touching the same code. The collision pain motivates adoption better than any pitch deck.
+
+**Stage C — Adopt the DoD on a single epic.** Pick the *next* substantial piece of work. Apply the [Definition of Done](07_definition_of_done.md) to that epic only. Don't try to retrofit the whole backlog. The contrast — items in this epic actually being done vs. items elsewhere being "done in name only" — is the demonstration.
+
+**Stage D — Open the planning layer.** Once the disciplines (06, 07, 08) are familiar, introduce the planning structure (01, 02, 03, 04) for new work. Existing backlog stays where it is; new items go through the new format. The migration happens through attrition: old items close out in the old format; new items only appear in the new format; eventually only the new format remains.
+
+**Stage E — Backfill upward.** Pillars and strategy come last, not first. By the time you reach Stage E, the team has the disciplines and the working pattern. Writing down the strategy and pillars *codifies* what the team already implicitly understands rather than asking them to discover it from scratch.
+
+### What NOT to do in a brownfield adoption
+
+- **Don't try to reformat the existing backlog all at once.** It's pure overhead that doesn't ship anything. Let it die naturally.
+- **Don't fight conventions that aren't broken.** The methodology's conventions (file naming, doc structure, etc.) are recommendations. If the project has a working alternative, keep it. Adopt the *protocols* (lock, DoD, memory) which are the load-bearing parts; let the *conventions* (naming, structure) remain whatever the project already does.
+- **Don't ask non-contributors to read 12 docs.** Most team members need the project-instruction file (`CLAUDE.md` / `AGENTS.md`) and one paragraph explaining locks. The deep docs are for whoever is operating the methodology, not everyone touching the repo.
+- **Don't litigate the past.** The old code was written under different assumptions. Re-architecting it to fit the methodology is its own multi-month project. Touch what your tasks touch; leave the rest.
+
+### When brownfield adoption fails
+
+If after a few months the staging above isn't sticking, the honest answer is usually one of:
+
+- The team genuinely doesn't have a parallel-contributor coordination problem yet, and the methodology's main value (locks, DoD coupled to items) doesn't yet pay its weight.
+- The team has organizational reasons the methodology can't fit (compliance, contracting structure, etc.).
+- The project is short-lived enough that the upfront investment doesn't amortize.
+
+In any of these cases: cherry-pick the parts that do help (often the working principles plus memory) and skip the rest. Failed full-adoption isn't a methodology defect; it's a fit signal.
+
+---
+
 ## Adopting the methodology in a new project
 
 If you are starting from scratch, top-down works:

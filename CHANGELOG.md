@@ -13,6 +13,61 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.4.0 — 2026-05-25
+
+### Feat — Four methodology additions: stdlib growth loop, verification taxonomy, brownfield onboarding, decision-ownership matrix (2026-05-25)
+
+Closes four real gaps surfaced by external research comparing this methodology to its peers (GitHub Spec Kit, BMAD Method, Geoffrey Huntley's Ralph loop and stdlib pattern, et al.). Each addition is a section within an existing methodology doc — no new doc number, no restructure.
+
+**`08_lessons_and_memory.md` — new section "The promotion path: from one-off correction to durable rule"** (~70 lines)
+
+Names the explicit promotion loop: one-off correction → memory entry → instruction file → methodology addition (and the reverse loop for demotion and deletion). The existing doc already had two of the four stages (Trigger 2: "Same correction 2+ times" → memory; "Memory as a leading indicator" → methodology). The new section adds the missing middle stage (memory → instruction file) and frames the whole pipeline as a named loop. Peers — particularly Geoffrey Huntley's [stdlib pattern](https://ghuntley.com/specs/) — make this loop the centerpiece of their methodology; this addition adopts the discipline without dropping the existing planning hierarchy.
+
+**`10_testing_and_verification.md` — new section "Verification levels: matching depth to risk"** (~80 lines)
+
+Graduates the binary `Test: pass` field into a five-level taxonomy (L0 type check → L1 automated tests → L2 actual-UI loop → L3 cross-AI validation → L4 user testing). Includes a mapping from change class (typo / refactor / new feature / schema migration / security-sensitive / production hotfix) to required levels, with an optional level annotation in the item's `Test:` field (e.g., `Test: pass (L3)`). The DoD's hard rule (`Status: done` requires `Test: pass`) is unchanged — the taxonomy clarifies *what `pass` means* for the specific change. Closes the "unusually strict for trivial work / unusually loose for risky work" gap surfaced in peer-methodology research.
+
+**`00_README.md` — new section "Brownfield reality check (when adoption fights headwinds)"** (~70 lines)
+
+Explicit staging (Stage A → E) for adopting the methodology in legacy projects where the team hasn't asked for new process: start with personal-discipline adoption, add the lock protocol when AI parallelism creates collisions, apply DoD to a single epic, open the planning layer for new work only, backfill pillars and strategy last. Includes "what NOT to do" anti-patterns (don't reformat the existing backlog all at once, don't ask non-contributors to read 12 docs, don't litigate the past) and a "when brownfield adoption fails" honest failure-mode section. The existing "Adopting in an existing project" 8-step list remains — the new section addresses harder cases where that gentle staging assumes too much buy-in.
+
+**`11_human_roles.md` — new section "The decision-ownership matrix"** (~100 lines)
+
+A RACI-lite matrix mapping 21 decision types (code style → naming → refactor → bug fix → new feature → library choice → schema → API shape → auth → architecture → production deploy → destructive operations → strategy → pricing → hiring → legal) to five ownership columns (AI proposes / AI decides / Human reviews / Human decides / Human-only). Includes guidance on how to adapt for project risk tolerance, hard-coded rightmost-column rows (production deploys, force-push, destructive operations) that match the methodology's existing hard rules, an "ownership is unclear" escalation protocol, and an explicit cross-reference to the memory promotion loop above. Peer methodologies (per external research) consistently flagged this as the #1 missing artifact for teams adopting AI-collaborated workflows.
+
+**Mechanical updates:**
+
+- `README.md` line-count claim refreshed (~7,100 → ~7,500). The four additions added ~320 lines of methodology content; longest doc remains `04_backlog_items.md` at 778 lines.
+- No new doc files. The four additions all extend existing docs. Doc count stays at 12 (00–11).
+
+Discovery: all four additions came from a research pass that surveyed ~14 peer methodologies including GitHub Spec Kit, BMAD Method, Ralph loop, stdlib pattern, AGENTS.md standard, GSD, nano-spec, plus academic papers (Agentsway, Agile V) and vendor docs (Anthropic, OpenAI). The gaps these additions close were ranked by recurrence across peers — these were the four that came up most often.
+
+### Docs — README rewrite (benefit-led + competitive context) + new `templates/AGENT_KICKOFF.md` (2026-05-24)
+
+README rewritten — cut from 348 to 220 lines (~37% compression). Motivated by external feedback that the README "felt AI-written" and was missing benefit-led framing plus context on how this methodology relates to the wider ecosystem of AI-collaboration methodologies that now exists.
+
+**Added:**
+
+- **"What you get"** — a benefits-led section (10 bullets) right after the TL;DR. Each bullet maps to a specific methodology element (DoD hard rule, locks, memory entries, working principles, fix-test loop, challenge-before-consenting, cross-AI validation, vendor-neutral templates). Adopters see the value-prop before the mechanics.
+- **"What's similar, what's different"** — honest comparison to 7 peer methodologies discovered via external research: [GitHub Spec Kit](https://github.com/github/spec-kit) (~106k★), [BMAD Method](https://github.com/bmad-code-org/BMAD-METHOD), Geoffrey Huntley's [Ralph loop](https://ghuntley.com/ralph/) and [stdlib pattern](https://ghuntley.com/specs/), the [AGENTS.md standard](https://agents.md/), [Get Shit Done (GSD)](https://www.prafulls.me/blogs/gsd-spec-driven-development), and [nano-spec](https://github.com/tao-hpu/nano-spec). Includes explicit "this methodology has 0 stars at the time of writing and is solo-maintained" disclosure so the comparison isn't oversold.
+- New **`templates/AGENT_KICKOFF.md`** — the 40-line Step 2 planning-mode prompt that was bloating the README, extracted to its own file with a pointer from the README.
+
+**Compressed:**
+
+- "Why this exists" table: 16 rows → 10 highest-value rows; 3-column format (Problem / Why / Solution) → 2-column (Problem → Solution).
+- "Why it works (the short version)" subsection removed — meta-commentary that just rephrased the table.
+- "A small tip that pays off" subsection removed — the same advice already lives in Step 3's four-phrases bullet list.
+- Step 0 prose: ~25 lines → 1 paragraph (substance kept, repetition dropped).
+- Step 2 prompt: 40+ lines → 1 sentence + link to `templates/AGENT_KICKOFF.md`.
+- "Permissions and vendor compatibility": ~13 lines → 5 lines, same content denser.
+- Two parallel comparison sections ("What makes this different" + "How this relates to specific methodologies") merged into the new "What's similar, what's different" section. The Agile/Scrum/Kanban/Shape Up/XP comparison was replaced with the contemporary AI-methodology landscape (Spec Kit, BMAD, Ralph, etc.) — peers that didn't exist when v1.0 was framed.
+
+Repo total now: 7,152 lines across 21 files (the README displays a tree of 20, excluding the `.github/FUNDING.yml` metadata file from the prior commit).
+
+Research surfaced ~14 peer methodologies (Spec Kit alone has ~106k stars), confirming the README needed to position this work in the current landscape rather than only against pre-AI methodologies. Several peer methodologies provided concrete language for distinguishing strengths — most notably the "cheating agent" anti-pattern, file-based locks for humans+agents using the same protocol, and the challenge-before-consenting copy-paste prompt, none of which appear in peer methodologies surveyed.
+
+---
+
 ## v1.3.1 — 2026-05-24
 
 ### Docs — Add "Permissions and vendor compatibility" section to README (2026-05-24)

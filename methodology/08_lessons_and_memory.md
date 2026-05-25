@@ -450,6 +450,66 @@ The healthy state: methodology and memory inform each other continuously. Both s
 
 ---
 
+## The promotion path: from one-off correction to durable rule
+
+The memory system, the project-instruction file, and the methodology docs form a layered hierarchy of durability. Mistakes flow upward when they prove they need to:
+
+```
+One-off correction              → handled in conversation; nothing written.
+Same correction 2+ times        → write a memory entry. (See "When to write" above.)
+Memory entry referenced often   → consider promoting to the instruction file.
+Cluster of 3+ related entries   → consider absorbing into the methodology.
+```
+
+Each layer raises the bar for what survives. Memory is project-specific. The instruction file is universal-within-the-project. The methodology is universal-across-projects. Promoting a rule moves it from one scope to a broader one, and demands a higher level of confidence that the rule will hold.
+
+### Stage 1 → 2: in-conversation correction → memory entry
+
+Covered above under [When to write a new memory](#when-to-write-a-new-memory), Trigger 2. Once the same category of mistake has occurred twice in different contexts, the cost of leaving it unwritten exceeds the cost of writing it. Capture the pattern.
+
+### Stage 2 → 3: memory entry → instruction file
+
+A memory entry has *graduated* and belongs in the instruction file when:
+
+- **It's been referenced explicitly in 3+ contributor sessions** as a rule the contributor needed to remember. Frequent reference is a signal of universality.
+- **It applies to every task, not some tasks.** Memory holds the conditional rules; the instruction file holds the universal ones. If you keep loading the same memory entry for unrelated work, it's no longer conditional.
+- **It's been validated across multiple subsystems.** A rule that holds in one corner might be a local quirk; a rule that holds across the codebase is a project convention.
+- **It captures a hard constraint.** "Never do X" rules — especially those guarding against data loss, security regressions, or irreversible actions — belong in the instruction file even at low reference frequency. The cost of missing them is too high.
+
+When promoting:
+
+1. Add the rule to the appropriate section of the instruction file (Hard Rules, Code Conventions, etc.).
+2. **Delete the memory entry** (don't leave both — duplicates drift). Remove its index line.
+3. Note the promotion in the commit message so the audit trail is intact.
+
+### Stage 3 → 4: instruction file → methodology addition
+
+This is the upward limit. A rule belongs in the methodology when:
+
+- **It generalizes beyond the current project.** Other projects with different stacks, different domains, different team sizes would benefit from the same rule.
+- **It's the answer to a recurring class of problem, not a project-specific quirk.** "Always validate at trust boundaries" is methodology-scale; "validate the `userId` parameter in route X" is not.
+- **It's been captured in the instruction files of 2+ projects.** Real cross-project validation is rare and valuable.
+
+Methodology additions go via the patterns in [Memory as a leading indicator for methodology gaps](#memory-as-a-leading-indicator-for-methodology-gaps).
+
+### Why explicit promotion matters
+
+Without the named loop: mistakes get fixed in conversation, forgotten, recur, get fixed again, recur, get added to memory once someone notices, sit in memory forever even after they've graduated, and never reach the instruction file or the methodology where they would prevent the failure mode systematically.
+
+Naming the loop names the trigger. The trigger triggers the promotion. The promotion makes the rule durable.
+
+### The reverse loop: demotion and deletion
+
+Rules also flow downward when they no longer hold:
+
+- A methodology rule that turns out to be over-specified → mark optional or remove.
+- An instruction-file rule no longer needed → delete (the codebase has evolved past the failure mode).
+- A memory entry whose underlying bug has been fixed → delete the entry. Don't keep historical bandages.
+
+The healthy state: each rule lives at the lowest layer that captures its actual scope. No higher, no lower.
+
+---
+
 ## How memory connects to the rest of the methodology
 
 - **Memory → Working Principles** ([06_working_principles.md](06_working_principles.md)). The principles are the universal rules; memory captures the specific lessons that come from applying them in this project's context.

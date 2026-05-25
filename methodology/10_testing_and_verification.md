@@ -559,6 +559,72 @@ Cross-AI validation is *not* a substitute for code review by a human or for actu
 
 ---
 
+## Verification levels: matching depth to risk
+
+The previous sections describe *what* each layer of verification does. This section is about *which layers a given change requires.* `Test: pass` is binary in the [DoD](07_definition_of_done.md), but the work to earn it should match the change's risk profile. Verifying a typo fix with cross-AI validation is theatre; verifying a payment-flow refactor with only unit tests is negligence.
+
+### The levels
+
+| Level | Name | What it covers | Time cost |
+|---|---|---|---|
+| **L0** | Type / compile | Static type check; build passes; no syntax or import errors. | Seconds |
+| **L1** | Automated tests | Full automated suite passes locally — unit, integration, contract tests. | Seconds to minutes |
+| **L2** | Actual-UI fix-test loop | The fix-test loop above, with required dimensions (theme, viewport, auth, empty, error, offline). | Minutes to an hour |
+| **L3** | Cross-AI validation | A separate AI audits the diff for performance, security, accessibility, missed edge cases. | Minutes |
+| **L4** | User testing | A real user (or representative) tries the change and accepts it. | Hours to days |
+
+Levels are cumulative — L3 assumes L0–L2 have been done. Skipping a lower level to "save time" usually costs more time when a defect surfaces later.
+
+### Which levels a change requires
+
+A pragmatic mapping — adjust for your project's risk tolerance:
+
+| Change class | Required | Optional |
+|---|---|---|
+| **Typo, comment, doc edit** | L0 | — |
+| **Pure refactor, behavior unchanged** | L0, L1 | L2 (smoke check of affected surfaces) |
+| **Internal-only change** (no user-observable effect) | L0, L1 | L3 if architecturally significant |
+| **User-facing fix or small feature** | L0, L1, L2 | L3 if non-trivial |
+| **New feature** | L0, L1, L2, L4 | L3 |
+| **Schema migration / breaking API change** | L0, L1, L2, L3, L4 | — |
+| **Security-sensitive change** (auth, authz, payment, PII) | L0, L1, L2, L3, L4 | — |
+| **Performance-critical change** | L0, L1, L2 + perf measurement | L3, L4 |
+| **Production incident hotfix** | L0, L1, L2 minimum (verified on staging) | L3 deferred to follow-up |
+
+These are not absolute. A trivial typo in a security-critical place still warrants L2. A feature behind a flag with no users may not need L4. Use judgment; document the choice.
+
+### Recording the level
+
+The item's `Test:` field can carry the level reached:
+
+```
+Test: pass (L2)             — actual-UI verified, no cross-AI, no user
+Test: pass (L3)             — cross-AI validated, awaiting user gate
+Test: pass (L4)             — user-accepted
+Test: pass                  — assumed L2 minimum (default for user-observable)
+Test: pass (L1, refactor)   — explicit lower bar with reason
+```
+
+The level annotation is optional but useful for risk-tracking. A PR that ships a security-sensitive change at L2 is a red flag the reviewer can catch.
+
+### Why graduate the gate
+
+Without graduation:
+
+- **Over-verification.** Trivial changes drag through the full loop, slowing the team and training contributors to skip steps that "weren't really needed."
+- **Under-verification.** Risky changes get the same L1–L2 treatment as routine work because nothing in the process flagged them as different.
+- **Implicit shortcuts.** Contributors silently skip levels they think don't matter; reviewers can't tell what was actually done.
+
+Naming the levels makes the choice explicit. When a contributor says "L3 wasn't required for this class of change," the reviewer can challenge the classification rather than re-derive what was checked.
+
+### How this interacts with the DoD
+
+The Definition of Done's hard rule remains: `Status: done` requires `Test: pass`. The taxonomy doesn't soften it — it clarifies *what `pass` means* for the specific change. A change requiring L3 cannot be marked `Test: pass` after only L2.
+
+The DoD overlay for the project should name which change classes require which minimum level.
+
+---
+
 ## User testing is the final gate
 
 No matter how thorough the automated tests, the UI verification loop, or the cross-AI validation — **a real user trying the feature is the only test that produces the truth.**

@@ -218,6 +218,89 @@ The point isn't to rank these tiers. The point is that the *shape of work* chang
 
 ---
 
+## The decision-ownership matrix
+
+The [supervisory layer](#the-new-supervisory-layer) lists *what humans do.* This section gets concrete about *which decisions are theirs.* Without an explicit ownership map, two failure modes appear: AI agents quietly making decisions that turn out to need human judgment, or humans bottlenecking decisions an AI is fully capable of making.
+
+The map below is a starting point — a default that fits most projects. Adapt to your team's risk tolerance.
+
+### A default matrix
+
+| Decision type | AI proposes | AI decides | Human reviews | Human decides | Human-only |
+|---|:---:|:---:|:---:|:---:|:---:|
+| Code style and formatting | ✓ | ✓ | | | |
+| Variable / function naming | ✓ | ✓ | | | |
+| Refactor structure (no behavior change) | ✓ | ✓ | ✓ | | |
+| Adding a unit test for an existing function | ✓ | ✓ | | | |
+| Bug fix (small, well-scoped, in code AI wrote) | ✓ | ✓ | ✓ | | |
+| Bug fix (legacy code AI didn't write) | ✓ | | ✓ | ✓ | |
+| New small feature in established pattern | ✓ | | ✓ | ✓ | |
+| Choice of library / dependency | ✓ | | ✓ | ✓ | |
+| Database schema change | ✓ | | ✓ | ✓ | |
+| Public API shape (request/response, errors) | ✓ | | ✓ | ✓ | |
+| Authentication / authorization logic | ✓ | | ✓ | ✓ | |
+| Performance-critical optimization | ✓ | | ✓ | ✓ | |
+| New architectural pattern (where data lives, async vs sync, etc.) | ✓ | | ✓ | ✓ | |
+| Pillar definition / strategy phase shift | | | | | ✓ |
+| Pricing, business model, contractual terms | | | | | ✓ |
+| Hiring / firing / team composition | | | | | ✓ |
+| Production deploy execution | | | | | ✓ |
+| Destructive operations (`rm -rf`, `DROP TABLE`, force-push, etc.) | | | | | ✓ |
+| Anything affecting real user data in production | | | | | ✓ |
+| Anything involving money, payment, or financial systems | | | | | ✓ |
+| Anything with legal, compliance, or regulatory implications | | | | | ✓ |
+
+The columns escalate left-to-right:
+
+- **AI proposes** — the AI suggests an answer. The default for everything; even human-only decisions benefit from AI proposals.
+- **AI decides** — the AI picks and acts. Used for low-risk, easily-reversible work.
+- **Human reviews** — the AI does the work; a human reads the diff before merge.
+- **Human decides** — the AI presents options with tradeoffs; a human picks. AI may then implement the picked option.
+- **Human-only** — the AI doesn't act, period. Often these are decisions the AI lacks the context to make well, or actions whose consequences exceed what an AI should autonomously cause.
+
+### How to adapt
+
+Three knobs to turn:
+
+1. **Project risk tolerance.** A weekend-hack project can move many rows leftward (more AI autonomy). A regulated-industry product moves them rightward (more human oversight).
+2. **AI capability.** As the underlying model gets stronger and the team's trust grows, individual rows can shift left. Move one row at a time; observe whether quality holds.
+3. **Reversibility.** Easily-reversible actions (a single commit on a feature branch) tolerate more AI autonomy than irreversible ones (a deployed migration, a sent email, a published release).
+
+The matrix is not a contract with the AI — it's a contract among the humans about *what they own.* Make it explicit, then enforce it via the project-instruction file ("the following operations require human authorization: ...").
+
+### Hard-coded ownership (the rightmost column)
+
+Some decisions must be human-only regardless of how capable the AI is. The methodology's [hard rules](00_README.md#the-hard-rules) and the operational discipline in [09_git_workflow.md](09_git_workflow.md) name several:
+
+- Never run production deploys autonomously.
+- Never run destructive commands without explicit per-operation authorization.
+- Never force-push.
+- Never bypass pre-commit hooks.
+
+These are non-negotiable across projects. Even if the matrix becomes more AI-permissive over time, these rows stay in the rightmost column.
+
+### When ownership is unclear
+
+In practice, the matrix has gaps. New decision types appear all the time (new dependency category, new compliance question, new performance corner). The protocol when a row is unclear:
+
+1. **The AI's default is to escalate.** When uncertain whether a decision belongs to the human, treat it as if it does. Surface the choice; don't act.
+2. **The human decides where the row lives.** Either "this is yours, decide and document so we don't re-litigate next time," or "this is mine going forward, here's the rule."
+3. **Update the matrix.** Once the row is decided, add it to the project's adapted version so the next ambiguous case has precedent.
+
+This is the same shape as the [memory promotion loop](08_lessons_and_memory.md#the-promotion-path-from-one-off-correction-to-durable-rule) — a one-off judgment call, repeated, gets written down as a rule.
+
+### Why this matters
+
+Without an explicit ownership map:
+
+- **Quiet AI overreach.** The AI makes a decision that turns out to need human judgment, and nobody noticed because nobody had named the decision as human-owned.
+- **Human bottleneck on the wrong work.** Every change waits for human approval, including the trivial ones the AI could safely complete autonomously. The team's slowest reviewer is the gate for the team's fastest contributor.
+- **Inconsistent application.** Different contributors apply different ownership thresholds; the result is unpredictable for everyone, including the AI.
+
+Naming the rows makes the contract visible. Everyone — humans, AI agents, future contributors — knows where the lines are.
+
+---
+
 ## How this doc connects to the rest of the methodology
 
 - **[01 Strategy](01_strategy.md) and [02 Pillars](02_pillars.md)** are increasingly the human-authored spec layer that AI executes against. The clearer they are, the better the AI's output.
