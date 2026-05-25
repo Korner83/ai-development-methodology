@@ -642,7 +642,8 @@ _(Older unblocked items live in their epic's `ARCHIVE.md`.)_
 
 - **Locks** ([05](05_locks_and_parallel_work.md)): the file is the alternative to "hold a lock indefinitely on a blocked item." The lock TTL exists precisely so blocked work doesn't starve the system; `HUMAN_NEEDED.md` is where that released-lock work becomes visible.
 - **Decision-ownership matrix** ([11](11_human_roles.md)): the rightmost column of the matrix (human-only decisions) is the most common source of `HUMAN_NEEDED.md` entries.
-- **Autonomous loops** ([AUTONOMOUS_LOOP.md](../templates/AUTONOMOUS_LOOP.md)): the loop surfaces `HUMAN_NEEDED.md` to the user at check-in time so pending human work gets visibility at the moments when the human is reviewing progress.
+
+The file is a *passive registry*, not an actively-managed surface — items land in it via the blocked-item protocol above, and humans scan it when they check in. The autonomous loop does not interact with `HUMAN_NEEDED.md` directly; blocked items simply leave the ready set via the lock release, so the loop stops touching them.
 
 ---
 

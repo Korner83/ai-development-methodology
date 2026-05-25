@@ -13,6 +13,22 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.5.1 — 2026-05-25
+
+### Docs — Decouple `HUMAN_NEEDED.md` from the autonomous loop (2026-05-25)
+
+The v1.5.0 docs cross-wired `HUMAN_NEEDED.md` and the autonomous loop in three places — describing the loop as "surfacing" blocked items to `HUMAN_NEEDED.md` at check-in time. That overstated the coupling. `HUMAN_NEEDED.md` is a **passive registry**, not an actively-managed surface: items land in it via the normal blocked-item protocol (agent sets `Status: blocked`, releases lock, adds the `**Blocker:**` line, adds the one-line entry); humans scan it when they check in; the loop simply stops touching blocked items because they leave the ready set.
+
+Three places updated:
+
+- `methodology/00_README.md` — the "long-term multi-session work" section's autonomous-loop bullet no longer says the loop "surfaces" blocked items; it says blocked items leave the ready set via the normal protocol, and the loop stops touching them.
+- `methodology/04_backlog_items.md` — the `HUMAN_NEEDED.md` section's "How this interacts" subsection removed the "Autonomous loops" bullet entirely. Replaced with a one-paragraph framing: "The file is a passive registry, not an actively-managed surface — the autonomous loop does not interact with `HUMAN_NEEDED.md` directly."
+- `README.md` — the "Long autonomous runs..." table row now reads "Stops at milestone, when no ready items remain, or on user check-in" instead of "Stops on milestone or surfaces blockers to `HUMAN_NEEDED.md`."
+
+The `HUMAN_NEEDED.md` pattern itself is unchanged — the file, the protocol, the cross-references to locks and the decision-ownership matrix all stay.
+
+---
+
 ## v1.5.0 — 2026-05-25
 
 ### Feat — Long-term multi-session work + HUMAN_NEEDED.md + ROI prioritization + PROJECT_STRUCTURE template (2026-05-25)
