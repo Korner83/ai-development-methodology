@@ -99,6 +99,11 @@ Most projects accumulate the same failure modes once they last more than a few w
 | AI writes broken code AND broken tests that validate it. | [Cheating agent anti-pattern](methodology/10_testing_and_verification.md) + cross-AI validation. |
 | Humans become strangers in their own codebase. | [Human roles](methodology/11_human_roles.md) — supervisory layer, four anti-patterns. |
 | The trunk breaks; force-push, destructive command, day gone. | [Git workflow rules](methodology/09_git_workflow.md) — branch protection, AI never deploys, never destructive. |
+| Work doesn't compound across sessions, contributors, or tools — each new session re-derives the context. | [Plans, items, and memory all persist in files](methodology/00_README.md#how-the-system-enables-long-term-multi-session-work). Drop items today; another agent picks them up next week. The backlog *is* the queue. |
+| Picking the next item turns into "whichever feels interesting"; cheap high-value work gets skipped. | [ROI-based prioritization](methodology/04_backlog_items.md#prioritization--the-roi-heuristic) — `Priority:` + `Effort:` fields make "highest-impact-per-effort" the default picking rule. Deviation is explicit, not silent. |
+| Human-blocked work freezes agents indefinitely; AI sits on a lock for credentials it'll never get. | [`HUMAN_NEEDED.md`](methodology/04_backlog_items.md#human_neededmd--work-blocked-on-human-agency) — dedicated file tracks blocked items so agents release the lock and move on; humans see pending delegations in one place. |
+| Long autonomous runs (overnight, weekend, milestone push) drift without a structure to ratchet against. | [`AUTONOMOUS_LOOP.md`](templates/AUTONOMOUS_LOOP.md) — loop prompt that picks the highest-impact item, executes through the DoD, archives, repeats. Stops on milestone or surfaces blockers to `HUMAN_NEEDED.md`. |
+| Done items pile up and become unsearchable; deferred ideas get lost. | `ARCHIVE.md` keeps every done item grep-able forever. `FUTURE.md` keeps deferred ideas alive without cluttering active work. Both are standard files in every epic folder. |
 
 ---
 
@@ -115,10 +120,11 @@ ai-development-methodology/
     ├── CLAUDE.md             # project-instruction file (Claude Code)
     ├── AGENTS.md             # vendor-neutral version (extra plan/tool/safety sections)
     ├── AGENT_KICKOFF.md      # planning-mode prompt for new projects
-    └── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions
+    ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions
+    └── PROJECT_STRUCTURE.md  # recommended folder layout + naming conventions
 ```
 
-~7,500 lines across 20 files. Longest doc ~780 lines. Each doc is self-contained — read in any order.
+~8,000 lines across 21 files. Longest doc ~900 lines. Each doc is self-contained — read in any order.
 
 ---
 
@@ -143,7 +149,7 @@ flowchart TB
     PLAN["🎨 <b>docs/planning/</b> <i>(optional)</i><br/>pre-epic design work · becomes the charter when ready"]
     PLAN -.-> EPICS
 
-    EPICS["📋 <b>backlog/epics/NN-slug/</b> &nbsp; (3–12 week delivery containers)<br/>├── <b>README.md</b> &nbsp;← charter: primary pillar, binary exit criteria, out-of-scope<br/>├── <b>BACKLOG.md</b> ← active items<br/>├── <b>ARCHIVE.md</b> ← done items<br/>└── <b>FUTURE.md</b> &nbsp;← deferred / out-of-scope-but-noted<br/><br/><i><b>backlog/EPICS.md</b> at the backlog root is the cross-epic rollup.</i>"]
+    EPICS["📋 <b>backlog/epics/NN-slug/</b> &nbsp; (3–12 week delivery containers)<br/>├── <b>README.md</b> &nbsp;← charter: primary pillar, binary exit criteria, out-of-scope<br/>├── <b>BACKLOG.md</b> ← active items<br/>├── <b>ARCHIVE.md</b> ← done items<br/>└── <b>FUTURE.md</b> &nbsp;← deferred / out-of-scope-but-noted<br/><br/>At the backlog root:<br/>· <b>EPICS.md</b> — cross-epic rollup<br/>· <b>HUMAN_NEEDED.md</b> — items blocked on human agency"]
 
     EPICS ==>|"items live inside each epic's BACKLOG.md"| ITEMS
 

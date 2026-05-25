@@ -219,6 +219,35 @@ That is the loop. Strategy, pillars, and epics inform what items exist; items ar
 
 ---
 
+## How the system enables long-term, multi-session work
+
+The methodology is designed for projects where work happens across:
+
+- **Many sessions**, separated by hours, days, or weeks.
+- **Many contributors**, mixing humans and AI agents.
+- **Many tools**, as AI models, IDEs, and frameworks evolve over months.
+
+Three mechanisms make this work:
+
+1. **Plans persist in files, not in heads.** Strategy, pillars, epic charters, and items — all markdown in git. A contributor (human or AI) joining the project two weeks later reads the same artifacts the previous contributor wrote; nothing depends on a specific person's memory or running context.
+
+2. **The backlog is the work queue.** An item filed by one contributor in one session can be picked up by another contributor in another session weeks later. The item's frontmatter (`Status`, `Lock`, `Test`, `Effort`, `Priority`) and body (goal, plan, verification) carry forward everything needed to resume. The [lock TTL](05_locks_and_parallel_work.md) ensures no item is held hostage by a contributor who never came back.
+
+3. **The autonomous loop runs unsupervised between check-ins.** The [autonomous-loop prompt template](../templates/AUTONOMOUS_LOOP.md) lets an AI agent grind through the backlog toward a milestone-level stopping condition — picking the highest-impact-per-effort item ([the ROI heuristic](04_backlog_items.md#prioritization--the-roi-heuristic)), executing through the DoD, archiving, surfacing human-blocked items to [`HUMAN_NEEDED.md`](04_backlog_items.md#human_neededmd--work-blocked-on-human-agency), repeating. Suitable for long unattended runs (overnight, weekends, multi-day milestone pushes) where the human supervises at the milestone level rather than per-item.
+
+The implication: **work compounds across time without depending on a single contributor's continuous attention.** Items dropped into the system today are picked up by whatever contributor is available tomorrow, next week, or next quarter.
+
+### Common patterns that use this property
+
+- **Drop-and-resume.** A user drops several items into the backlog with one AI session (sketching the work). Days later, an autonomous loop picks them up and executes. The user reviews the results at check-in time.
+- **Hand-off between agents.** Agent A files items and partial designs in `docs/planning/`. Agent B (a different model, a different session, a different week) picks them up and completes the work.
+- **Vendor switching.** Project moves from one AI tool to another. Because the methodology is markdown-and-git, the new tool reads the existing backlog, instruction file, and memory directory without translation.
+- **Multi-day milestone push.** A milestone (epic exit criteria) is the stopping condition for an autonomous loop. The loop runs for hours or days, ratcheting items toward `done`, until the milestone is hit or `HUMAN_NEEDED.md` accumulates enough items to demand attention.
+
+These are how the methodology is used in practice on real long-running projects, not aspirational features.
+
+---
+
 ## What this methodology does *not* prescribe
 
 A common failure mode of methodology docs is over-specification. This set deliberately stops short of:

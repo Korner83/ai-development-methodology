@@ -180,6 +180,46 @@ Together they help prioritize the picking queue: P1-XS items are usually picked 
 
 ---
 
+## Prioritization — the ROI heuristic
+
+The default rule for picking the next item to work on: **highest impact per unit of effort.** With `Priority:` (P0–P3) and `Effort:` (XS–XL) both set on every active item, the picking order falls out naturally.
+
+### The default rule
+
+| Priority | Effort | What to do |
+|---|---|---|
+| **P0** | any | Drop everything. Work this. |
+| **P1** | XS, S | Pick first among non-P0 work. Cheap items that unblock big outcomes. |
+| **P1** | M, L, XL | Schedule deliberately. Don't grab opportunistically. |
+| **P2** | XS, S | Good for sprint slack and gap-filling. |
+| **P2** | M+ | Defer unless explicitly scheduled. |
+| **P3** | any | Likely belongs in `FUTURE.md`, not in active `BACKLOG.md`. |
+
+This is the **default heuristic**, not a contract. The user (or epic owner) can override when product reasons require it — but the override is *explicit*, not silent.
+
+### Why ROI is the default
+
+Without a rule, contributors (especially AI agents in autonomous mode) tend to pick whichever item caught their attention. The results: many partially-touched items, no compounding wins, cheap-and-impactful items perpetually skipped for whatever felt interesting.
+
+The ROI heuristic biases toward shipping the highest-value work per unit of time invested. Over many items, the small high-value wins land daily, while larger work gets scheduled with full awareness of cost.
+
+### When to deviate
+
+- **A user explicitly asked for a specific feature.** Their direction wins.
+- **An epic has a binary exit criterion not yet met.** Closing the epic unblocks the next; prefer items inside that epic over new work elsewhere, even if elsewhere has a better local ROI.
+- **A dependency just unblocked.** Pick the item that uses the newly-available dependency while the context is fresh.
+- **You're warming up.** A small, well-scoped item is a good way to start a session before tackling a larger one.
+
+### Recording the deviation
+
+When a contributor (human or AI) picks a non-ROI-optimal item, the commit message or the item body should say *why.* This prevents future-you (or another contributor) from re-deriving the reasoning, and it's the kind of decision that often becomes a memory entry (see [08_lessons_and_memory.md](08_lessons_and_memory.md)).
+
+### Applying ROI in autonomous runs
+
+The [autonomous-loop prompt template](../templates/AUTONOMOUS_LOOP.md) explicitly uses this heuristic. The loop picks the highest-impact-per-effort `ready` item, executes through the DoD, archives, and picks again. The heuristic is what keeps the loop converging on milestone-level outcomes rather than meandering through interesting-but-low-impact work.
+
+---
+
 ## Status enum
 
 ```
@@ -527,6 +567,82 @@ Two cases:
 2. **The work doesn't fit any existing epic.** Create a new epic *first.* Charter it. Then file the item. Items without a parent epic are orphans; orphans get neglected.
 
 The friction of "must create an epic first" is intentional. It prevents random items from accumulating without a home, and it forces the team to think about scope before working.
+
+---
+
+## `HUMAN_NEEDED.md` — work blocked on human agency
+
+Some items can't be completed by an AI agent alone:
+
+- **Physical action.** Sign a document, plug in a hardware key, drive somewhere.
+- **Credentials the agent doesn't have.** Production API keys, second-factor codes, owner-only authorizations.
+- **Legal or ethical judgment.** Contractual terms, regulatory sign-off, public statements.
+- **Decisions reserved for humans.** Pricing, strategy pivots, hiring (see [11_human_roles.md](11_human_roles.md) "The decision-ownership matrix" for the full taxonomy).
+- **In-person testing.** Real devices, specific locations, real-user sessions an AI can't substitute for.
+
+These items shouldn't sit `Status: in-progress` consuming a lock — the lock TTL would expire while the agent waits indefinitely, and the unfinished work would block other contributors. They also shouldn't be deferred to `FUTURE.md` — the work is real and current; it's just gated on a human.
+
+The methodology uses a dedicated **`backlog/HUMAN_NEEDED.md`** file at the backlog root (sibling of `EPICS.md`) listing every item currently blocked on human agency.
+
+### The protocol
+
+When an AI agent (or human contributor) encounters human-blocked work:
+
+1. **Update the originating BL item:**
+   - `Status: blocked`
+   - `Lock: —` (released)
+   - Add a `**Blocker:**` line in the body naming what the human needs to do and what unblocks it.
+2. **Add a one-line entry to `HUMAN_NEEDED.md`** linking back to the BL item.
+3. **Pick the next ready item** per the [ROI heuristic](#prioritization--the-roi-heuristic) and continue work.
+
+The human, when they have time, scans `HUMAN_NEEDED.md`, completes the actions, and updates the BL items (`Status: ready` or `Status: in-progress`) so an agent can pick them up. The corresponding line in `HUMAN_NEEDED.md` moves from the "Active" section to "Recently unblocked" (then gets pruned after ~30 days — the BL item's `ARCHIVE.md` entry remains the permanent record).
+
+### Why a dedicated file
+
+- **Centralized visibility.** Humans see all delegated work in one place rather than grepping for `Blocker:` across N epic folders.
+- **No deadlock.** Agents don't sit on locks while waiting for humans; the lock TTL doesn't expire on stuck work.
+- **Audit trail.** The file is git-tracked; you can see how long items waited and what was delegated when.
+- **Throughput.** Agents run continuously even when human-blocked work piles up. The pile becomes visible (and human-actionable) rather than invisibly stalling progress.
+
+### Skeleton
+
+```markdown
+# HUMAN_NEEDED.md
+
+Tasks blocked on human action. Each entry links to the originating
+BL item. Add an entry when you set `Status: blocked` and the blocker
+is human-only (not waiting on another agent, not waiting on a
+dependency that an agent can resolve).
+
+## Active
+
+- [BL-0123](epics/02-payments/BACKLOG.md#bl-0123) — set up Stripe
+  production webhook; need account owner access. Added 2026-05-12.
+- [BL-0211](epics/03-launch/BACKLOG.md#bl-0211) — review legal
+  disclaimer wording with counsel. Added 2026-05-18.
+- [BL-0289](epics/04-billing/BACKLOG.md#bl-0289) — physical card
+  needed for test charge in production. Added 2026-05-21.
+
+## Recently unblocked (last 30 days)
+
+- ~~[BL-0099]~~ — sign contractor NDA. Done 2026-05-09. Item resumed.
+- ~~[BL-0142]~~ — capture screenshots from on-site demo. Done 2026-05-15.
+
+_(Older unblocked items live in their epic's `ARCHIVE.md`.)_
+```
+
+### What does NOT belong in `HUMAN_NEEDED.md`
+
+- **Items blocked on another agent's work.** Use the [`Deps:` field](#deps-field) and the [lock system](05_locks_and_parallel_work.md).
+- **Items the AI thinks the human should know about** but isn't strictly blocked. Use the regular review flow (`Status: under-review`).
+- **Long-form requests.** Keep entries to one line; detail lives in the BL item body.
+- **Permanently-deferred work.** That belongs in `FUTURE.md` (or stays out of the system entirely).
+
+### How this interacts with the rest of the methodology
+
+- **Locks** ([05](05_locks_and_parallel_work.md)): the file is the alternative to "hold a lock indefinitely on a blocked item." The lock TTL exists precisely so blocked work doesn't starve the system; `HUMAN_NEEDED.md` is where that released-lock work becomes visible.
+- **Decision-ownership matrix** ([11](11_human_roles.md)): the rightmost column of the matrix (human-only decisions) is the most common source of `HUMAN_NEEDED.md` entries.
+- **Autonomous loops** ([AUTONOMOUS_LOOP.md](../templates/AUTONOMOUS_LOOP.md)): the loop surfaces `HUMAN_NEEDED.md` to the user at check-in time so pending human work gets visibility at the moments when the human is reviewing progress.
 
 ---
 

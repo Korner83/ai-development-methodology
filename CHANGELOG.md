@@ -13,6 +13,45 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.5.0 — 2026-05-25
+
+### Feat — Long-term multi-session work + HUMAN_NEEDED.md + ROI prioritization + PROJECT_STRUCTURE template (2026-05-25)
+
+Closes several gaps around the methodology's "work compounds across sessions, contributors, and tools" property — making explicit the mechanisms that were implicit, plus a new template for the folder layout adopters need.
+
+**`methodology/04_backlog_items.md` — new section "Prioritization — the ROI heuristic"** (~50 lines)
+
+Names the default rule for picking the next item: **highest-impact-per-effort**. With `Priority:` (P0–P3) and `Effort:` (XS–XL) both required on every active item, the picking order falls out as a small table (P1-XS first; P2-M defer unless scheduled; P3-any belongs in `FUTURE.md`). Explicit "when to deviate" guidance: user-direction wins, near-met epic-exit-criteria wins locally, just-unblocked-dependency wins for context-freshness. Used directly by the autonomous loop to converge on milestone outcomes rather than meandering through interesting-but-low-impact work.
+
+**`methodology/04_backlog_items.md` — new section "`HUMAN_NEEDED.md` — work blocked on human agency"** (~80 lines)
+
+A dedicated file at `backlog/HUMAN_NEEDED.md` (sibling of `EPICS.md`) tracking items blocked on human-only action: physical actions, credentials AI doesn't have, legal/ethical judgment, decisions reserved for humans (per the [decision-ownership matrix](methodology/11_human_roles.md)), in-person testing. Protocol: agent sets `Status: blocked`, releases the lock, adds a `**Blocker:**` line in the body, adds a one-line entry to `HUMAN_NEEDED.md` linking the BL item, and moves on to the next ready item. Prevents deadlock on human-gated work; gives humans a single place to scan pending delegations. Skeleton + "what doesn't belong here" rules + cross-references to locks/decision-matrix/autonomous-loop included.
+
+**`methodology/00_README.md` — new section "How the system enables long-term, multi-session work"** (~40 lines)
+
+Makes explicit the property adopters were having to derive: work *compounds across time* without depending on a single contributor's continuous attention. Names the three mechanisms (plans persist in files; backlog is the queue; autonomous loop runs unsupervised) and the patterns that exploit them (drop-and-resume, hand-off between agents, vendor switching, multi-day milestone push). This is what makes the methodology suitable for long-running projects, not just current-session work.
+
+**`templates/PROJECT_STRUCTURE.md`** — new template (~140 lines)
+
+A recommended folder structure and file-naming convention for projects adopting the methodology. Covers:
+
+- **Top-level layout** — `docs/{strategy,pillars,planning,architecture,operations,audits,methodology}/`, `backlog/`, `memory/`, plus the conventional file roles at each level.
+- **File-naming patterns** — strategy docs `NN_topic.md`, pillars `P<#>_<slug>.md`, epic folders `NN-slug`, work items `BL-####` monotonic repo-wide, memory entries `<type>_<topic>.md`, runbooks `<scenario>_runbook.md`, audits `<topic>_audit_YYYY-MM-DD.md`.
+- **ID-space rules** — work-item IDs (`BL-####`) are repo-wide-monotonic, never per-epic, so items can move between epics without renumbering and `grep BL-0428` is unambiguous.
+- **"What lives where" quick-reference table** — most common questions ("Why does this product exist?" → `docs/strategy/00_master_plan.md`) mapped to file paths.
+- **Project-instruction filename per AI tool** — Claude Code / Codex / Antigravity / Cursor / Aider / Continue.
+- **Explicit non-goals** — project-specific code layout, CI/CD configs, external trackers, specific test frameworks.
+
+**`README.md` — five new "Why this exists" rows** linking to the methodology sections above: long-term multi-session, ROI prioritization, HUMAN_NEEDED, autonomous loop convergence, ARCHIVE/FUTURE searchability.
+
+**`README.md` — Diagram 2 updated** to show `backlog/HUMAN_NEEDED.md` alongside `backlog/EPICS.md` at the backlog root.
+
+**Mechanical:** README line-count claim refreshed (~7,500 → ~8,000); file count 20 → 21; "longest doc" ~780 → ~900 (`04_backlog_items.md` grew from 778 to 894 lines with the two new sections).
+
+Research origin: a survey of patterns from a real production project's `backlog/` and `docs/` folders. Project-specific patterns (e.g., `OWNER_ACTIONS.md`, `docs/operations/SUPPORT_RUNBOOK.md`, `docs/audits/*`) were abstracted into project-agnostic guidance (`HUMAN_NEEDED.md`, runbook naming conventions, integrity-check archiving). No project-specific names or domain references introduced.
+
+---
+
 ## v1.4.3 — 2026-05-25
 
 ### Docs — Drop oddly-specific "every six months" claim from README benefits bullet (2026-05-25)
