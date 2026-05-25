@@ -9,6 +9,12 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
+(nothing yet)
+
+---
+
+## v1.13.0 — 2026-05-25
+
 ### Methodology adaptation — tiered autonomy on authoritative artifacts (2026-05-25)
 
 A maintainer-authored adaptation in response to a structural critique surfaced after Run 2: the original `Constraint 1` ("loop never edits `methodology/` autonomously") was over-broad, reducing self-*development* to self-*evaluation*. The loop could discover methodology gaps but couldn't translate them into fixes — every improvement became maintainer homework, breaking the compounding promise of self-improving cycles.
