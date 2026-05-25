@@ -123,13 +123,14 @@ ai-development-methodology/
 │   ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions
 │   └── PROJECT_STRUCTURE.md  # recommended folder layout + naming conventions
 └── self-development/         # the methodology applied to its own development (worked example)
+    ├── AUTONOMOUS_LOOP.md    # Step 4 — adapted loop config (operational cycle)
     ├── brief/                # Step 0 outputs — vision, audience, competitive landscape, etc.
     ├── strategy/             # Step 1 — master plan (vision + 4 phases + pillar roadmap)
     ├── pillars/              # Step 1 — 9 capability-layer pillars (P1..P9)
-    └── backlog/              # Step 2 — 5 epic charters (3 active, 2 planned) + rollup + HUMAN_NEEDED.md
+    └── backlog/              # Step 2 — 5 epic charters; Step 3 — 14 BL-#### items inside active epics
 ```
 
-~11,000 lines across 51 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
+~11,400 lines across 52 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
 
 ---
 

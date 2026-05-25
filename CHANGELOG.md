@@ -13,6 +13,57 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.11.0 — 2026-05-25
+
+### Feat — Self-development bootstrap, Step 4 (final): autonomous loop is operational (2026-05-25)
+
+**Step 4 of the self-development bootstrap — the final step.** Ships `self-development/AUTONOMOUS_LOOP.md` (282 lines), the specialized loop prompt for this project. After this release, the autonomous loop is **operational** — the maintainer can start the first run targeting BL-0006 whenever convenient.
+
+**New file `self-development/AUTONOMOUS_LOOP.md`** adapts [`templates/AUTONOMOUS_LOOP.md`](templates/AUTONOMOUS_LOOP.md) with this project's specifics:
+
+- **Project context** — points the loop at `self-development/backlog/`, references the master plan and pillars, names the current Phase 1 primary pillars.
+- **Hard constraints (non-negotiable):**
+  - **Constraint 1** — never modify abstract `methodology/` docs autonomously. Insights logged to `self-development/loop-notes/YYYY-MM-DD.md`; methodology changes ship via normal release cycle.
+  - **Constraint 2** — never modify `templates/` autonomously.
+  - **Constraint 2a** — never modify `self-development/strategy/` or `self-development/pillars/` autonomously. Worksurface is `self-development/backlog/`, `self-development/evaluations/`, `self-development/loop-notes/`.
+  - **Constraint 3** — production deploys, force-push, destructive git ops, GitHub Release creation — never autonomously.
+  - **Constraint 4** — never delete content silently; removals logged with reasoning in item bodies.
+- **Items the loop should NOT pick** — 8-row negative list covering third-party PRs, social media work, items depending on user feedback, items requiring credentials, legal/business judgment, methodology design changes, epic-closure approvals, performance benchmarking, and git history rewrites.
+- **Stopping conditions** — 7 binary conditions: run target reached / no ready items / constraint at risk / time-box elapsed / item entered cross-AI validation gate / HUMAN_NEEDED.md grew by ≥3 / maintainer halt.
+- **First-run targets** — bounded per Phase 1 exit criterion 4: complete BL-0006 (P1-XS, smallest P1 item) end-to-end through DoD, then halt. Validates the loop works at all before scaling up.
+- **Subsequent-run target ramp** — Run 2: BL-0007 + BL-0008; Run 3: BL-0009 + BL-0010 (close E02); Run 4+: opportunistic E01 + E03 work.
+- **The adapted prompt** — paste-and-go for an AI agent session running the loop. Embeds the constraint references; cross-links every methodology section the loop applies.
+- **Post-run report template** — structured for maintainer action: items completed, items started but not completed, cross-AI validation needs, HUMAN_NEEDED.md additions, methodology-change suggestions surfaced (logged to `loop-notes/`, not auto-applied), recommendation for next run target.
+- **Integrity rule** — strong: "Never claim an item is done, tested, or DoD-passed unless it was actually verified. Honest partial progress beats false completion."
+
+**Cross-AI review applied before ship.** Per the bootstrap plan's DoD ("stopping conditions clear? constraints prevent damage to abstract docs? targets concrete?"), a fresh Explore agent reviewed cold. Verdict: **ship with one enhancement + two clarifications.** All three applied:
+
+1. **Constraint 2a added** — the original Constraints 1 + 2 covered `methodology/` and `templates/` but didn't explicitly cover `self-development/strategy/` and `self-development/pillars/`. Reviewer flagged this as implicit in Phase 1 but worth making explicit for Phase 2+ work.
+2. **Negative-list row on epic closure** — clarified that the loop completes the closing item's *work* (deliverable + verification + closure note) and brings it to `Status: to-be-tested`, then halts. The final `Status: done` flip happens after maintainer approval.
+3. **Negative-list row on performance benchmarking + git history rewrite** — added as new categories of work the loop should not pick autonomously.
+
+The reviewer's overall assessment: all stopping conditions are mechanically detectable; Constraints 1 + 2 (now + 2a) are clear and enforceable; targets are concrete and phase-aligned; reporting protocol is actionable; integrity rule is strong.
+
+**README updates:**
+
+- `What's in the repo` tree now shows `self-development/AUTONOMOUS_LOOP.md`.
+- Line-count claim refreshed (~11,000 → ~11,400); file count 51 → 52.
+
+**Bootstrap status — COMPLETE:**
+
+- ✓ Step 0 (brief) — v1.7.0
+- ✓ Step 1 (strategy + pillars) — v1.8.0
+- ✓ Step 2 (first epics) — v1.9.0
+- ✓ Step 3 (first items) — v1.10.0
+- ✓ Step 4 (autonomous loop setup) — **this release (v1.11.0)** — **the cycle is now operational**
+- Step 5+ — continuous cycle runs gated only on the maintainer triggering each run
+
+**What's now possible:** the maintainer can start the first autonomous loop run at any time. Per the loop's first-run target, the first run targets only BL-0006 and halts after completion — validates the loop works before scaling up. After Run 1's success, subsequent runs ramp toward closing E02, then opportunistic E01 + E03 work.
+
+**The self-improving cycle this entire bootstrap was building toward is now live.**
+
+---
+
 ## v1.10.0 — 2026-05-25
 
 ### Feat — Self-development bootstrap, Step 3: 14 BL-#### items across 3 active epics (2026-05-25)
