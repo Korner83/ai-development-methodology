@@ -1,0 +1,17 @@
+# Pre-publication tactical drafts — staged locally for maintainer review;
+# not shipped publicly because (a) they leak campaign strategy,
+# (b) lose value after publication, (c) reduce editorial control.
+# The autonomous loop drafts here; the maintainer publishes; the published
+# artifacts become CHANGELOG entries / blog posts / HN threads on their own.
+self-development/distribution/
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Editor noise
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
