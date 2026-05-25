@@ -13,6 +13,22 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.4.1 — 2026-05-25
+
+### Docs — Two Mermaid diagrams added to README + v1.3.1 → v1.4.0 reference bumps (2026-05-25)
+
+Two diagrams give visitors and adopters a visual entry point alongside the prose:
+
+**New section "How it fits together"** (right after TL;DR) — conceptual diagram showing the four planning layers (Strategy → Pillars → Epics → Items) cascading downward, three discipline overlays (Working Principles / Definition of Done / Memory) binding every change, and three operational supports (Locks / Git Workflow / Fix-Test Loop) making the day-to-day navigable. Colors map to function (planning blue, disciplines amber, supports green).
+
+**New section "How the work cascades"** (right after "What's in the repo") — data-cascade diagram with file paths, from Step 0 (your brief, BEFORE the methodology kicks in) → `docs/strategy/` → `docs/pillars/` → optional `docs/planning/` → `backlog/epics/NN-slug/` → individual BL-XXXX items inside each epic's `BACKLOG.md`. Includes the four-file shape of each epic folder (README/BACKLOG/ARCHIVE/FUTURE) and the item frontmatter schema (Pillar / Status / Test / Lock / Priority / Effort). Explicitly notes the "one ticket type" design — feature, bugfix, task, and user-story-shaped items all use the same BL-XXXX format, no Jira-style taxonomy.
+
+Both diagrams use Mermaid markdown blocks (no separate image files) so they render natively on GitHub, edit as text, and live in git — consistent with the methodology's "markdown + git only, no SaaS" framing.
+
+**Mechanical:** two stale "v1.3.1" references in the README (TL;DR + Status section) bumped to v1.4.0. Should have been bumped at v1.4.0 ship; folded in here.
+
+---
+
 ## v1.4.0 — 2026-05-25
 
 ### Feat — Four methodology additions: stdlib growth loop, verification taxonomy, brownfield onboarding, decision-ownership matrix (2026-05-25)

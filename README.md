@@ -16,7 +16,53 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Fix-test loop for the actual UI** because "tests pass" doesn't mean "the page renders."
 - **Cross-AI validation + user testing** as the final gates.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project. Currently [v1.3.1](CHANGELOG.md).
+- Battle-tested in one production project. Currently [v1.4.0](CHANGELOG.md).
+
+---
+
+## How it fits together
+
+Four planning layers cascade downward; three disciplines bind every change at every layer; three operational supports make the daily work navigable.
+
+```mermaid
+flowchart TB
+    classDef planning fill:#dbeafe,stroke:#1e40af,color:#1e3a8a
+    classDef discipline fill:#fef3c7,stroke:#b45309,color:#78350f
+    classDef support fill:#dcfce7,stroke:#15803d,color:#14532d
+
+    subgraph PLANNING [" PLANNING — cascades downward "]
+        direction TB
+        S["<b>Strategy</b><br/><i>why · phases · outcomes</i>"]
+        P["<b>Pillars</b><br/><i>capability layers · evergreen</i>"]
+        E["<b>Epics</b><br/><i>3–12 week containers</i>"]
+        I["<b>Items</b><br/><i>1–2 week units of work</i>"]
+        S --> P --> E --> I
+    end
+
+    subgraph DISCIPLINE [" DISCIPLINES — bind every change "]
+        direction LR
+        W["<b>Working Principles</b><br/><i>think · simple · surgical · goal-driven</i>"]
+        D["<b>Definition of Done</b><br/><i>6 gates · Status:done requires Test:pass</i>"]
+        M["<b>Memory</b><br/><i>instruction file + memory directory</i>"]
+    end
+
+    subgraph SUPPORT [" OPERATIONAL SUPPORTS "]
+        direction LR
+        L["<b>Locks</b><br/><i>TTL · humans + AI<br/>same protocol</i>"]
+        G["<b>Git Workflow</b><br/><i>branch protection<br/>no force-push</i>"]
+        T["<b>Fix-Test Loop</b><br/><i>actual UI · cross-AI<br/>user testing</i>"]
+    end
+
+    PLANNING -.->|bound by| DISCIPLINE
+    DISCIPLINE -.->|enforced via| SUPPORT
+    PLANNING -.->|moves via| SUPPORT
+
+    class S,P,E,I planning
+    class W,D,M discipline
+    class L,G,T support
+```
+
+For the file layout and how the cascade physically lives on disk, see [How the work cascades](#how-the-work-cascades) below.
 
 ---
 
@@ -73,6 +119,40 @@ ai-development-methodology/
 ```
 
 ~7,500 lines across 20 files. Longest doc ~780 lines. Each doc is self-contained — read in any order.
+
+---
+
+## How the work cascades
+
+From "your brief" (the upstream work the methodology *doesn't* do) all the way down to a single line in a `BACKLOG.md` file — and where each artifact lives on disk.
+
+```mermaid
+flowchart TB
+    BRIEF["📝 <b>Your brief</b> — Step 0, BEFORE the methodology kicks in<br/><i>what · who · success metrics · competitors · business viability · tech stack · 5–10 capability layers</i>"]
+
+    BRIEF ==>|"answers become strategy docs"| STRAT
+
+    STRAT["📐 <b>docs/strategy/</b> &nbsp; (the WHY)<br/>00_master_plan.md — vision · phases · outcomes<br/>+ supporting docs: 01_market · 02_differentiation · ... 10_roadmap<br/><i>versioned snapshots; never overwritten</i>"]
+
+    STRAT ==>|"strategy defines which capabilities matter"| PIL
+
+    PIL["🏛 <b>docs/pillars/</b> &nbsp; (the WHAT-CAPABILITIES)<br/>P1_&lt;area&gt;.md · P2_&lt;area&gt;.md · ... PN_&lt;area&gt;.md<br/><i>5–10 evergreen capability layers, sequentially dependent</i>"]
+
+    PIL ==>|"each pillar advanced by epics"| EPICS
+    PIL -.->|"design exploration first"| PLAN
+    PLAN["🎨 <b>docs/planning/</b> <i>(optional)</i><br/>pre-epic design work · becomes the charter when ready"]
+    PLAN -.-> EPICS
+
+    EPICS["📋 <b>backlog/epics/NN-slug/</b> &nbsp; (3–12 week delivery containers)<br/>├── <b>README.md</b> &nbsp;← charter: primary pillar, binary exit criteria, out-of-scope<br/>├── <b>BACKLOG.md</b> ← active items<br/>├── <b>ARCHIVE.md</b> ← done items<br/>└── <b>FUTURE.md</b> &nbsp;← deferred / out-of-scope-but-noted<br/><br/><i><b>backlog/EPICS.md</b> at the backlog root is the cross-epic rollup.</i>"]
+
+    EPICS ==>|"items live inside each epic's BACKLOG.md"| ITEMS
+
+    ITEMS["🔖 <b>Items — BL-XXXX format</b> &nbsp; (1–2 week units of work)<br/><br/>Summary table at top — one line per item: <code>ID │ Title │ Priority │ Effort │ Status</code><br/><br/>Each item's detailed block has frontmatter fields:<br/>· <b>Pillar:</b> P3 &nbsp;&nbsp; · <b>Priority:</b> P0–P3 &nbsp;&nbsp; · <b>Effort:</b> XS–XL<br/>· <b>Status:</b> backlog → ready → in-progress → under-review → to-be-tested → done<br/>· <b>Test:</b> not-tested → pass &nbsp;&nbsp; · <b>Lock:</b> &lt;holder&gt;@&lt;TTL-expiry&gt;<br/>+ body: goal · plan · verification step per substep<br/><br/><i>No separate ticket types — features, bug fixes, tasks, and user stories all use the same BL-XXXX shape.</i>"]
+```
+
+**Step 0 is foundational.** The brief (product, target user, market, viability, tech stack, capability layers) is *your* work, not the methodology's. The methodology *records and operationalizes* those decisions; it does not invent them. Skipping this produces a velocity illusion — shipping confidently-built wrong product. See the "Step 0" callout in [How to use it](#how-to-use-it) for the long version.
+
+**One ticket type, used flexibly.** Items can be feature-shaped, bugfix-shaped, task-shaped, or user-story-shaped (Given/When/Then), but they all use the same `BL-XXXX` frontmatter and live in the same `BACKLOG.md`. No separate Jira-style ticket-type taxonomy.
 
 ---
 
@@ -201,7 +281,7 @@ For modified versions, indicate you've made changes. Only obligation the license
 
 ## Status
 
-Battle-tested in one production project. Currently v1.3.1 — see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean — PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.4.0 — see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean — PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 
