@@ -13,6 +13,54 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.9.0 — 2026-05-25
+
+### Feat — Self-development bootstrap, Step 2: first 5 epic charters (2026-05-25)
+
+Step 2 of the self-development bootstrap. Charters the first 5 epics that move the methodology forward in Phase 1 (Foundation), respecting the methodology's WIP cap of 3 active. The backlog scaffolding (README + EPICS.md rollup + HUMAN_NEEDED.md) is also seeded.
+
+**New folder `self-development/backlog/`** with:
+
+- **`README.md`** — backlog workflow doc, mostly a pointer to [`methodology/04_backlog_items.md`](methodology/04_backlog_items.md). Two project-specific overrides: (1) the autonomous loop (once operational after Step 4) MUST NOT modify abstract methodology docs autonomously; (2) all self-development releases ship as minor/patch versions of the public repo.
+- **`EPICS.md`** — rollup table of 5 epics with status, pillar coverage (forward + inverse), and WIP cap discipline. Currently 3 active / 2 planned / 0 done.
+- **`HUMAN_NEEDED.md`** — empty seed for items blocked on human-only action.
+
+**Five new epic charters in `self-development/backlog/epics/`** following the [`methodology/03_epics.md`](methodology/03_epics.md) skeleton:
+
+| Epic | Pillar (primary + secondary) | Status | Charter focus |
+|---|---|---|---|
+| **E01 — Examples folder** | P1 + P6 | active | `examples/` folder at repo root with at least one fully-worked anonymized example (strategy doc + 2-3 pillars + 1 epic + 5+ BL items). Closes the longstanding "no examples/ folder" gap. |
+| **E02 — First semi-annual self-evaluation pass** | P3 + P2 | active | Instantiates the [self-evaluation cadence](methodology/07_definition_of_done.md#methodology-self-evaluation-semi-annual) added in v1.6.0. Cold-read every methodology doc, classify gaps as "practice wrong / docs wrong / both," ship fixes. |
+| **E03 — Trim or split `09_git_workflow.md`** | P2 | active | `09_git_workflow.md` at 986 lines is the longest methodology doc, approaching the 1,050 soft cap. Trim or split. Decision documented. |
+| **E04 — Native templates for Cursor / Aider / Continue.dev** | P4 | planned | Reduce friction for adopters using these tools — currently they adapt `AGENTS.md`. Native templates with drift-prevention notes. |
+| **E05 — CHEATSHEET.md** | P1 | planned | One-page quick reference (under 100 lines) covering the methodology's key patterns. |
+
+**Cross-AI review applied before ship.** Per the bootstrap plan's DoD, a fresh Explore agent reviewed the charters cold and reported four revisions, all applied:
+
+1. **E01 exit criterion 5** — replaced subjective "explains the relationship" with binary 3-row comparison table check ("a cross-AI reader can correctly map each artifact type to its purpose after one read").
+2. **E03 exit criteria** — added new criterion requiring the closure note to include a clarity assessment comparing post-change to v1.6.0 baseline (so E03 closure doesn't depend on E02's future eval timing). Moved the forward-looking clarity measurement from KPI to "Long-term clarity" reframing.
+3. **E04 exit criterion 4** — tightened smoke-test definition: was "tool reads it, methodology rules show up"; now ≥3 specific methodology terms (e.g., "WIP limit", "exit criteria", "lock TTL") appear in agent context when queried.
+4. **E05 KPI 1** — reframed from unverifiable "top-5 most-viewed files" to binary "≥3 Discussions threads or external mentions reference 'cheatsheet' or 'quick reference' within 60 days," with GitHub Insights as backup if available.
+
+Pillar alignment, out-of-scope rigor, and WIP discipline were all confirmed solid by the reviewer.
+
+**README updates:**
+
+- `What's in the repo` tree now shows `self-development/backlog/`.
+- Line-count claim refreshed (~10,100 → ~10,600); file count 40 → 48.
+
+**Bootstrap status:**
+
+- ✓ Step 0 (brief) — v1.7.0
+- ✓ Step 1 (strategy + pillars) — v1.8.0
+- ✓ Step 2 (first epics) — this release (v1.9.0)
+- Pending: Step 3 (first items — populate each active epic's `BACKLOG.md` with 3-10 BL-#### items)
+- Pending: Step 4 (autonomous loop setup)
+
+Step 3 ships as the next minor release when ready.
+
+---
+
 ## v1.8.0 — 2026-05-25
 
 ### Feat — Self-development bootstrap, Step 1: strategy master plan + 9 pillars (2026-05-25)

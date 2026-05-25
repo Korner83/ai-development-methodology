@@ -125,10 +125,11 @@ ai-development-methodology/
 └── self-development/         # the methodology applied to its own development (worked example)
     ├── brief/                # Step 0 outputs — vision, audience, competitive landscape, etc.
     ├── strategy/             # Step 1 — master plan (vision + 4 phases + pillar roadmap)
-    └── pillars/              # Step 1 — 9 capability-layer pillars (P1..P9)
+    ├── pillars/              # Step 1 — 9 capability-layer pillars (P1..P9)
+    └── backlog/              # Step 2 — 5 epic charters (3 active, 2 planned) + rollup + HUMAN_NEEDED.md
 ```
 
-~10,100 lines across 40 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
+~10,600 lines across 48 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
 
 ---
 
