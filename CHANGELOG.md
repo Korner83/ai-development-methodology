@@ -13,6 +13,67 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.8.0 — 2026-05-25
+
+### Feat — Self-development bootstrap, Step 1: strategy master plan + 9 pillars (2026-05-25)
+
+Step 1 of the self-development bootstrap. Converts the Step 0 brief (shipped in v1.7.0) into a strategy master plan with four binary-exit-criteria phases and nine capability-layer pillar definitions. The strategy + pillars together are now the substrate Step 2 (epics) will charter against.
+
+**New file `self-development/strategy/00_master_plan.md`** (~175 lines)
+
+The strategy master plan for the methodology project itself. Sections:
+
+- **Vision (condensed)** — methodology + self-improving cycle in one paragraph; full vision in [brief/01_vision.md](self-development/brief/01_vision.md).
+- **Four phases** with binary exit criteria each:
+  - **Phase 1 — Foundation** (~3 months): methodology complete; self-development bootstrap operational. Exits on bootstrap Steps 0–4 shipped + no known self-contradictions + all 6 tool templates + first autonomous loop run.
+  - **Phase 2 — Discovery** (3–12 months): adopters find the methodology; first stories emerge. Exits on ≥500 stars + ≥10 adoption stories + ≥5 contributions + ≥2 cycle-attributed releases + ≥1 maintained fork.
+  - **Phase 3 — Establishment** (12–24 months): on the field map; companies adopt internally. Exits on ≥5 comparison-venue references + ≥3 company adoptions + ≥2 niche forks + sustained ≤40 hours/quarter.
+  - **Phase 4 — Maturity** (24+ months, open-ended): cross-pollination to peers; cycle has shifted methodology. Open-ended exit; steady state.
+- **Pillar roadmap** — 9-row table showing which pillars are *primary* vs *baseline* vs *dormant* at each phase. P9 (Self-improvement velocity) is primary across all four phases as the cross-cutting mechanism.
+- **Document index** — pointers to brief (upstream research), pillars (downstream definitions), methodology (the abstract skeletons followed).
+- **Re-evaluation protocol** — three cadences: phase-transition, semi-annual (per [methodology/07_definition_of_done.md](methodology/07_definition_of_done.md)), memory-driven (per the stdlib growth loop).
+
+**Nine new pillar files in `self-development/pillars/`** (~85-95 lines each)
+
+Each follows the [methodology/02_pillars.md](methodology/02_pillars.md) skeleton adapted for a docs-only project (no schema/API/configuration sections; instead: sub-capabilities, exit criteria, dependencies, anti-patterns, current state, delivering epics).
+
+- **P1 — Doc completeness** (foundational; primary in Phase 1).
+- **P2 — Doc clarity** (depends on P1; primary in Phase 1).
+- **P3 — Doc currency** (depends on P2; primary in Phase 1 + 2).
+- **P4 — Tool compatibility** (depends on P3; primary in Phase 1). Resequenced from P6 → P4 during Step 0 review because tool compatibility is a prerequisite for adoption, not downstream of examples.
+- **P5 — Adopter discoverability** (depends on P4, P2, P3; primary in Phase 2).
+- **P6 — Example richness** (depends on P5, P2; primary in Phase 2).
+- **P7 — Community feedback loop** (depends on P5, P6; primary in Phase 2 + 3).
+- **P8 — Maintenance sustainability** (depends on P7; primary in Phase 3).
+- **P9 — Self-improvement velocity** (depends on P1, P3, P7, P8; primary across all phases — the compounding mechanism).
+
+**Cross-AI review applied before ship.** Per the bootstrap plan's DoD, a fresh Explore agent reviewed the master plan + 9 pillars cold (no prior context from the authoring session) and reported five revisions, all applied before this release:
+
+1. **P1 exit criteria** — tightened the "within ~5 minutes" criterion to a binary form ("response within 30 days links to existing doc or logs gap candidate"); moved subjective indicators to a "Health indicators" section.
+2. **P2 exit criteria** — consolidated the three semi-subjective criteria (cross-AI report, senior-engineer-cold-read test, AI-bloat indicators) into one binary form tied to the most recent semi-annual self-evaluation; moved the senior-engineer test to "Health indicators."
+3. **P4 exit criteria** — removed the adopter-dependent criterion ("at least one adopter has reported using across two tools") from exit criteria (uncontrollable) and moved to "Health indicators." Replaced with maintainer-testable criterion ("cross-AI review found no tool-specific protocols in `methodology/`").
+4. **P8 pillar goal** — reworded from goal-shaped ("stays current with ≤40 hours/quarter sustained") to capability-shaped ("operates with lean, sustainable maintenance overhead indefinitely"). The hour budget remains as a measure, not the capability itself.
+5. **Master plan §3 (pillar roadmap)** — added a one-paragraph note explaining the P4 resequencing context (from P6 to P4 during Step 0 review), so future phase re-evaluations have the reasoning visible.
+
+The reviewer also noted one quality-of-life suggestion (cross-reference table in master plan showing which brief metrics feed which phase) — deferred to a future patch release rather than blocking this ship.
+
+**README updates:**
+
+- `What's in the repo` tree shows `self-development/strategy/` and `self-development/pillars/`.
+- Line-count claim refreshed (~9,100 → ~10,100); file count 30 → 40.
+
+**Bootstrap status:**
+
+- ✓ Step 0 (brief) — v1.7.0
+- ✓ Step 1 (strategy + pillars) — this release (v1.8.0)
+- Pending: Step 2 (first epics)
+- Pending: Step 3 (first items)
+- Pending: Step 4 (autonomous loop)
+
+Step 2 ships as the next minor release when ready.
+
+---
+
 ## v1.7.0 — 2026-05-25
 
 ### Feat — Self-development bootstrap, Step 0: the brief (2026-05-25)

@@ -123,10 +123,12 @@ ai-development-methodology/
 │   ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions
 │   └── PROJECT_STRUCTURE.md  # recommended folder layout + naming conventions
 └── self-development/         # the methodology applied to its own development (worked example)
-    └── brief/                # Step 0 outputs — vision, audience, competitive landscape, etc.
+    ├── brief/                # Step 0 outputs — vision, audience, competitive landscape, etc.
+    ├── strategy/             # Step 1 — master plan (vision + 4 phases + pillar roadmap)
+    └── pillars/              # Step 1 — 9 capability-layer pillars (P1..P9)
 ```
 
-~9,100 lines across 30 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
+~10,100 lines across 40 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
 
 ---
 
