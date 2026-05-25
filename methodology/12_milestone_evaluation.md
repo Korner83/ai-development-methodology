@@ -85,26 +85,61 @@ The rubric is the operational tool the milestone-evaluation loop uses. It scores
 
 ### Standard scoring areas
 
-Adapt per project. A common starting set:
+Adapt per project. The starting set below covers most product-shaped projects. **Pick the areas that match your project; ignore the rest; add new ones that fit your domain.** A score is only meaningful if "10/10" has a project-specific definition.
 
 | Area | What 10/10 means | What 0/10 means |
 |---|---|---|
-| **UX/UI** | Every flow lands; no broken states; navigation is unambiguous; visual quality is at-or-above adopter expectations for this product class. | Users get stuck; key flows broken; visual quality embarrassing. |
+| **UX / UI design** | Every flow lands; no broken states; navigation is unambiguous; visual quality is at-or-above adopter expectations for this product class. | Users get stuck; key flows broken; visual quality embarrassing. |
 | **Frontend** | No console errors; assets cached correctly; bundle size under budget; works in target browsers + viewports. | Console errors per page; load times exceed budget; broken in target browsers. |
 | **Backend** | All APIs respond correctly; no N+1 queries on hot paths; error responses are structured; uptime > target. | APIs throw 500s on common inputs; slow queries; opaque errors. |
-| **Security** | Auth/authz correct; input validation present; no exposed secrets; OWASP-relevant categories audited. | IDOR present; secrets in commits; auth bypass possible. |
+| **Database** | Schema is normalized appropriately; migrations are reversible; indexes match query patterns; slow-query log is clean. | Schema rot; migrations break prod data; sequential scans on hot tables. |
+| **Authentication (authn)** | Login flows work for all supported methods; session lifetime + refresh sensible; no auth bypass paths. | Login broken on common inputs; tokens leak in URLs; session fixation possible. |
+| **Authorization (authz)** | All data access is owner-derived from server-trusted session, never from request body. RLS or equivalent boundary present at every privacy-sensitive read/write. | IDOR present; client-supplied IDs accepted as authorization input; missing checks on privileged routes. |
+| **Security** | Input validation present at boundaries; no exposed secrets; OWASP-relevant categories audited; dependencies have no known critical CVEs. | Secrets in commits; XSS/SQLi possible; outdated deps with known exploits. |
 | **Performance** | p50 / p95 latencies under budget; bundle sizes under budget; perf budget enforced in CI. | Pages > 5s on target hardware; perf budget unenforced. |
 | **Test coverage** | Behavior tests cover all critical paths; regression tests for every fixed bug; suite runs in CI. | Critical paths untested; bugs recur because regression tests missing. |
+| **Accessibility — design** | Keyboard navigation works; focus states visible; contrast meets WCAG AA; screen reader can use core flows. | Keyboard navigation broken; focus invisible; failed contrast; screen reader blocked. |
+| **Accessibility — testing** | Automated a11y checks in CI (e.g., axe-core); manual screen-reader QA on critical flows; user testing with assistive-tech users where feasible. | No a11y in CI; no manual screen-reader pass; a11y "checked once at launch and never since." |
 | **Content quality** | Copy is consistent in voice; no typos in user-visible text; placeholder content removed; translations (if any) parity-checked. | Inconsistent voice; placeholder text in production; broken translations. |
-| **Documentation** | Adopter can set up the project from README alone; key concepts have docs; CHANGELOG honest. | Setup requires asking; docs contradict code; CHANGELOG outdated. |
-| **Operational readiness** | Deploy is reversible; monitoring exists; incident response documented; on-call rotation defined if applicable. | Deploys break things irreversibly; no monitoring; no incident playbook. |
-| **Accessibility** | Keyboard navigation works; focus states visible; contrast meets WCAG AA; screen reader can use core flows. | Keyboard navigation broken; focus invisible; failed contrast; screen reader blocked. |
+| **Documentation** | Adopter can set up the project from README alone; key concepts have docs; CHANGELOG honest; on-call runbooks exist where relevant. | Setup requires asking; docs contradict code; CHANGELOG outdated; tribal knowledge dominates. |
+| **CI / CD** | Every push runs the full pipeline; deploys are scripted + reversible; staging mirrors production; failed deploys roll back automatically. | Manual deploys with `scp`; no staging; CI flaky enough to be ignored. |
+| **Production / operational readiness** | Monitoring + alerting in place; on-call rotation defined; incident playbook exists; SLO + error-budget tracked. | No monitoring; bugs surface from user reports; no playbook; SLOs aspirational not measured. |
+| **Paywall / monetization** | Pricing visible + correct; checkout works on all supported payment methods; entitlements + grace periods documented; refund flow tested. | Pricing inconsistent across pages; checkout failures unhandled; entitlement bugs lock paid users out. |
+| **Administration / operator tools** | Operators have UI for the common ops (review queue, ban, override, refund); CLI alternatives exist for emergencies; all ops are audit-logged. | Operators ssh into prod to fix things; no audit log; one-off SQL queries in chat. |
+| **Internationalization** | Strings externalized; right-to-left support if relevant; date/number/currency formatting matches locale. | Hardcoded English strings; broken layout in RTL; date format assumes US. |
+| **Privacy + data handling** | Per-user data scoped correctly; deletion works; export works; data-retention policy enforced. | User data leaks across tenants; no delete path; retention unset. |
+| **Brand + voice** | Consistent visual identity; tone matches strategy doc; no off-brand assets in production. | Inconsistent visual; tone shifts mid-flow; placeholder logos. |
+| **Onboarding** | A new user reaches first-success in under N minutes (target per project); failure modes recoverable; no required-but-unexplained step. | Users abandon at signup; first-success requires support contact. |
 
-**Add or drop areas based on the project's domain.** A regulated-industry product adds `Compliance`. A research artifact adds `Reproducibility`. A consumer mobile app adds `Mobile UX (iOS vs Android parity)`. **Document the chosen areas + 10/10 definition per area in the strategy doc or `milestones.md`.** A score is only meaningful if "10/10" has a project-specific definition.
+**Add or drop areas based on the project's domain.** A regulated-industry product adds `Compliance`. A research artifact adds `Reproducibility`. A consumer mobile app adds `Mobile UX (iOS vs Android parity)`. A B2B platform adds `Tenant isolation`. **Document the chosen areas + 10/10 definition per area in the strategy doc or `milestones.md`.**
 
 ### AI can help define the areas
 
 When a strategy is drafted, the maintainer can ask a fresh AI session: *"For a project of shape X with users Y and milestone Z, what are the right scoring areas, and what does 10/10 mean for each?"* The AI's first-pass list, refined by the maintainer, is the project's rubric. This is a one-time setup activity per milestone; the rubric stabilizes across the milestone's eval cycles.
+
+### Picking the rubric's scope: project / pillar / epic / item
+
+The rubric can apply at different levels of granularity. Pick the level(s) that fit your project's structure:
+
+| Scope | What it scores | When to use |
+|---|---|---|
+| **Project-wide** | The entire product, scored once on the area list. Single aggregate score. | Default for small / mid-sized projects. The whole product as one unit. |
+| **Per-pillar** | Each pillar from [02_pillars.md](02_pillars.md) gets its own rubric pass — different areas per pillar where appropriate. | Projects where pillars are decoupled enough that a strong backend pillar shouldn't paper over a weak content pillar. |
+| **Per-epic** | Each active epic gets its own area list + scores. The aggregate is the epic-weighted average. | Useful when an epic represents a significant scope (e.g., a whole new product surface) that deserves its own quality check. |
+| **Per-item (user-story scoped)** | Each major user story / item gets a quality score. Aggregates roll up to epic → pillar → project. | Heavy ceremony; reserve for items where the user-story bar is the whole point (e.g., one critical user flow that gates a milestone). |
+
+Most projects start at **project-wide** and add **per-pillar** at the second eval pass if the project-wide average is hiding under-served pillars. **Per-epic** and **per-item** are powerful but expensive; use deliberately, not by default.
+
+**Mixed scope is allowed.** A project may score project-wide for most areas + per-pillar for security (because security drift in any one pillar matters disproportionately) + per-item for a specific user-flow item the maintainer is watching closely. The rubric is yours to shape.
+
+### Authentic rubric vs. compliance theater
+
+A rubric becomes theater the moment scores stop reflecting reality. Guardrails:
+
+- **Scores are integers 0–10 with an evidence-cited paragraph** per area. The paragraph is what the maintainer reads; the number is the chart.
+- **Specific evidence, not summaries.** "Backend: 7 because login endpoint p95 = 1.2s, exceeds 800ms budget per `docs/perf.md`" beats "Backend: 7 because performance has issues."
+- **Cross-AI scores, not self-scores.** The implementing session is biased.
+- **Sample, don't accept assertions.** When a score cites evidence, the reviewer randomly samples 2–3 evidence claims to verify. False evidence is the failure mode the rubric must catch.
 
 ### Score thresholds (default starting point)
 

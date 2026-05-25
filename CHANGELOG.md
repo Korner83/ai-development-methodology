@@ -13,6 +13,97 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.16.0 — 2026-05-25
+
+### Methodology adjustments per maintainer feedback
+
+Three substantive refinements to the methodology informed by reviewing a real adopter backlog (WayWhisper) and the maintainer's direct feedback on v1.15.0:
+
+**1. Expanded Test enum** ([doc 04](methodology/04_backlog_items.md#test-enum)).
+
+Old enum: `not-tested | pass | fail: <detail> | regression-needed` (4 values).
+New enum: `not-tested | pending | manual-verified | partial | pass | fail: <detail> | regression-needed | n/a` (8 values).
+
+Additions:
+- **`pending`** — tests exist (written or scaffolded) but not yet executed. The intermediate state before `pass` or `fail`.
+- **`manual-verified`** — verified by a human (UI walkthrough, manual reproduction) without automated tests. Acceptable for `Status: done` when automation is impractical AND a `regression-needed` follow-up item exists. Adopted from observing WayWhisper's `manual-verified` usage in real items.
+- **`partial`** — some test surface passes; some is missing or pending. Cannot transition to `done`; explicit limitation.
+- **`n/a`** — item has no testable behavior (folder creation, README edit, repo-state chore). Acceptable for `done` with body-documented reason.
+
+The hard rule is correspondingly extended: **`Status: done` requires `Test: pass`, `manual-verified` (with regression-needed follow-up), or `n/a` (with body-documented reason).** The two narrow extensions exist to keep the methodology honest about real-world cases without becoming an escape hatch; both require explicit documentation and are auditable in the next eval cycle.
+
+The Test field is also now documented as accepting **free-form artifact references after the enum value** (file paths, PR numbers): `Test: pass — apps/api/src/test/admin.test.ts (19 tests)`. Adopted from observing WayWhisper's real-world usage where Test fields routinely carry test-artifact pointers for traceability.
+
+**2. Status enum tolerance** ([doc 04](methodology/04_backlog_items.md#acceptable-project-specific-aliases)).
+
+The canonical 8-value Status enum stays unchanged. Three project-specific aliases are now explicitly acceptable:
+
+- **`todo`** as an alias for `backlog` (WayWhisper uses this).
+- **`future`** for items living in `FUTURE.md` (not a transition state; flips to `backlog`/`ready` on promotion).
+- **`parked`** for items set aside indefinitely when `blocked` doesn't fit (no concrete blocker; deprioritized).
+
+**Adding aliases is fine; inventing new lifecycle states is not.** New states are T2/T3 methodology-change candidates.
+
+**3. Multi-level scoring** ([doc 12](methodology/12_milestone_evaluation.md#picking-the-rubrics-scope-project--pillar--epic--item)).
+
+The deep-eval rubric can now apply at four levels of granularity:
+
+- **Project-wide** (default for most projects — single aggregate score).
+- **Per-pillar** (when pillars are decoupled enough that one strong pillar shouldn't paper over a weak one).
+- **Per-epic** (when an epic represents significant scope deserving its own quality check).
+- **Per-item / user-story** (heavy ceremony; reserve for items where the user-story bar is the whole milestone gate).
+
+**Mixed scope is allowed** — score project-wide for most areas + per-pillar for security + per-item for one critical user-flow item, if that's what the project needs.
+
+**4. Expanded default scoring areas** ([doc 12](methodology/12_milestone_evaluation.md#standard-scoring-areas)).
+
+The standard rubric area list grew from 10 → 20 to cover more product surfaces explicitly:
+
+| New area | What 10/10 means |
+|---|---|
+| **Database** | Normalized schema; reversible migrations; indexes match query patterns; clean slow-query log. |
+| **Authentication** | Login flows work; session lifetime sensible; no auth bypass. |
+| **Authorization** | Owner-derived from server-trusted session, never request body. RLS or equivalent at every privacy-sensitive boundary. |
+| **Accessibility — testing** (separate from Accessibility — design) | Automated a11y checks in CI; manual screen-reader QA on critical flows. |
+| **CI / CD** | Every push runs full pipeline; deploys scripted + reversible; staging mirrors production. |
+| **Paywall / monetization** | Pricing visible + correct; checkout works; entitlements documented; refund tested. |
+| **Administration / operator tools** | Operators have UI for common ops; audit-logged; CLI alternatives for emergencies. |
+| **Internationalization** | Strings externalized; RTL support if relevant; locale-aware formatting. |
+| **Privacy + data handling** | Per-user data scoped correctly; deletion + export work; retention enforced. |
+| **Brand + voice** | Consistent visual identity; tone matches strategy doc; no off-brand assets in production. |
+| **Onboarding** | New user reaches first-success under project's N-minute target. |
+
+The standard set now includes 20 areas. Adopters still pick the subset that fits their project + add domain-specific ones (Compliance, Reproducibility, Tenant isolation, etc.).
+
+### Authentic-rubric-vs-theater guardrails
+
+Doc 12 also gains explicit guardrails so scoring stays honest:
+
+- Scores are integers 0–10 **with an evidence-cited paragraph per area** (the paragraph is what the maintainer reads; the number is the summary).
+- **Specific evidence, not summaries** ("p95 = 1.2s, exceeds 800ms budget per `docs/perf.md`" beats "performance has issues").
+- **Cross-AI scores, not self-scores** (the implementing session is biased; cross-AI samples evidence claims to verify they're not fabricated).
+
+### CHEATSHEET updates
+
+[`CHEATSHEET.md`](CHEATSHEET.md) now reflects: full Status + Test enums with aliases + the free-form artifact-reference pattern; the multi-level scoring scope options; the expanded default area list.
+
+### Self-development project progress
+
+**E03 (Trim/split 09_git_workflow.md) promoted to active.** EPICS rollup updated: 1 active (E03), 1 planned (E04), 3 done (E01, E02, E05). E03's backlog has 4 items pending; the loop may pick them up under standard ROI.
+
+**First periodic deep-eval ran** (`self-development/evaluations/2026-05-25-eval-01.md`). Scored on a methodology-tailored 9-area rubric. **Result: NOT READY for closed beta** — average 8.11 / 10, but Adopter discoverability scored 6 / 10 (below the 7 minimum-area threshold for the closed-beta target). The dominant blocker: zero external promotion has happened. Distribution materials drafted; maintainer-led publication pending.
+
+**Distribution materials staged** under `self-development/distribution/` (Show HN draft, awesome-lists PRs, blog post, Discussions seeds). The autonomous loop drafted; the maintainer publishes (per the methodology's "voice belongs to the maintainer" rule for external posts).
+
+### Notable for adopters
+
+- If you were using `Test: not-tested` to flag "I just haven't written tests yet but they're coming", switch to `Test: pending` for clearer signal.
+- If you were stuck flipping to `Status: done` on items that genuinely have no testable behavior (a folder creation, a README edit), use `Test: n/a` with a one-line body explanation. This is now legitimate, no longer a workaround.
+- If your project's pillars are decoupled enough that one pillar's quality could mask another's drift, switch your deep-eval to per-pillar scoring this cycle.
+- The expanded area list isn't a checklist to fill out — it's a menu to pick from. Most projects use 6–12 areas; using all 20 is overkill for most.
+
+---
+
 ## v1.15.0 — 2026-05-25
 
 ### New methodology pattern: milestone-driven evaluation + scoring rubric

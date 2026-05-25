@@ -1,6 +1,6 @@
 # Epics
 
-_Last refreshed: 2026-05-25 (E01 + E05 closed in v1.15.0; 3 epics done total; WIP cap at 2; E03 + E04 eligible for next active slots)._
+_Last refreshed: 2026-05-25 (v1.16.0 — E03 promoted to active; 3 done, 1 active, 1 planned; WIP cap = 2; one slot still open if maintainer wants concurrency)._
 
 ## Rollup
 
@@ -9,10 +9,10 @@ _Last refreshed: 2026-05-25 (E01 + E05 closed in v1.15.0; 3 epics done total; WI
 | [E02](epics/02-first-semiannual-self-evaluation/README.md) | First semi-annual methodology self-evaluation pass | P3 Doc currency + P2 Doc clarity | **done** (2026-05-25) | Phase 1 | 0 / 5 | First epic closed; cycle validated; next pass 2026-11-25. |
 | [E01](epics/01-examples-folder/README.md) | Examples folder | P1 Doc completeness + P6 Example richness | **done** (2026-05-25) | Phase 1 | 0 / 5 | Shipped in v1.15.0 (examples/ folder with tinker fictional project). |
 | [E05](epics/05-cheatsheet/README.md) | CHEATSHEET.md (one-page reference) | P1 Doc completeness | **done** (2026-05-25) | Phase 1 | — / 1 | Shipped in v1.15.0 (CHEATSHEET.md at repo root, ~80 lines). |
-| [E03](epics/03-git-workflow-trim/README.md) | Trim or split `09_git_workflow.md` | P2 Doc clarity | planned | Phase 1 | 4 / 0 | Eligible for promotion (open WIP slot). Some E02 T2 findings flow here. BL-0012 touches `methodology/` (T3-equivalent — maintainer handoff). |
-| [E04](epics/04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | planned | Phase 1 | 0 / 0 | Eligible for promotion (open WIP slot). |
+| [E03](epics/03-git-workflow-trim/README.md) | Trim or split `09_git_workflow.md` | P2 Doc clarity | **active** (2026-05-25, v1.16.0) | Phase 1 | 4 / 0 | Promoted to active per maintainer direction. Several E02 T2 findings flow here. BL-0012 touches `methodology/` (T3-equivalent — maintainer handoff). |
+| [E04](epics/04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | planned | Phase 1 | 0 / 0 | Defer until closed-beta milestone work reveals which native templates adopters actually need. |
 
-**Counts:** **0 active**, 2 planned, 3 done.
+**Counts:** **1 active** (E03), 1 planned (E04), 3 done (E01, E02, E05).
 
 ### WIP cap note
 

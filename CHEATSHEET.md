@@ -26,9 +26,18 @@ _One-page reference. For learning, read [`methodology/`](methodology/). For setu
 3. **Surgical changes** — touch only what the task requires.
 4. **Goal-driven execution** — verifiable success criteria up front.
 
+## Status + Test enums
+
+```
+Status: backlog | ready | in-progress | under-review | to-be-tested | done | blocked | rejected
+Test:   not-tested | pending | manual-verified | partial | pass | fail: <detail> | regression-needed | n/a
+```
+
+Aliases: `todo` ≈ `backlog`; `future` (FUTURE.md items); `parked` (set aside, project-specific). Test field accepts free-form refs after the enum: `Test: pass — path/to/test.ts (24 tests)`. [04](methodology/04_backlog_items.md)
+
 ## Hard rules
 
-- **`Status: done` requires `Test: pass`.** Never flip done from any other Test value. [07](methodology/07_definition_of_done.md)
+- **`Status: done` requires `Test: pass`** (or narrow exceptions: `manual-verified` with regression-needed follow-up; `n/a` with body-documented reason). Never flip done from `not-tested`, `pending`, `partial`, or `fail:`. [07](methodology/07_definition_of_done.md)
 - **Never force-push to the trunk.** Never commit directly to trunk. [09](methodology/09_git_workflow.md)
 - **Never modify abstract `methodology/` autonomously** beyond the tier matrix (T0/T1 only, with cross-AI diff-verify; T2/T3 maintainer-authored). [templates/AUTONOMOUS_LOOP.md](templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts)
 - **AI agents never override locks.** [05](methodology/05_locks_and_parallel_work.md)
@@ -76,6 +85,10 @@ Escalate-on-doubt: if T1 vs T2, T2 wins. [templates/AUTONOMOUS_LOOP.md](template
 Sequence (adapt): pre-alpha → alpha → closed beta wave 1 → closed beta wave 2 → open beta → first public (v1.0) → GA.
 
 Default thresholds: **min 8/10 per area, average 9/10 across all areas.** No area averaged away. Periodic deep-eval cadence: **every 3rd–10th loop** depending on phase. [12](methodology/12_milestone_evaluation.md)
+
+**Default scoring areas** (pick what fits; adapt + extend): UX/UI design, Frontend, Backend, Database, Authentication, Authorization, Security, Performance, Test coverage, Accessibility (design + testing), Content quality, Documentation, CI/CD, Production / operational readiness, Paywall / monetization, Administration / operator tools, Internationalization, Privacy + data handling, Brand + voice, Onboarding. AI can help define areas for your project.
+
+**Scope of the rubric:** project-wide (default) / per-pillar / per-epic / per-item — mix as needed.
 
 Unsolvable issues: **handle / postpone / mark — never force.**
 

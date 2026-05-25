@@ -237,6 +237,18 @@ backlog | ready | in-progress | under-review | to-be-tested | done | blocked | r
 | `blocked` | Cannot proceed. A `Blocker:` body line names what is in the way. |
 | `rejected` | A decision was made not to do this. The item stays as a record. |
 
+### Acceptable project-specific aliases
+
+The canonical names above are the methodology's defaults. Projects sometimes use shorthand variants that are recognized as equivalent:
+
+| Canonical | Common alias | Notes |
+|---|---|---|
+| `backlog` | `todo` | Some teams prefer `todo`; treat as equivalent to `backlog`. Pick one per project and stay consistent. |
+| (no canonical) | `future` | Used specifically for items living in `FUTURE.md`. Not a transition state — once promoted, the item flips to `backlog` or `ready`. |
+| (no canonical) | `parked` | An item set aside indefinitely (priority shifted, not enough info). Project may use this when `blocked` doesn't fit (nothing concrete blocks it; just deprioritized). Document the choice. |
+
+Adding aliases is fine; **inventing new lifecycle states is not.** Stick to the eight canonical states' semantics; if a project needs a new state, that's a methodology-change candidate (T2/T3 per the tier matrix in `templates/AUTONOMOUS_LOOP.md`).
+
 ### Status transitions
 
 ```
@@ -262,15 +274,32 @@ Items occasionally move backward — a review uncovers a bigger problem than exp
 ## Test enum
 
 ```
-not-tested | pass | fail: <detail> | regression-needed
+not-tested | pending | manual-verified | partial | pass | fail: <detail> | regression-needed | n/a
 ```
 
 | Value | Meaning |
 |-------|---------|
 | `not-tested` | No verification has been attempted yet. Default for new items. |
+| `pending` | Tests exist (written or scaffolded) but not yet executed against this item. Often the intermediate state right before `pass` or `fail:`. |
+| `manual-verified` | Verified by a human (UI walkthrough, manual reproduction of the bug fix) but no automated test exists. Acceptable for `Status: done` when automation is impractical (e.g., third-party API quirks); flag for follow-up regression-test item. |
+| `partial` | Some test surface exists and passes; some is missing or pending. Example: "happy path tested; error-path test not yet written." Cannot transition to `Status: done`; explicit limitation. |
 | `pass` | All gates of [Definition of Done](07_definition_of_done.md) passed. Required for `Status: done`. |
 | `fail: <detail>` | A gate failed. The `<detail>` names what failed and how. |
 | `regression-needed` | A regression test is required (typically for a bug fix) and has not yet been added. |
+| `n/a` | The item has no testable behavior (e.g., a pure docs change, a folder-creation chore). Acceptable for `Status: done` when genuinely applicable; using `n/a` to dodge testing is the anti-pattern. |
+
+### Free-form artifact references
+
+The Test field may also carry **artifact references** — a file path, PR number, or short note pointing to where the verification evidence lives. These pair with an enum-style value when more traceability helps:
+
+```
+Test: pass — apps/api/src/test/admin.test.ts (19 tests)
+Test: pass — manual UI walkthrough; PR #160 review notes
+Test: partial — Google branch unit-tested; e2e pending real client ID
+Test: pending — apps/web/src/hooks/__tests__/useEntitlements.test.ts (scaffolded)
+```
+
+The enum value at the start makes the field greppable + machine-readable; the free-form tail makes it humanly useful. **Prefer this two-part form** for non-trivial items where the verification evidence isn't obvious from the item body.
 
 ### Why this field exists separately from Status
 
@@ -292,17 +321,28 @@ Vague `fail` values do not help the next contributor. Specifics do.
 
 Used specifically when a bug fix has been written but the test that proves the bug is fixed (and won't return) has not been added yet. This is a meaningful in-between state — the fix works, but the safety net is missing. Move to `pass` once the regression test exists and passes.
 
+### When `manual-verified` and `n/a` are acceptable for `Status: done`
+
+The hard rule below requires `Test: pass` for `Status: done`. The two extensions:
+
+- **`manual-verified` → `done` IS allowed** when automated testing is genuinely impractical for the change *and* a follow-up `regression-needed` item exists to backfill automation when feasible. The item body must document why automation was skipped. Manual-verified without a follow-up regression item is the cheating-agent anti-pattern; don't do it.
+- **`n/a` → `done` IS allowed** for items with no testable behavior (folder creation, README edits, repo-state chores). The item body must note *why* it's `n/a`; "I didn't feel like writing tests" is not a valid reason.
+
+For everything else, the canonical path remains `not-tested → pending → pass → done`.
+
 ---
 
 ## The hard rule
 
-> **`Status: done` requires `Test: pass`.**
+> **`Status: done` requires `Test: pass`, `manual-verified` (with a regression-needed follow-up), or `n/a` (with a body-documented reason).**
 
-There is no other path. Not from `not-tested`. Not from `fail:`. Not from `regression-needed`. The Test field must read `pass` first.
+There is no other path. Not from `not-tested`. Not from `pending`. Not from `partial`. Not from `fail:`. Not from `regression-needed` (without a backing `pass`).
 
 This rule is the single most important enforcement point in the methodology. See [07_definition_of_done.md](07_definition_of_done.md) for the gates that produce `Test: pass`.
 
 If the gates cannot be passed for some reason, the item stays at `to-be-tested`, `under-review`, or `blocked`. Not `done`.
+
+The two narrow extensions (`manual-verified`, `n/a`) exist to keep the methodology honest about real-world cases where automated testing is genuinely impractical or doesn't apply — without becoming an escape hatch. Both require explicit body documentation; both are auditable in the next eval cycle.
 
 ---
 
