@@ -9,7 +9,23 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-(nothing yet)
+### Self-development loop runs (2026-05-25) — Run 1 + Run 2
+
+The autonomous loop ran twice on 2026-05-25 against the E02 (first semi-annual self-evaluation) backlog. No methodology files changed — both runs operate on `self-development/` only, per the loop's hard constraints. Surfaced findings + observations queued for the next maintainer-reviewed methodology release.
+
+- **Run 1 — BL-0006 (evaluations skeleton).** Seeded `self-development/evaluations/` with `README.md` and `2026-05-first-pass.md` skeleton (six section headings, all empty placeholders). No methodology docs read. Status: `to-be-tested`, awaiting maintainer review.
+- **Run 2 — BL-0007 (cold-read of methodology docs 00–05).** Fresh Opus 4.7 general-purpose agent (no prior context) cold-read all six docs and landed 23–25 findings under `## Cold-read findings (docs 00–05)` (3 stale / 12 unclear / 10 inconsistent). Cross-AI validation via fresh Sonnet 4.6 Explore agent: PASS on all three Done-means criteria, 5/5 sampled citations grounded, 3/3 spot-checked findings grounded. Status: `to-be-tested`, Test: `pass`, awaiting maintainer review.
+
+**Methodology-modification recommendations surfaced by Run 2** (logged in [`self-development/loop-notes/2026-05-25.md`](self-development/loop-notes/2026-05-25.md); not auto-applied per Constraint 1):
+
+- **Tier A — patch immediately:** `methodology/04_backlog_items.md` grep examples (lines 813–839) use stale `\*\*bold\*\*` field-name regex that returns zero matches against v1.12.0 plain-table items.
+- **Tier B — clarify in patch release:** ~6 cross-doc agreement / missing default callouts (reading-path table omits doc 11; WIP-cap default presentation; Lock+Status coupling "automatic" vs "optional" mismatch; etc.).
+- **Tier C — defer or treat as known limitations:** ~18 vaguer findings (e.g., the "strategy outranks pillars" rule restated in three docs with drift risk).
+- **Operational pattern from Run 2:** "fresh session" definition in `AUTONOMOUS_LOOP.md` should clarify that cold-read agents need Write/Edit tools (use `general-purpose`, not `Explore`).
+
+Formal classification + disposition for all findings happens in BL-0009; this is a preview.
+
+**Bootstrap status:** loop is operational. E02 BL-0006 and BL-0007 complete (work + cross-AI), awaiting maintainer's done-flip. Next run target: BL-0008 (cold-read of methodology docs 06–11).
 
 ---
 

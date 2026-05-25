@@ -4,13 +4,13 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 
 ## Summary
 
-| ID      | Title                                                              | Priority | Effort | Status      |
-|---------|--------------------------------------------------------------------|----------|--------|-------------|
-| BL-0006 | Create `evaluations/` folder + first eval report skeleton          | P1       | XS     | ready       |
-| BL-0007 | Cross-AI cold-read of methodology docs 00–05 (planning + locks)    | P1       | M      | backlog     |
-| BL-0008 | Cross-AI cold-read of methodology docs 06–11 (disciplines + ops)   | P1       | M      | backlog     |
-| BL-0009 | Classify surfaced gaps + assign dispositions                       | P1       | S      | backlog     |
-| BL-0010 | Finalize eval report + close epic                                  | P1       | S      | backlog     |
+| ID      | Title                                                              | Priority | Effort | Status         |
+|---------|--------------------------------------------------------------------|----------|--------|----------------|
+| BL-0006 | Create `evaluations/` folder + first eval report skeleton          | P1       | XS     | to-be-tested   |
+| BL-0007 | Cross-AI cold-read of methodology docs 00–05 (planning + locks)    | P1       | M      | to-be-tested   |
+| BL-0008 | Cross-AI cold-read of methodology docs 06–11 (disciplines + ops)   | P1       | M      | backlog        |
+| BL-0009 | Classify surfaced gaps + assign dispositions                       | P1       | S      | backlog        |
+| BL-0010 | Finalize eval report + close epic                                  | P1       | S      | backlog        |
 
 ---
 
@@ -68,10 +68,14 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 | Pillar   | P3                                 |
 | Priority | P1                                 |
 | Effort   | M                                  |
-| Status   | backlog                            |
-| Test     | not-tested                         |
+| Status   | to-be-tested                       |
+| Test     | pass                               |
 | Deps     | BL-0006                            |
 | Lock     | —                                  |
+
+**Run-2 execution note:** Cold-read completed by a fresh Opus 4.7 general-purpose agent on 2026-05-25 (no prior turns referencing this project). 23–25 findings landed across all six docs (3 stale / 12 unclear / 10 inconsistent per Opus's count; 23 distinct bullets per Sonnet's recount — discrepancy is bullet-counting only, every doc has substantive findings). Findings + Metadata block now populated in `self-development/evaluations/2026-05-first-pass.md`.
+
+**Cross-AI validation (2026-05-25):** Fresh Sonnet 4.6 Explore agent (different model family, no prior context) verified Done-means criteria mechanically: (1) all 6 docs have finding entries — PASS; (2) file:line citations present and accurate — PASS (5 sampled, all grounded); (3) fresh session documented in Metadata — PASS. Spot-checked 3 random findings; all GROUNDED in cited text. Validation report logged in this session's loop-notes for the maintainer. Awaiting maintainer review before flip to `Status: done` and move to `ARCHIVE.md`.
 
 **Why / Description:** Run a **fresh AI session** (no prior conversation context referencing the methodology project) over `methodology/00_README.md` through `methodology/05_locks_and_parallel_work.md` and surface drift between the docs and how the project / adopters actually use them. Findings get appended (not overwritten) to the skeleton from BL-0006. Pillar (secondary): P2 — Doc clarity.
 
