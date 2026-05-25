@@ -6,7 +6,7 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 
 | ID      | Title                                                              | Priority | Effort | Status      |
 |---------|--------------------------------------------------------------------|----------|--------|-------------|
-| BL-0006 | Create `evaluations/` folder + first eval report template          | P1       | XS     | ready       |
+| BL-0006 | Create `evaluations/` folder + first eval report skeleton          | P1       | XS     | ready       |
 | BL-0007 | Cross-AI cold-read of methodology docs 00–05 (planning + locks)    | P1       | M      | backlog     |
 | BL-0008 | Cross-AI cold-read of methodology docs 06–11 (disciplines + ops)   | P1       | M      | backlog     |
 | BL-0009 | Classify surfaced gaps + assign dispositions                       | P1       | S      | backlog     |
@@ -14,122 +14,200 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 
 ---
 
-### BL-0006 — Create `evaluations/` folder + first eval report template
+### BL-0006 — Create `evaluations/` folder + first eval report skeleton
 
-**Pillar:** P3 — Doc currency
-**Priority:** P1
-**Effort:** XS
-**Status:** ready
-**Test:** not-tested
-**Lock:** —
-**Deps:** —
+| Field    | Value                              |
+|----------|------------------------------------|
+| Epic     | E02-first-semiannual-self-evaluation |
+| Pillar   | P3                                 |
+| Priority | P1                                 |
+| Effort   | XS                                 |
+| Status   | ready                              |
+| Test     | not-tested                         |
+| Deps     | —                                  |
+| Lock     | —                                  |
 
-**Goal:** Create the `self-development/evaluations/` folder and the first eval report template so subsequent items have a structured place to land findings.
+**Why / Description:** The methodology added a [semi-annual self-evaluation cadence](../../../../methodology/07_definition_of_done.md#methodology-self-evaluation-semi-annual) in v1.6.0; that cadence has no operating surface yet. This item creates the folder + skeleton that subsequent items (BL-0007, BL-0008, BL-0009) populate with findings. **This is skeleton-only work — no findings data is recorded in this item; no methodology docs are read; the cold-read happens in BL-0007/0008.** Pillar (secondary): P2 — Doc clarity.
 
-**Plan:**
+**Approach:**
 
-1. Create `self-development/evaluations/` directory.
-2. Write `self-development/evaluations/2026-05-first-pass.md` skeleton with sections:
-   - Metadata (date, methodology version at eval, reviewer model + session, scope).
-   - Findings per doc (table: doc path / gap class / disposition).
-   - Summary statistics (gaps surfaced, classified, addressed).
-   - Next eval date (target: ~6 months out).
-3. Write `self-development/evaluations/README.md` (1-paragraph intro: this folder holds eval reports; cadence is semi-annual per `methodology/07_definition_of_done.md`).
+1. Create directory `self-development/evaluations/`.
+2. Write `self-development/evaluations/2026-05-first-pass.md` as an *empty skeleton* with section headings only — no content yet:
+   - `# 2026 first semi-annual self-evaluation pass`
+   - `## Metadata` (placeholders for date, methodology version at eval, reviewer model + session, scope)
+   - `## Cold-read findings (docs 00–05)` (empty; populated by BL-0007)
+   - `## Cold-read findings (docs 06–11)` (empty; populated by BL-0008)
+   - `## Classification + dispositions` (empty; populated by BL-0009)
+   - `## Summary statistics` (empty; populated by BL-0010)
+   - `## Next eval date` (empty; recorded by BL-0010)
+3. Write `self-development/evaluations/README.md` (≤30 lines): one-paragraph intro that this folder holds eval reports; cadence reference; pointer to the methodology section that defines the cadence.
+4. **Do NOT begin filling findings.** BL-0007 + BL-0008 are the cold-read; this item only prepares the structure.
 
-**Verification:** Folder exists; template file exists with all sections; README.md exists with cadence reference.
+**Done means:**
+
+- [ ] Folder `self-development/evaluations/` exists.
+- [ ] `self-development/evaluations/2026-05-first-pass.md` exists with all six section headings listed in the Approach (and no findings content under any heading).
+- [ ] `self-development/evaluations/README.md` exists, is ≤30 lines, and references `methodology/07_definition_of_done.md` for the cadence.
+- [ ] No methodology doc was read or analyzed during this item's execution (that's BL-0007 + BL-0008's scope).
+- [ ] Item moved from `BACKLOG.md` to `ARCHIVE.md` after cross-AI validation passes.
+
+**Files (probable):**
+
+- `self-development/evaluations/2026-05-first-pass.md` (new)
+- `self-development/evaluations/README.md` (new)
 
 ---
 
 ### BL-0007 — Cross-AI cold-read of methodology docs 00–05 (planning + locks)
 
-**Pillar:** P3 — Doc currency (secondary: P2 — Doc clarity)
-**Priority:** P1
-**Effort:** M
-**Status:** backlog
-**Test:** not-tested
-**Lock:** —
-**Deps:** BL-0006
+| Field    | Value                              |
+|----------|------------------------------------|
+| Epic     | E02-first-semiannual-self-evaluation |
+| Pillar   | P3                                 |
+| Priority | P1                                 |
+| Effort   | M                                  |
+| Status   | backlog                            |
+| Test     | not-tested                         |
+| Deps     | BL-0006                            |
+| Lock     | —                                  |
 
-**Goal:** A fresh AI session reads `methodology/00_README.md` through `methodology/05_locks_and_parallel_work.md` cold (no prior context) and surfaces drift between docs and how the project / adopters actually use them.
+**Why / Description:** Run a **fresh AI session** (no prior conversation context referencing the methodology project) over `methodology/00_README.md` through `methodology/05_locks_and_parallel_work.md` and surface drift between the docs and how the project / adopters actually use them. Findings get appended (not overwritten) to the skeleton from BL-0006. Pillar (secondary): P2 — Doc clarity.
 
-**Plan:**
+**Approach:**
 
-1. Spawn an Explore agent with no prior session context.
-2. Agent reads the six docs in order: 00, 01, 02, 03, 04, 05.
-3. For each doc, agent reports: (a) anything that reads as stale (rules no longer in practice, claims that don't hold, references that resolved differently than expected); (b) anything unclear; (c) any cross-doc inconsistencies vs. what other docs say.
-4. Findings written to `self-development/evaluations/2026-05-first-pass.md` under a "Cold-read findings (docs 00–05)" section.
+1. Spawn a fresh AI session (definition: new chat or new agent session with no turns referencing this project; ideally a different model family than was used to author the docs).
+2. Session reads the six docs in order: 00, 01, 02, 03, 04, 05.
+3. For each doc, session reports three categories of finding:
+   - **Stale** — rules no longer in practice; claims that don't hold; references that resolved differently than expected.
+   - **Unclear** — passages a fresh contributor wouldn't be able to apply without re-reading.
+   - **Inconsistent** — cross-doc contradictions vs. what other docs in the methodology say.
+4. Findings landed into `self-development/evaluations/2026-05-first-pass.md` under the "Cold-read findings (docs 00–05)" heading. Each finding cites file:line where applicable.
+5. Each doc gets at least one finding entry (even "no issues found" is recorded — to prove the doc was actually read).
 
-**Verification:** Each of the 6 docs has at least one finding entry (even "no issues found" counts); findings reference specific file:line where applicable.
+**Done means:**
+
+- [ ] All six docs (00, 01, 02, 03, 04, 05) have at least one finding entry under "Cold-read findings (docs 00–05)".
+- [ ] Each finding cites file:line where applicable.
+- [ ] The session that produced the findings had no prior turns referencing the methodology project (documented in the eval report's Metadata section).
+- [ ] Item moved from `BACKLOG.md` to `ARCHIVE.md` after cross-AI validation passes.
+
+**Files (probable):**
+
+- `self-development/evaluations/2026-05-first-pass.md` (append findings)
 
 ---
 
 ### BL-0008 — Cross-AI cold-read of methodology docs 06–11 (disciplines + ops + roles)
 
-**Pillar:** P3 — Doc currency (secondary: P2 — Doc clarity)
-**Priority:** P1
-**Effort:** M
-**Status:** backlog
-**Test:** not-tested
-**Lock:** —
-**Deps:** BL-0006
+| Field    | Value                              |
+|----------|------------------------------------|
+| Epic     | E02-first-semiannual-self-evaluation |
+| Pillar   | P3                                 |
+| Priority | P1                                 |
+| Effort   | M                                  |
+| Status   | backlog                            |
+| Test     | not-tested                         |
+| Deps     | BL-0006, BL-0007                   |
+| Lock     | —                                  |
 
-**Goal:** A fresh AI session reads `methodology/06_working_principles.md` through `methodology/11_human_roles.md` cold and surfaces drift.
+**Why / Description:** Same as BL-0007 applied to `methodology/06_working_principles.md` through `methodology/11_human_roles.md`. **Sequential to BL-0007 (not parallel):** BL-0008's verification asks for cross-doc inconsistencies between this batch and BL-0007's batch, which requires BL-0007's findings to be in the report first. Pillar (secondary): P2 — Doc clarity.
 
-**Plan:**
+**Approach:**
 
-1. Spawn an Explore agent with no prior session context (separate from BL-0007 to keep each batch reviewable independently).
-2. Agent reads the six docs in order: 06, 07, 08, 09, 10, 11.
-3. Same report shape as BL-0007: stale / unclear / inconsistent.
-4. Findings appended to `self-development/evaluations/2026-05-first-pass.md` under a "Cold-read findings (docs 06–11)" section.
+1. Spawn a fresh AI session (per the "fresh session" definition in BL-0007).
+2. The session reads BL-0007's findings first (to know what was already surfaced in docs 00–05), then reads docs 06, 07, 08, 09, 10, 11 in order.
+3. Same report shape: stale / unclear / inconsistent per doc.
+4. Findings landed into `self-development/evaluations/2026-05-first-pass.md` under "Cold-read findings (docs 06–11)".
+5. Cross-doc inconsistencies between this batch and BL-0007's batch are explicitly flagged as a sub-list under the docs-06–11 heading.
 
-**Verification:** Each of the 6 docs has at least one finding entry; cross-doc inconsistencies between this batch and BL-0007's batch are explicitly flagged.
+**Done means:**
+
+- [ ] All six docs (06, 07, 08, 09, 10, 11) have at least one finding entry under "Cold-read findings (docs 06–11)".
+- [ ] Each finding cites file:line where applicable.
+- [ ] Cross-doc inconsistencies between the two batches are explicitly flagged.
+- [ ] The session that produced the findings was fresh (per definition; recorded in the eval report's Metadata).
+- [ ] Item moved from `BACKLOG.md` to `ARCHIVE.md` after cross-AI validation passes.
+
+**Files (probable):**
+
+- `self-development/evaluations/2026-05-first-pass.md` (append findings)
 
 ---
 
 ### BL-0009 — Classify surfaced gaps + assign dispositions
 
-**Pillar:** P3 — Doc currency
-**Priority:** P1
-**Effort:** S
-**Status:** backlog
-**Test:** not-tested
-**Lock:** —
-**Deps:** BL-0007, BL-0008
+| Field    | Value                              |
+|----------|------------------------------------|
+| Epic     | E02-first-semiannual-self-evaluation |
+| Pillar   | P3                                 |
+| Priority | P1                                 |
+| Effort   | S                                  |
+| Status   | backlog                            |
+| Test     | not-tested                         |
+| Deps     | BL-0007, BL-0008                   |
+| Lock     | —                                  |
 
-**Goal:** Read the combined findings from BL-0007 + BL-0008, classify each gap as "practice is wrong" / "docs are wrong" / "both", and assign a disposition (patch release / file as item / defer to FUTURE.md).
+**Why / Description:** Read the combined findings from BL-0007 + BL-0008, classify each gap as `practice-wrong` / `docs-wrong` / `both`, and assign a disposition (patch release / file as item / defer to FUTURE.md). The classification framework comes from [`methodology/07_definition_of_done.md "Methodology self-evaluation"`](../../../../methodology/07_definition_of_done.md#methodology-self-evaluation-semi-annual).
 
-**Plan:**
+**Approach:**
 
-1. Read all findings in `self-development/evaluations/2026-05-first-pass.md`.
-2. For each finding, classify per the methodology's three-way framework (per [`methodology/07_definition_of_done.md "Methodology self-evaluation"`](../../../../methodology/07_definition_of_done.md#methodology-self-evaluation-semi-annual)).
+1. Read all findings under both "Cold-read findings" sections of the eval report.
+2. For each finding, classify per the three-way framework.
 3. For each classification, assign a disposition:
-   - "Practice wrong" → file as a memory entry candidate; surface to maintainer; no methodology change.
-   - "Docs wrong" → either ship a patch release immediately (if severity warrants) OR file as item in appropriate epic (E02 itself, or follow-up epic).
-   - "Both" → file an item to update both; severity-triaged.
-4. Update the eval report with classifications + dispositions in a table.
+   - `practice-wrong` → file as a memory entry candidate; surface to maintainer; no methodology change.
+   - `docs-wrong` → either patch release immediately (severity-based) OR file as item in appropriate epic (E02 itself, or follow-up epic).
+   - `both` → file an item to update both; severity-triaged.
+4. Output a "Classification + dispositions" table in the eval report.
 
-**Verification:** Every finding has a classification; every classification has a disposition; no "both" gaps lack an open item (per E02 exit criterion 5).
+**Done means:**
+
+- [ ] Every finding from BL-0007 + BL-0008 has a classification (`practice-wrong` / `docs-wrong` / `both`).
+- [ ] Every classification has a disposition (patch / item / defer).
+- [ ] No `both` gaps lack an open item (per E02 charter exit criterion 5).
+- [ ] The eval report's "Classification + dispositions" table is populated.
+- [ ] Item moved from `BACKLOG.md` to `ARCHIVE.md` after cross-AI validation passes.
+
+**Files (probable):**
+
+- `self-development/evaluations/2026-05-first-pass.md` (populate Classification table)
 
 ---
 
 ### BL-0010 — Finalize eval report + close epic
 
-**Pillar:** P3 — Doc currency
-**Priority:** P1
-**Effort:** S
-**Status:** backlog
-**Test:** not-tested
-**Lock:** —
-**Deps:** BL-0009
+| Field    | Value                              |
+|----------|------------------------------------|
+| Epic     | E02-first-semiannual-self-evaluation |
+| Pillar   | P3                                 |
+| Priority | P1                                 |
+| Effort   | S                                  |
+| Status   | backlog                            |
+| Test     | not-tested                         |
+| Deps     | BL-0009                            |
+| Lock     | —                                  |
 
-**Goal:** Finalize the eval report, record the next semi-annual eval date, ship any required patch releases, and close E02.
+**Why / Description:** Complete the eval report (summary statistics, next eval date, maintainer signoff), ship any patch releases for `docs-wrong` gaps marked for immediate fix, and bring the epic to `to-be-tested` for maintainer approval. **The epic's final `Status: done` flip happens after maintainer review** — this item completes the *work* but does not itself close the epic autonomously.
 
-**Plan:**
+**Approach:**
 
-1. Finalize `self-development/evaluations/2026-05-first-pass.md`: summary statistics, next eval date (~2026-11-25 or as adjusted), maintainer signoff line.
-2. Ship any patch releases for "docs wrong" gaps that warrant immediate fix.
-3. Verify all E02 exit criteria in the charter are checked off.
-4. Move all 5 BL items (BL-0006 through BL-0010) from `BACKLOG.md` to `ARCHIVE.md`.
-5. Update `EPICS.md` rollup: E02 status → `done`, item counts → 0 open / 5 done. WIP cap frees a slot (E04 or E05 can promote).
+1. Populate the eval report's "Summary statistics" section: counts of findings by classification, counts by disposition, time-to-close estimate.
+2. Record next semi-annual eval target date (~2026-11-25 or adjusted based on context).
+3. Add maintainer signoff line to the report (left blank for maintainer to complete).
+4. For each disposition flagged "patch release immediately": prepare the patch release as a separate commit chain (does not block this item's close).
+5. Bring this item to `Status: to-be-tested`, halt, surface for cross-AI review + maintainer approval.
 
-**Verification:** Charter exit criteria all checked; ARCHIVE.md contains all 5 items; EPICS.md reflects E02 done + WIP cap update.
+**Done means:**
+
+- [ ] Summary statistics section is populated.
+- [ ] Next eval date recorded (~6 months out).
+- [ ] Maintainer signoff line present (awaiting signature).
+- [ ] All "patch release immediately" dispositions have prepared changes (committed if maintainer authorizes).
+- [ ] Epic E02 charter exit criteria are all checked.
+- [ ] Item is at `Status: to-be-tested`, awaiting maintainer review for the epic-closure flip.
+- [ ] Item moved from `BACKLOG.md` to `ARCHIVE.md` only after maintainer approves the epic closure.
+
+**Files (probable):**
+
+- `self-development/evaluations/2026-05-first-pass.md` (final population)
+- `self-development/backlog/EPICS.md` (rollup update on epic close)
+- `CHANGELOG.md` (epic closure entry)

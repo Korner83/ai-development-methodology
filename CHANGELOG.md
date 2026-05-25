@@ -13,6 +13,47 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.12.0 — 2026-05-25
+
+### Chore — Opus cross-check applied to the bootstrap; eight fixes before Run 1 (2026-05-25)
+
+After v1.11.0 declared the bootstrap complete and the autonomous loop operational, an Opus-tier cross-check ran against the entire `self-development/` folder as a coherent system (not per-step like prior reviews). The Opus reviewer surfaced one blocker plus seven supporting issues that the per-step Sonnet-tier reviews missed because each saw only one step at a time.
+
+**Critical (blockers fixed before Run 1):**
+
+- **C1 — All 14 BL-#### items rewritten to methodology-conformant frontmatter.** Prior items used a `**Pillar:** P3` bold-label shorthand format. The methodology in [`methodology/04_backlog_items.md` lines 91–116](methodology/04_backlog_items.md) requires a **table-form frontmatter** with `| Field | Value |` shape (`Epic`, `Pillar`, `Priority`, `Effort`, `Status`, `Test`, `Deps`, `Lock` — 8 required fields, table form). The greppable-metadata patterns in the methodology depend on this shape. All 14 items now use the table form. Body sections also restructured: prior items used `**Goal:** / **Plan:** / **Verification:**`; methodology requires `**Why / Description:** / **Approach:** / **Done means:** (checkboxes) / **Files (probable):**`. The `Done means:` checkbox section — load-bearing per `04_backlog_items.md` lines 374–404 as the item-level exit criteria — was missing from every item and is now present.
+- **C2 — Master plan Phase 1 exit criterion 3 reworded.** Was: "All five templates exist *and have been tested by at least one external session.*" The italicized half is adopter-dependent (maintainer can't tick it autonomously) — same anti-pattern that was caught in P4's exit criteria during v1.8.0 cross-AI review but survived in the master plan one level up. Now: external-adoption testing is tracked as a **health indicator**, not a phase-exit criterion.
+- **C3 — Template-count vs tool-count terminology drift fixed in 5 places.** Prior text variously said "5 templates" / "6 tools" / "all six major AI coding tools" in master plan, AUTONOMOUS_LOOP, brief/08, P1, P4. The canonical framing now (consistent everywhere): **5 template files in `templates/` supporting 6 AI tools — 3 natively (CLAUDE.md, AGENTS.md, AGENTS.md again for Antigravity), 3 via adaptation from AGENTS.md (Cursor, Aider, Continue.dev). E04 in the backlog tracks promoting the latter to native templates.**
+
+**Should-fix (applied):**
+
+- **S1 — WIP cap dropped from 3 to 1.** Per `methodology/03_epics.md` "Smaller teams should run fewer" — and per the Opus cross-check — a solo-maintained project that has never closed an epic should start at 1 active. E02 stays active; E01 + E03 + E04 + E05 are now all `planned`. WIP cap rises after the first epic-close. Documented in `self-development/backlog/EPICS.md` "WIP cap note" and `self-development/backlog/README.md` Workflow section.
+- **S2 — `AUTONOMOUS_LOOP.md` Constraint 2a extended.** Was: "Never modify `self-development/strategy/` or `self-development/pillars/` autonomously." Now also covers `self-development/brief/` (the upstream-of-strategy artifact that prior constraint missed).
+- **S3 — BL-0006 plan tightened.** Was ambiguous about "create template" vs "create first eval report." Now: explicit "**skeleton-only work — no findings data is recorded in this item; no methodology docs are read; the cold-read happens in BL-0007/0008.**" Plus a Done-means checkbox: "No methodology doc was read or analyzed during this item's execution."
+- **S5 — "Fresh session" defined operationally in AUTONOMOUS_LOOP.md.** Was used multiple times (cross-AI validation, BL-0007/0008 cold-reads) without definition. Now: a new chat/agent session with no prior turns referencing this project; strongly preferred to be a different model family than the one that authored the artifact being reviewed.
+- **S7 — BL-0007 + BL-0008 changed from parallel to sequential.** Was: "Run 2 — BL-0007 and BL-0008 (can be done in parallel sessions if context allows)." But BL-0008's verification asks for cross-doc inconsistencies vs. BL-0007's batch — which requires BL-0007's findings to be in the report first. Now: Run 2 = BL-0007 only; Run 3 = BL-0008.
+
+**Additional improvements surfaced by the cross-check:**
+
+- BL-0012 explicitly marked as touching `methodology/*` and thus requiring maintainer handoff (the loop's Constraint 1 forbids it from executing this item autonomously). The loop's role is to prepare via BL-0011 and then halt for human-authored execution.
+- BL-0007/0008/0009/0010 now explicitly bring their items to `Status: to-be-tested` and halt for maintainer approval before flipping to `done` (per S6 epic-closure handling).
+
+**What was NOT changed:**
+
+- Pillar dependency chain (P1→P2→P3→P4→P5→P6→P7→P8→P9) stays as defined in v1.8.0; the cross-check confirmed it's coherent.
+- Strategy phases (Foundation / Discovery / Establishment / Maturity) stay as defined; exit criteria all binary except C2's fix.
+- Epic charters (E01–E05) unchanged in scope; only the items below them changed in format.
+
+**Verification:** confirmed via PowerShell that `self-development/evaluations/` and `self-development/loop-notes/` directories do NOT yet exist — BL-0006 has real work to do when Run 1 fires.
+
+**Bootstrap status after this release:**
+
+- ✓ Steps 0–4 shipped (v1.7.0 → v1.11.0)
+- ✓ Opus-tier cross-check applied with all critical + key should-fix issues addressed (v1.12.0)
+- **Ready for Run 1** of the autonomous loop, targeting BL-0006 (P1-XS) end-to-end through DoD.
+
+---
+
 ## v1.11.0 — 2026-05-25
 
 ### Feat — Self-development bootstrap, Step 4 (final): autonomous loop is operational (2026-05-25)

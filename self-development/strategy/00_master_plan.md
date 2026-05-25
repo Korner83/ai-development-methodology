@@ -33,7 +33,7 @@ Four phases, each with binary exit criteria. Phases gate: until the prior phase'
 
 - [ ] Self-development bootstrap Steps 0–4 are shipped (v1.7.0 through ~v1.x with autonomous loop config).
 - [ ] No known self-contradictions in the abstract methodology docs in `methodology/` (per the latest semi-annual self-evaluation pass).
-- [ ] All five templates exist in `templates/` (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md) and have been tested by at least one external session.
+- [ ] All five template files exist in `templates/` (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md), each with current methodology version stamp and verified against the methodology's required shape. (External-adoption testing is tracked as a **health indicator**, not a phase-exit criterion — adopter behavior is uncontrollable.)
 - [ ] First autonomous loop run has completed at least one item end-to-end without maintainer intervention mid-run.
 
 **Active pillars:** P1 Doc completeness, P2 Doc clarity, P3 Doc currency, P4 Tool compatibility, P9 Self-improvement velocity (cycle bootstrap).

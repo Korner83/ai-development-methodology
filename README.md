@@ -130,7 +130,7 @@ ai-development-methodology/
     └── backlog/              # Step 2 — 5 epic charters; Step 3 — 14 BL-#### items inside active epics
 ```
 
-~11,400 lines across 52 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
+~11,600 lines across 53 files. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
 
 ---
 

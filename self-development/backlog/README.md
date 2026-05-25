@@ -31,10 +31,11 @@ Per the methodology's [project structure convention](../../templates/PROJECT_STR
 
 ## Workflow
 
-Standard methodology workflow per [`methodology/04_backlog_items.md`](../../methodology/04_backlog_items.md). Two project-specific overrides:
+Standard methodology workflow per [`methodology/04_backlog_items.md`](../../methodology/04_backlog_items.md). Three project-specific overrides:
 
-1. **The autonomous loop (when active, after Step 4 of the bootstrap) MUST NOT modify abstract methodology docs in `methodology/` autonomously.** Cycle outputs that suggest methodology changes are surfaced to the maintainer; methodology updates ship as a normal release cycle.
+1. **The autonomous loop (when active, after Step 4 of the bootstrap) MUST NOT modify abstract methodology docs in `methodology/` autonomously.** Cycle outputs that suggest methodology changes are surfaced to the maintainer; methodology updates ship as a normal release cycle. The full constraint set is in [`../AUTONOMOUS_LOOP.md`](../AUTONOMOUS_LOOP.md) "Hard constraints."
 2. **All releases that touch `self-development/` ship as minor or patch versions of the public repo** — the work is in the public repo, but it's project-meta work, not methodology work. The abstract methodology in `methodology/` versions independently.
+3. **WIP cap is 1 active epic** (not the methodology's typical 3). See `EPICS.md` "WIP cap note" for reasoning. The cap rises after epics close and the maintainer observes the loop's behavior.
 
 ## Cross-references
 

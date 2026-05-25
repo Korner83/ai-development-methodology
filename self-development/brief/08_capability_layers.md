@@ -60,7 +60,7 @@ The layers are roughly sequentially dependent: doc completeness comes before doc
 **Why it matters:** vendor-neutral is one of the core differentiating values vs. vendor-specific peers (BMAD, Spec Kit's tighter GitHub coupling). Tool compatibility is a *prerequisite for adoption*, not a downstream concern — adopters who find the methodology immediately ask "does this work with my tool?" before they read further.
 
 **Tested by:**
-- Templates exist for all major AI tools (currently 5 templates: CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md).
+- The 5 template files in `templates/` support all 6 major AI tools — 3 natively (Claude Code via CLAUDE.md, Codex/Antigravity via AGENTS.md) and 3 via adaptation from AGENTS.md (Cursor, Aider, Continue.dev). E04 in the backlog tracks promoting the latter to native templates.
 - Adopter reports of cross-tool use without methodology adjustment.
 - New AI tools entering the field — does the methodology gracefully support them?
 

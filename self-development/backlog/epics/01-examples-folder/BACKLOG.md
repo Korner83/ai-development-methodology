@@ -2,11 +2,13 @@
 
 _Items currently in scope for this epic. See [charter](README.md) for exit criteria._
 
+**Epic status (as of v1.12.0):** `planned` — E01 is not active. Items below are visible but **not pickable by the autonomous loop** until E02 closes and E01 is promoted to active. WIP cap = 1 per maintainer-deliberate choice (see backlog [README.md](../../README.md) "WIP cap note").
+
 ## Summary
 
 | ID      | Title                                                          | Priority | Effort | Status      |
 |---------|----------------------------------------------------------------|----------|--------|-------------|
-| BL-0001 | Create `examples/` folder + README with comparison table       | P2       | XS     | ready       |
+| BL-0001 | Create `examples/` folder + README with comparison table       | P2       | XS     | backlog     |
 | BL-0002 | Author anonymized example strategy + 2 pillars                 | P2       | M      | backlog     |
 | BL-0003 | Author anonymized example epic charter + 5 BL items            | P2       | M      | backlog     |
 | BL-0004 | Cross-AI abstract-voice review of examples content             | P2       | S      | backlog     |
@@ -16,117 +18,187 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 
 ### BL-0001 — Create `examples/` folder + README with comparison table
 
-**Pillar:** P1 — Doc completeness (secondary: P6 — Example richness)
-**Priority:** P2
-**Effort:** XS
-**Status:** ready
-**Test:** not-tested
-**Lock:** —
-**Deps:** —
+| Field    | Value                              |
+|----------|------------------------------------|
+| Epic     | E01-examples-folder                |
+| Pillar   | P1                                 |
+| Priority | P2                                 |
+| Effort   | XS                                 |
+| Status   | backlog                            |
+| Test     | not-tested                         |
+| Deps     | —                                  |
+| Lock     | —                                  |
 
-**Goal:** Create the `examples/` folder at repo root and its README.md so subsequent items have a place to drop content.
+**Why / Description:** Create the `examples/` folder at the repo root with a README that explains the relationship between `examples/`, abstract `methodology/`, and `self-development/`. This is the foundational item for E01 — subsequent items deposit content into this folder. Pillar (secondary): P6 — Example richness.
 
-**Plan:**
+**Approach:**
 
-1. Create `examples/` directory at repo root.
+1. Create directory `examples/` at repo root (sibling of `methodology/`, `templates/`, `self-development/`).
 2. Write `examples/README.md` containing:
    - One-paragraph intro: this folder shows what an adopter project looks like when it adopts the methodology.
-   - A 3-row comparison table mapping `examples/` (illustrative fictional project) / abstract `methodology/` (the rules) / `self-development/` (the methodology applied to its own development).
+   - A 3-row comparison table: `examples/` (illustrative fictional project) / abstract `methodology/` (the rules) / `self-development/` (the methodology applied to its own development).
    - Pointer back to `methodology/00_README.md`.
-   - Note that examples are pinned to a methodology version; current version stated.
-3. Verify: a cross-AI reader correctly maps the three artifact types after one read (per E01 exit criterion 5).
+   - Methodology version the examples are pinned to.
 
-**Verification:** README exists; comparison table is 3 rows; methodology version is current (v1.9.0 or later).
+**Done means:**
+
+- [ ] Directory `examples/` exists at repo root.
+- [ ] `examples/README.md` contains a 3-row comparison table.
+- [ ] A cross-AI reader correctly maps each artifact type to its purpose after one read of the README.
+- [ ] Methodology version is current and noted.
+- [ ] Item moved from `BACKLOG.md` to `ARCHIVE.md` after cross-AI validation passes.
+
+**Files (probable):**
+
+- `examples/README.md` (new)
 
 ---
 
 ### BL-0002 — Author anonymized example strategy + 2 pillars
 
-**Pillar:** P1 — Doc completeness (secondary: P6 — Example richness)
-**Priority:** P2
-**Effort:** M
-**Status:** backlog
-**Test:** not-tested
-**Lock:** —
-**Deps:** BL-0001
+| Field    | Value                              |
+|----------|------------------------------------|
+| Epic     | E01-examples-folder                |
+| Pillar   | P1                                 |
+| Priority | P2                                 |
+| Effort   | M                                  |
+| Status   | backlog                            |
+| Test     | not-tested                         |
+| Deps     | BL-0001                            |
+| Lock     | —                                  |
 
-**Goal:** Create a fictional but plausible example project's strategy master plan and 2 pillar files, demonstrating how the methodology's `01_strategy.md` and `02_pillars.md` skeletons are filled in for a real project.
+**Why / Description:** Create a fictional but plausible example project's strategy master plan and 2 pillar files, demonstrating how the methodology's `01_strategy.md` and `02_pillars.md` skeletons are filled in for a real project. Pillar (secondary): P6 — Example richness.
 
-**Plan:**
+**Approach:**
 
-1. Pick a fictional project that's plausible but generic — e.g., a small SaaS productivity tool, a developer-facing CLI utility, or a research-team notebook system. Document the project choice in `examples/example-project/README.md`.
-2. Author `examples/example-project/strategy/00_master_plan.md` following the methodology's strategy-doc skeleton — vision, 3 phases with binary exit criteria, pillar roadmap, doc index.
-3. Author 2 pillar files (`P1_<area>.md`, `P2_<area>.md`) showing dependency relationship + capability shape.
-4. All content must pass abstract-voice rule extended to examples: no real project names, no real company references, no specific framework names beyond methodology's accepted examples.
+1. Pick a fictional project that's plausible but generic (e.g., a small SaaS productivity tool, a developer CLI utility, a research-team notebook system). Document the choice in `examples/example-project/README.md`.
+2. Author `examples/example-project/strategy/00_master_plan.md` following the methodology's strategy-doc skeleton.
+3. Author 2 pillar files (`P1_<area>.md`, `P2_<area>.md`) with dependency relationship + capability shape.
+4. All content passes the abstract-voice rule extended to examples: no real project names, no real company references.
 
-**Verification:** Strategy doc has all 5 sections from `01_strategy.md`; pillars use the skeleton from `02_pillars.md`; abstract-voice check passes (cross-AI scan); fictional project doesn't accidentally resemble a real product (sanity check).
+**Done means:**
+
+- [ ] `examples/example-project/strategy/00_master_plan.md` exists with all five sections from `01_strategy.md`.
+- [ ] 2 pillar files exist using the skeleton from `02_pillars.md`.
+- [ ] Cross-AI abstract-voice check passes (see BL-0004).
+- [ ] Fictional project doesn't accidentally resemble a real product (sanity check by maintainer).
+- [ ] Item moved from `BACKLOG.md` to `ARCHIVE.md` after cross-AI validation passes.
+
+**Files (probable):**
+
+- `examples/example-project/README.md` (new)
+- `examples/example-project/strategy/00_master_plan.md` (new)
+- `examples/example-project/pillars/P1_<area>.md` (new)
+- `examples/example-project/pillars/P2_<area>.md` (new)
 
 ---
 
 ### BL-0003 — Author anonymized example epic charter + 5 BL items
 
-**Pillar:** P1 — Doc completeness (secondary: P6 — Example richness)
-**Priority:** P2
-**Effort:** M
-**Status:** backlog
-**Test:** not-tested
-**Lock:** —
-**Deps:** BL-0002
+| Field    | Value                              |
+|----------|------------------------------------|
+| Epic     | E01-examples-folder                |
+| Pillar   | P1                                 |
+| Priority | P2                                 |
+| Effort   | M                                  |
+| Status   | backlog                            |
+| Test     | not-tested                         |
+| Deps     | BL-0002                            |
+| Lock     | —                                  |
 
-**Goal:** Demonstrate the methodology's `03_epics.md` and `04_backlog_items.md` skeletons by filling in one epic charter and 5 BL items for the example project from BL-0002.
+**Why / Description:** Demonstrate the methodology's `03_epics.md` and `04_backlog_items.md` skeletons by filling in one epic charter and 5 BL items for the example project from BL-0002. Pillar (secondary): P6 — Example richness.
 
-**Plan:**
+**Approach:**
 
-1. Charter one epic at `examples/example-project/backlog/epics/01-<slug>/README.md` — primary pillar from BL-0002, JTBD outcome, binary exit criteria, out-of-scope.
-2. Populate that epic's `BACKLOG.md` with 5 BL-#### items, each with full frontmatter (Pillar / Priority / Effort / Status / Test / Lock) and body (goal + plan + verification).
-3. Include 1 item demonstrating a P1 priority, 1 item with `Status: blocked` and `Blocker:` line, 1 item with `Status: done` and `Test: pass` (showing the closed state).
-4. Include EPICS.md rollup at `examples/example-project/backlog/EPICS.md` showing the one epic.
+1. Charter one epic at `examples/example-project/backlog/epics/01-<slug>/README.md` per `03_epics.md`.
+2. Populate that epic's `BACKLOG.md` with 5 BL-#### items in the **table-form frontmatter** required by `04_backlog_items.md` (lines 91–116).
+3. Include 1 item demonstrating P1 priority, 1 item with `Status: blocked` + `Blocker:` line, 1 item with `Status: done` + `Test: pass`.
+4. Include `EPICS.md` rollup at `examples/example-project/backlog/EPICS.md`.
 
-**Verification:** Epic charter has all sections from `03_epics.md`; items follow `04_backlog_items.md` shape; the "done" item demonstrates the hard rule (`Status: done` requires `Test: pass`); the blocked item demonstrates the `HUMAN_NEEDED.md` candidate pattern.
+**Done means:**
+
+- [ ] Epic charter has all sections from `03_epics.md`.
+- [ ] All 5 items use the **table-form frontmatter** per `04_backlog_items.md` lines 91–106 (not the bold-label shorthand).
+- [ ] Each item has body sections: `**Why / Description:**`, `**Approach:**` (where multi-step), `**Done means:**` (checkboxes), `**Files (probable):**`.
+- [ ] The `done` item demonstrates the hard rule (`Status: done` requires `Test: pass`).
+- [ ] The `blocked` item demonstrates the `HUMAN_NEEDED.md` candidate pattern.
+- [ ] Item moved from `BACKLOG.md` to `ARCHIVE.md` after cross-AI validation passes.
+
+**Files (probable):**
+
+- `examples/example-project/backlog/epics/01-<slug>/README.md` (new)
+- `examples/example-project/backlog/epics/01-<slug>/BACKLOG.md` (new)
+- `examples/example-project/backlog/EPICS.md` (new)
 
 ---
 
 ### BL-0004 — Cross-AI abstract-voice review of examples content
 
-**Pillar:** P1 — Doc completeness
-**Priority:** P2
-**Effort:** S
-**Status:** backlog
-**Test:** not-tested
-**Lock:** —
-**Deps:** BL-0002, BL-0003
+| Field    | Value                              |
+|----------|------------------------------------|
+| Epic     | E01-examples-folder                |
+| Pillar   | P1                                 |
+| Priority | P2                                 |
+| Effort   | S                                  |
+| Status   | backlog                            |
+| Test     | not-tested                         |
+| Deps     | BL-0002, BL-0003                   |
+| Lock     | —                                  |
 
-**Goal:** Run a fresh AI session over all `examples/` content to verify no abstract-voice violations (no real project names, no domain leakage, no accidentally-real company references) before ship.
+**Why / Description:** A fresh AI session reviews all `examples/` content to verify no abstract-voice violations: no real project names, no real company references, no specific framework names beyond methodology's accepted examples, no domain jargon revealing a source project.
 
-**Plan:**
+**Approach:**
 
-1. Spawn a fresh Explore agent with no prior context.
-2. Agent reads all files under `examples/` and reports any potential abstract-voice violations: real product names, real company references, specific framework names beyond methodology's accepted examples, domain-specific jargon that gives away a source project.
-3. Agent reports findings with file:line specificity.
-4. Apply fixes (rewrite or remove offending content); re-run review if substantial changes.
+1. Spawn a fresh AI session with no prior context.
+2. Session reads all files under `examples/` and reports potential violations with file:line specificity.
+3. Apply fixes (rewrite or remove); re-run review if substantial changes.
 
-**Verification:** Cross-AI report returns "no violations found" OR all flagged issues have been addressed.
+**Done means:**
+
+- [ ] Cross-AI report returns "no violations found" OR all flagged issues have been addressed.
+- [ ] The session that produced the report was fresh (per BL-0007's "fresh session" definition).
+- [ ] Item moved from `BACKLOG.md` to `ARCHIVE.md` after cross-AI validation passes.
+
+**Files (probable):**
+
+- (read-only; potentially edits to `examples/**` if violations found)
 
 ---
 
 ### BL-0005 — Link `examples/` from main README + close epic
 
-**Pillar:** P1 — Doc completeness
-**Priority:** P2
-**Effort:** XS
-**Status:** backlog
-**Test:** not-tested
-**Lock:** —
-**Deps:** BL-0001, BL-0002, BL-0003, BL-0004
+| Field    | Value                              |
+|----------|------------------------------------|
+| Epic     | E01-examples-folder                |
+| Pillar   | P1                                 |
+| Priority | P2                                 |
+| Effort   | XS                                 |
+| Status   | backlog                            |
+| Test     | not-tested                         |
+| Deps     | BL-0001, BL-0002, BL-0003, BL-0004 |
+| Lock     | —                                  |
 
-**Goal:** Update the main README's "What's in the repo" tree to include `examples/`, then close E01 by verifying all exit criteria are met.
+**Why / Description:** Update the main README's "What's in the repo" tree to include `examples/`, then bring the epic to `to-be-tested` for maintainer-approved closure. **The epic's final `Status: done` flip happens after maintainer review** — this item completes the *work* but does not autonomously close the epic.
 
-**Plan:**
+**Approach:**
 
 1. Update `README.md` tree to show `examples/` alongside `methodology/`, `templates/`, `self-development/`.
-2. Update CHANGELOG with E01 closure entry.
-3. Verify all 5 exit criteria in `README.md` (the charter) are checked off.
-4. Move all 5 BL items from `BACKLOG.md` to `ARCHIVE.md` (create `ARCHIVE.md` if not exists).
-5. Update `EPICS.md` rollup: E01 status → `done`, item counts → 0 open / 5 done.
+2. Update `CHANGELOG.md` with E01 closure entry.
+3. Verify all charter exit criteria are checked.
+4. Bring item to `Status: to-be-tested`; halt for maintainer approval before flipping items to `done` and the epic to `done`.
+5. After maintainer approval: move all 5 items from `BACKLOG.md` to `ARCHIVE.md`; update `EPICS.md` rollup.
 
-**Verification:** Charter exit criteria all checked; ARCHIVE.md contains all items; EPICS.md rollup is accurate; main README tree includes examples/.
+**Done means:**
+
+- [ ] `README.md` tree includes `examples/`.
+- [ ] `CHANGELOG.md` has E01 closure entry.
+- [ ] Charter exit criteria all checked.
+- [ ] Item at `Status: to-be-tested`, awaiting maintainer review.
+- [ ] After maintainer approval: ARCHIVE.md contains all 5 items; EPICS.md rollup reflects E01 `done`.
+
+**Files (probable):**
+
+- `README.md` (tree update)
+- `CHANGELOG.md` (closure entry)
+- `self-development/backlog/EPICS.md` (rollup)
+- `self-development/backlog/epics/01-examples-folder/ARCHIVE.md` (new on close)

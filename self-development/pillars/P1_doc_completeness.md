@@ -35,7 +35,7 @@ Doc completeness asks: for each common adopter situation, does the methodology s
 The pillar is *delivered* (not done — it's evergreen) when:
 
 - [ ] All 12 methodology docs have been reviewed in the most recent semi-annual self-evaluation pass with no "missing" gaps surfaced by cross-AI review.
-- [ ] Templates exist for all of: Claude Code, OpenAI Codex, Google Antigravity, Cursor, Aider, Continue.dev.
+- [ ] Each of the 6 supported AI tools (Claude Code, OpenAI Codex, Google Antigravity, Cursor, Aider, Continue.dev) has a usable starting template — either native (currently 3: CLAUDE.md, AGENTS.md, and AGENTS.md again for Antigravity) or adaptable (currently 3, from AGENTS.md; promoted to native via E04).
 - [ ] At least one worked example folder exists in the repo (the `self-development/` folder satisfies this as of v1.7.0).
 - [ ] Every Discussions / Issues thread tagged as a "how do I" question has a recorded response (from maintainer or community) within 30 days that either links to an existing doc as the answer or is logged as a methodology gap candidate for the next release.
 

@@ -36,7 +36,7 @@ The pillar was resequenced from P6 to P4 during the Step 0 cross-AI review for e
 
 The pillar is *delivered* when:
 
-- [ ] Templates exist for all six major AI coding tools listed above (currently: CLAUDE.md + AGENTS.md cover all; project-specific filenames adapt from these).
+- [ ] All 6 major AI coding tools listed above have a usable starting template — currently 3 via native template files (CLAUDE.md for Claude Code; AGENTS.md for Codex and Antigravity) and 3 via adaptation from AGENTS.md (Cursor, Aider, Continue.dev). E04 in the self-development backlog tracks promoting the latter to native templates.
 - [ ] The most recent semi-annual self-evaluation cross-AI review found no protocol in `methodology/*.md` that depends on a tool-specific feature — i.e., all protocols are framed tool-agnostically (locks are file-based; verification is loop-based; memory is file-based).
 - [ ] The AGENTS.md template is the canonical "anything else" path: it is up-to-date in the most recent release and contains no Claude-Code-specific assumptions.
 - [ ] The README "AI tool support" table is current and covers each tool listed in the brief's [07_tech.md](../brief/07_tech.md).

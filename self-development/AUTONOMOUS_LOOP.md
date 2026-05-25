@@ -36,17 +36,25 @@ The reason: the abstract methodology's stability is part of its value. Methodolo
 
 ### Constraint 2 — Never modify templates autonomously
 
-Same logic as Constraint 1, applied to `templates/`. The five templates (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md) are adopter-facing artifacts. Changes go through human-reviewed cycles.
+Same logic as Constraint 1, applied to `templates/`. The five template files (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md) are adopter-facing artifacts that support six AI tools (three natively, three via adaptation from AGENTS.md). Changes go through human-reviewed cycles.
 
 The loop can edit templates **only when** the item explicitly authorizes it (e.g., a future E04 item to add `.cursorrules`). When in doubt, surface to maintainer.
 
-### Constraint 2a — Never modify `self-development/strategy/` or `self-development/pillars/` autonomously
+### Constraint 2a — Never modify `self-development/brief/`, `self-development/strategy/`, or `self-development/pillars/` autonomously
 
-The strategy master plan and the 9 pillar definitions are *upstream conceptual artifacts* — they describe the methodology project's direction and capability shape. Like the abstract methodology and the templates, they change through human-reviewed cycles, not as side effects of loop work.
+The brief (Step 0 outputs), strategy master plan, and 9 pillar definitions are *upstream conceptual artifacts* — they describe the methodology project's intent, direction, and capability shape. Like the abstract methodology and the templates, they change through human-reviewed cycles, not as side effects of loop work.
 
-The loop reads `self-development/strategy/` and `self-development/pillars/` as authority (e.g., to derive priority for an item per the pillar roadmap). It does not edit them. Methodology-project-strategy insights surfaced during a loop run go into `self-development/loop-notes/YYYY-MM-DD.md` and are promoted via the same maintainer-reviewed cycle as methodology changes.
+The loop reads these as authority (e.g., to understand audience and competitive positioning from the brief, to derive priority for an item per the pillar roadmap, to honor phase exit criteria from the master plan). It does not edit them. Methodology-project-strategy insights surfaced during a loop run go into `self-development/loop-notes/YYYY-MM-DD.md` and are promoted via the same maintainer-reviewed cycle as methodology changes.
 
 The loop **can** edit `self-development/backlog/` (items move between Status values, BACKLOG ↔ ARCHIVE, EPICS.md rollup updates) — that's the loop's primary worksurface. It can also edit `self-development/evaluations/` and `self-development/loop-notes/` (its own output surfaces).
+
+### Operational definition of "fresh session" (used throughout this loop)
+
+"Fresh session" appears multiple times below (cross-AI validation, BL-0007/0008 cold-reads, etc.). Operationally:
+
+- **Required:** a new chat or agent session with **no prior conversational turns referencing this project**. The fresh session may read project files (it must, to do its job), but it has no memory of the authoring session's reasoning, decisions, or context.
+- **Strongly preferred:** a different model family than the one used to author the artifact being reviewed (e.g., if Sonnet authored, Opus or a different vendor's model reviews). When unavailable, the same model in a no-context session is the fallback.
+- **Not sufficient:** the same session that authored the artifact "reviewing its own work." That's self-validation, which the methodology forbids in [`10_testing_and_verification.md "The cheating agent"`](../methodology/10_testing_and_verification.md#the-cheating-agent-anti-pattern).
 
 ### Constraint 3 — Production deploys, force-push, destructive git ops
 
@@ -122,9 +130,10 @@ So the first run's target is **deliberately minimal**: complete one item end-to-
 
 After the first run validates the loop:
 
-- **Run 2:** complete BL-0007 and BL-0008 (P1-M each, can be done in parallel sessions if context allows; otherwise sequential).
-- **Run 3:** complete BL-0009 + BL-0010 (close E02; surface for user approval of the close).
-- **Run 4+:** opportunistic E01 and E03 work per ROI heuristic; primary target is "close one epic per run" once the cadence is established.
+- **Run 2:** complete BL-0007 (P1-M). Stop after BL-0007 closes; do not start BL-0008 in the same run — BL-0008 references BL-0007's findings, and starting BL-0008 in the same session would risk contaminating the cold-read.
+- **Run 3:** complete BL-0008 (P1-M, with BL-0007's findings now in the eval report).
+- **Run 4:** complete BL-0009 + BL-0010 (close E02; surface for user approval of the close). After E02 closes, WIP cap rises from 1 to 2; maintainer decides which of E01 / E03 / E04 / E05 promotes to active next.
+- **Run 5+:** work in the now-active second epic per ROI heuristic; primary target is "close one epic per run" once the cadence is established.
 
 Maintainer adjusts targets at each check-in based on what the prior run produced. Targets are not a fixed schedule.
 
