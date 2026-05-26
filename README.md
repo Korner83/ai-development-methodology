@@ -15,6 +15,7 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **File-based locks with TTL** so two AI agents (or two humans) don't both grab the same item.
 - **Fix-test loop for the actual UI** because "tests pass" doesn't mean "the page renders."
 - **Cross-AI validation + user testing** as the final gates.
+- **Autonomous goal-oriented development cycles** — paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration — 0–10 rubric per area; unsolvable issues get *handled/postponed/marked*, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
 - Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.16.0](CHANGELOG.md).
