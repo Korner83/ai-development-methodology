@@ -18,7 +18,8 @@ The three are complementary: read `methodology/` to understand the rules; read `
 - [`example-project/strategy/00_master_plan.md`](example-project/strategy/00_master_plan.md) — strategy doc following the [01_strategy.md](../methodology/01_strategy.md) skeleton.
 - [`example-project/pillars/`](example-project/pillars/) — two example pillars following the [02_pillars.md](../methodology/02_pillars.md) skeleton.
 - [`example-project/backlog/EPICS.md`](example-project/backlog/EPICS.md) — epic rollup.
-- [`example-project/backlog/epics/01-cli-foundations/`](example-project/backlog/epics/01-cli-foundations/) — one epic charter + 5 BL items in the canonical table-form frontmatter from [04_backlog_items.md](../methodology/04_backlog_items.md).
+- [`example-project/backlog/epics/E01-cli-foundations/`](example-project/backlog/epics/E01-cli-foundations/) — one epic with all 5 standard files (README, BACKLOG, ARCHIVE, FUTURE, TEST) demonstrating the canonical table-form frontmatter from [04_backlog_items.md](../methodology/04_backlog_items.md) and the [03_epics.md "Standard epic-folder structure"](../methodology/03_epics.md#standard-epic-folder-structure).
+- [`example-project/backlog/TEST_BACKLOG.md`](example-project/backlog/TEST_BACKLOG.md) — cross-epic manual-QA queue (pairs with each epic's per-epic `TEST.md`).
 
 ## About the fictional project
 

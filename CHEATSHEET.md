@@ -8,8 +8,10 @@ _One-page reference. For learning, read [`methodology/`](methodology/). For setu
 |---|---|---|---|
 | Strategy | Years | `docs/strategy/` | [01](methodology/01_strategy.md) |
 | Pillars | Years (evergreen) | `docs/pillars/` | [02](methodology/02_pillars.md) |
-| Epics | 3–12 weeks | `backlog/epics/<NN>-<slug>/` | [03](methodology/03_epics.md) |
-| Items | 1–2 weeks | `backlog/epics/<NN>-<slug>/BACKLOG.md` | [04](methodology/04_backlog_items.md) |
+| Epics | 3–12 weeks | `backlog/epics/E<NN>-<slug>/` | [03](methodology/03_epics.md) |
+| Items | 1–2 weeks | `backlog/epics/E<NN>-<slug>/BACKLOG.md` | [04](methodology/04_backlog_items.md) |
+
+**Standard 5-file epic folder:** `README.md` (charter) + `BACKLOG.md` (active) + `ARCHIVE.md` (done/rejected) + `FUTURE.md` (P3 / deferred) + `TEST.md` (acceptance + regression scenarios). Optional cross-epic `backlog/TEST_BACKLOG.md` for QA spanning multiple epics. [03](methodology/03_epics.md#standard-epic-folder-structure)
 
 ## The 3 discipline overlays + applied + evaluation
 

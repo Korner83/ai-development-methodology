@@ -13,6 +13,62 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.17.0 — 2026-05-26
+
+### Epic-folder convention reconciled with real adopter practice
+
+After surveying the WayWhisper backlog (the methodology's primary production adopter), three gaps surfaced between what the methodology documented and what real projects need:
+
+1. **Epic folder naming was ambiguous.** Methodology said `<NN>-<slug>/` (e.g., `07-content-protection/`). Real practice and the WayWhisper convention use `E<NN>-<slug>/` (e.g., `E07-content-protection/`). The `E` prefix prevents grep collisions between epic numbers and item numbers / dates, and matches the EPICS rollup's `E07` rows.
+2. **Per-epic file set was under-specified.** Methodology said `TEST.md` was optional. Real projects make all 5 files standard (`README` + `BACKLOG` + `ARCHIVE` + `FUTURE` + `TEST`). Ship empty-but-present rather than missing.
+3. **Cross-epic QA queue not documented.** Real projects keep a `backlog/TEST_BACKLOG.md` at the backlog root for QA scenarios that span ≥ 2 epics. The methodology had no pattern for this.
+
+### Methodology changes
+
+- **`methodology/03_epics.md` "Standard epic-folder structure"** (renamed from "Epic directory layout") — naming convention canonicalized to `E<NN>-<slug>`; 5 standard files documented; cross-epic `TEST_BACKLOG.md` pattern introduced.
+- **`methodology/03_epics.md` "TEST.md template"** — extended with a third optional table for manual-QA scenarios; conventions for `AT-##` IDs, status values mirroring the Test enum, append-only regression scenarios; new sub-section on cross-epic `TEST_BACKLOG.md` using `QA-##` IDs.
+- **`methodology/00_README.md`, `04_backlog_items.md`, `05_locks_and_parallel_work.md`, `09_git_workflow.md`** — all path references updated from `<NN>-<slug>` to `E<NN>-<slug>`.
+- **`templates/AGENT_KICKOFF.md`** — Step 3c updated to use the new convention; added pointer to `03_epics.md "Standard epic-folder structure"`.
+- **`CHEATSHEET.md`** — planning-layers table updated; new sub-line documenting the 5-file standard + optional `TEST_BACKLOG.md`.
+
+### Example improvements
+
+The `examples/example-project/` worked example previously shipped with only 2 files per epic (`README.md` + `BACKLOG.md`). v1.17.0 brings it up to the 5-file standard:
+
+- **Folder renamed** `01-cli-foundations` → `E01-cli-foundations`.
+- **`ARCHIVE.md` added** — BL-0001 (Scaffold project + CI for 3 OS) moved from BACKLOG to ARCHIVE with closure note. Demonstrates the archival pattern correctly (`Status: done` items don't stay in active BACKLOG).
+- **`FUTURE.md` added** — 3 example deferred items using Scheme B IDs (`BL-E01-F01`, `BL-E01-F02`, `BL-E01-F03`). Demonstrates the deferred-but-named-and-grep-able pattern.
+- **`TEST.md` added** — 5 acceptance tests mapping to charter exit criteria; 1 regression scenario from BL-0001's close; 3 manual-QA scenarios with cadences. Uses the new `AT-##` ID convention.
+- **`backlog/TEST_BACKLOG.md` added** — cross-epic manual-QA queue with 3 example scenarios using `QA-##` IDs.
+- **`BACKLOG.md` cleaned up** — BL-0001 removed (now in ARCHIVE); summary table reflects only active items.
+
+### Self-development consistency
+
+The methodology's own self-development project (`self-development/backlog/epics/`) was on the old naming convention (`01-examples-folder`, etc.). All 5 folders renamed to `E<NN>-` to match the new standard:
+
+```
+01-examples-folder              → E01-examples-folder
+02-first-semiannual-self-eval   → E02-first-semiannual-self-evaluation
+03-git-workflow-trim            → E03-git-workflow-trim
+04-native-tool-templates        → E04-native-tool-templates
+05-cheatsheet                   → E05-cheatsheet
+```
+
+All references in EPICS.md + cross-doc links updated. The 5-file structure expansion (ARCHIVE, FUTURE, TEST) for active self-development epics is deferred to a follow-up commit since those epics (E03 active; E04 planned) have light item counts that don't yet justify all 5 files. Standard applies when populated.
+
+### Process note
+
+**First PR-workflow release** (PR #3). The earlier in-day commits bypassed PR review under maintainer authorization (one-off operational concession); v1.17.0 establishes the PR-default discipline going forward. Every methodology change from this release onward should pass through PR review — even solo maintainer work benefits from the review-surface artifact, and adopters see in the commit history that the project follows its own rules.
+
+### Notable for adopters upgrading from v1.16.0 or earlier
+
+- **Rename your epic folders** to `E<NN>-<slug>/` (e.g., `07-content-protection` → `E07-content-protection`). The `git mv` is one-line per folder; update `EPICS.md` link references.
+- **Add the missing standard files** to each epic folder (`ARCHIVE.md`, `FUTURE.md`, `TEST.md`) — empty-but-present is fine. WayWhisper-style 5-file pattern.
+- **Consider adding `backlog/TEST_BACKLOG.md`** if your QA volume warrants a cross-epic queue.
+- **Existing `<NN>-<slug>/` folders are not invalid** — the methodology still works if you don't rename — but new projects should default to the `E<NN>-` convention.
+
+---
+
 ## v1.16.0 — 2026-05-25
 
 ### Methodology adjustments per maintainer feedback

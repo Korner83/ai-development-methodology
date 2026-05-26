@@ -63,7 +63,7 @@ _All 5 items completed in v1.15.0 maintainer-authored batch. See [examples/](../
 | Deps | BL-0002 |
 | Lock | — |
 
-**Closure:** [Epic charter](../../../../examples/example-project/backlog/epics/01-cli-foundations/README.md) + [5 BL items](../../../../examples/example-project/backlog/epics/01-cli-foundations/BACKLOG.md) shipped in canonical table-form frontmatter. The 5 items demonstrate: 1 done item (BL-0001 with Test: pass), 1 blocked item (BL-0005 with Blocker: line), 1 in-progress item with active lock, 1 ready item, 1 backlog item. EPICS rollup at [examples/example-project/backlog/EPICS.md](../../../../examples/example-project/backlog/EPICS.md).
+**Closure:** [Epic charter](../../../../examples/example-project/backlog/epics/E01-cli-foundations/README.md) + active items in [BACKLOG.md](../../../../examples/example-project/backlog/epics/E01-cli-foundations/BACKLOG.md) shipped in canonical table-form frontmatter. The 5 BL items demonstrate: 1 done item (BL-0001 with Test: pass — in [ARCHIVE.md](../../../../examples/example-project/backlog/epics/E01-cli-foundations/ARCHIVE.md)), 1 blocked item (BL-0005 with Blocker: line), 1 in-progress item with active lock, 1 ready item, 1 backlog item. EPICS rollup at [examples/example-project/backlog/EPICS.md](../../../../examples/example-project/backlog/EPICS.md). v1.17.0 added the missing 5-file structure (ARCHIVE/FUTURE/TEST) + folder-renamed to `E01-` convention.
 
 ---
 

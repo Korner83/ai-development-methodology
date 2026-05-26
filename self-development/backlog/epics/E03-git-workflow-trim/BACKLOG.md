@@ -168,4 +168,4 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 - `self-development/evaluations/2026-05-09-git-workflow-decision.md` (closure note)
 - `CHANGELOG.md` (E03 closure entry)
 - `self-development/backlog/EPICS.md` (rollup)
-- `self-development/backlog/epics/03-git-workflow-trim/ARCHIVE.md` (new on close)
+- `self-development/backlog/epics/E03-git-workflow-trim/ARCHIVE.md` (new on close)

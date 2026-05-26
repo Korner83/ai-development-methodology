@@ -34,9 +34,10 @@ Your job, in order:
    b) An initial pillar set (5–8 pillars) as separate files at
       docs/pillars/P1_*.md ... PN_*.md. Use the skeleton in
       02_pillars.md. Sequential dependency chain.
-   c) The charter for the first epic at backlog/epics/01-<slug>/README.md.
+   c) The charter for the first epic at backlog/epics/E01-<slug>/README.md.
       Use the template in 03_epics.md. One primary pillar. Binary
-      exit criteria.
+      exit criteria. Folder naming uses the E<NN>-<slug> convention
+      per 03_epics.md "Standard epic-folder structure."
    d) The first 3–5 backlog items in that epic's BACKLOG.md. Use the
       format in 04_backlog_items.md.
 

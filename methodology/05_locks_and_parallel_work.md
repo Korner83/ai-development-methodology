@@ -344,7 +344,7 @@ Every lock change is a git commit. This makes the lock history fully auditable.
 
 - **Who has held this item, and when:**
   ```
-  git log -p --follow -- backlog/epics/<NN>-<slug>/BACKLOG.md
+  git log -p --follow -- backlog/epics/E<NN>-<slug>/BACKLOG.md
   ```
   Filter to lines mentioning the item ID and you see every lock state change in order.
 - **All locks held by a specific contributor:**

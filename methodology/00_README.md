@@ -100,8 +100,8 @@ Work cascades through four layers, each answering a different question and opera
 |-------|---------------------|--------------|----------|
 | **Strategy** | *Why does this product exist? Who is it for? How does it make money?* | Years | `docs/strategy/` |
 | **Pillars** | *What capability layers does the product need to deliver the strategy?* | Years (evergreen) | `docs/pillars/` |
-| **Epics** | *What 3–12-week batches of work advance the pillars?* | Months | `backlog/epics/<NN>-<slug>/` |
-| **Items** | *What unit of work — 1–2 weeks max — can a contributor pick up?* | Days to weeks | `backlog/epics/<NN>-<slug>/BACKLOG.md` |
+| **Epics** | *What 3–12-week batches of work advance the pillars?* | Months | `backlog/epics/E<NN>-<slug>/` |
+| **Items** | *What unit of work — 1–2 weeks max — can a contributor pick up?* | Days to weeks | `backlog/epics/E<NN>-<slug>/BACKLOG.md` |
 
 Each layer constrains the one below. Strategy bounds which pillars matter. Pillars bound which epics make sense. Epics bound which items get filed. The chain prevents the most common scope-creep failures: items that don't ladder up to anything, epics that orphan themselves, pillars that don't operationalize strategy.
 
