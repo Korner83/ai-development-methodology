@@ -23,6 +23,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Old epic-folder convention must not appear
         run: |
@@ -114,6 +116,8 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check internal markdown links (Python; no external action deps)
         run: |
