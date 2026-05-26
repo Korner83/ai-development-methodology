@@ -35,7 +35,7 @@ When the methodology has accumulated ~6 months of active use and ~1.x releases, 
 - **Auditing the `self-development/` docs.** This pass covers `methodology/` only. The `self-development/` folder has its own evolution per the bootstrap plan; auditing it is a separate concern (likely a future epic).
 - **Methodology design changes.** Gaps closed by editing existing docs are in scope. Adding *new* sections or restructuring beyond gap-fix is not — those go through normal feature releases. (E.g., if the eval surfaces "we need a doc about X," that becomes a Phase 2 epic, not part of this eval.)
 - **Updating the brief or strategy docs.** The brief was just authored (v1.7.0); not subject to drift review yet. Deferred to a future eval.
-- **Auditing third-party content** (peer methodology landscape in `brief/03_competitive_landscape.md`). The competitive landscape has its own snapshot-update cadence noted in the brief itself.
+- **Auditing third-party content** (peer methodology landscape — was tracked in `brief/03_competitive_landscape.md` before v1.17.1 gitignored it; now maintainer-private and updated at the maintainer's own cadence).
 
 ## Linked docs
 

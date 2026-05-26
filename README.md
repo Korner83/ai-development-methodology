@@ -18,7 +18,7 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Autonomous goal-oriented development cycles** — paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration — 0–10 rubric per area; unsolvable issues get *handled/postponed/marked*, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.17.0](CHANGELOG.md).
+- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.17.1](CHANGELOG.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
 
 ---
@@ -116,17 +116,17 @@ Most projects accumulate the same failure modes once they last more than a few w
 ai-development-methodology/
 ├── README.md                 # this file
 ├── CHANGELOG.md              # version history (self-applies the methodology)
-├── CHEATSHEET.md             # one-page quick reference (NEW v1.17.0)
+├── CHEATSHEET.md             # one-page quick reference (NEW v1.17.1)
 ├── LICENSE                   # CC BY 4.0
 ├── STATUS.md                 # maintenance posture
-├── methodology/              # the 13 methodology docs (00–12; doc 12 NEW v1.17.0)
+├── methodology/              # the 13 methodology docs (00–12; doc 12 NEW v1.17.1)
 ├── templates/
 │   ├── CLAUDE.md             # project-instruction file (Claude Code)
 │   ├── AGENTS.md             # vendor-neutral version (extra plan/tool/safety sections)
 │   ├── AGENT_KICKOFF.md      # planning-mode prompt for new projects
-│   ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions (extended v1.17.0 with periodic deep-eval)
+│   ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions (extended v1.17.1 with periodic deep-eval)
 │   └── PROJECT_STRUCTURE.md  # recommended folder layout + naming conventions
-├── examples/                 # NEW v1.17.0 — fictional `tinker` project showing methodology applied end-to-end
+├── examples/                 # NEW v1.17.1 — fictional `tinker` project showing methodology applied end-to-end
 │   ├── README.md             # 3-row comparison: methodology/ vs self-development/ vs examples/
 │   └── example-project/
 │       ├── README.md
@@ -143,7 +143,7 @@ ai-development-methodology/
     └── loop-notes/           # loop-detected methodology insights for maintainer review
 ```
 
-~13,000+ lines across 60+ files at v1.17.0. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
+~13,000+ lines across 60+ files at v1.17.1. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
 
 ---
 
@@ -257,29 +257,42 @@ The methodology is tool-agnostic. Only the project-instruction filename differs:
 
 ---
 
-## What's similar, what's different
+## When to use this methodology
 
-There's a real ecosystem now of AI-collaboration methodologies. Honest map of the neighborhood:
+### What this is good for
 
-| Project | What it covers | Where it overlaps | Where this differs |
-|---|---|---|---|
-| [**GitHub Spec Kit**](https://github.com/github/spec-kit) (~106k★) | Spec-driven dev: Constitution → Specify → Clarify → Plan → Tasks → Implement | Planning hierarchy, vendor-neutral templates, plan-before-code | This adds DoD-coupled-to-item, locks, memory, named anti-patterns; lighter on artifact scaffolding |
-| [**BMAD Method**](https://github.com/bmad-code-org/BMAD-METHOD) | 12+ agent personas (PM/Architect/Dev/UX), multi-agent workflows, CLI + Web UI | Structured workflows, multi-layer planning | This is markdown-only — no personas, no CLI tooling, no Web UI |
-| [**Ralph loop**](https://ghuntley.com/ralph/) (Geoffrey Huntley) | `while :; do cat PROMPT.md \| claude-code; done` — one task per loop, prompt-tuning over tool-blame | Iterative, prompt-as-discipline, single-threaded validation | This adds parallel work, formal DoD, four planning layers, brownfield support |
-| [**stdlib pattern**](https://ghuntley.com/specs/) (Geoffrey Huntley) | Library of small composable prompting rules; every mistake → new rule | Memory/rule accretion via two-tier memory | This adds planning layers, locks, DoD — orthogonal additions |
-| [**AGENTS.md standard**](https://agents.md/) | Open instruction-file format (Cursor, Aider, Codex, Jules, Zed) | This methodology uses it as a primary template | Just a file standard, not a process |
-| [**Get Shit Done (GSD)**](https://www.prafulls.me/blogs/gsd-spec-driven-development) | "Specs are prompts" — quality of spec dictates output | Spec-first discipline | This adds locks, parallel work, DoD, memory |
-| [**Nano-spec**](https://github.com/tao-hpu/nano-spec) | 4 templates (README/todo/doc/log), ~10 min setup | Markdown-first, planning hierarchy | This is the larger superset — DoD, locks, memory, verification |
+- **Projects where humans and AI agents collaborate as peers.** The file-based lock + tier matrix + per-item DoD all assume contributors will arrive at AI velocity; the practices are designed for that.
+- **Adopters who want markdown + git as the substrate.** No SaaS, no signup, no vendor lock-in, no monthly cost. Everything lives in the repo where the code lives.
+- **Solo maintainers + small teams.** Scales down to one human + one AI agent without ceremony; scales up to a small team + multiple agents via the lock + WIP cap.
+- **Long-running projects where direction matters.** The four-layer planning cascade (strategy → pillars → epics → items) prevents the silent drift that "let's just keep shipping features" produces over months.
+- **AI-assisted projects that want a defense against the "cheating agent" anti-pattern.** Most testing approaches assume tests-pass = done; this one explicitly addresses the case where the same agent writes both broken code AND the broken tests that validate it.
+- **Projects shipping toward declared milestones.** The periodic deep-eval ([doc 12](methodology/12_milestone_evaluation.md)) catches the aggregate problems that per-item DoD can't see — compounded UX debt, cross-cutting perf regressions, security drift.
+- **Teams willing to write things down.** Strategy docs, pillar files, epic charters, items, memory entries — everything is markdown text. The methodology rewards teams whose culture is "if it isn't written, it doesn't exist."
 
-If you're already using one of these and it works, great. The areas this set distinguishes itself on:
+### What this is NOT good for
 
-- **The "cheating agent" anti-pattern is named and addressed.** Most peer methodologies assume tests-pass = done. They don't ship a defense for the case where the same AI writes both broken code and broken tests that validate it.
-- **File-based locks with TTL for humans + agents, same protocol.** Peers assume single-driver or use heavy isolation (VMs, sub-agent spawning). I haven't found another methodology with a same-format lock for both.
-- **Challenge-before-consenting as a named pattern with a copy-paste prompt.** Peers acknowledge AI agreement bias; this ships a counter.
-- **Four-layer planning hierarchy.** Most peers stop at two layers (spec → tasks).
-- **DoD coupled to the work-item frontmatter itself**, not a separate doc — making "done" mechanically impossible to fake.
+- **Teams that want a hosted PM tool with permissions, dashboards, and a web UI.** This isn't that. If you want one, use one.
+- **Projects where ceremony is the value.** This methodology removes ceremony where it can. If your team's process culture depends on ritualized standups + sprint demos + retros, this doesn't replace those.
+- **Regulated-industry projects without further adaptation.** The default scoring rubric in [doc 12](methodology/12_milestone_evaluation.md) has no Compliance area; the lock protocol has no audit trail beyond git. You can add these, but they're not built in.
+- **Single-shot scripts or throwaway prototypes.** The overhead doesn't pay off until a project has > 1 month of work ahead of it.
+- **Replacing institutional knowledge that already works.** If your team has implicit conventions that produce good outcomes, don't replace them with this methodology's explicit ones just because the explicit version is shinier. Layer over what works; don't bulldoze.
+- **Verbal-only teams.** If your culture is "we discussed it in chat last week," this methodology won't fit until that culture shifts. Adoption is hard because the methodology assumes writing is the default.
 
-Honest disclosure: this methodology has 0 stars at the time of writing and is solo-maintained. The above are the structural differences; whether they matter for *your* project is your call.
+## Why these particular structural choices
+
+The methodology commits to a few patterns that are worth naming explicitly:
+
+- **The "cheating agent" anti-pattern is named + defended.** Tests pass ≠ done. Cross-AI validation + the actual-UI fix-test loop + cross-AI diff-verification together make it hard for the implementing session to silently ship a self-validated bug.
+- **File-based locks with TTL — same protocol for humans and AI agents.** No tier system where humans coordinate one way and agents another. Same `Lock:` field, same TTL, same release discipline. ([Doc 05](methodology/05_locks_and_parallel_work.md).)
+- **Challenge-before-consenting** as a named pattern with a copy-paste prompt — defends against AI's agreement bias when the maintainer is approving a non-trivial plan. ([Doc 06](methodology/06_working_principles.md).)
+- **Four-layer planning hierarchy** (strategy → pillars → epics → items) keeps work laddered to long-term direction rather than shipped as disconnected features. ([Docs 01–04](methodology/00_README.md).)
+- **DoD coupled to the item frontmatter itself.** `Status: done` requires `Test: pass` (or narrow exceptions with body-documented reasons). "Done" is mechanically auditable, not maintainer-judgment-dependent. ([Docs 04 + 07](methodology/04_backlog_items.md).)
+- **Tier matrix for autonomous loops on authoritative content.** Cosmetic + surgical patches are loop-eligible with cross-AI diff-verification; substantive changes stay human-authored. Compounding without sacrificing safety. ([`AUTONOMOUS_LOOP.md`](templates/AUTONOMOUS_LOOP.md).)
+- **Periodic deep-eval every Nth loop.** Catches aggregate quality drift (UX debt, perf regression, security drift) on a 0–10 rubric per area, with `handle / postpone / mark` discipline for unsolvable issues. ([Doc 12](methodology/12_milestone_evaluation.md).)
+
+## Honest disclosure
+
+This methodology is solo-maintained. Its primary validation is one production project + this repo applied to itself (`self-development/`). It has not yet been stress-tested by multiple external adopters. The structural choices above are the bet; whether they fit *your* project's shape is your evaluation to make. The [CHEATSHEET](CHEATSHEET.md) gets you to a yes/no decision in 5 minutes.
 
 ---
 
@@ -306,7 +319,7 @@ For modified versions, indicate you've made changes. Only obligation the license
 
 ## Status
 
-Battle-tested in one production project. Currently v1.17.0 — see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean — PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.17.1 — see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean — PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 

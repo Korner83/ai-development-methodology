@@ -13,6 +13,53 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.17.1 — 2026-05-26
+
+### Repositioning: positive framing replaces side-by-side comparison
+
+Maintainer-driven choice to stop comparing the methodology directly to peer projects in adopter-facing surfaces. The previous "What's similar, what's different" section in `README.md` was a 7-row comparison table naming peer methodologies + star counts + per-row "where this differs" framing. Three reasons to drop it:
+
+1. **Maintenance debt.** Peer projects evolve; comparisons go stale within months. Star counts are wrong by the next release.
+2. **Defensive framing.** "How we differ from X" structures the doc around X's terms. Visitors leave understanding X better than understanding us.
+3. **Tribal signaling.** Explicit positioning vs. peer methodologies invites adopters to pre-categorize ("ah, this is the anti-Spec-Kit"). Hard to recover from.
+
+### README.md changes
+
+The `## What's similar, what's different` section is replaced with three positive-positioning sections:
+
+- **`## When to use this methodology`** — split into "What this is good for" + "What this is NOT good for." 6 + 6 bullet points each, written as positive claims about fit (or anti-fit) without naming peer projects.
+- **`## Why these particular structural choices`** — 7 bullet points naming the methodology's commitments (cheating-agent defense, file-based locks for humans+agents, challenge-before-consenting, four-layer planning, DoD coupled to item, tier matrix, periodic deep-eval) as positive claims with anchor links to the relevant docs. Same structural content as the previous "where this differs" list, but framed as "what we do" instead of "how we're different from them."
+- **`## Honest disclosure`** — preserved the solo-maintained + one-production-project caveat (character, not comparison).
+
+No peer-project names, no star counts, no `vs.` framing remain in the README.
+
+### Gitignored
+
+- **`self-development/brief/03_competitive_landscape.md`** (119 lines) — internal competitive analysis surveying nine named peer methodologies.
+- **`self-development/brief/04_market_gaps.md`** (80 lines) — internal market-gap analysis named-vs-peer.
+
+Both moved to gitignored status (untracked but kept on local disk for maintainer reference). Same rationale as `self-development/distribution/`: internal strategic analysis that loses value publicly (stale within months) and looks calculating (private research notes shouldn't be a public artifact). Will be deleted from origin on next push; remain available to the maintainer's local workflow.
+
+### Cross-reference cleanup
+
+Four cross-doc references to the now-gitignored brief files were rewritten to point to the README's positive-positioning sections instead:
+
+- `self-development/brief/00_brief.md` (3 references updated)
+- `self-development/brief/01_vision.md` (1 reference updated)
+- `self-development/strategy/00_master_plan.md` (2 references updated to note the gitignored status)
+- `self-development/backlog/epics/E02-first-semiannual-self-evaluation/README.md` (1 reference updated)
+
+### Permanence note
+
+v1.17.0's tagged commit + earlier history still contain the comparison material — that's immutable git history; force-rewriting it to "scrub" comparisons would violate `methodology/09_git_workflow.md` "Never force-push." Acceptable trade-off; the methodology going forward (v1.17.1+) doesn't carry the comparison framing.
+
+### Notable for adopters
+
+- If you forked or cloned before v1.17.1 and have the brief's competitive analysis files locally — keep them or delete them per your own preference. They're not load-bearing.
+- The README is now meaningfully shorter and more focused on what the methodology *does* rather than how it relates to alternatives. Adopters comparing methodologies will compare on their own time, with current information from each project's own README.
+
+---
+
 ## v1.17.0 — 2026-05-26
 
 ### Epic-folder convention reconciled with real adopter practice

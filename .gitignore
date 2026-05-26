@@ -5,6 +5,16 @@
 # artifacts become CHANGELOG entries / blog posts / HN threads on their own.
 self-development/distribution/
 
+# Internal competitive analysis — kept local for maintainer reference;
+# not shipped publicly because (a) competitor projects evolve and the
+# analysis goes stale within months, (b) public side-by-side comparisons
+# can read as competitive or petty, (c) star counts and popularity claims
+# are wrong by the next release. Positive positioning lives in README.md
+# "When to use this methodology"; this internal analysis is the maintainer's
+# private research notes.
+self-development/brief/03_competitive_landscape.md
+self-development/brief/04_market_gaps.md
+
 # OS noise
 .DS_Store
 Thumbs.db
