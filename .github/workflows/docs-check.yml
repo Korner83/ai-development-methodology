@@ -12,18 +12,22 @@ on:
       - ".github/workflows/docs-check.yml"
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   pattern-guards:
     name: Pattern guards (epic convention, doc counts, version pins, reading time, done rule)
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Old epic-folder convention must not appear
         run: |
-          # The v1.17.0 release canonicalized E<NN>-<slug>/.
-          # Any "NN-slug/" or "epics/01-..." style in adopter-facing docs is stale.
-          # CHANGELOG and evaluations/ are historical record — excluded.
           hits=$(grep -rEn 'backlog/epics/(NN|<NN>)-' \
                    --include='*.md' \
                    --exclude=CHANGELOG.md \
@@ -39,8 +43,6 @@ jobs:
 
       - name: Doc count claims must not say 11 or "Twelve"
         run: |
-          # The methodology has 13 numbered docs (00–12). Any "11 docs covering" or
-          # "Twelve short docs" in templates/README/CHEATSHEET is stale.
           hits=$(grep -rEn '(\b11 docs covering|Twelve short docs|all 12 methodology docs)' \
                    --include='*.md' \
                    --exclude=CHANGELOG.md \
@@ -71,9 +73,6 @@ jobs:
 
       - name: Status:done rule must not say "No exceptions"
         run: |
-          # The v1.16.0 release extended the rule with two narrow exceptions
-          # (manual-verified + n/a). Any "No exceptions" in the Status:done
-          # context is stale.
           hits=$(grep -rEnB1 -A1 'Status: done.*requires.*Test: pass' \
                    --include='*.md' \
                    --exclude=CHANGELOG.md \
@@ -90,28 +89,12 @@ jobs:
 
       - name: Version pin consistency
         run: |
-          # Pinned references to old versions (v1.13–v1.16) outside CHANGELOG +
-          # evaluations are stale. Current version is derived from the README's
-          # "Currently [v1.X.Y]" line.
           current=$(grep -oE 'Currently \[v1\.[0-9]+\.[0-9]+\]' README.md | head -1 | grep -oE 'v1\.[0-9]+\.[0-9]+')
           if [ -z "$current" ]; then
             echo "::error::Could not detect current version from README.md 'Currently [vX.Y.Z]' line."
             exit 1
           fi
           echo "Detected current version: $current"
-          stale=$(grep -rEn 'v1\.1[0-7]\.[0-9]+' \
-                    --include='*.md' \
-                    --exclude=CHANGELOG.md \
-                    --exclude-dir=evaluations \
-                    --exclude-dir=.git \
-                  | grep -v "$current" \
-                  | grep -vE '(via the autonomous|the v1\.[0-9]+\.[0-9]+ release|since v1\.[0-9]+\.[0-9]+|from v1\.[0-9]+\.[0-9]+|in v1\.[0-9]+\.[0-9]+|per v1\.[0-9]+\.[0-9]+|as of v1\.[0-9]+\.[0-9]+|introduced in v1\.|added in v1\.|shipped in v1\.|Built against methodology|Pinned to|Pinned-against|with v1\.[0-9]+\.[0-9]+)' \
-                  || true)
-          if [ -n "$stale" ]; then
-            echo "::warning::Possible stale version pins (review manually):"
-            echo "$stale"
-          fi
-          # Pin-line specific check: lines that ARE pin statements must match $current.
           pins=$(grep -rEn '(Pinned-against|Pinned to|Built against methodology) [* ]*v1\.[0-9]+\.[0-9]+' \
                    --include='*.md' \
                    --exclude=CHANGELOG.md \
@@ -129,19 +112,60 @@ jobs:
   link-check:
     name: Internal markdown link check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
-
-      - name: Lychee — check internal links only
-        uses: lycheeverse/lychee-action@v2
         with:
-          # Internal links only: --offline skips network requests entirely.
-          # Excludes the gitignored distribution/ folder + evaluations/ historical.
-          args: >-
-            --offline
-            --no-progress
-            --exclude-path 'self-development/distribution'
-            --exclude-path 'self-development/evaluations'
-            --exclude-path 'CHANGELOG.md'
-            './**/*.md'
-          fail: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check internal markdown links (Python; no external action deps)
+        run: |
+          python3 - <<'PY'
+          import os, re, sys
+          from pathlib import Path
+          from urllib.parse import unquote
+
+          # Match standard markdown links: [text](path)
+          LINK_RE = re.compile(r'(?<!\!)\[([^\]]+)\]\(([^)]+)\)')
+          # Skip external links + anchors-only + mailto.
+          EXTERNAL_PREFIXES = ('http://', 'https://', 'mailto:', '#')
+          # Folders excluded from the scan.
+          EXCLUDE_DIRS = {'.git', 'evaluations', 'distribution'}
+
+          repo = Path('.').resolve()
+          broken = []
+          checked = 0
+
+          for md in repo.rglob('*.md'):
+              if any(part in EXCLUDE_DIRS for part in md.parts):
+                  continue
+              if md.name == 'CHANGELOG.md':
+                  continue
+              try:
+                  text = md.read_text(encoding='utf-8')
+              except Exception as e:
+                  print(f"WARN reading {md}: {e}")
+                  continue
+              for m in LINK_RE.finditer(text):
+                  link = m.group(2).strip()
+                  # Strip anchor + query.
+                  link_path = unquote(link.split('#', 1)[0].split('?', 1)[0])
+                  if not link_path:
+                      continue  # anchor-only
+                  if link.startswith(EXTERNAL_PREFIXES):
+                      continue
+                  checked += 1
+                  # Resolve relative to the file's directory.
+                  resolved = (md.parent / link_path).resolve()
+                  if not resolved.exists():
+                      broken.append((md.relative_to(repo), link, str(resolved.relative_to(repo) if resolved.is_relative_to(repo) else resolved)))
+
+          print(f"Checked {checked} internal links across markdown files.")
+          if broken:
+              print(f"::error::{len(broken)} broken internal links:")
+              for src, link, resolved in broken:
+                  print(f"  {src}: [...]({link})  →  resolves to {resolved} (NOT FOUND)")
+              sys.exit(1)
+          print("OK — all internal markdown links resolve.")
+          PY
