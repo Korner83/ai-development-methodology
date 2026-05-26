@@ -131,7 +131,26 @@ jobs:
           # Skip external links + anchors-only + mailto.
           EXTERNAL_PREFIXES = ('http://', 'https://', 'mailto:', '#')
           # Folders excluded from the scan.
-          EXCLUDE_DIRS = {'.git', 'evaluations', 'distribution'}
+          # templates/ contains adopter-project paths (docs/methodology/...) that
+          # resolve when the template is copied INTO an adopter repo, not here.
+          EXCLUDE_DIRS = {'.git', 'evaluations', 'distribution', 'templates'}
+
+          def strip_code_blocks(text):
+              """Remove fenced code blocks so example links inside them aren't checked."""
+              lines = text.split('\n')
+              out = []
+              in_block = False
+              for line in lines:
+                  if line.lstrip().startswith('```'):
+                      in_block = not in_block
+                      continue
+                  if not in_block:
+                      out.append(line)
+              return '\n'.join(out)
+
+          # Inline code spans (`...`) often contain example markdown syntax that
+          # renders as code, not real links. Strip before scanning.
+          INLINE_CODE_RE = re.compile(r'`[^`\n]*`')
 
           repo = Path('.').resolve()
           broken = []
@@ -147,8 +166,15 @@ jobs:
               except Exception as e:
                   print(f"WARN reading {md}: {e}")
                   continue
+              # Strip fenced code blocks and inline code spans before scanning —
+              # example/template links inside them are documentation, not real links.
+              text = strip_code_blocks(text)
+              text = INLINE_CODE_RE.sub('', text)
               for m in LINK_RE.finditer(text):
                   link = m.group(2).strip()
+                  # Skip placeholder paths (e.g., P<N+1>_<name>.md, <NN>_<topic>.md).
+                  if '<' in link or '>' in link:
+                      continue
                   # Strip anchor + query.
                   link_path = unquote(link.split('#', 1)[0].split('?', 1)[0])
                   if not link_path:
