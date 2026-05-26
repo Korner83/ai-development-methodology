@@ -284,7 +284,7 @@ KPIs differ from exit criteria. Exit criteria gate closure ("the integration tes
 Explicit. Pointed.
 
 - *"Editorial review tooling — out of scope; see the E10 — Quality Ops epic in your project's backlog."*
-- *"Internationalization beyond the default language — deferred; see [FUTURE.md](FUTURE.md)."*
+- *"Internationalization beyond the default language — deferred; see `FUTURE.md`."*
 
 The list should pre-empt scope creep. Whenever a reviewer or contributor asks "shouldn't we also do X?" the answer should already exist in this section.
 
