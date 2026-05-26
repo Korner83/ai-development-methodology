@@ -1,22 +1,22 @@
 # AI Development Methodology
 
-How to run a software project when some of your contributors are AI agents — and one of them just panic-refactored your auth middleware at 2am while a different one was halfway through the same task.
+How to run a software project when some of your contributors are AI agents - and one of them just panic-refactored your auth middleware at 2am while a different one was halfway through the same task.
 
 Thirteen short docs. Markdown + git. No SaaS, no signup, no vendor lock-in. An AI agent picks up the operating contract in seconds via [`templates/`](templates/). A human grasps the core concept in 5 minutes via the [CHEATSHEET](CHEATSHEET.md). Full reading is a focused day. Use forever (or until you find something better).
 
-By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com)) — [CC BY 4.0](LICENSE). Fork it, ship it, charge for it, teach it. Just keep the credit.
+By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com)) - [CC BY 4.0](LICENSE). Fork it, ship it, charge for it, teach it. Just keep the credit.
 
 ---
 
 ## TL;DR
 
-- **Four planning layers** — strategy → pillars → epics → items. Each answers a different question.
-- **Three discipline overlays** — working principles, Definition of Done, lessons-learned memory. They bind every change.
+- **Four planning layers** - strategy → pillars → epics → items. Each answers a different question.
+- **Three discipline overlays** - working principles, Definition of Done, lessons-learned memory. They bind every change.
 - **File-based locks with TTL** so two AI agents (or two humans) don't both grab the same item.
 - **Fix-test loop for the actual UI** because "tests pass" doesn't mean "the page renders."
 - **Cross-AI validation + user testing** as the final gates.
-- **Autonomous goal-oriented development cycles** — paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
-- **Milestone-driven deep-eval** every Nth loop iteration — 0–10 rubric per area; unsolvable issues get *handled/postponed/marked*, never forced.
+- **Autonomous goal-oriented development cycles** - paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
+- **Milestone-driven deep-eval** every Nth loop iteration - 0–10 rubric per area; unsolvable issues get *handled/postponed/marked*, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
 - Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.17.3](CHANGELOG.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
@@ -33,7 +33,7 @@ flowchart TB
     classDef discipline fill:#fef3c7,stroke:#b45309,color:#78350f
     classDef support fill:#dcfce7,stroke:#15803d,color:#14532d
 
-    subgraph PLANNING [" PLANNING — cascades downward "]
+    subgraph PLANNING [" PLANNING - cascades downward "]
         direction TB
         S["<b>Strategy</b><br/><i>why · phases · outcomes</i>"]
         P["<b>Pillars</b><br/><i>long-term capability goals · evergreen</i>"]
@@ -42,7 +42,7 @@ flowchart TB
         S --> P --> E --> I
     end
 
-    subgraph DISCIPLINE [" DISCIPLINES — bind every change "]
+    subgraph DISCIPLINE [" DISCIPLINES - bind every change "]
         direction LR
         W["<b>Working Principles</b><br/><i>think · simple · surgical · goal-driven</i>"]
         D["<b>Definition of Done</b><br/><i>6 gates · Status:done requires Test:pass</i>"]
@@ -74,38 +74,38 @@ For the file layout and how the cascade physically lives on disk, see [How the w
 The concrete payoffs after a week or two of adoption:
 
 - **Work stops drifting.** Items trace from today's commit back to a phase in the strategy. "Why are we doing this?" is answerable without re-arguing it every quarter.
-- **The backlog tells the truth.** `Status: done` requires `Test: pass` — no partial credit. Trust in the backlog comes back.
+- **The backlog tells the truth.** `Status: done` requires `Test: pass` - no partial credit. Trust in the backlog comes back.
 - **Parallel agents stop colliding.** File-based locks with TTL handle the coordination that chat-based "I've got this" can't.
 - **The same mistake doesn't come back.** Memory entries make recurring fixes a one-time cost.
 - **AI agents stay on task.** Four working principles forbid the speculative-abstraction / scope-creep / "let me also clean this up" pattern that LLMs default to.
-- **Verification catches what tests miss.** White pages, broken dark mode, bypassed auth gates, missing imports — caught at the actual-UI gate, not in production.
+- **Verification catches what tests miss.** White pages, broken dark mode, bypassed auth gates, missing imports - caught at the actual-UI gate, not in production.
 - **AI-as-yes-man becomes visible.** A copy-paste counter-prompt ("what's wrong with this plan?") makes you challenge before approving.
 - **The cheating agent gets caught.** When one model writes both the implementation and the tests that validate it, the green suite hides bugs. A different model auditing catches them.
-- **Portable across tools.** Switching Claude Code → Cursor → Codex doesn't mean re-learning your process — only swapping the project-instruction filename.
+- **Portable across tools.** Switching Claude Code → Cursor → Codex doesn't mean re-learning your process - only swapping the project-instruction filename.
 - **No vendor lock-in.** Markdown and git. If your AI tool is gone in 18 months, your methodology isn't.
 
 ---
 
 ## Why this exists
 
-Most projects accumulate the same failure modes once they last more than a few weeks. AI-assisted projects accumulate them twice as fast — the effective contributor count doubles and the new contributors don't sleep.
+Most projects accumulate the same failure modes once they last more than a few weeks. AI-assisted projects accumulate them twice as fast - the effective contributor count doubles and the new contributors don't sleep.
 
 | The problem | How this set closes it |
 |---|---|
-| Direction drifts; every quarter re-litigates "what are we building?" | [Strategy docs](methodology/01_strategy.md) — versioned phases with exit criteria. |
-| "Done" means whatever the contributor decides. | [Definition of Done](methodology/07_definition_of_done.md) — six binary gates; hard rule `Status: done` requires `Test: pass`. |
+| Direction drifts; every quarter re-litigates "what are we building?" | [Strategy docs](methodology/01_strategy.md) - versioned phases with exit criteria. |
+| "Done" means whatever the contributor decides. | [Definition of Done](methodology/07_definition_of_done.md) - six binary gates; hard rule `Status: done` requires `Test: pass`. |
 | "Tests pass" but the page is white, dark mode broken, auth bypassed. | [Actual-UI fix-test loop](methodology/10_testing_and_verification.md) with required dimensions. |
-| Lessons evaporate; same mistake every six months. | [Two-layer memory](methodology/08_lessons_and_memory.md) — instruction file + memory directory. |
-| Parallel contributors collide; two agents grab the same item silently. | [File-based locks with TTL](methodology/05_locks_and_parallel_work.md) — humans and agents, same protocol. |
-| AI agents wander off-task — speculation, scope creep, "while I'm here" refactors. | [Working principles](methodology/06_working_principles.md) — distilled from real LLM failure modes. |
+| Lessons evaporate; same mistake every six months. | [Two-layer memory](methodology/08_lessons_and_memory.md) - instruction file + memory directory. |
+| Parallel contributors collide; two agents grab the same item silently. | [File-based locks with TTL](methodology/05_locks_and_parallel_work.md) - humans and agents, same protocol. |
+| AI agents wander off-task - speculation, scope creep, "while I'm here" refactors. | [Working principles](methodology/06_working_principles.md) - distilled from real LLM failure modes. |
 | AI agrees with you and you're both wrong. | [Challenge before consenting](methodology/06_working_principles.md). |
 | AI writes broken code AND broken tests that validate it. | [Cheating agent anti-pattern](methodology/10_testing_and_verification.md) + cross-AI validation. |
-| Humans become strangers in their own codebase. | [Human roles](methodology/11_human_roles.md) — supervisory layer, four anti-patterns. |
-| The trunk breaks; force-push, destructive command, day gone. | [Git workflow rules](methodology/09_git_workflow.md) — branch protection, AI never deploys, never destructive. |
-| Work doesn't compound across sessions, contributors, or tools — each new session re-derives the context. | [Plans, items, and memory all persist in files](methodology/00_README.md#how-the-system-enables-long-term-multi-session-work). Drop items today; another agent picks them up next week. The backlog *is* the queue. |
-| Picking the next item turns into "whichever feels interesting"; cheap high-value work gets skipped. | [ROI-based prioritization](methodology/04_backlog_items.md#prioritization--the-roi-heuristic) — `Priority:` + `Effort:` fields make "highest-impact-per-effort" the default picking rule. Deviation is explicit, not silent. |
-| Human-blocked work freezes agents indefinitely; AI sits on a lock for credentials it'll never get. | [`HUMAN_NEEDED.md`](methodology/04_backlog_items.md#human_neededmd--work-blocked-on-human-agency) — dedicated file tracks blocked items so agents release the lock and move on; humans see pending delegations in one place. |
-| Long autonomous runs (overnight, weekend, milestone push) drift without a structure to ratchet against. | [`AUTONOMOUS_LOOP.md`](templates/AUTONOMOUS_LOOP.md) — loop prompt that picks the highest-impact ready item, executes through the DoD, archives, repeats. Stops at milestone, when no ready items remain, or on user check-in. |
+| Humans become strangers in their own codebase. | [Human roles](methodology/11_human_roles.md) - supervisory layer, four anti-patterns. |
+| The trunk breaks; force-push, destructive command, day gone. | [Git workflow rules](methodology/09_git_workflow.md) - branch protection, AI never deploys, never destructive. |
+| Work doesn't compound across sessions, contributors, or tools - each new session re-derives the context. | [Plans, items, and memory all persist in files](methodology/00_README.md#how-the-system-enables-long-term-multi-session-work). Drop items today; another agent picks them up next week. The backlog *is* the queue. |
+| Picking the next item turns into "whichever feels interesting"; cheap high-value work gets skipped. | [ROI-based prioritization](methodology/04_backlog_items.md#prioritization--the-roi-heuristic) - `Priority:` + `Effort:` fields make "highest-impact-per-effort" the default picking rule. Deviation is explicit, not silent. |
+| Human-blocked work freezes agents indefinitely; AI sits on a lock for credentials it'll never get. | [`HUMAN_NEEDED.md`](methodology/04_backlog_items.md#human_neededmd--work-blocked-on-human-agency) - dedicated file tracks blocked items so agents release the lock and move on; humans see pending delegations in one place. |
+| Long autonomous runs (overnight, weekend, milestone push) drift without a structure to ratchet against. | [`AUTONOMOUS_LOOP.md`](templates/AUTONOMOUS_LOOP.md) - loop prompt that picks the highest-impact ready item, executes through the DoD, archives, repeats. Stops at milestone, when no ready items remain, or on user check-in. |
 | Done items pile up and become unsearchable; deferred ideas get lost. | `ARCHIVE.md` keeps every done item grep-able forever. `FUTURE.md` keeps deferred ideas alive without cluttering active work. Both are standard files in every epic folder. |
 
 ---
@@ -126,7 +126,7 @@ ai-development-methodology/
 │   ├── AGENT_KICKOFF.md      # planning-mode prompt for new projects
 │   ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions (extended v1.17.3 with periodic deep-eval)
 │   └── PROJECT_STRUCTURE.md  # recommended folder layout + naming conventions
-├── examples/                 # NEW v1.17.3 — fictional `tinker` project showing methodology applied end-to-end
+├── examples/                 # NEW v1.17.3 - fictional `tinker` project showing methodology applied end-to-end
 │   ├── README.md             # 3-row comparison: methodology/ vs self-development/ vs examples/
 │   └── example-project/
 │       ├── README.md
@@ -134,30 +134,30 @@ ai-development-methodology/
 │       ├── pillars/P1_capture.md, P2_retrieval.md
 │       └── backlog/TEST_BACKLOG.md + EPICS.md + epics/E01-cli-foundations/ (charter + BACKLOG + ARCHIVE + FUTURE + TEST)
 └── self-development/         # the methodology applied to its own development
-    ├── AUTONOMOUS_LOOP.md    # Step 4 — adapted loop config (operational cycle)
-    ├── brief/                # Step 0 outputs — vision, audience, competitive landscape, etc.
-    ├── strategy/             # Step 1 — master plan (vision + 4 phases + pillar roadmap)
-    ├── pillars/              # Step 1 — 9 capability-layer pillars (P1..P9)
-    ├── backlog/              # Step 2 — 5 epic charters; Step 3 — items inside active epics
+    ├── AUTONOMOUS_LOOP.md    # Step 4 - adapted loop config (operational cycle)
+    ├── brief/                # Step 0 outputs - vision, audience, competitive landscape, etc.
+    ├── strategy/             # Step 1 - master plan (vision + 4 phases + pillar roadmap)
+    ├── pillars/              # Step 1 - 9 capability-layer pillars (P1..P9)
+    ├── backlog/              # Step 2 - 5 epic charters; Step 3 - items inside active epics
     ├── evaluations/          # semi-annual self-eval reports (first pass 2026-05-25)
     └── loop-notes/           # loop-detected methodology insights for maintainer review
 ```
 
-~13,000+ lines across 60+ files at v1.17.3. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
+~13,000+ lines across 60+ files at v1.17.3. Longest doc ~1,000 lines. Each doc is self-contained - read in any order.
 
 ---
 
 ## How the work cascades
 
-From "your brief" (the upstream work the methodology *doesn't* do) all the way down to a single line in a `BACKLOG.md` file — and where each artifact lives on disk.
+From "your brief" (the upstream work the methodology *doesn't* do) all the way down to a single line in a `BACKLOG.md` file - and where each artifact lives on disk.
 
 ```mermaid
 flowchart TB
-    BRIEF["📝 <b>Your brief</b> — Step 0, BEFORE the methodology kicks in<br/><i>what · who · success metrics · competitors · business viability · tech stack · 5–10 capability layers</i>"]
+    BRIEF["📝 <b>Your brief</b> - Step 0, BEFORE the methodology kicks in<br/><i>what · who · success metrics · competitors · business viability · tech stack · 5–10 capability layers</i>"]
 
     BRIEF ==>|"answers become strategy docs"| STRAT
 
-    STRAT["📐 <b>docs/strategy/</b> &nbsp; (the WHY)<br/>00_master_plan.md — vision · phases · outcomes<br/>+ supporting docs: 01_market · 02_differentiation · ... 10_roadmap<br/><i>versioned snapshots; never overwritten</i>"]
+    STRAT["📐 <b>docs/strategy/</b> &nbsp; (the WHY)<br/>00_master_plan.md - vision · phases · outcomes<br/>+ supporting docs: 01_market · 02_differentiation · ... 10_roadmap<br/><i>versioned snapshots; never overwritten</i>"]
 
     STRAT ==>|"strategy defines which capabilities matter"| PIL
 
@@ -168,14 +168,14 @@ flowchart TB
     PLAN["🎨 <b>docs/planning/</b> <i>(optional)</i><br/>pre-epic design work · becomes the charter when ready"]
     PLAN -.-> EPICS
 
-    EPICS["📋 <b>backlog/epics/E&lt;NN&gt;-&lt;slug&gt;/</b> &nbsp; (3–12 week delivery containers)<br/>├── <b>README.md</b> &nbsp;← charter: primary pillar, binary exit criteria, out-of-scope<br/>├── <b>BACKLOG.md</b> ← active items<br/>├── <b>ARCHIVE.md</b> ← done items<br/>├── <b>FUTURE.md</b> &nbsp;← deferred / out-of-scope-but-noted<br/>└── <b>TEST.md</b> &nbsp; ← acceptance + regression scenarios<br/><br/>At the backlog root:<br/>· <b>EPICS.md</b> — cross-epic rollup<br/>· <b>TEST_BACKLOG.md</b> — cross-epic manual-QA queue (optional)<br/>· <b>HUMAN_NEEDED.md</b> — items blocked on human agency"]
+    EPICS["📋 <b>backlog/epics/E&lt;NN&gt;-&lt;slug&gt;/</b> &nbsp; (3–12 week delivery containers)<br/>├── <b>README.md</b> &nbsp;← charter: primary pillar, binary exit criteria, out-of-scope<br/>├── <b>BACKLOG.md</b> ← active items<br/>├── <b>ARCHIVE.md</b> ← done items<br/>├── <b>FUTURE.md</b> &nbsp;← deferred / out-of-scope-but-noted<br/>└── <b>TEST.md</b> &nbsp; ← acceptance + regression scenarios<br/><br/>At the backlog root:<br/>· <b>EPICS.md</b> - cross-epic rollup<br/>· <b>TEST_BACKLOG.md</b> - cross-epic manual-QA queue (optional)<br/>· <b>HUMAN_NEEDED.md</b> - items blocked on human agency"]
 
     EPICS ==>|"items live inside each epic's BACKLOG.md"| ITEMS
 
-    ITEMS["🔖 <b>Items — BL-XXXX format</b> &nbsp; (sized to the contributor: 1–2 weeks for humans · daily for AI)<br/><br/>Summary table at top — one line per item: <code>ID │ Title │ Priority │ Effort │ Status</code><br/><br/>Each item's detailed block has frontmatter fields:<br/>· <b>Pillar:</b> P3 &nbsp;&nbsp; · <b>Priority:</b> P0–P3 &nbsp;&nbsp; · <b>Effort:</b> XS–XL<br/>· <b>Status:</b> backlog → ready → in-progress → under-review → to-be-tested → done<br/>· <b>Test:</b> not-tested → pass &nbsp;&nbsp; · <b>Lock:</b> &lt;holder&gt;@&lt;TTL-expiry&gt;<br/>+ body: goal · plan · verification step per substep<br/><br/><i>No separate ticket types — features, bug fixes, tasks, and user stories all use the same BL-XXXX shape.</i>"]
+    ITEMS["🔖 <b>Items - BL-XXXX format</b> &nbsp; (sized to the contributor: 1–2 weeks for humans · daily for AI)<br/><br/>Summary table at top - one line per item: <code>ID │ Title │ Priority │ Effort │ Status</code><br/><br/>Each item's detailed block has frontmatter fields:<br/>· <b>Pillar:</b> P3 &nbsp;&nbsp; · <b>Priority:</b> P0–P3 &nbsp;&nbsp; · <b>Effort:</b> XS–XL<br/>· <b>Status:</b> backlog → ready → in-progress → under-review → to-be-tested → done<br/>· <b>Test:</b> not-tested → pass &nbsp;&nbsp; · <b>Lock:</b> &lt;holder&gt;@&lt;TTL-expiry&gt;<br/>+ body: goal · plan · verification step per substep<br/><br/><i>No separate ticket types - features, bug fixes, tasks, and user stories all use the same BL-XXXX shape.</i>"]
 ```
 
-**Step 0 is foundational.** The brief (product, target user, market, viability, tech stack, capability layers) is *your* work, not the methodology's. The methodology *records and operationalizes* those decisions; it does not invent them. Skipping this produces a velocity illusion — shipping confidently-built wrong product. See the "Step 0" callout in [How to use it](#how-to-use-it) for the long version.
+**Step 0 is foundational.** The brief (product, target user, market, viability, tech stack, capability layers) is *your* work, not the methodology's. The methodology *records and operationalizes* those decisions; it does not invent them. Skipping this produces a velocity illusion - shipping confidently-built wrong product. See the "Step 0" callout in [How to use it](#how-to-use-it) for the long version.
 
 **One ticket type, used flexibly.** Items can be feature-shaped, bugfix-shaped, task-shaped, or user-story-shaped (Given/When/Then), but they all use the same `BL-XXXX` frontmatter and live in the same `BACKLOG.md`. No separate Jira-style ticket-type taxonomy.
 
@@ -198,9 +198,9 @@ flowchart TB
 
 Hand the methodology to your AI agent in planning mode *before* you write any code. By the time you start implementing, the structure is in place.
 
-**Step 0 — Have a brief.** This methodology executes on goals; it doesn't define them. Before anything else, write defensible answers to: what / who / problem / success metric / competition / business viability / tech stack / 5–10 capability layers (those become your [pillars](methodology/02_pillars.md)). Use Lean Canvas, JTBD, Five Forces — whatever fits. The discipline of *having written, defensible answers* is the point, not the format. Skipping this produces a velocity illusion: shipping confidently-built wrong product.
+**Step 0 - Have a brief.** This methodology executes on goals; it doesn't define them. Before anything else, write defensible answers to: what / who / problem / success metric / competition / business viability / tech stack / 5–10 capability layers (those become your [pillars](methodology/02_pillars.md)). Use Lean Canvas, JTBD, Five Forces - whatever fits. The discipline of *having written, defensible answers* is the point, not the format. Skipping this produces a velocity illusion: shipping confidently-built wrong product.
 
-**Step 1 — Set up the repo.**
+**Step 1 - Set up the repo.**
 
 ```bash
 mkdir my-new-project && cd my-new-project
@@ -212,14 +212,14 @@ rm -rf _src
 git add docs/methodology CLAUDE.md && git commit -m "docs: import ai-development-methodology"
 ```
 
-**Step 2 — Have your AI agent produce the planning skeleton.** Point it at `docs/methodology/` (start with `00_README.md`), share your brief from Step 0, ask it to produce: strategy master plan → 5–8 pillars → first epic charter → 3–5 backlog items. Use plan mode; review each artifact before the next. Full copy-paste prompt at [templates/AGENT_KICKOFF.md](templates/AGENT_KICKOFF.md).
+**Step 2 - Have your AI agent produce the planning skeleton.** Point it at `docs/methodology/` (start with `00_README.md`), share your brief from Step 0, ask it to produce: strategy master plan → 5–8 pillars → first epic charter → 3–5 backlog items. Use plan mode; review each artifact before the next. Full copy-paste prompt at [templates/AGENT_KICKOFF.md](templates/AGENT_KICKOFF.md).
 
-**Step 3 — Day-to-day.** The project-instruction file (`CLAUDE.md`/`AGENTS.md`) loads automatically on every AI session — no pasting. Your job is to steer when the AI drifts. Four phrases worth memorizing:
+**Step 3 - Day-to-day.** The project-instruction file (`CLAUDE.md`/`AGENTS.md`) loads automatically on every AI session - no pasting. Your job is to steer when the AI drifts. Four phrases worth memorizing:
 
-- **"Do you have any questions before you start?"** — surfaces silent assumptions.
-- **"What's wrong with this plan? What's the strongest case against it?"** — counters AI agreement bias.
-- **"Use plan mode and show me the plan before executing."** — when the AI is about to wing it.
-- **"Stop. Split this item — you're growing scope."** — mid-task creep.
+- **"Do you have any questions before you start?"** - surfaces silent assumptions.
+- **"What's wrong with this plan? What's the strongest case against it?"** - counters AI agreement bias.
+- **"Use plan mode and show me the plan before executing."** - when the AI is about to wing it.
+- **"Stop. Split this item - you're growing scope."** - mid-task creep.
 
 For long-running autonomous milestone work, use [templates/AUTONOMOUS_LOOP.md](templates/AUTONOMOUS_LOOP.md).
 
@@ -253,7 +253,7 @@ The methodology is tool-agnostic. Only the project-instruction filename differs:
 | Continue.dev | `.continue/context.md` | adapt [AGENTS.md](templates/AGENTS.md) |
 | Anything else | whatever `.md` it reads | either |
 
-`AGENTS.md` is the superset — includes plan-mode discipline, tool-install guidance, and an operational-safety rule on destructive commands that Claude Code's harness covers implicitly. Symlink `CLAUDE.md` → `AGENTS.md` if you use both.
+`AGENTS.md` is the superset - includes plan-mode discipline, tool-install guidance, and an operational-safety rule on destructive commands that Claude Code's harness covers implicitly. Symlink `CLAUDE.md` → `AGENTS.md` if you use both.
 
 ---
 
@@ -266,8 +266,8 @@ The methodology is tool-agnostic. Only the project-instruction filename differs:
 - **Solo maintainers + small teams.** Scales down to one human + one AI agent without ceremony; scales up to a small team + multiple agents via the lock + WIP cap.
 - **Long-running projects where direction matters.** The four-layer planning cascade (strategy → pillars → epics → items) prevents the silent drift that "let's just keep shipping features" produces over months.
 - **AI-assisted projects that want a defense against the "cheating agent" anti-pattern.** Most testing approaches assume tests-pass = done; this one explicitly addresses the case where the same agent writes both broken code AND the broken tests that validate it.
-- **Projects shipping toward declared milestones.** The periodic deep-eval ([doc 12](methodology/12_milestone_evaluation.md)) catches the aggregate problems that per-item DoD can't see — compounded UX debt, cross-cutting perf regressions, security drift.
-- **Teams willing to write things down.** Strategy docs, pillar files, epic charters, items, memory entries — everything is markdown text. The methodology rewards teams whose culture is "if it isn't written, it doesn't exist."
+- **Projects shipping toward declared milestones.** The periodic deep-eval ([doc 12](methodology/12_milestone_evaluation.md)) catches the aggregate problems that per-item DoD can't see - compounded UX debt, cross-cutting perf regressions, security drift.
+- **Teams willing to write things down.** Strategy docs, pillar files, epic charters, items, memory entries - everything is markdown text. The methodology rewards teams whose culture is "if it isn't written, it doesn't exist."
 
 ### What this is NOT good for
 
@@ -283,26 +283,22 @@ The methodology is tool-agnostic. Only the project-instruction filename differs:
 The methodology commits to a few patterns that are worth naming explicitly:
 
 - **The "cheating agent" anti-pattern is named + defended.** Tests pass ≠ done. Cross-AI validation + the actual-UI fix-test loop + cross-AI diff-verification together make it hard for the implementing session to silently ship a self-validated bug.
-- **File-based locks with TTL — same protocol for humans and AI agents.** No tier system where humans coordinate one way and agents another. Same `Lock:` field, same TTL, same release discipline. ([Doc 05](methodology/05_locks_and_parallel_work.md).)
-- **Challenge-before-consenting** as a named pattern with a copy-paste prompt — defends against AI's agreement bias when the maintainer is approving a non-trivial plan. ([Doc 06](methodology/06_working_principles.md).)
+- **File-based locks with TTL - same protocol for humans and AI agents.** No tier system where humans coordinate one way and agents another. Same `Lock:` field, same TTL, same release discipline. ([Doc 05](methodology/05_locks_and_parallel_work.md).)
+- **Challenge-before-consenting** as a named pattern with a copy-paste prompt - defends against AI's agreement bias when the maintainer is approving a non-trivial plan. ([Doc 06](methodology/06_working_principles.md).)
 - **Four-layer planning hierarchy** (strategy → pillars → epics → items) keeps work laddered to long-term direction rather than shipped as disconnected features. ([Docs 01–04](methodology/00_README.md).)
 - **DoD coupled to the item frontmatter itself.** `Status: done` requires `Test: pass` (or narrow exceptions with body-documented reasons). "Done" is mechanically auditable, not maintainer-judgment-dependent. ([Docs 04 + 07](methodology/04_backlog_items.md).)
 - **Tier matrix for autonomous loops on authoritative content.** Cosmetic + surgical patches are loop-eligible with cross-AI diff-verification; substantive changes stay human-authored. Compounding without sacrificing safety. ([`AUTONOMOUS_LOOP.md`](templates/AUTONOMOUS_LOOP.md).)
 - **Periodic deep-eval every Nth loop.** Catches aggregate quality drift (UX debt, perf regression, security drift) on a 0–10 rubric per area, with `handle / postpone / mark` discipline for unsolvable issues. ([Doc 12](methodology/12_milestone_evaluation.md).)
 
-## Honest disclosure
-
-This methodology is solo-maintained. Its primary validation is one production project + this repo applied to itself (`self-development/`). It has not yet been stress-tested by multiple external adopters. The structural choices above are the bet; whether they fit *your* project's shape is your evaluation to make. The [CHEATSHEET](CHEATSHEET.md) gets you to a yes/no decision in 5 minutes.
-
 ---
 
 ## Permissions and vendor compatibility
 
-Markdown and git. CC BY 4.0 — use it anywhere (private, commercial, open-source), fork it, modify it, redistribute it, charge for derivatives, ship it inside a paid product. Only obligation is [attribution](#attribution).
+Markdown and git. CC BY 4.0 - use it anywhere (private, commercial, open-source), fork it, modify it, redistribute it, charge for derivatives, ship it inside a paid product. Only obligation is [attribution](#attribution).
 
-Not endorsed by, partnered with, or affiliated with any AI tool vendor (Anthropic, OpenAI, Google, Cursor, Aider, Continue.dev). The project-instruction file each tool reads (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `.continue/context.md`) is the vendor-supported mechanism for project context — using it is the intended path, not a workaround. The methodology's safety rules (no agent prod-deploys, no force-push, no hook bypass) *align* with vendor AUPs, not fight them.
+Not endorsed by, partnered with, or affiliated with any AI tool vendor (Anthropic, OpenAI, Google, Cursor, Aider, Continue.dev). The project-instruction file each tool reads (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `.continue/context.md`) is the vendor-supported mechanism for project context - using it is the intended path, not a workaround. The methodology's safety rules (no agent prod-deploys, no force-push, no hook bypass) *align* with vendor AUPs, not fight them.
 
-Not legal advice — if you're under regulated-industry, data-residency, or classified-work constraints, confirm fit with your legal team.
+Not legal advice - if you're under regulated-industry, data-residency, or classified-work constraints, confirm fit with your legal team.
 
 ---
 
@@ -313,13 +309,13 @@ If you use or adapt this, please include credit:
 > AI Development Methodology by Miklós Polgár, licensed CC BY 4.0.
 > https://github.com/Korner83/ai-development-methodology
 
-For modified versions, indicate you've made changes. Only obligation the license imposes — use it commercially, in client work, in books, in courses, anywhere, as long as the credit travels with it.
+For modified versions, indicate you've made changes. Only obligation the license imposes - use it commercially, in client work, in books, in courses, anywhere, as long as the credit travels with it.
 
 ---
 
 ## Status
 
-Battle-tested in one production project. Currently v1.17.3 — see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean — PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.17.3 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 
@@ -327,12 +323,4 @@ Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 
 ## License
 
-[CC BY 4.0](LICENSE) — Creative Commons Attribution 4.0 International. Copyright © 2026 Miklós Polgár. Share, adapt, commercial use OK; just credit.
-
----
-
-## Origins
-
-Extracted from a real production project's working practice, republished as a portable abstract version. The source project doesn't appear anywhere in the methodology — by design, so it transplants.
-
-This isn't a theoretical framework. It's what worked, after it had failed in other shapes. See [CHANGELOG.md](CHANGELOG.md) for the running record of what's been added, refined, or rolled back.
+[CC BY 4.0](LICENSE) - Creative Commons Attribution 4.0 International. Copyright © 2026 Miklós Polgár. Share, adapt, commercial use OK; just credit.
