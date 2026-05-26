@@ -26,14 +26,15 @@ my-project/
 ├── backlog/                     # All work-tracking artifacts
 │   ├── README.md                # Backlog workflow + AI agent playbook
 │   ├── EPICS.md                 # Cross-epic rollup (active, done, parked counts)
+│   ├── TEST_BACKLOG.md          # Cross-epic manual-QA queue (optional; see 03)
 │   ├── HUMAN_NEEDED.md          # Items blocked on human agency (see 04)
 │   └── epics/
-│       └── NN-slug/             # One folder per epic
+│       └── E<NN>-<slug>/        # One folder per epic (E-prefix per 03)
 │           ├── README.md        # Epic charter (pillar, outcome, exit criteria)
 │           ├── BACKLOG.md       # Active items
 │           ├── ARCHIVE.md       # Done items
 │           ├── FUTURE.md        # Deferred items (out-of-scope this epic)
-│           └── TEST.md          # Epic-specific test scenarios (optional)
+│           └── TEST.md          # Epic-specific acceptance + regression scenarios
 │
 ├── memory/                      # Per-project memory directory (see 08)
 │   ├── MEMORY.md                # Index file
@@ -52,7 +53,7 @@ my-project/
 |---|---|---|
 | **Strategy docs** | `NN_topic.md` (zero-padded numeric prefix, snake_case body) | `01_market.md`, `04_business.md`, `10_roadmap.md` |
 | **Pillar docs** | `P<#>_<slug>.md` | `P1_authentication.md`, `P2_billing.md`, `P9_compliance.md` |
-| **Epic folders** | `NN-slug` (zero-padded numeric, kebab-case slug) | `01-onboarding`, `02-payments`, `12-compliance` |
+| **Epic folders** | `E<NN>-<slug>` (literal `E` prefix, zero-padded 2-digit number, kebab-case slug — see [`methodology/03_epics.md`](../methodology/03_epics.md#naming-convention-enn-slug)) | `E01-onboarding`, `E02-payments`, `E12-compliance` |
 | **Work items** | `BL-<####>` (monotonic, zero-padded, **repo-wide**) | `BL-0001`, `BL-0428`, `BL-1337` |
 | **Memory entries** | `<type>_<topic>.md` | `feedback_no_emojis.md`, `project_auth_flow.md`, `reference_grafana.md` |
 | **Architecture docs** | `<topic>.md` (descriptive, kebab-case or snake_case — pick one) | `database-schema.md`, `data-flow.md`, `service-boundaries.md` |
@@ -81,10 +82,10 @@ my-project/
 |---|---|
 | Why does this product exist? | `docs/strategy/00_master_plan.md` |
 | What capabilities does the product need long-term? | `docs/pillars/` |
-| What 3–12 week batch are we doing right now? | `backlog/epics/NN-slug/README.md` (charter) |
-| What's the next 1–2 week unit (human) / next day's work (AI)? | `backlog/epics/NN-slug/BACKLOG.md` |
-| What did we ship? | `backlog/epics/NN-slug/ARCHIVE.md` + `CHANGELOG.md` |
-| What's deferred but not abandoned? | `backlog/epics/NN-slug/FUTURE.md` |
+| What 3–12 week batch are we doing right now? | `backlog/epics/E<NN>-<slug>/README.md` (charter) |
+| What's the next 1–2 week unit (human) / next day's work (AI)? | `backlog/epics/E<NN>-<slug>/BACKLOG.md` |
+| What did we ship? | `backlog/epics/E<NN>-<slug>/ARCHIVE.md` + `CHANGELOG.md` |
+| What's deferred but not abandoned? | `backlog/epics/E<NN>-<slug>/FUTURE.md` |
 | What's blocked waiting on a human? | `backlog/HUMAN_NEEDED.md` |
 | How do I run the project? | `README.md` + `CLAUDE.md` / `AGENTS.md` |
 | How does the system actually work? | `docs/architecture/` |

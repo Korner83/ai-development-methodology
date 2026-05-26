@@ -39,4 +39,4 @@ This is the minimum-viable set for an adopter to see the methodology operational
 
 ## Methodology version
 
-Built against methodology **v1.15.0**.
+Built against methodology **v1.17.3**.

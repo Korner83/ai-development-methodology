@@ -2,7 +2,7 @@
 
 How to run a software project when some of your contributors are AI agents — and one of them just panic-refactored your auth middleware at 2am while a different one was halfway through the same task.
 
-Twelve short docs. Markdown + git. No SaaS, no signup, no vendor lock-in. Read in 90 minutes; use forever (or until you find something better).
+Thirteen short docs. Markdown + git. No SaaS, no signup, no vendor lock-in. An AI agent picks up the operating contract in seconds via [`templates/`](templates/). A human grasps the core concept in 5 minutes via the [CHEATSHEET](CHEATSHEET.md). Full reading is a focused day. Use forever (or until you find something better).
 
 By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com)) — [CC BY 4.0](LICENSE). Fork it, ship it, charge for it, teach it. Just keep the credit.
 
@@ -18,7 +18,7 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Autonomous goal-oriented development cycles** — paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration — 0–10 rubric per area; unsolvable issues get *handled/postponed/marked*, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.17.2](CHANGELOG.md).
+- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.17.3](CHANGELOG.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
 
 ---
@@ -116,17 +116,17 @@ Most projects accumulate the same failure modes once they last more than a few w
 ai-development-methodology/
 ├── README.md                 # this file
 ├── CHANGELOG.md              # version history (self-applies the methodology)
-├── CHEATSHEET.md             # one-page quick reference (NEW v1.17.2)
+├── CHEATSHEET.md             # one-page quick reference (NEW v1.17.3)
 ├── LICENSE                   # CC BY 4.0
 ├── STATUS.md                 # maintenance posture
-├── methodology/              # the 13 methodology docs (00–12; doc 12 NEW v1.17.2)
+├── methodology/              # the 13 methodology docs (00–12; doc 12 NEW v1.17.3)
 ├── templates/
 │   ├── CLAUDE.md             # project-instruction file (Claude Code)
 │   ├── AGENTS.md             # vendor-neutral version (extra plan/tool/safety sections)
 │   ├── AGENT_KICKOFF.md      # planning-mode prompt for new projects
-│   ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions (extended v1.17.2 with periodic deep-eval)
+│   ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions (extended v1.17.3 with periodic deep-eval)
 │   └── PROJECT_STRUCTURE.md  # recommended folder layout + naming conventions
-├── examples/                 # NEW v1.17.2 — fictional `tinker` project showing methodology applied end-to-end
+├── examples/                 # NEW v1.17.3 — fictional `tinker` project showing methodology applied end-to-end
 │   ├── README.md             # 3-row comparison: methodology/ vs self-development/ vs examples/
 │   └── example-project/
 │       ├── README.md
@@ -143,7 +143,7 @@ ai-development-methodology/
     └── loop-notes/           # loop-detected methodology insights for maintainer review
 ```
 
-~13,000+ lines across 60+ files at v1.17.2. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
+~13,000+ lines across 60+ files at v1.17.3. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
 
 ---
 
@@ -168,7 +168,7 @@ flowchart TB
     PLAN["🎨 <b>docs/planning/</b> <i>(optional)</i><br/>pre-epic design work · becomes the charter when ready"]
     PLAN -.-> EPICS
 
-    EPICS["📋 <b>backlog/epics/NN-slug/</b> &nbsp; (3–12 week delivery containers)<br/>├── <b>README.md</b> &nbsp;← charter: primary pillar, binary exit criteria, out-of-scope<br/>├── <b>BACKLOG.md</b> ← active items<br/>├── <b>ARCHIVE.md</b> ← done items<br/>└── <b>FUTURE.md</b> &nbsp;← deferred / out-of-scope-but-noted<br/><br/>At the backlog root:<br/>· <b>EPICS.md</b> — cross-epic rollup<br/>· <b>HUMAN_NEEDED.md</b> — items blocked on human agency"]
+    EPICS["📋 <b>backlog/epics/E&lt;NN&gt;-&lt;slug&gt;/</b> &nbsp; (3–12 week delivery containers)<br/>├── <b>README.md</b> &nbsp;← charter: primary pillar, binary exit criteria, out-of-scope<br/>├── <b>BACKLOG.md</b> ← active items<br/>├── <b>ARCHIVE.md</b> ← done items<br/>├── <b>FUTURE.md</b> &nbsp;← deferred / out-of-scope-but-noted<br/>└── <b>TEST.md</b> &nbsp; ← acceptance + regression scenarios<br/><br/>At the backlog root:<br/>· <b>EPICS.md</b> — cross-epic rollup<br/>· <b>TEST_BACKLOG.md</b> — cross-epic manual-QA queue (optional)<br/>· <b>HUMAN_NEEDED.md</b> — items blocked on human agency"]
 
     EPICS ==>|"items live inside each epic's BACKLOG.md"| ITEMS
 
@@ -319,7 +319,7 @@ For modified versions, indicate you've made changes. Only obligation the license
 
 ## Status
 
-Battle-tested in one production project. Currently v1.17.2 — see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean — PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.17.3 — see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean — PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 

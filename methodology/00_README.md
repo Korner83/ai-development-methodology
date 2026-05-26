@@ -271,7 +271,7 @@ The smallest set of inviolable constraints. If a change violates one of these, i
 
 | Rule | Where defined |
 |------|---------------|
-| `Status: done` requires `Test: pass`. No exceptions. | [04](04_backlog_items.md), [07](07_definition_of_done.md) |
+| `Status: done` requires `Test: pass` (or two narrow exceptions: `manual-verified` with regression-needed follow-up; `n/a` with body-documented reason). | [04](04_backlog_items.md#the-hard-rule), [07](07_definition_of_done.md) |
 | Never force-push to the trunk. | [09](09_git_workflow.md) |
 | Never commit directly to the trunk. | [09](09_git_workflow.md) |
 | AI agents never run production deploys. | [09](09_git_workflow.md) |

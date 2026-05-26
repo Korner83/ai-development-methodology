@@ -71,7 +71,7 @@ If a task would be significantly easier with an MCP server, a plugin, a library,
 
 ## Methodology
 
-The way work is organized and executed on this project is codified in [`docs/methodology/`](docs/methodology/) — 11 docs covering strategy, pillars, epics, items, locks, working principles, Definition of Done, lessons and memory, git workflow, and testing.
+The way work is organized and executed on this project is codified in [`docs/methodology/`](docs/methodology/) — 13 docs (00–12) covering strategy, pillars, epics, items, locks, working principles, Definition of Done, lessons and memory, git workflow, testing and verification, human roles, and milestone evaluation.
 
 The methodology docs are the **authoritative source** for HOW work is done here. When you have a process question — how to file an item, what counts as "done," how to coordinate parallel sessions — the methodology doc is where the answer lives.
 
@@ -191,7 +191,7 @@ A short list of "never do this in this project" rules. Each one exists because t
 - **Never commit directly to `<<main-branch>>`.** All work lands via PR.
 - **AI agents never run production deploys.** Production deploy command: `<<command>>` — user-only.
 - **Never skip pre-commit hooks** (`--no-verify`) without explicit authorization. Fix the hook failure instead.
-- **Never bypass the Definition of Done.** `Status: done` requires `Test: pass`. No exceptions.
+- **Never bypass the Definition of Done.** `Status: done` requires `Test: pass` (or two narrow exceptions documented in `methodology/04_backlog_items.md` "The hard rule": `manual-verified` with a regression-needed follow-up item, or `n/a` with a body-documented reason). Never flip from `not-tested`, `pending`, `partial`, `fail`, or `regression-needed`.
 - **Never automate destructive operations** (drop tables, cancel payments, etc.) without explicit user authorization per operation.
 - **<<project-specific hard rule>>** — <<why this exists>>.
 

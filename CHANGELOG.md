@@ -13,6 +13,46 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.17.3 — 2026-05-26
+
+### Documentation hygiene pass + docs-check CI workflow
+
+Two independent cross-AI reviews of v1.17.2 surfaced consistent doc-drift findings: the recent v1.13–v1.17 release cluster introduced internal inconsistencies between README, CHEATSHEET, templates, examples, and self-development metadata. This release closes every concrete finding from both reviews + adds a minimal CI workflow to prevent recurrence.
+
+The fix is reconciliation, not redesign — no methodology rule changes; canonical authoritative docs (`methodology/04_backlog_items.md`, `methodology/03_epics.md`) are the source of truth, and other docs are now synced to match.
+
+### Reconciled inconsistencies
+
+- **`self-development/backlog/EPICS.md`** — fixed 3 self-contradictions: WIP-cap text ("1 of 1 slot used" → "1 of 2 slots used"); pillar-coverage row (E02 was marked "in active work" but is done); "Autonomous loop" footer line (was saying "only E02 pickable" with WIP=1 — corrected to E03 with WIP=2).
+- **Epic-folder convention** — propagated `E<NN>-<slug>` to the 3 stale references (`README.md` mermaid; `templates/PROJECT_STRUCTURE.md` tree + reading-paths table + naming-convention examples). The methodology canonicalized this in v1.17.0 but the templates still taught the old `NN-slug` form.
+- **`Status: done` rule** — synced to the v1.16.0 extended form across `methodology/00_README.md` (hard-rules table), `methodology/07_definition_of_done.md` (rule statement + rationale), `templates/AGENTS.md`, and `templates/CLAUDE.md`. All four locations now match `methodology/04_backlog_items.md`'s canonical rule: `Status: done` requires `Test: pass` OR `manual-verified` (with regression-needed follow-up) OR `n/a` (with body-documented reason). Previous mixed signaling ("no exceptions" in 3 docs vs. "two exceptions" in 04 + CHEATSHEET) was the most-visible inconsistency caught by the review.
+- **Doc count drift** — updated stale counts (`README.md` "Twelve" → "Thirteen"; `templates/AGENTS.md` + `templates/CLAUDE.md` "11 docs" → "13 docs"). The methodology has 13 numbered docs (00–12) since doc 12 was added in v1.15.0.
+- **`README.md` reading-time claim** — old "Read in 90 minutes" was not credible (public core docs are ~69,000 words — several hours of real reading). Reframed per maintainer direction: an AI agent picks up the operating contract instantly via `templates/`; a human grasps the core concept in 5 minutes via the CHEATSHEET; full reading is a focused day. Reframes the value proposition from "fast to read" to "fast to use."
+- **Version pin drift** — bumped 3 stale `v1.15.0` pins to `v1.17.3` (CHEATSHEET line 3; `examples/README.md` line 3; `examples/example-project/README.md` line ~42).
+- **Broken links** — fixed 2 relative-path errors in `examples/example-project/backlog/TEST_BACKLOG.md` (lines 25, 30). Both were `../../methodology/...` resolving under `examples/` instead of repo root; corrected to `../../../methodology/...`.
+- **E03 BACKLOG.md state alignment** — `self-development/backlog/epics/E03-git-workflow-trim/BACKLOG.md` line 5 still said "planned, not pickable as of v1.12.0" even though the epic was promoted to active in v1.16.0. Aligned with the EPICS.md rollup.
+
+### New: `.github/workflows/docs-check.yml` (CI)
+
+A minimal GitHub Actions workflow that catches recurrence of these exact failure modes. Two jobs:
+
+1. **Pattern guards** (bash + grep) — checks for stale epic-folder convention (`NN-slug`); stale doc counts ("Twelve short docs", "11 docs covering"); the stale "Read in 90 minutes" claim; "No exceptions" near the Status:done rule (must be the extended form); and stale version pins in adopter-facing files (must match the current version from `README.md`'s "Currently [vX.Y.Z]" line). All grep-based, no external tooling.
+2. **Internal link check** (lychee, offline mode) — verifies that internal markdown links resolve. Skips external URLs (rate-limit + scope issue) and the `evaluations/` + `self-development/distribution/` folders (historical / gitignored).
+
+Triggered on PR + push to main. Lands as advisory; can be promoted to required check via ruleset edit after the first clean run.
+
+### Why ship this as a patch (not minor)
+
+This release reconciles existing docs to existing canonical rules + adds CI infrastructure. No methodology rule changes. CHANGELOG history is preserved unchanged (per `methodology/09_git_workflow.md` "never rewrite history"). v1.17.3 (patch) is the correct semver.
+
+### Notable for adopters
+
+- If your fork is on v1.17.2 or earlier and you depend on the old "no exceptions" Status:done rule wording in templates, update to the extended form. The extended form has been canonical in `methodology/04_backlog_items.md` since v1.16.0; the templates are catching up.
+- If you maintain a fork that uses `NN-slug` epic folders, you don't need to rename — the methodology is backward-compatible. New projects should default to `E<NN>-<slug>`.
+- The new docs-check workflow is opt-in for forks (it's just a YAML file you can keep or delete). Recommended for any fork that ships docs as primary product.
+
+---
+
 ## v1.17.2 — 2026-05-26
 
 ### Success metrics rephrased + full sweep of public hostages-to-fortune

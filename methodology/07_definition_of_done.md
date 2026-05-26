@@ -125,11 +125,18 @@ The backlog is a source of truth. If the file says `done` but the work is half-f
 
 ## The hard rule
 
-**`Status: done` requires `Test: pass`.**
+**`Status: done` requires `Test: pass`, `manual-verified` (with a regression-needed follow-up item), or `n/a` (with a body-documented reason).**
 
-There is no path from `not-tested`, `fail: <detail>`, or `regression-needed` directly to `done`. The Test field must read `pass` first. If the Test field reads anything else, the item is not done — regardless of how close the work feels.
+The canonical path is `pass`. The two narrow extensions exist to handle real-world cases automated testing can't cover honestly:
 
-This is not bureaucracy. It is the single most important enforcement point in the methodology. Every other gate can be checked by good intent. This one requires the test to have actually run and actually passed. It is the gate that catches all the others when they slip.
+- **`manual-verified`** — verified by a human (UI walkthrough, manual reproduction) but no automated test exists. Acceptable when automation is impractical for the change AND a `regression-needed` follow-up item exists to backfill automation when feasible. Manual-verified without a follow-up is the cheating-agent anti-pattern.
+- **`n/a`** — the item has no testable behavior (folder creation, README edit, repo-state chore). Acceptable with a body-documented reason; "I didn't feel like writing tests" is not a valid reason.
+
+There is no path from `not-tested`, `pending`, `partial`, `fail: <detail>`, or `regression-needed` (without a backing `pass`) directly to `done`. The Test field must read `pass`, `manual-verified`, or `n/a` first. If it reads anything else, the item is not done — regardless of how close the work feels.
+
+This is not bureaucracy. It is the single most important enforcement point in the methodology. Every other gate can be checked by good intent. This one requires the test to have actually run and actually passed (or the manual-verification + follow-up trail to exist, or the `n/a` reasoning to be documented). It is the gate that catches all the others when they slip.
+
+See [`04_backlog_items.md "The hard rule"`](04_backlog_items.md#the-hard-rule) for the canonical statement of the rule and the Test enum.
 
 If you cannot tick the Test field to `pass`, the item stays at:
 

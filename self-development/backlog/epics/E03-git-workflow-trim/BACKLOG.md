@@ -2,7 +2,7 @@
 
 _Items currently in scope for this epic. See [charter](README.md) for exit criteria._
 
-**Epic status (as of v1.12.0):** `planned` — E03 is not active. Items below are visible but **not pickable by the autonomous loop** until E02 closes and E03 is promoted to active. WIP cap = 1 per maintainer-deliberate choice (see backlog [README.md](../../README.md) "WIP cap note").
+**Epic status (as of v1.16.0):** **active**. Items below are pickable by the autonomous loop per the [ROI heuristic](../../../../methodology/04_backlog_items.md#prioritization--the-roi-heuristic). WIP cap = 2 (one slot used by this epic; one open). See `self-development/backlog/EPICS.md` "WIP cap note" for current state.
 
 ## Summary
 
