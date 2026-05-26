@@ -9,6 +9,8 @@ on:
     branches: [main]
     paths:
       - "**/*.md"
+      - ".github/workflows/docs-check.yml"
+  workflow_dispatch:
 
 jobs:
   pattern-guards:
