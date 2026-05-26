@@ -1,6 +1,6 @@
 # Examples
 
-This folder shows what an adopter project looks like when it adopts the methodology. Pinned to **v1.15.0**.
+This folder shows what an adopter project looks like when it adopts the methodology. Pinned to **v1.17.3**.
 
 ## Three artifact types, three purposes
 

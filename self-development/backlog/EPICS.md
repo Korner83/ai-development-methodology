@@ -25,7 +25,7 @@ Inverse view: which epics touch each pillar.
 | Pillar | Active epics | Planned epics | Coverage status |
 |---|---|---|---|
 | P1 Doc completeness | — | E01 (primary), E05 (primary) | Planned; activates after E02 closes |
-| P2 Doc clarity | E02 (secondary) | E03 (primary) | E02 secondary in active work; E03 planned |
+| P2 Doc clarity | E03 (primary) | — | E02 secondary (done in v1.14.0); E03 primary (active since v1.16.0) |
 | P3 Doc currency | E02 (primary) | — | **Active work in progress** |
 | P4 Tool compatibility | — | E04 (primary) | Planned |
 | P5 Adopter discoverability | — | — | Dormant (Phase 2 pillar) |
@@ -50,7 +50,7 @@ Alternatively the maintainer may pause new-epic promotion and prioritize Phase 1
 ## Status legend
 
 - **planned** — charter exists; work has not started. Does not count against WIP cap.
-- **active** — work in progress; counts against WIP cap. Currently 1 of 1 slot used.
+- **active** — work in progress; counts against WIP cap. Currently 1 of 2 slots used (E03).
 - **done** — all items closed, exit criteria met, charter frozen.
 - **parked** — work halted (priority shift, blocker, etc.); charter preserved, exit criteria not met.
 
@@ -58,7 +58,7 @@ Alternatively the maintainer may pause new-epic promotion and prioritize Phase 1
 
 - **Maintainer / contributor:** glance at the rollup to see status; click into an epic for its charter and items.
 - **Cross-AI review or audit:** spot-check that pillar coverage reflects active work; spot-check that WIP cap is respected.
-- **Autonomous loop (Phase 5+):** use this file to identify which active epics to pick items from per the [ROI heuristic](../../methodology/04_backlog_items.md#prioritization--the-roi-heuristic). With WIP cap at 1, only E02 is currently pickable.
+- **Autonomous loop (Phase 5+):** use this file to identify which active epics to pick items from per the [ROI heuristic](../../methodology/04_backlog_items.md#prioritization--the-roi-heuristic). With WIP cap at 2 and 1 slot currently used (E03), E03's `BACKLOG.md` is the active pickup target.
 
 ## Refresh discipline
 

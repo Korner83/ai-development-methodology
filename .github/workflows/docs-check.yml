@@ -1,0 +1,145 @@
+name: docs-check
+
+on:
+  pull_request:
+    paths:
+      - "**/*.md"
+      - ".github/workflows/docs-check.yml"
+  push:
+    branches: [main]
+    paths:
+      - "**/*.md"
+
+jobs:
+  pattern-guards:
+    name: Pattern guards (epic convention, doc counts, version pins, reading time, done rule)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Old epic-folder convention must not appear
+        run: |
+          # The v1.17.0 release canonicalized E<NN>-<slug>/.
+          # Any "NN-slug/" or "epics/01-..." style in adopter-facing docs is stale.
+          # CHANGELOG and evaluations/ are historical record — excluded.
+          hits=$(grep -rEn 'backlog/epics/(NN|<NN>)-' \
+                   --include='*.md' \
+                   --exclude=CHANGELOG.md \
+                   --exclude-dir=evaluations \
+                   --exclude-dir=.git \
+                 || true)
+          if [ -n "$hits" ]; then
+            echo "::error::Old epic-folder convention found:"
+            echo "$hits"
+            exit 1
+          fi
+          echo "OK — no stale epic-folder references."
+
+      - name: Doc count claims must not say 11 or "Twelve"
+        run: |
+          # The methodology has 13 numbered docs (00–12). Any "11 docs covering" or
+          # "Twelve short docs" in templates/README/CHEATSHEET is stale.
+          hits=$(grep -rEn '(\b11 docs covering|Twelve short docs|all 12 methodology docs)' \
+                   --include='*.md' \
+                   --exclude=CHANGELOG.md \
+                   --exclude-dir=evaluations \
+                   --exclude-dir=.git \
+                 || true)
+          if [ -n "$hits" ]; then
+            echo "::error::Stale doc-count claim found:"
+            echo "$hits"
+            exit 1
+          fi
+          echo "OK — no stale doc-count claims."
+
+      - name: Stale reading-time claim
+        run: |
+          hits=$(grep -rEn 'Read in 90 minutes' \
+                   --include='*.md' \
+                   --exclude=CHANGELOG.md \
+                   --exclude-dir=evaluations \
+                   --exclude-dir=.git \
+                 || true)
+          if [ -n "$hits" ]; then
+            echo "::error::Stale 'Read in 90 minutes' claim:"
+            echo "$hits"
+            exit 1
+          fi
+          echo "OK — no stale reading-time claim."
+
+      - name: Status:done rule must not say "No exceptions"
+        run: |
+          # The v1.16.0 release extended the rule with two narrow exceptions
+          # (manual-verified + n/a). Any "No exceptions" in the Status:done
+          # context is stale.
+          hits=$(grep -rEnB1 -A1 'Status: done.*requires.*Test: pass' \
+                   --include='*.md' \
+                   --exclude=CHANGELOG.md \
+                   --exclude-dir=evaluations \
+                   --exclude-dir=.git \
+                 | grep -i 'no exceptions' \
+                 || true)
+          if [ -n "$hits" ]; then
+            echo "::error::Stale 'No exceptions' near Status:done rule:"
+            echo "$hits"
+            exit 1
+          fi
+          echo "OK — Status:done rule consistent (extended form everywhere)."
+
+      - name: Version pin consistency
+        run: |
+          # Pinned references to old versions (v1.13–v1.16) outside CHANGELOG +
+          # evaluations are stale. Current version is derived from the README's
+          # "Currently [v1.X.Y]" line.
+          current=$(grep -oE 'Currently \[v1\.[0-9]+\.[0-9]+\]' README.md | head -1 | grep -oE 'v1\.[0-9]+\.[0-9]+')
+          if [ -z "$current" ]; then
+            echo "::error::Could not detect current version from README.md 'Currently [vX.Y.Z]' line."
+            exit 1
+          fi
+          echo "Detected current version: $current"
+          stale=$(grep -rEn 'v1\.1[0-7]\.[0-9]+' \
+                    --include='*.md' \
+                    --exclude=CHANGELOG.md \
+                    --exclude-dir=evaluations \
+                    --exclude-dir=.git \
+                  | grep -v "$current" \
+                  | grep -vE '(via the autonomous|the v1\.[0-9]+\.[0-9]+ release|since v1\.[0-9]+\.[0-9]+|from v1\.[0-9]+\.[0-9]+|in v1\.[0-9]+\.[0-9]+|per v1\.[0-9]+\.[0-9]+|as of v1\.[0-9]+\.[0-9]+|introduced in v1\.|added in v1\.|shipped in v1\.|Built against methodology|Pinned to|Pinned-against|with v1\.[0-9]+\.[0-9]+)' \
+                  || true)
+          if [ -n "$stale" ]; then
+            echo "::warning::Possible stale version pins (review manually):"
+            echo "$stale"
+          fi
+          # Pin-line specific check: lines that ARE pin statements must match $current.
+          pins=$(grep -rEn '(Pinned-against|Pinned to|Built against methodology) [* ]*v1\.[0-9]+\.[0-9]+' \
+                   --include='*.md' \
+                   --exclude=CHANGELOG.md \
+                   --exclude-dir=evaluations \
+                   --exclude-dir=.git \
+                 | grep -v "$current" \
+                 || true)
+          if [ -n "$pins" ]; then
+            echo "::error::Stale version pins (must match $current):"
+            echo "$pins"
+            exit 1
+          fi
+          echo "OK — all explicit version pins match $current."
+
+  link-check:
+    name: Internal markdown link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lychee — check internal links only
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Internal links only: --offline skips network requests entirely.
+          # Excludes the gitignored distribution/ folder + evaluations/ historical.
+          args: >-
+            --offline
+            --no-progress
+            --exclude-path 'self-development/distribution'
+            --exclude-path 'self-development/evaluations'
+            --exclude-path 'CHANGELOG.md'
+            './**/*.md'
+          fail: true
