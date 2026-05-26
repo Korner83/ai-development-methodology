@@ -125,8 +125,8 @@ The brief is the upstream input to this plan. Treat as supporting research:
 - [`brief/00_brief.md`](../brief/00_brief.md) — TL;DR
 - [`brief/01_vision.md`](../brief/01_vision.md) — vision detail
 - [`brief/02_audience.md`](../brief/02_audience.md) — primary + secondary segments
-- [`brief/03_competitive_landscape.md`](../brief/03_competitive_landscape.md) — nine peer methodologies
-- [`brief/04_market_gaps.md`](../brief/04_market_gaps.md) — nine gaps the peers leave
+- `brief/03_competitive_landscape.md` — maintainer-private competitive analysis (gitignored from v1.17.1; lives on maintainer's disk for reference)
+- `brief/04_market_gaps.md` — maintainer-private market-gap analysis (gitignored from v1.17.1; same reason)
 - [`brief/05_success_metrics.md`](../brief/05_success_metrics.md) — 1y / 3y metrics
 - [`brief/06_distribution.md`](../brief/06_distribution.md) — channels and sustainability
 - [`brief/07_tech.md`](../brief/07_tech.md) — tech surface

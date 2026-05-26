@@ -26,7 +26,7 @@ The methodology closes those failure modes with a small set of practices:
 
 AI agents are a significant share of code contribution on a growing number of projects. Most methodologies (Agile, Scrum, Kanban, Shape Up, XP) predate this shift. Adopting a pre-AI methodology and adding AI agents inside it produces a class of failures the original methodology can't address: collision between agents, "done" claimed without verification, drift between sessions, AI overreach into human-only decisions, the "cheating agent" pattern where the same AI writes both broken implementation and broken tests.
 
-A methodology written natively for mixed-contributor work is missing from the field. Peer methodologies (Spec Kit, BMAD, Ralph loop, etc.) each address parts of the problem but leave significant gaps (see [04_market_gaps.md](04_market_gaps.md)).
+A methodology written natively for mixed-contributor work is the bet this project takes. The structural choices it commits to are documented in [README "Why these particular structural choices"](../../../README.md#why-these-particular-structural-choices) — patterns like named anti-patterns, same-format locks for humans + AI agents, DoD coupled to item frontmatter, tier matrix for autonomous loops, periodic deep-eval — each driven by a specific failure mode the maintainer encountered while running mixed-contributor work in practice.
 
 This project fills those gaps without depending on a specific AI vendor, a specific tech stack, or a SaaS platform that might disappear in 18 months.
 
