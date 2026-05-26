@@ -1,12 +1,1 @@
 ko_fi: korner83
-#
-# The `github` key below shows a "Sponsor" button on the repo. It works only
-# after enrolling in GitHub Sponsors at https://github.com/sponsors. Until
-# enrolled, the button routes to a "not a sponsorable user" page.
-#
-# Delete this file if you don't want a Sponsor button on the repo.
-# Replace `github` with `ko_fi`, `liberapay`, `patreon`, or `custom:` if
-# you'd rather route sponsorship elsewhere — see
-# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
-# for the full list.
-github: [Korner83]
