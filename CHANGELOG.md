@@ -13,6 +13,62 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.17.2 — 2026-05-26
+
+### Success metrics rephrased + full sweep of public hostages-to-fortune
+
+Follow-up to v1.17.1's positioning cleanup. The previous release cleaned the README + gitignored the brief's competitive-analysis docs; this release finishes the job by removing the same problematic patterns (specific number targets, competitor name-drops) from the remaining adopter-facing strategic docs.
+
+### `self-development/brief/05_success_metrics.md` — fully rephrased
+
+Old: numbered "1-year horizon" + "3-year horizon" metrics tables with specific targets (≥500 stars, ≥2,500 stars, ≥3 small companies adopt, ≤40 maintainer hours/quarter, etc.) and explicit competitor name-drops ("referenced alongside Spec Kit / BMAD / Ralph in ≥5 venues").
+
+New: qualitative success indicators in two sections ("Early signals" + "Sustained signals") with no specific number targets. The one operational rule (maintainer time stays sustainable) is kept but reframed qualitatively. The "What's NOT a metric" + counter-signals + leading-indicator sections are preserved and tightened.
+
+**Rationale:** specific number targets set hostages to fortune (if missed, look bad; if exceeded, look braggy); they go stale fast; and they make the doc feel calculating rather than honest about what success means.
+
+### Dependent docs cleaned up
+
+The success-metrics doc was cited by 5 other public docs that referenced specific "metric 5 / metric 6 / metric 10" numbers + competitor mentions:
+
+- **`self-development/brief/00_brief.md`** — TL;DR row rewritten: no specific star/company counts, no "alongside Spec Kit / BMAD" framing.
+- **`self-development/brief/01_vision.md`** — "1-year horizon" + "3-year horizon" sections rewritten to qualitative early/sustained signals. Removed "alongside Spec Kit, BMAD, and the rest of the peer landscape" framing.
+- **`self-development/brief/07_tech.md`** — "No CLI" rationale dropped the "BMAD has one; Spec Kit has one" comparison.
+- **`self-development/brief/08_capability_layers.md`** — 3 references to specific metrics + 1 competitor mention cleaned.
+- **`self-development/strategy/00_master_plan.md`** — Phase 2 + Phase 3 + Phase 4 exit criteria rewritten: no specific star/company counts, no "Spec Kit / BMAD / Ralph" framing. Doc index updated.
+- **`self-development/pillars/P4_tool_compatibility.md`** — "vendor-specific peers (BMAD, with its CLI; Spec Kit + GitHub coupling)" → generic "vendor-neutral by design" framing.
+- **`self-development/pillars/P5_adopter_discoverability.md`** — Exit criteria rewritten (no "≥500 stars", "≥10 stories" specific numbers; qualitative phrasing).
+- **`self-development/pillars/P8_maintenance_sustainability.md`** — "≤40 maintainer hours/quarter" sustainability target reframed as qualitative ("must not feel like a second job"); maintainer's personal time budget is private.
+- **`self-development/pillars/P9_self_improvement_velocity.md`** — Exit criteria rewritten: no "≥2 minor releases" or "≥3 patterns" specific numbers; qualitative phrasing.
+
+### What's kept
+
+- **Operational sustainability rule** — the qualitative "maintaining this should not feel like a second job" rule remains because it's an actual operational constraint that other docs cite, not a public success-metric.
+- **Counter-signals** — early-warning patterns that mean the methodology is failing rather than succeeding. Useful public framing; shows the maintainer thinks about failure modes.
+- **Leading-indicator pattern** — that the self-development cycle's health predicts everything else. Most original insight in the doc.
+- **What's NOT a metric** section — healthy public framing; preserved and extended.
+
+### What's gone from public history (going forward)
+
+| Term | Before | After |
+|---|---|---|
+| "≥500 stars" / "≥2,500 stars" specific counts | In 1y + 3y horizons + Phase 2 exits + P5 exits | Qualitative "external adoption signal exists" |
+| "≥3 small companies" specific count | In 3y horizon + Phase 3 exits | Qualitative "at least one team or company publicly uses + sustained 12+ months" |
+| "Spec Kit / BMAD / Ralph" name-drops | In vision, master plan Phase 3, tech, capability layers, P4 | Removed; replaced with "the field" or specific structural-value framing |
+| "≤40 maintainer hours/quarter" public budget | In success-metrics + P8 + master plan exit criteria | Reframed as qualitative + maintainer's personal budget is private |
+| "metric 5 / 6 / 10" numbered citations across 5 files | Brittle citations to a numbered list | Linked to named sections that are stable across rewrites |
+
+### CHANGELOG history note
+
+Historical CHANGELOG entries (pre-v1.17.1) still mention the old metrics and competitor names — that's the methodology's "Never force-push to trunk; never rewrite history" rule from `methodology/09_git_workflow.md`. The methodology going forward (v1.17.2+) doesn't carry these framings; CHANGELOG honestly records what was there at each version.
+
+### Notable for adopters
+
+- If you forked or cloned before v1.17.2 and have the old success-metrics file locally — your fork is unaffected; ours just no longer publishes specific number targets.
+- The new framing models the position that **specific public metrics are a separate concern from operational rules**. Operational rules belong in the methodology because other docs cite them. Public metrics are a maintainer choice — be transparent if you want, keep private if the hostages-to-fortune cost outweighs the transparency value.
+
+---
+
 ## v1.17.1 — 2026-05-26
 
 ### Repositioning: positive framing replaces side-by-side comparison

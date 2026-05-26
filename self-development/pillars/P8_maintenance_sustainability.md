@@ -1,6 +1,6 @@
 # P8 — Maintenance sustainability
 
-> **Pillar goal:** the methodology operates with lean, sustainable maintenance overhead indefinitely — without burning out the maintainer. (The ≤40 maintainer hours/quarter budget is the *measure* of that capability, not the capability itself.)
+> **Pillar goal:** the methodology operates with lean, sustainable maintenance overhead indefinitely — without burning out the maintainer. The *measure* of that capability is qualitative ("maintaining this should not feel like a second job") rather than a specific quarterly hour budget; the maintainer's personal time budget is private.
 >
 > **Last updated:** 2026-05-25
 
@@ -15,7 +15,7 @@
 
 Burnout is the failure mode for solo-maintained projects. If the methodology requires more attention than the maintainer can give without burning out, the methodology fails — slowly, then suddenly.
 
-The sustainability target is **≤40 maintainer hours/quarter sustained** (per [brief/05_success_metrics.md](../brief/05_success_metrics.md) metric 6). This is a real budget, not aspirational. If hours exceed this for two consecutive quarters, the model is broken and needs intervention (scope reduction, co-maintainer, or methodology adjustment).
+The sustainability rule is qualitative: **maintaining this methodology must not start feeling like a second job** (see [brief/05_success_metrics.md "The one operational rule"](../brief/05_success_metrics.md#the-one-operational-rule)). The specific time budget is the maintainer's call (it's their time); the rule is that maintenance load stays at a level a single solo maintainer sustains in normal life. If maintenance starts to feel sustained-unsustainable for two consecutive quarters, the model is broken and needs intervention (scope reduction, co-maintainer, or methodology adjustment).
 
 This pillar is **dormant in Phase 1** and **primary in Phase 3** because sustainability is only testable with sustained traction. Phase 1 is bootstrap (highly variable, project-establishment effort); Phase 2 is discovery (intermittent peaks for awesome-list submissions, etc.); Phase 3 is steady state.
 

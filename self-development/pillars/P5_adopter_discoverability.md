@@ -35,9 +35,9 @@ Discoverability isn't aggressive marketing. It's *being findable when the adopte
 
 The pillar is *delivered* (evergreen) when:
 
-- [ ] ≥500 GitHub stars (Phase 2 metric 1).
-- [ ] ≥10 referenced public adoption stories (Phase 2 metric 2).
-- [ ] Listed in ≥3 widely-known awesome-* lists in the AI-coding space (at least 2 PRs open, 1+ merged).
+- [ ] External adoption signal exists — stars are a baseline indicator (not the goal; see [brief/05_success_metrics.md "What's NOT a success metric"](../brief/05_success_metrics.md#whats-not-a-success-metric)), but at least *some* baseline discoverability is required for adoption to be possible at all.
+- [ ] Externally-authored adoption stories exist — at least one (per [brief/05_success_metrics.md "Early signals"](../brief/05_success_metrics.md#early-signals-within-12-months)). Real adopters publicly say "we use this" with specifics.
+- [ ] Listed in widely-known awesome-* lists in the AI-coding space (at least one PR merged, others open).
 - [ ] Repo description is current and accurate (the v1.3.1 honesty pass refreshed this; recheck at each release).
 - [ ] At least 10 GitHub topics are set and match adopter search vocabulary.
 - [ ] GitHub Pages site is live and the README renders correctly on it.

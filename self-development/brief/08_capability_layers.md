@@ -57,7 +57,7 @@ The layers are roughly sequentially dependent: doc completeness comes before doc
 
 **The capability:** the methodology's protocols work with any AI coding tool that reads a project-instruction file.
 
-**Why it matters:** vendor-neutral is one of the core differentiating values vs. vendor-specific peers (BMAD, Spec Kit's tighter GitHub coupling). Tool compatibility is a *prerequisite for adoption*, not a downstream concern — adopters who find the methodology immediately ask "does this work with my tool?" before they read further.
+**Why it matters:** vendor-neutral is one of the methodology's core values. Tool compatibility is a *prerequisite for adoption*, not a downstream concern — adopters who find the methodology immediately ask "does this work with my tool?" before they read further. If the answer is "you need to use vendor X," adopters who already use vendor Y leave.
 
 **Tested by:**
 - The 5 template files in `templates/` support all 6 major AI tools — 3 natively (Claude Code via CLAUDE.md, Codex/Antigravity via AGENTS.md) and 3 via adaptation from AGENTS.md (Cursor, Aider, Continue.dev). E04 in the backlog tracks promoting the latter to native templates.
@@ -111,18 +111,18 @@ The layers are roughly sequentially dependent: doc completeness comes before doc
 - Accepted contributions from external contributors.
 - Maintainer's "I learned X from an adopter" notes in CHANGELOG entries.
 
-**Current state (v1.6.0):** Discussions enabled with welcome thread; one external contributor has been the user (the maintainer himself); no external community yet. This capability is mostly dormant until adoption increases (per metric 2 in [05_success_metrics.md](05_success_metrics.md)).
+**Current state (v1.6.0):** Discussions enabled with welcome thread; one external contributor has been the user (the maintainer himself); no external community yet. This capability is mostly dormant until external adoption starts producing feedback signal (see [05_success_metrics.md "Early signals"](05_success_metrics.md#early-signals-within-12-months)).
 
 **Pillar shape:** P7 — Community feedback loop.
 
 ### 8. Maintenance sustainability
 
-**The capability:** the methodology stays current with ≤40 maintainer hours/quarter sustained.
+**The capability:** the methodology stays current within a sustainable maintainer-time budget — qualitative, not a published quarterly number.
 
 **Why it matters:** burnout is the failure mode for solo-maintained projects. The methodology must not require more attention than the maintainer can give without burning out.
 
 **Tested by:**
-- Maintainer hours/quarter (target ≤40 per [05_success_metrics.md](05_success_metrics.md) metric 6).
+- Whether maintaining the methodology starts to feel like a second job (the rule in [05_success_metrics.md "The one operational rule"](05_success_metrics.md#the-one-operational-rule)).
 - Frequency and depth of releases.
 - Quality of CHANGELOG entries (rushed releases have thin entries).
 - The self-development cycle's contribution to maintenance load — does the cycle reduce or increase burden?
@@ -138,9 +138,9 @@ The layers are roughly sequentially dependent: doc completeness comes before doc
 **Why it matters:** this is the compounding mechanism. If the cycle works, the methodology evolves with less effort over time; if it doesn't work, the cycle is overhead.
 
 **Tested by:**
-- Self-development cycle release count (per metric 5 in [05_success_metrics.md](05_success_metrics.md): ≥2 minor releases via autonomous loop within 1 year).
+- Whether the self-development cycle ships methodology improvements (not just self-development cleanup). The cycle is the methodology's most distinctive claim; if it doesn't produce real methodology releases, the claim is theoretical. See [05_success_metrics.md "Early signals"](05_success_metrics.md#early-signals-within-12-months).
 - "This came from the cycle" attribution in CHANGELOG entries.
-- Methodology shifts the maintainer wouldn't have discovered solo (per metric 10).
+- Methodology shifts the maintainer wouldn't have discovered solo (see [05_success_metrics.md "Sustained signals"](05_success_metrics.md#sustained-signals-multi-year)).
 
 **Current state (v1.6.0):** cycle not yet operational. This brief is Step 0 of bootstrapping it. The capability becomes testable only after Step 4 (autonomous loop setup) lands.
 

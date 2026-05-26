@@ -46,15 +46,15 @@ Four phases, each with binary exit criteria. Phases gate: until the prior phase'
 
 **Exit criteria (all must hold):**
 
-- [ ] ≥500 GitHub stars.
-- [ ] ≥10 referenced public adoption stories (blog posts, conference talks, podcast mentions, public engineering blogs where someone says "we use this and here's how").
-- [ ] ≥5 accepted upstream contributions from external contributors (substantive PRs, not patches).
-- [ ] Self-development loop has produced ≥2 minor releases attributed to the autonomous cycle.
-- [ ] ≥1 maintained external fork (where "maintained" = commits in the last 60 days at exit time).
+- [ ] External adoption signal exists — baseline discoverability indicators (stars, traffic, search-found rate). No specific star count; see [brief/05_success_metrics.md "What's NOT a success metric"](../brief/05_success_metrics.md#whats-not-a-success-metric) for why.
+- [ ] Externally-authored adoption stories exist — at least one substantive public account (blog post, conference talk, podcast mention, public engineering blog) where someone says "we use this and here's how it shaped the project."
+- [ ] At least one accepted upstream contribution from an external contributor — substantive PR (not patch), proving a contributor pipeline is forming.
+- [ ] Self-development loop has produced methodology releases attributed to the autonomous cycle (not just self-development cleanup).
+- [ ] At least one maintained external fork exists (where "maintained" = commits in the last 60 days at exit time).
 
 **Active pillars:** P5 Adopter discoverability, P6 Example richness, P7 Community feedback loop become primary. Phase 1 pillars (P1–P4, P9) continue as baseline.
 
-**Indicator of phase health:** stars climb but no adoption stories appear → discoverability is working but the methodology isn't sticking; investigate friction.
+**Indicator of phase health:** discoverability signals climb but no adoption stories appear → people are bookmarking, not using; investigate friction (see [brief/05_success_metrics.md "Counter-signals"](../brief/05_success_metrics.md#counter-signals-early-warning)).
 
 ### Phase 3 — Establishment (12 → 24 months from Phase 2 exit)
 
@@ -62,14 +62,14 @@ Four phases, each with binary exit criteria. Phases gate: until the prior phase'
 
 **Exit criteria (all must hold):**
 
-- [ ] Methodology is referenced alongside Spec Kit / BMAD / Ralph in ≥5 public comparison venues (blog posts, talks, papers).
-- [ ] ≥3 small companies / teams have publicly adopted as their internal standard (e.g., named in engineering blogs, hiring docs, public talks).
-- [ ] ≥2 maintained adaptations / forks for specific niches (e.g., regulated industry, research teams).
-- [ ] Maintainer hours have stayed ≤40/quarter on average across the phase (per [brief/05_success_metrics.md](../brief/05_success_metrics.md) metric 6).
+- [ ] The methodology appears in public field discussions on its own merit (blog posts, talks, papers comparing AI-coding methodologies). No specific count target — appearance at all is the signal.
+- [ ] At least one team or company publicly uses the methodology as their internal standard (engineering blogs, hiring docs, public talks) and is still using it 12+ months later (public + sustained).
+- [ ] At least one maintained adaptation / fork exists for a specific niche (e.g., regulated industry, research teams). "Maintained" = commits within 60 days.
+- [ ] Maintainer time has stayed sustainable across the phase — qualitative; the rule is "if maintaining this feels like a second job, something has to change." See [brief/05_success_metrics.md "The one operational rule"](../brief/05_success_metrics.md#the-one-operational-rule).
 
 **Active pillars:** P8 Maintenance sustainability becomes primary (now testable because traction exists). All other pillars continue as baseline.
 
-**Indicator of phase health:** maintainer hours climb past 40/quarter → sustainability is broken; reduce scope or invite co-maintainer per [STATUS.md](../../STATUS.md).
+**Indicator of phase health:** maintainer time stops feeling sustainable → reduce scope or invite co-maintainer per [STATUS.md](../../STATUS.md).
 
 ### Phase 4 — Maturity (24+ months from Phase 3 exit, open-ended)
 
@@ -77,8 +77,8 @@ Four phases, each with binary exit criteria. Phases gate: until the prior phase'
 
 **Exit criteria (open-ended; the project lives here indefinitely):**
 
-- [ ] ≥2 patterns originally in this methodology have been adopted by peer methodologies (verifiable via peer methodology CHANGELOGs).
-- [ ] Self-development cycle has produced ≥3 patterns the solo maintainer wouldn't have discovered alone (per [brief/05_success_metrics.md](../brief/05_success_metrics.md) metric 10).
+- [ ] Patterns originally in this methodology have been adopted by other methodologies in the field (verifiable via cross-project CHANGELOGs). Generative for the field is the strongest possible signal.
+- [ ] The self-development cycle has produced patterns the solo maintainer wouldn't have discovered alone — measured by the maintainer's "this came from the cycle" notes in CHANGELOG (see [brief/05_success_metrics.md "Sustained signals"](../brief/05_success_metrics.md#sustained-signals-multi-year)).
 - [ ] Project is operating in "shared infrastructure" mode (per [brief/06_distribution.md](../brief/06_distribution.md)): ≥3 external maintainers with substantive contributions; CODE_OF_CONDUCT.md and CONTRIBUTING.md present; second maintainer with merge permissions.
 
 **No explicit "Phase 5."** Phase 4 is the steady state. If the project shifts beyond it (e.g., becomes a foundation-backed project, is forked into a new direction by a larger team), that's a separate strategic event, not a planned phase.
@@ -127,7 +127,7 @@ The brief is the upstream input to this plan. Treat as supporting research:
 - [`brief/02_audience.md`](../brief/02_audience.md) — primary + secondary segments
 - `brief/03_competitive_landscape.md` — maintainer-private competitive analysis (gitignored from v1.17.1; lives on maintainer's disk for reference)
 - `brief/04_market_gaps.md` — maintainer-private market-gap analysis (gitignored from v1.17.1; same reason)
-- [`brief/05_success_metrics.md`](../brief/05_success_metrics.md) — 1y / 3y metrics
+- [`brief/05_success_metrics.md`](../brief/05_success_metrics.md) — qualitative success indicators (early + sustained); one operational rule on maintainer time; counter-signals
 - [`brief/06_distribution.md`](../brief/06_distribution.md) — channels and sustainability
 - [`brief/07_tech.md`](../brief/07_tech.md) — tech surface
 - [`brief/08_capability_layers.md`](../brief/08_capability_layers.md) — the nine layers that became pillars

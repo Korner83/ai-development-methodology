@@ -57,7 +57,7 @@ What's in scope, what's deliberately out. This is the tech-stack section of the 
 
 ### Tooling for the methodology itself
 
-- **No CLI for the methodology** (BMAD has one; Spec Kit has one; this doesn't). The methodology is docs; adopters copy-paste templates and edit. Building a CLI would entangle the methodology with a maintenance burden it doesn't need.
+- **No CLI for the methodology.** The methodology is docs; adopters copy-paste templates and edit. Building a CLI would entangle the methodology with a maintenance burden it doesn't need and a vendor lock-in it explicitly avoids.
 - **No methodology-specific linters / validators.** The methodology is descriptive, not enforced.
 - **No web UI / dashboard for backlog browsing.** Adopters use their own preferred tools.
 
