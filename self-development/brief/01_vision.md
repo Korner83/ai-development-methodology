@@ -32,21 +32,21 @@ This project fills those gaps without depending on a specific AI vendor, a speci
 
 ## What success looks like
 
-### 1-year horizon (by 2027-05)
+### Early signals (within ~12 months)
 
-- **≥500 GitHub stars.** A needed baseline signal; not proof of depth.
-- **≥10 referenced public adoption stories.** Blog posts, conference talks, podcast mentions where someone says "we use this and here's how it shaped the project."
-- **≥3 substantive forks.** Adopters who have made meaningful additions, not just patches. Forks prove the methodology is generative — others can extend it usefully.
-- **≥5 upstream contributions accepted** from external contributors. PRs that add or refine methodology content. Proves a contributor pipeline is forming.
-- **Self-development loop operational.** At least 2 minor version releases produced via the autonomous cycle (Step 4+ of this bootstrap).
+- **External adoption signal exists.** Stars are a baseline-existence indicator (not the goal — see [05_success_metrics.md "What's NOT"](05_success_metrics.md#whats-not-a-success-metric)); the real signal is at least *some* baseline discoverability so adoption is possible at all.
+- **Externally-authored adoption stories exist.** At least one blog post, conference talk, podcast mention, or public engineering blog where someone says "we use this and here's how it shaped the project."
+- **Forks have commits.** Adopters who have made meaningful additions to the methodology, not just bookmarked-and-forgotten. Forks with substantive additions prove the methodology is generative.
+- **A contributor pipeline is forming.** At least one accepted upstream contribution from an external contributor — substantive (not a patch).
+- **Self-development loop has shipped methodology improvements.** The cycle has produced methodology releases attributed to its output (not just self-development internal cleanup) — proving the cycle is the methodology's most distinctive claim, not theoretical.
 
-### 3-year horizon (by 2029-05)
+### Sustained signals (multi-year)
 
-- **Methodology is referenced as one of the "named" methodologies in AI-coding discussions**, alongside Spec Kit, BMAD, and the rest of the peer landscape. Not necessarily the most popular — but legitimately on the list when people compare options.
-- **≥3 small companies / teams have publicly adopted as their internal standard.** Sustained use, not weekend trial.
-- **Multiple maintained adaptations / forks for specific niches** (e.g., a research-team variant, a regulated-industry variant). CC BY 4.0 enables this; the existence of maintained adaptations proves it's worth doing.
-- **Self-development loop has demonstrably evolved the methodology beyond v1.x design.** The autonomous cycle has surfaced patterns the solo maintainer wouldn't have discovered.
-- **Cross-pollination: ≥2 patterns originally in this methodology have been adopted by peer methodologies.** Concrete evidence the methodology is generative for the field, not just for adopters.
+- **The methodology appears in field discussions on its own merit.** When people compare AI-coding methodologies, this one comes up because it offers something specific — not because it's the loudest. Whether it comes up at all is the signal; counting mentions invites gaming.
+- **Public sustained use.** At least one team or company publicly uses the methodology as their internal standard, and is still using it 12+ months later. Public + sustained beats either alone.
+- **Maintained adaptations exist.** CC BY 4.0 enables forking; maintained variants (e.g., for regulated industries, research teams, specific stacks) mean the methodology is useful enough to fork-and-maintain.
+- **Self-development loop has demonstrably evolved the methodology.** The autonomous cycle has surfaced patterns the solo maintainer wouldn't have discovered alone.
+- **Patterns originally in this methodology have been adopted by other methodologies in the field.** Generative for the field. Strongest possible signal of methodology quality; weakest possible signal of maintainer ego (because by then the maintainer isn't the source any more).
 
 ## What success is NOT
 

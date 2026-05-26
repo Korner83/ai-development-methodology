@@ -1,60 +1,54 @@
-# Success Metrics
+# Success indicators
 
-Concrete, observable outcomes at 1-year and 3-year horizons. Vanity metrics excluded.
+Qualitative signals that tell the maintainer this methodology is working. One operational rule. No specific star, fork, or adoption counts — those go stale, look braggy when exceeded, look bad when missed, and invite gaming.
 
-## 1-year horizon (target: 2027-05-25)
+## Early signals (first year)
 
-| # | Metric | Target | Why it matters | How to measure |
-|---|---|---|---|---|
-| 1 | GitHub stars | ≥500 | Baseline signal of adoption interest. Insufficient alone, but needed. | GitHub API; quarterly check. |
-| 2 | Referenced public adoption stories | ≥10 | Real adopters publicly say "we use this." Proves the methodology survives the trial. | Maintainer logs; passive search for repo URL mentions. |
-| 3 | Substantive forks | ≥3 | Forks with meaningful additions (not patches). Proves the methodology is generative — others can extend usefully. | GitHub API; manual inspection of top forks; "additions" judged by diff content, not LOC. |
-| 4 | Accepted upstream contributions | ≥5 | PRs from external contributors that add or refine methodology content. Proves a contributor pipeline is forming. | GitHub PR history. |
-| 5 | Self-development cycle releases | ≥2 minor releases via autonomous loop | Demonstrates the cycle works end-to-end. Without this, the "self-improving" claim is theoretical. | CHANGELOG analysis — releases tagged as "via autonomous loop" or with that body language. |
-| 6 | Maintainer hours/quarter | ≤40 hours/quarter sustained | Sustainability check. If maintenance exceeds this, the lean-maintainer model is broken. | Maintainer self-log. |
+- **At least one externally-authored adoption story exists.** A blog post, a forked repo with substantial additions, a Discussions thread saying "I tried this on project X and Y happened." Stars are bookmarks; stories are use.
+- **The methodology survives non-author use.** Someone other than the maintainer applies it to a project the maintainer didn't write. Specific feedback comes back.
+- **Forks have commits.** Substantive additions, not just bookmarks. That's what proves the methodology is generative.
+- **The self-development cycle ships methodology improvements.** Real releases attributed to cycle output, not just internal cleanup. Without this, the "self-improving" claim is theoretical.
 
-## 3-year horizon (target: 2029-05-25)
+## Sustained signals (multi-year)
 
-| # | Metric | Target | Why it matters | How to measure |
-|---|---|---|---|---|
-| 7 | Named in AI-coding methodology discussions | Referenced alongside Spec Kit / BMAD / Ralph in ≥5 blog posts, talks, or papers comparing options | Legitimately on the list when people compare. Not necessarily most popular; on the radar. | Search mentions; community lists; conference talk indices. |
-| 8 | Public adoption as internal standard | ≥3 small companies / teams publicly adopt as their methodology | Sustained use, not weekend trial. Hard to fake; the team is willing to attach their name to it. | Public statements (engineering blogs, talks, hiring docs). |
-| 9 | Maintained adaptations / forks for niches | ≥2 maintained variants (e.g., regulated industry, research teams) | CC BY 4.0 enables adaptation; existence of maintained variants proves the methodology is useful enough to fork-and-maintain. | GitHub fork inspection; "maintained" = commits in last 60 days. |
-| 10 | Self-development loop has shifted the methodology | The autonomous cycle has surfaced ≥3 patterns the solo maintainer wouldn't have discovered | Proves the loop is generative, not just executing. | Methodology release attribution; "this came from the cycle" notes in CHANGELOG. |
-| 11 | Cross-pollination to peer methodologies | ≥2 patterns originally here have been adopted by peer methodologies | Generative for the field, not just for adopters. The strongest signal of methodology quality. | Peer methodology CHANGELOGs and READMEs; community discussion. |
-| 12 | Stars (secondary check) | ≥2,500 | A 3-year baseline if the other metrics are tracking. Not a goal in itself. | GitHub API. |
+- **Appears in field discussions on its own merit.** Comes up because it offers something specific. Counting mentions invites gaming; appearance at all is the signal.
+- **Public sustained use.** At least one team or company publicly uses it as their internal standard *and* is still using it 12+ months later. Public + sustained beats either alone.
+- **Maintained forks for specific niches** (regulated industries, research teams, specific stacks). CC BY 4.0 enables forking; maintained variants prove the methodology is worth maintaining a fork of.
+- **Patterns adopted by other methodologies in the field.** Generative beyond this project. The strongest possible signal of methodology quality.
 
-## What's NOT a metric
+## What success is NOT
 
-- **Revenue.** CC BY 4.0; no monetization. If commercial activity emerges around the methodology (consulting, training), that's downstream, not the methodology's success.
-- **Star count above some arbitrary high number.** 500 stars with 50 real adopters > 50,000 stars with 50 real adopters. Stars are a baseline signal, not the goal.
-- **Velocity of releases.** Quality and coherence matter more than release frequency. Six releases in a day (which happened on 2026-05-25) is an unusual burst, not a sustainable pace, and not a target.
-- **Personal recognition for the maintainer.** Not the point. The methodology should outlive any individual's attention.
-- **Followers / subscribers / newsletter signups.** Marketing-flavored metrics. The methodology doesn't have these channels; doesn't need them.
-- **Specific feature count.** "We added X new sections this year" is volume, not value.
+- **Revenue.** CC BY 4.0; no monetization. Commercial activity around the methodology is downstream of the open source, not the methodology's success.
+- **Star counts above some target.** A small adoption base that uses the methodology beats a large bookmark base that doesn't.
+- **Release frequency.** Quality and coherence > cadence. Bursts of releases (like the 2026-05-25 cluster) happen; they're not the target.
+- **Personal recognition for the maintainer.** The methodology should outlive any one person's attention.
+- **Followers / subscribers / newsletter signups.** Marketing-flavored. Not channels this methodology has, or needs.
+- **Volume of features or sections shipped.** Adding more pages is not value.
 
-## Counter-signals (early warning)
+## Counter-signals — when things are failing, not succeeding
 
-Things to watch that mean the methodology is failing, not succeeding:
+- **Stars climb but adoption stories don't.** People bookmark, don't use.
+- **Forks appear but never get commits.** People fork to try, then abandon.
+- **Issues asking "how do I do basic X?"** The docs aren't clear.
+- **Maintenance load grows unsustainable.** The lean-maintainer model is breaking.
+- **Methodology releases stop happening.** The cycle stalled.
+- **External contributions arrive and get bounced back repeatedly.** The contribution surface isn't clear.
 
-- **Stars climb but no adoption stories appear.** Means people are bookmarking, not using.
-- **Forks appear but never get commits.** Means people are forking-to-try and abandoning.
-- **Issues asking "how do I do basic X?"** Means the docs aren't actually clear; the doc-clarity capability layer is underdelivering.
-- **Maintainer hours climb past 40/quarter.** Means the lean-maintainer model is breaking; consider what's causing the rise and either fix the methodology or shift to a different maintenance posture.
-- **Methodology releases stop happening.** Means the cycle stalled. Worth investigating whether the cycle is the wrong shape or the maintainer is over-extended.
-- **External contributions arrive but get bounced back repeatedly.** Means contribution surface isn't clear; consider better CONTRIBUTING.md or different governance.
+## The one operational rule
+
+**Maintaining this should not feel like a second job.** If it does, something in the methodology or the maintenance posture has to change. Specific time budget is private — it's the maintainer's time. This is the qualitative rule that other docs cite (P8 — Maintenance sustainability; strategy plan exit criteria).
+
+## Leading indicator: cycle health
+
+The self-development cycle's health is the leading indicator for every signal above.
+
+- Healthy cycle → methodology improves at loop velocity → adopters experience an improving artifact → stories, forks, sustained use follow.
+- Stalled cycle → static methodology → adoption plateaus → everything else slows.
+
+If the other signals slow, check the cycle first.
 
 ## Review cadence
 
-- **Quarterly:** check metrics 1, 3, 4, 5, 6 (the easily-quantified ones) plus any counter-signals. Adjust if drift is significant.
-- **Semi-annually:** full review tied to the methodology self-evaluation pass (per [`methodology/07_definition_of_done.md`](../../methodology/07_definition_of_done.md)). Includes the metrics review plus a "are these still the right metrics?" sanity check.
-- **Annually:** end-of-year review of 1-year-horizon metrics; restate 3-year-horizon targets if context has shifted.
-
-## How metrics interact with the self-development cycle
-
-Metric 5 (self-development cycle releases) and metric 10 (loop has shifted the methodology) are the **leading indicators** for everything else. If the cycle is operational and generative, the other metrics improve as a downstream effect:
-
-- Better methodology → better adoption stories → more stars → more substantive forks → more upstream contributions.
-- Stalled cycle → static methodology → adoption stalls → metrics plateau.
-
-The self-development bootstrap (this folder) exists precisely to make the cycle operational. Until Step 4 lands, metrics 5 and 10 are unreachable.
+- **Quarterly** — scan signals + counter-signals; investigate drift.
+- **Semi-annually** — tied to the methodology self-evaluation pass; includes "are these still the right indicators?"
+- **Annually** — review trajectory; restate qualitative targets if context has shifted.

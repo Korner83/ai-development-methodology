@@ -46,8 +46,8 @@ The pillar is *delivered* (evergreen) when:
 
 - [ ] Steps 0–4 of the self-development bootstrap are shipped (v1.7.0 through v1.x with autonomous loop config).
 - [ ] At least one autonomous loop run has completed end-to-end without maintainer intervention mid-run.
-- [ ] ≥2 minor methodology releases attributed to the cycle (per Phase 2 exit criterion and metric 5 in [brief/05_success_metrics.md](../brief/05_success_metrics.md)).
-- [ ] ≥3 patterns surfaced by the cycle that the solo maintainer wouldn't have discovered alone (per metric 10 in [brief/05_success_metrics.md](../brief/05_success_metrics.md)) — measured by the maintainer's "this came from the cycle" notes in CHANGELOG.
+- [ ] The cycle has shipped methodology improvements (not just self-development cleanup); CHANGELOG entries attribute specific changes to cycle output. See [brief/05_success_metrics.md "Early signals"](../brief/05_success_metrics.md#early-signals-within-12-months).
+- [ ] The cycle has surfaced patterns the solo maintainer wouldn't have discovered alone — measured by the maintainer's "this came from the cycle" notes in CHANGELOG. See [brief/05_success_metrics.md "Sustained signals"](../brief/05_success_metrics.md#sustained-signals-multi-year).
 - [ ] The cycle has not damaged the abstract methodology docs via the autonomous loop (no incidents where the loop touched `methodology/*.md` without explicit user direction).
 
 **Re-tested:** every methodology release that came from the cycle (per the attribution criterion); quarterly during Phase 2 to verify cycle health.

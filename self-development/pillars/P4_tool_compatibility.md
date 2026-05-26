@@ -15,7 +15,7 @@
 
 Tool compatibility is a **prerequisite for adoption**, not a downstream concern. Adopters who find the methodology immediately ask "does this work with my tool?" before they read further. If the answer is "you need to use X," adopters who already use Y leave.
 
-This pillar is also one of the methodology's core differentiating values vs. vendor-specific peers (BMAD, with its CLI; tighter Spec Kit + GitHub coupling). The methodology is *tool-agnostic by design*: every protocol works with any AI agent that can read files and run commands.
+This pillar is also one of the methodology's core values. The methodology is *tool-agnostic by design*: every protocol works with any AI agent that can read files and run commands. No vendor lock-in, no CLI dependency, no SaaS dependency.
 
 The pillar was resequenced from P6 to P4 during the Step 0 cross-AI review for exactly this reason: it's foundational, not downstream of examples.
 
