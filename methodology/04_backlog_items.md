@@ -658,11 +658,11 @@ dependency that an agent can resolve).
 
 ## Active
 
-- [BL-0123](epics/02-payments/BACKLOG.md#bl-0123) — set up Stripe
+- [BL-0123](epics/E02-payments/BACKLOG.md#bl-0123) — set up Stripe
   production webhook; need account owner access. Added 2026-05-12.
-- [BL-0211](epics/03-launch/BACKLOG.md#bl-0211) — review legal
+- [BL-0211](epics/E03-launch/BACKLOG.md#bl-0211) — review legal
   disclaimer wording with counsel. Added 2026-05-18.
-- [BL-0289](epics/04-billing/BACKLOG.md#bl-0289) — physical card
+- [BL-0289](epics/E04-billing/BACKLOG.md#bl-0289) — physical card
   needed for test charge in production. Added 2026-05-21.
 
 ## Recently unblocked (last 30 days)

@@ -18,7 +18,7 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Autonomous goal-oriented development cycles** — paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration — 0–10 rubric per area; unsolvable issues get *handled/postponed/marked*, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.16.0](CHANGELOG.md).
+- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.17.0](CHANGELOG.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
 
 ---
@@ -116,23 +116,23 @@ Most projects accumulate the same failure modes once they last more than a few w
 ai-development-methodology/
 ├── README.md                 # this file
 ├── CHANGELOG.md              # version history (self-applies the methodology)
-├── CHEATSHEET.md             # one-page quick reference (NEW v1.16.0)
+├── CHEATSHEET.md             # one-page quick reference (NEW v1.17.0)
 ├── LICENSE                   # CC BY 4.0
 ├── STATUS.md                 # maintenance posture
-├── methodology/              # the 13 methodology docs (00–12; doc 12 NEW v1.16.0)
+├── methodology/              # the 13 methodology docs (00–12; doc 12 NEW v1.17.0)
 ├── templates/
 │   ├── CLAUDE.md             # project-instruction file (Claude Code)
 │   ├── AGENTS.md             # vendor-neutral version (extra plan/tool/safety sections)
 │   ├── AGENT_KICKOFF.md      # planning-mode prompt for new projects
-│   ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions (extended v1.16.0 with periodic deep-eval)
+│   ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions (extended v1.17.0 with periodic deep-eval)
 │   └── PROJECT_STRUCTURE.md  # recommended folder layout + naming conventions
-├── examples/                 # NEW v1.16.0 — fictional `tinker` project showing methodology applied end-to-end
+├── examples/                 # NEW v1.17.0 — fictional `tinker` project showing methodology applied end-to-end
 │   ├── README.md             # 3-row comparison: methodology/ vs self-development/ vs examples/
 │   └── example-project/
 │       ├── README.md
 │       ├── strategy/00_master_plan.md
 │       ├── pillars/P1_capture.md, P2_retrieval.md
-│       └── backlog/EPICS.md + epics/01-cli-foundations/ (charter + 5 BL items)
+│       └── backlog/TEST_BACKLOG.md + EPICS.md + epics/E01-cli-foundations/ (charter + BACKLOG + ARCHIVE + FUTURE + TEST)
 └── self-development/         # the methodology applied to its own development
     ├── AUTONOMOUS_LOOP.md    # Step 4 — adapted loop config (operational cycle)
     ├── brief/                # Step 0 outputs — vision, audience, competitive landscape, etc.
@@ -143,7 +143,7 @@ ai-development-methodology/
     └── loop-notes/           # loop-detected methodology insights for maintainer review
 ```
 
-~13,000+ lines across 60+ files at v1.16.0. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
+~13,000+ lines across 60+ files at v1.17.0. Longest doc ~1,000 lines. Each doc is self-contained — read in any order.
 
 ---
 
@@ -306,7 +306,7 @@ For modified versions, indicate you've made changes. Only obligation the license
 
 ## Status
 
-Battle-tested in one production project. Currently v1.16.0 — see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean — PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.17.0 — see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean — PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 

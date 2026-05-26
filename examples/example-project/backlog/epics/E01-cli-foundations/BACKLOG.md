@@ -1,48 +1,15 @@
 # E01 — CLI foundations — Active Backlog
 
-_5 example items demonstrating the canonical [04_backlog_items.md](../../../../../methodology/04_backlog_items.md) frontmatter shape._
+_4 example items demonstrating the canonical [04_backlog_items.md](../../../../../methodology/04_backlog_items.md) frontmatter shape. (BL-0001 already shipped — see [ARCHIVE.md](ARCHIVE.md).)_
 
 ## Summary
 
 | ID      | Title                                                   | Priority | Effort | Status      |
 |---------|---------------------------------------------------------|----------|--------|-------------|
-| BL-0001 | Scaffold project + CI for 3 OS                          | P0       | M      | done        |
 | BL-0002 | `tinker capture "<text>"` writes note + auto-attaches context | P1       | M      | in-progress |
 | BL-0003 | `tinker capture` (no arg) opens `$EDITOR`               | P1       | S      | ready       |
 | BL-0004 | `tinker recent` lists last 20 for cwd                   | P1       | S      | backlog     |
 | BL-0005 | Note storage format finalized (durability + schema)     | P0       | M      | blocked     |
-
----
-
-### BL-0001 — Scaffold project + CI for 3 OS
-
-| Field    | Value                              |
-|----------|------------------------------------|
-| Epic     | E01-cli-foundations                |
-| Pillar   | P1                                 |
-| Priority | P0                                 |
-| Effort   | M                                  |
-| Status   | done                               |
-| Test     | pass                               |
-| Deps     | —                                  |
-| Lock     | —                                  |
-
-**Why / Description:** Without project scaffolding + CI for all 3 target OS (macOS, Linux, Windows), no subsequent item can claim cross-platform correctness. Foundation item.
-
-**Approach:**
-1. `cargo new tinker` (Rust per strategy doc 02 — fictional).
-2. GitHub Actions workflow: matrix build on `ubuntu-latest`, `macos-latest`, `windows-latest`.
-3. Test runner: `cargo test` on all 3.
-
-**Done means:**
-
-- [x] Repo skeleton committed.
-- [x] CI runs green on all 3 OS for the placeholder test.
-- [x] README explains how to run tests locally.
-
-**Files (probable):**
-
-- `Cargo.toml`, `src/main.rs`, `.github/workflows/ci.yml`, `README.md`.
 
 ---
 

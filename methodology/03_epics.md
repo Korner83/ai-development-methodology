@@ -69,29 +69,37 @@ Without this gate, "active" loses meaning.
 
 ---
 
-## Epic directory layout
+## Standard epic-folder structure
 
-Each epic gets its own folder at `backlog/epics/<NN>-<slug>/`. The folder contains a fixed set of files.
+Each epic gets its own folder at `backlog/epics/E<NN>-<slug>/`. The folder contains a fixed set of five files:
 
 ```
 backlog/
+  README.md                                  # backlog workflow doc (project-level)
   EPICS.md                                   # rollup table (see below)
+  TEST_BACKLOG.md                            # cross-epic manual-QA queue (optional)
   epics/
-    <NN>-<slug>/
+    E<NN>-<slug>/
       README.md                              # the epic charter
       BACKLOG.md                             # active items (open, ready, in-progress, etc.)
       ARCHIVE.md                             # completed and rejected items
-      FUTURE.md                              # items deferred to a later phase
-      TEST.md                                # epic-specific manual/QA test scenarios (optional)
+      FUTURE.md                              # items deferred to a later phase (P3 / nice-to-have)
+      TEST.md                                # epic-specific acceptance + regression scenarios
 ```
+
+The five per-epic files are the **standard pattern**. An epic should ship all five even if some start empty — the empty-but-present file signals to contributors "this surface exists; add to it." Empty files are cheap; missing files force every new contributor to re-derive the convention.
 
 ### File roles
 
 - **`README.md` — the charter.** The single source of truth for what this epic is, why it exists, and when it is done. The full template is below.
 - **`BACKLOG.md` — active items.** Every item in the epic that is not yet `done` lives here. Items are added when filed and moved out when archived or deferred. The format of individual items is defined in [04_backlog_items.md](04_backlog_items.md).
 - **`ARCHIVE.md` — completed items.** When an item passes the [Definition of Done](07_definition_of_done.md) and is marked `done`, it moves here. Also receives `rejected` items. Archives are append-only; do not edit history.
-- **`FUTURE.md` — deferred items.** Items that are real but not in scope for the current phase. They live here so they are not forgotten without polluting the active backlog.
-- **`TEST.md` — epic-specific test scenarios.** Optional. Useful when the epic's surface needs manual QA steps that span multiple items.
+- **`FUTURE.md` — deferred items.** P3 / nice-to-have items that are real but not in scope for the current phase. Items here use either monotonic `BL-####` IDs (Scheme A) or epic-scoped `BL-E<NN>-F##` IDs (Scheme B) per [04_backlog_items.md "FUTURE.md numbering"](04_backlog_items.md#futuremd-numbering-two-valid-schemes).
+- **`TEST.md` — epic-specific test scenarios.** Two-table format: acceptance tests mapping to exit criteria + regression scenarios to protect. Per-item tests live in the item bodies (`Test:` field); TEST.md holds the epic-scoped scenarios that span multiple items or need manual QA. Template below.
+
+### The cross-epic `TEST_BACKLOG.md` (optional)
+
+Some projects also keep a `backlog/TEST_BACKLOG.md` at the backlog root for **cross-epic manual-QA scenarios** — tests that span ≥ 2 epics, or that operators run on a cadence before milestone declarations. Each epic's `TEST.md` covers epic-scoped scenarios; `TEST_BACKLOG.md` covers the rest. Skip it for small projects where the per-epic TEST.md files are sufficient; add it when QA volume justifies a central queue.
 
 ### Why per-epic folders
 
@@ -99,48 +107,68 @@ backlog/
 - Cross-epic queries still work via grep across `backlog/epics/`.
 - Closing an epic compresses cleanly: archive the folder or mark it `done` in the rollup; the directory remains intact for audit.
 
-### Slug convention
+### Naming convention: `E<NN>-<slug>`
 
-The slug is a short kebab-case identifier. `<NN>-<slug>` together must be unique. Numbering matches the epic ID: `E07` → `07-content-protection`. Keep slugs descriptive but short (under 30 characters).
+The folder name has two parts:
+
+1. **`E<NN>`** — epic ID with the literal `E` prefix and a 2-digit zero-padded number (`E01`, `E02`, …, `E12`). The `E` prefix prevents collisions with item numbering and makes greps for "epic 7" unambiguous (`rg "E07"` vs `rg "07"` matching everything from item numbers to dates).
+2. **`<slug>`** — short kebab-case identifier under ~30 characters. Descriptive but tight: `city-expansion` not `expansion-of-cities-to-new-locations`.
+
+Together: `E01-city-expansion`, `E02-ai-enrichment`, `E11-open-beta-launch`. Numbering matches the epic ID in `EPICS.md`: `E07` in the rollup → `E07-content-protection` on disk.
 
 ---
 
 ## TEST.md template
 
-`TEST.md` (optional, per epic) holds the structured test inventory when item-level tests aren't enough — typically because exit criteria need end-to-end scenarios that span multiple items, or because the epic touches a surface where regressions have happened before.
+`TEST.md` is a standard per-epic file (recommended for every epic; required when the epic's exit criteria need verification beyond what individual item tests cover). It holds the structured test inventory: acceptance scenarios mapping to exit criteria + regression scenarios to protect on every change.
 
-The template is two tables:
+The template is two or three tables:
 
 ```markdown
-# E<NN> — <Epic name> — Test Scenarios
+# E<NN> — <Epic name> — Test scenarios
 
-_Epic-specific acceptance scenarios. Cross-epic manual QA queues live
-elsewhere if your project has them._
+_Epic-specific acceptance + regression scenarios. The cross-epic
+manual-QA queue lives in [../../TEST_BACKLOG.md](../../TEST_BACKLOG.md)._
 
 ## Acceptance tests for exit criteria
 
-| ID  | Scenario                                                     | Status     |
-|-----|--------------------------------------------------------------|------------|
-| AT1 | <Scenario verifying a binary exit criterion from the charter>| pending    |
-| AT2 | <Scenario verifying a binary exit criterion>                 | pass       |
+| ID    | Scenario                                                     | Status     |
+|-------|--------------------------------------------------------------|------------|
+| AT-01 | <Scenario verifying a binary exit criterion from the charter>| not-run    |
+| AT-02 | <Scenario verifying a binary exit criterion>                 | pass       |
 
 ## Regression scenarios to protect
 
 | Area              | Scenario                                              | Last verified  |
 |-------------------|-------------------------------------------------------|----------------|
 | <surface or flow> | <what to keep working as the epic evolves>            | YYYY-MM-DD     |
+
+## Manual-QA scenarios (operator-driven, optional)
+
+| Scenario                                            | Cadence              | Notes |
+|-----------------------------------------------------|----------------------|-------|
+| <Scenario that can't be cheaply automated>          | Per minor release    | <why manual> |
 ```
 
 ### When to use TEST.md
 
 - **Exit criteria need verification beyond what individual item tests cover.** End-to-end flows that span multiple items, integration tests that exercise the epic's outputs as a whole.
 - **The epic touches a surface where regressions have happened before.** Capture the failure modes; re-test on every meaningful change.
+- **Default position:** include TEST.md as a standard per-epic file. Empty-but-present is fine while the epic is early; populated as the epic accrues exit criteria + items.
 
-### When to skip TEST.md
+### When `TEST.md` can be empty (but should still exist)
 
-- Item-level tests are sufficient.
 - The epic is small enough that a few sentences in the charter cover verification needs.
 - The project's testing approach already covers the epic's scope through automated suites.
+
+Even in those cases, ship an empty `TEST.md` with the two/three table headers. An empty-but-present file signals "this surface exists; add to it as the epic grows" — missing files force every new contributor to re-derive the convention.
+
+### Conventions
+
+- **Acceptance-test IDs:** `AT-##` (epic-scoped, monotonic — separate counter per epic). Cross-epic QA in `TEST_BACKLOG.md` uses `QA-##`.
+- **Status column** mirrors the [Test enum](04_backlog_items.md#test-enum): `not-run` / `pending` / `partial` / `pass` / `fail: <detail>` / `manual-verified` / `n/a`.
+- When an acceptance test maps to a closed item, cite the item ID in the Status column (e.g., `pass — BL-0428`).
+- Regression scenarios are append-only after first inclusion — never delete; mark `deprecated` if no longer relevant.
 
 The file is part of the epic folder. When the epic closes, `TEST.md` is the audit record of what was verified to support the exit-criteria sign-off.
 

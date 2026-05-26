@@ -21,8 +21,12 @@ The artifacts under this folder match the methodology's prescribed shape:
 | Strategy master plan | [strategy/00_master_plan.md](strategy/00_master_plan.md) |
 | Pillars | [pillars/P1_capture.md](pillars/P1_capture.md), [pillars/P2_retrieval.md](pillars/P2_retrieval.md) |
 | Epic rollup | [backlog/EPICS.md](backlog/EPICS.md) |
-| First epic charter | [backlog/epics/01-cli-foundations/README.md](backlog/epics/01-cli-foundations/README.md) |
-| Items in that epic | [backlog/epics/01-cli-foundations/BACKLOG.md](backlog/epics/01-cli-foundations/BACKLOG.md) (5 items) |
+| First epic charter | [backlog/epics/E01-cli-foundations/README.md](backlog/epics/E01-cli-foundations/README.md) |
+| Active items in that epic | [backlog/epics/E01-cli-foundations/BACKLOG.md](backlog/epics/E01-cli-foundations/BACKLOG.md) (4 items) |
+| Archived items | [backlog/epics/E01-cli-foundations/ARCHIVE.md](backlog/epics/E01-cli-foundations/ARCHIVE.md) (1 done item — BL-0001) |
+| Deferred (P3) items | [backlog/epics/E01-cli-foundations/FUTURE.md](backlog/epics/E01-cli-foundations/FUTURE.md) (3 items using Scheme B IDs `BL-E01-F##`) |
+| Epic acceptance + regression tests | [backlog/epics/E01-cli-foundations/TEST.md](backlog/epics/E01-cli-foundations/TEST.md) |
+| Cross-epic manual-QA queue | [backlog/TEST_BACKLOG.md](backlog/TEST_BACKLOG.md) |
 
 This is the minimum-viable set for an adopter to see the methodology operationalized. A real adopter project would add more pillars, more epics, more items as the project grew; this example shows the starting shape.
 

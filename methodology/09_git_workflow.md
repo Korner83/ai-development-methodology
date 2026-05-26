@@ -759,7 +759,7 @@ Do NOT hot-fix for: ordinary bugs, feature requests, "while we're at it" improve
 
 7. **Tag a new patch release** (see [Release tagging](#release-tagging-and-semantic-versioning)). The hot-fix gets its own version so adopters can pin to "the version that has the fix."
 
-8. **Archive the item to the originating epic's `ARCHIVE.md`** — or to a dedicated `epics/00-hotfixes/` epic if your project sees enough hot-fixes to warrant one.
+8. **Archive the item to the originating epic's `ARCHIVE.md`** — or to a dedicated `epics/E00-hotfixes/` epic if your project sees enough hot-fixes to warrant one.
 
 ### Write down what happened
 
