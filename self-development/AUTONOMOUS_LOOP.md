@@ -305,7 +305,7 @@ The check-in is the maintainer's gating loop *around* the autonomous loop. The m
 ## Cross-references
 
 - Template this adapts: [`templates/AUTONOMOUS_LOOP.md`](../templates/AUTONOMOUS_LOOP.md).
-- Bootstrap plan that gated this file's creation: [maintainer's harness plan + the README of this folder](README.md).
+- Bootstrap plan that gated this file's creation: see the v1.7.0–v1.11.0 release notes in [`CHANGELOG.md`](../CHANGELOG.md) for the bootstrap history; entry points to the self-development project are under [`brief/`](brief/), [`strategy/`](strategy/), and [`pillars/`](pillars/).
 - ROI heuristic the loop uses: [`methodology/04_backlog_items.md "Prioritization — the ROI heuristic"`](../methodology/04_backlog_items.md#prioritization--the-roi-heuristic).
 - DoD the loop respects: [`methodology/07_definition_of_done.md`](../methodology/07_definition_of_done.md).
 - Cross-AI validation pattern: [`methodology/10_testing_and_verification.md "Cross-AI validation"`](../methodology/10_testing_and_verification.md#cross-ai-validation).

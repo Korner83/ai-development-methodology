@@ -283,7 +283,7 @@ KPIs differ from exit criteria. Exit criteria gate closure ("the integration tes
 
 Explicit. Pointed.
 
-- *"Editorial review tooling — out of scope; see [E10 — Quality Ops](../10-quality-ops/README.md)."*
+- *"Editorial review tooling — out of scope; see the E10 — Quality Ops epic in your project's backlog."*
 - *"Internationalization beyond the default language — deferred; see [FUTURE.md](FUTURE.md)."*
 
 The list should pre-empt scope creep. Whenever a reviewer or contributor asks "shouldn't we also do X?" the answer should already exist in this section.
@@ -476,7 +476,7 @@ Without this discipline, epics absorb every adjacent suggestion and never finish
 ```markdown
 ## Out of scope
 
-- Editorial review tooling — out of scope; see [E10 — Quality Ops](../10-quality-ops/README.md).
+- Editorial review tooling — out of scope; see the E10 — Quality Ops epic in your project's backlog.
 - Per-language voice catalog beyond the default — deferred; see [FUTURE.md](FUTURE.md).
 - Migration of legacy content to the new schema — out of scope; one-off
   migration handled by [E04 — Legacy Migration](../04-legacy-migration/README.md).
