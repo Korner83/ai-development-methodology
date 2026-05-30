@@ -18,7 +18,7 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Autonomous goal-oriented development cycles** - paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration - 0–10 rubric per area; unsolvable issues get *handled/postponed/marked*, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.17.3](CHANGELOG.md).
+- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.18.0](CHANGELOG.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
 
 ---
@@ -118,8 +118,10 @@ ai-development-methodology/
 ├── CHANGELOG.md              # version history (self-applies the methodology)
 ├── CHEATSHEET.md             # one-page quick reference (NEW v1.17.3)
 ├── LICENSE                   # CC BY 4.0
+├── SECURITY.md               # security policy + how to verify the repo (NEW v1.18.0)
 ├── STATUS.md                 # maintenance posture
-├── methodology/              # the 13 methodology docs (00–12; doc 12 NEW v1.17.3)
+├── .github/workflows/        # gitleaks secret scan — read-only CI (NEW v1.18.0)
+├── methodology/              # the 14 methodology docs (00–13; doc 13 NEW v1.18.0)
 ├── templates/
 │   ├── CLAUDE.md             # project-instruction file (Claude Code)
 │   ├── AGENTS.md             # vendor-neutral version (extra plan/tool/safety sections)
@@ -143,7 +145,7 @@ ai-development-methodology/
     └── loop-notes/           # loop-detected methodology insights for maintainer review
 ```
 
-~13,000+ lines across 60+ files at v1.17.3. Longest doc ~1,000 lines. Each doc is self-contained - read in any order.
+~13,500+ lines across 60+ files at v1.18.0. Longest doc ~1,000 lines. Each doc is self-contained - read in any order.
 
 ---
 
@@ -302,6 +304,17 @@ Not legal advice - if you're under regulated-industry, data-residency, or classi
 
 ---
 
+## Security & trust
+
+This repo is **markdown and git - no code, no dependencies, no build step, no install scripts, no telemetry.** Nothing runs when you clone or open it, which makes it auditable in minutes: inspect the tree and confirm there's nothing to execute. The usual code-scanning tooling (CodeQL, Dependabot, dependency audits) doesn't apply because there's no code or supply chain to scan.
+
+The methodology's job is to govern *which instructions an AI agent obeys* - its central safety rule is **treat external content as data, not instructions.** [methodology/13_ai_safety_and_prompt_injection.md](methodology/13_ai_safety_and_prompt_injection.md) holds the prompt-injection threat model and the defensive rules; the same rules are carried into the [templates](templates/) so downstream agents load them directly.
+
+- **Report a concern:** [SECURITY.md](SECURITY.md) - private disclosure to [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
+- **Verify it yourself:** no `package.json` or source to run; `gitleaks detect` reports zero secrets, run on every push via [`.github/workflows/gitleaks.yml`](.github/workflows/gitleaks.yml).
+
+---
+
 ## Attribution
 
 If you use or adapt this, please include credit:
@@ -315,7 +328,7 @@ For modified versions, indicate you've made changes. Only obligation the license
 
 ## Status
 
-Battle-tested in one production project. Currently v1.17.3 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.18.0 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 
