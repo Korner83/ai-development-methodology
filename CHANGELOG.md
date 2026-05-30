@@ -13,6 +13,34 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.19.0 — 2026-05-30
+
+### New: one-line agent-skill install + README presentation
+
+Adoption was previously copy-the-folder only. This release adds a one-command install path so Codex / Claude Code / Cursor / Gemini-CLI users can pull the methodology's operating rules into their agent directly, plus a presentation pass on the README. No methodology rule changes — additive distribution artifact + docs, hence a minor bump.
+
+The repo's no-code trust posture is preserved: the new skill is **markdown only**, the banner is a **static SVG (no script)**, and nothing is published to npm or executed on install. The `skills` CLI that consumes `SKILL.md` is the *user's* tool, not a dependency this repo ships — so the SECURITY.md claim ("no executable code, no dependencies, no install scripts — markdown + git only") still holds.
+
+### Added
+
+- **`skills/ai-dev-methodology/SKILL.md`** — a self-contained agent skill installable with `npx skills add Korner83/ai-development-methodology`. Carries the operating contract (planning layers, `Status`/`Test` values, hard rules, Definition of Done, lock protocol + TTL, the ROI picking rule, the four working principles, the challenge-before-consenting prompt, the autonomous-loop tier matrix, and the AI-safety rule) with absolute links back to the canonical docs. Single-line `description` ≤600 chars (some Codex builds reject multi-line YAML descriptions). Defers to the project's own `CLAUDE.md`/`AGENTS.md` and the user on conflict.
+- **`assets/hero.svg`** — static SVG banner for the README header. No script, no external references.
+
+### Changed
+
+- **`README.md`** — centered hero banner + status badges (license, version, no-code, gitleaks); new **Install** section leading with the skill one-liner and pointing to the project-scaffold steps for full structure; repo tree now lists `skills/` and `assets/`; version strings → v1.19.0.
+- **`CHEATSHEET.md`** — version pin → v1.19.0.
+
+### Fixed
+
+- **Doc-count drift** — README's spelled-out lead-in still read "Thirteen short docs" after v1.18.0 added doc 13 (00–13 = 14 files). Corrected to "Fourteen." The numeric "14 docs (00–13)" forms updated in v1.18.0 were already correct; this was the one spelled-out instance that slipped through.
+
+### Notable for adopters
+
+- The skill is optional and additive. Install it for on-demand rules in your agent, or keep copying `templates/` + `methodology/` as before — both paths stay supported.
+
+---
+
 ## v1.18.0 — 2026-05-30
 
 ### New: AI-safety / prompt-injection overlay (doc 13) + security trust files
