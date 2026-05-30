@@ -1,0 +1,28 @@
+# Secret scan. This repo is documentation-only (no code, no dependencies), so the
+# only meaningful automated check is catching an accidentally committed secret.
+#
+# NOTE on licensing: gitleaks-action requires a GITLEAKS_LICENSE secret only for
+# GitHub *organization* accounts. This is a personal public repo, so none is needed.
+# If the repo ever moves under an organization, add a GITLEAKS_LICENSE secret.
+name: gitleaks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
