@@ -1,8 +1,19 @@
+<p align="center">
+  <img src="assets/hero.svg" alt="AI Development Methodology - run a software project when some of your contributors are AI agents" width="100%">
+</p>
+
 # AI Development Methodology
+
+<p align="center">
+  <a href="LICENSE"><img alt="License: CC BY 4.0" src="https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg"></a>
+  <a href="CHANGELOG.md"><img alt="Methodology version" src="https://img.shields.io/badge/methodology-v1.19.0-1e40af"></a>
+  <a href="SECURITY.md"><img alt="No code - markdown + git" src="https://img.shields.io/badge/code-none%20%C2%B7%20markdown%20%2B%20git-2ea44f"></a>
+  <a href=".github/workflows/gitleaks.yml"><img alt="gitleaks secret scan" src="https://github.com/Korner83/ai-development-methodology/actions/workflows/gitleaks.yml/badge.svg"></a>
+</p>
 
 How to run a software project when some of your contributors are AI agents - and one of them just panic-refactored your auth middleware at 2am while a different one was halfway through the same task.
 
-Thirteen short docs. Markdown + git. No SaaS, no signup, no vendor lock-in. An AI agent picks up the operating contract in seconds via [`templates/`](templates/). A human grasps the core concept in 5 minutes via the [CHEATSHEET](CHEATSHEET.md). Full reading is a focused day. Use forever (or until you find something better).
+Fourteen short docs. Markdown + git. No SaaS, no signup, no vendor lock-in. An AI agent picks up the operating contract in seconds via [`templates/`](templates/) or a one-line [skill install](#install). A human grasps the core concept in 5 minutes via the [CHEATSHEET](CHEATSHEET.md). Full reading is a focused day. Use forever (or until you find something better).
 
 By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com)) - [CC BY 4.0](LICENSE). Fork it, ship it, charge for it, teach it. Just keep the credit.
 
@@ -18,8 +29,22 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Autonomous goal-oriented development cycles** - paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration - 0–10 rubric per area; unsolvable issues get *handled/postponed/marked*, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.18.0](CHANGELOG.md).
+- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.19.0](CHANGELOG.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
+
+---
+
+## Install
+
+**As an agent skill - one command.** Gives your coding agent on-demand access to the methodology's operating rules - Definition of Done, the lock protocol, the `Status`/`Test` values, the ROI picking rule, the AI-safety rule - with links into the full docs. Works on Claude Code, Codex, Cursor, Gemini CLI, and ~50 other agents via the `skills` CLI (a community installer that drops a `SKILL.md` into your agent's skills directory):
+
+```bash
+npx skills add Korner83/ai-development-methodology
+```
+
+Then ask process questions naturally, or invoke explicitly: `/ai-dev-methodology "how do I mark this item done?"`. The skill is **markdown only - nothing executes on install.** Source: [`skills/ai-dev-methodology/SKILL.md`](skills/ai-dev-methodology/SKILL.md).
+
+**As a project scaffold - full structure.** To drop the methodology docs plus a project-instruction file into a new project (strategy → pillars → epics → backlog), follow [How to use it → Step 1](#how-to-use-it). Everything is files you copy; there is nothing to build or install.
 
 ---
 
@@ -122,6 +147,9 @@ ai-development-methodology/
 ├── STATUS.md                 # maintenance posture
 ├── .github/workflows/        # gitleaks secret scan — read-only CI (NEW v1.18.0)
 ├── methodology/              # the 14 methodology docs (00–13; doc 13 NEW v1.18.0)
+├── skills/                   # NEW v1.19.0 - `npx skills add` installs SKILL.md into any agent
+│   └── ai-dev-methodology/SKILL.md   # self-contained operating rules (markdown only)
+├── assets/                   # README hero banner (static SVG, no script)
 ├── templates/
 │   ├── CLAUDE.md             # project-instruction file (Claude Code)
 │   ├── AGENTS.md             # vendor-neutral version (extra plan/tool/safety sections)
@@ -145,7 +173,7 @@ ai-development-methodology/
     └── loop-notes/           # loop-detected methodology insights for maintainer review
 ```
 
-~13,500+ lines across 60+ files at v1.18.0. Longest doc ~1,000 lines. Each doc is self-contained - read in any order.
+~13,700+ lines across 60+ files at v1.19.0. Longest doc ~1,000 lines. Each doc is self-contained - read in any order.
 
 ---
 
@@ -328,7 +356,7 @@ For modified versions, indicate you've made changes. Only obligation the license
 
 ## Status
 
-Battle-tested in one production project. Currently v1.18.0 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.19.0 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 
