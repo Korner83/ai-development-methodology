@@ -9,9 +9,7 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-### Changed
-
-- **`README.md`** — added a top-of-page "In a hurry?" quickstart callout: point an AI agent at the repo and tell it to apply the methodology, or `npx skills add` to load the rules automatically. Lowers the barrier for readers who find the full "How to use it" section heavy.
+(nothing yet)
 
 ---
 
