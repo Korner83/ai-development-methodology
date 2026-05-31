@@ -15,6 +15,8 @@ How to run a software project when some of your contributors are AI agents - and
 
 Fourteen short docs. Markdown + git. No SaaS, no signup, no vendor lock-in. An AI agent picks up the operating contract in seconds via [`templates/`](templates/) or a one-line [skill install](#install). A human grasps the core concept in 5 minutes via the [CHEATSHEET](CHEATSHEET.md). Full reading is a focused day. Use forever (or until you find something better).
 
+> **In a hurry?** Give your AI coding agent this repo and say: *"Read this methodology and apply it to my project."* It scaffolds the structure (strategy → pillars → epics → backlog) and follows the rules from there. To load the rules into every session automatically instead, run `npx skills add Korner83/ai-development-methodology`. Everything below is detail for when you want it - you don't need to read it to start.
+
 By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com)) - [CC BY 4.0](LICENSE). Fork it, ship it, charge for it, teach it. Just keep the credit.
 
 ---
