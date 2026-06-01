@@ -136,6 +136,10 @@ The only field you must fill in is `<<milestone target>>`. Everything else is re
 
 For projects with project-specific gates (specific security scanner, accessibility tool, performance budget, regulatory review), append a short "Project-specific gates" section to the prompt naming them.
 
+### Surviving context resets
+
+A multi-hour loop gets compacted, and a multi-session loop starts cold. Keep a short **active-context file** — current focus, recent changes, next steps — and treat it as a cache to flush and reload: write it *before* a context reset, read it *first* on resume (then verify against live `git log` and item state). This is what lets a resumed loop pick up where it left off instead of re-deriving context from scratch. See [methodology/08 "Active context"](../methodology/08_lessons_and_memory.md#active-context-the-volatile-working-file).
+
 ---
 
 ## Tiered autonomy for authoritative artifacts

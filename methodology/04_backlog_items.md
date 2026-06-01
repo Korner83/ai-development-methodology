@@ -454,6 +454,22 @@ Examples:
 
 **Notes.** Optional. For context that does not fit elsewhere: design rationale, links to discussions, partial findings from research, alternatives considered.
 
+### Writing testable acceptance criteria (EARS)
+
+Vague criteria ("works correctly," "handles errors gracefully") are the most common reason an item's `done` gets disputed after the fact. **EARS** (Easy Approach to Requirements Syntax) is a lightweight writing convention — no tooling, just five sentence shapes — that forces each criterion to name a *trigger* and an *observable response*, which is exactly what makes it testable:
+
+| Pattern | Shape | Example |
+|---|---|---|
+| **Ubiquitous** | `THE SYSTEM SHALL <response>` | The export SHALL be UTF-8 encoded. |
+| **Event-driven** | `WHEN <trigger>, THE SYSTEM SHALL <response>` | WHEN the user clicks Download, the system SHALL stream a CSV of the filtered rows. |
+| **State-driven** | `WHILE <state>, THE SYSTEM SHALL <response>` | WHILE a filter is active, the export SHALL contain only matching rows. |
+| **Unwanted behavior** | `IF <condition>, THEN THE SYSTEM SHALL <response>` | IF the result set is empty, THEN the system SHALL download a header-only file, not an error. |
+| **Optional feature** | `WHERE <feature present>, THE SYSTEM SHALL <response>` | WHERE SSO is enabled, the system SHALL record the exporter's identity. |
+
+A `Done means:` checkbox written this way doubles as its own test plan: the trigger tells the verifier what to do, the response tells them what to observe — and it maps cleanly onto the [`Test:` field](#test-enum) (each criterion resolves to `pass` or `fail: <which clause broke>`).
+
+Apply it where ambiguity is expensive — anything touching money, authentication, data integrity, or an external contract. For a one-line doc fix, a plain checkbox is fine; don't ceremonialize trivial work.
+
 ---
 
 ## Resolution notes for rejected and non-obvious-done items
@@ -914,7 +930,7 @@ If two contributors file new items in parallel and both compute the same "next" 
 | Item lingers in `backlog` for many months with no refinement. | Either refine it to `ready`, or move it to `FUTURE.md`, or `reject` it. Limbo helps no one. |
 | Item is in two epics' `BACKLOG.md`. | An item lives in exactly one epic. Pick one; delete the duplicate (preserving the ID in the chosen one). |
 | Item IDs are not monotonic (someone reused `BL-0042`). | Find the duplicate. Renumber the newer one. Reuse breaks every grep-based query going forward. |
-| Acceptance criteria are vague ("works correctly"). | Replace with specifics ("returns CSV with these columns," "renders without console errors"). |
+| Acceptance criteria are vague ("works correctly"). | Replace with specifics, or use an [EARS](#writing-testable-acceptance-criteria-ears) trigger→response shape ("WHEN the result set is empty, the system SHALL download a header-only file"). |
 
 ---
 
