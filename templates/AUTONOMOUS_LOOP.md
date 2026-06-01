@@ -81,18 +81,18 @@ Mission (loop; do NOT stop at single-task completion):
 8. AFTER EVERY 10 MEANINGFUL IMPROVEMENTS — re-run analysis + gap
    review against the milestone target, reprioritize, continue.
 
-6. KEEP LIVING DOCS HONEST — CHANGELOG, README, STATUS, project
+9. KEEP LIVING DOCS HONEST — CHANGELOG, README, STATUS, project
    instruction file, EPICS rollup, memory index. Update in the same
    PR per methodology/07 "Maintaining living project documents."
 
-7. POST-CYCLE REVIEW — for any change that touches:
+10. POST-CYCLE REVIEW — for any change that touches:
    - auth / authorization / input / data → security check
    - keyboard / focus / contrast / semantics → accessibility check
    - rendering / bundle / API frequency / large lists → performance
    - schema / persistence → migration safety + backward compatibility
    Add fixes and tests to the active loop; don't defer.
 
-9. FEEDBACK TRIAGE — once the project has real users (alpha+), the
+11. FEEDBACK TRIAGE — once the project has real users (alpha+), the
    inbound feedback inbox (backlog/FEEDBACK.md or equivalent) is
    triaged on cadence:
    - Pre-alpha / alpha: weekly.
@@ -102,7 +102,7 @@ Mission (loop; do NOT stop at single-task completion):
    FUTURE.md or pillar backlog, question → response + doc update,
    praise → log, spam → drop. See methodology/12 "Feedback triage."
 
-10. BLOCKERS — document the blocker, continue all unblocked work,
+12. BLOCKERS — document the blocker, continue all unblocked work,
    make only bounded safe assumptions. Don't guess on credentials,
    business rules, or legal questions.
 
