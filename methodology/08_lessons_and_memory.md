@@ -169,6 +169,8 @@ or scope.>
 - **`name`** — kebab-case slug, also used as the filename (`<name>.md`). Examples: `feedback-no-emojis`, `project-beta-wave`, `reference-grafana-dashboards`.
 - **`description`** — a single line that appears in the index. Should be specific enough that a contributor can decide from the index whether the entry is relevant to their current task.
 - **`metadata.type`** — one of `feedback`, `project`, `reference`, or `user`. Determines how the entry is meant to be applied.
+- **`metadata.status`** *(optional)* — `active` (the default; omit it), `stale` (flagged for archival on the next sweep), or `archived` (kept for lineage, dropped from the live index). See [Archive, don't destroy](#archive-dont-destroy-the-memory-lifecycle).
+- **`metadata.pinned`** *(optional)* — `true` marks a load-bearing entry (one that guards against data loss, a security regression, or an irreversible action) that sweeps never auto-archive, however rarely it is referenced.
 
 ### The body
 
@@ -323,11 +325,22 @@ Every few months (or whenever the memory directory feels noisy), do a consolidat
 
 - **Merge duplicates.** Two entries saying the same thing should be one entry.
 - **Update the wrong.** Entries that no longer match current reality get rewritten or deleted.
-- **Prune the obsolete.** Entries about workarounds for bugs that have since been fixed; entries about file paths that no longer exist; entries about decisions that have been replaced.
+- **Archive the obsolete.** Entries about workarounds for bugs that have since been fixed; entries about file paths that no longer exist; entries about decisions that have been replaced. Archive these rather than deleting them outright — see [Archive, don't destroy](#archive-dont-destroy-the-memory-lifecycle) below.
 - **Sharpen the vague.** Entries with one-line bodies that don't actually convey the lesson get expanded or removed.
 - **Verify the index.** Every entry has an index line. Every index line resolves to an entry.
 
 The consolidation pass is itself a kind of work. It can be filed as a backlog item with effort estimate `S` (half a day for most projects).
+
+### Archive, don't destroy: the memory lifecycle
+
+A memory entry moves through states: **active → stale → archived.** True deletion is reserved for entries that never carried durable value. The reflex to *delete* a stale entry throws away its lineage — the `Why:`, the incident that produced it, the record that the team once held this belief. When an entry *was* a real lesson but no longer applies, **archive it instead of deleting it.**
+
+- **Mark stale before archiving.** On a sweep, an entry that looks obsolete but isn't obviously worthless gets `metadata.status: stale` with the date. If it is still unreferenced at the next sweep, archive it. This one-sweep delay protects entries that are merely *dormant* — tied to a paused subsystem or a seasonal workflow — from being removed the moment they go quiet.
+- **Archive, don't hard-delete.** Move the entry to `memory/archive/` (or set `metadata.status: archived` and drop its index line). It leaves the live index — so it no longer costs context on every session — but the lesson and its `Why:` stay discoverable to anyone who greps. Archived entries are out of the way, not gone.
+- **Pin the load-bearing ones.** Entries that guard against data loss, security regressions, or irreversible actions get `metadata.pinned: true`. A sweep never marks a pinned entry stale or archives it, no matter how rarely it is referenced — low reference frequency on a "never drop the prod database" rule means the rule is *working*, not that it is dead.
+- **True deletion is for entries that never had value.** A memory capturing ephemeral state, a typo fix, or session-specific context (the things [What NOT to save](#what-not-to-save-as-memory) already rules out) can be deleted outright — there is no lineage worth keeping. Everything that was once a genuine lesson gets archived, not deleted.
+
+Git history is the ultimate backup: a deleted entry is always recoverable via `git log` / `git show`. The archive is not about recoverability — it is about *discoverability.* A grep of `memory/archive/` surfaces "we used to believe X, and here is why we stopped" without git archaeology, and that lineage is often the fastest way to avoid re-introducing a problem the team already solved.
 
 ### Renaming and reorganizing
 
@@ -538,7 +551,8 @@ The healthy state: each rule lives at the lowest layer that captures its actual 
 | Memory entry has no `Why:`. | Add the rationale. Without it, edge cases cannot be judged. |
 | Memory entry duplicates a rule already in the instruction file. | Delete the memory; the instruction file is the universal rule. |
 | Memory entry is a wish ("we should use library X"). | File as a backlog item instead. Memory is for facts and rules, not aspirations. |
-| Memory entry has gone stale (file/function it references no longer exists). | Update or delete. Stale memory is worse than no memory. |
+| Memory entry has gone stale (file/function it references no longer exists). | Update it, or archive it if the lesson once mattered. Stale memory left in the live index is worse than no memory. |
+| Stale entry was hard-deleted, losing its `Why:` and lineage. | Archive instead (`memory/archive/` or `metadata.status: archived`). Reserve outright deletion for entries that never carried durable value. |
 | Index has an entry the body doesn't, or vice versa. | Audit and reconcile. The index is the navigational truth. |
 | Memory directory is unmaintained for over a year. | Run a consolidation pass. Prune, merge, sharpen. |
 | Same lesson is captured in two entries with different angles. | Merge into a single entry; reference both angles in the body. |

@@ -13,6 +13,20 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.20.0 — 2026-06-01
+
+### Added: memory archival lifecycle + skill self-check
+
+A pass informed by reviewing runtime agent frameworks — notably the "curator" memory pattern in Hermes Agent (track usage, archive idle entries, never destroy). Two additive, markdown-only changes; the no-code trust posture is unchanged.
+
+### Changed
+
+- **`methodology/08_lessons_and_memory.md`** — added an **"Archive, don't destroy"** memory lifecycle (active → stale → archived): mark entries stale before archival (a one-sweep grace for dormant entries), archive rather than hard-delete so the `Why:`/lineage stays greppable, `pinned` load-bearing entries that sweeps never auto-archive, and outright deletion reserved for entries that never carried durable value. Documented optional `metadata.status` and `metadata.pinned` frontmatter fields; reconciled the consolidation and common-mistakes guidance with the new lifecycle.
+- **`skills/ai-dev-methodology/SKILL.md`** — added a **"Quick self-check before done"** verification checklist (Status/Test gate, surgical change, PR-only, hooks, untrusted-content, secrets, docs, real verification), mirroring the agent-skill convention of an explicit post-action checklist.
+- **Version strings** → v1.20.0 (`README.md`, `CHEATSHEET.md`).
+
+---
+
 ## v1.19.0 — 2026-05-30
 
 ### New: one-line agent-skill install + README presentation
