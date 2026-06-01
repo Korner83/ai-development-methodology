@@ -297,6 +297,34 @@ Before saving, ask: *will this still be useful and correct in six months?*
 
 ---
 
+## Active context: the volatile working file
+
+Memory (above) is *durable* — lessons and facts meant to outlive many sessions. But a contributor mid-task also carries *volatile* state: what they are doing right now, what just changed, what comes next. [What NOT to save](#what-not-to-save-as-memory) rules this out of memory deliberately — yet it still needs a home, because an AI session loses it on every context reset, and a fresh session (or a different agent picking up the work) starts blind.
+
+Keep this state in a single **active-context file** — one short, fast-changing markdown file, separate from durable memory. A common location is `backlog/ACTIVE_CONTEXT.md` (project-wide), or one per active epic; for AI-agent work it can live alongside the agent's own files. Whatever the location, there is **one** per work-stream and it is *expected* to churn.
+
+### What it holds
+
+- **Current focus** — the item (`BL-###`) or goal being worked right now.
+- **Recent changes** — the last few meaningful edits, with file paths, since the previous reset.
+- **Next steps** — the short, ordered list of what to do next.
+- **Open questions / waiting-on** — pending decisions, blockers, things to confirm.
+
+Keep it to a screen. It is a *baton*, not a journal: when an item closes, its lines are cleared or overwritten, not accumulated. The permanent record lives in commits, the item's `ARCHIVE.md` entry, and — for durable lessons — memory.
+
+### The save / rehydrate ritual
+
+The file earns its keep at the two moments a session's working memory is most fragile:
+
+- **Before a context reset** (compaction, handoff, end of session, stepping away): flush the current focus / recent changes / next steps into the active-context file *before* the context is lost. Treat it as writing a cache back to disk.
+- **After a reset, or on pickup** (new session, resumed loop, or a different agent acquiring the lock): read the active-context file *first*, alongside the instruction file and the memory index, to rehydrate where the work stood. Then verify against live state (`git log`, the item's `Status:` / `Lock:`) per [Memory and current state](#memory-and-current-state) — the file is a claim about where things *were*, not proof of where they *are now*.
+
+### Why this is separate from memory
+
+Durable memory answers *"what have we learned?"*; active context answers *"where am I?"*. Mixing them rots both: volatile state stuffed into memory makes the index churn and buries durable lessons, while a durable lesson left in a scratch file gets cleared on the next reset. Keep the durable in `memory/`, the volatile in the active-context file. The one bridge between them — if something written as volatile context keeps reappearing (the same "next step" recurs across items), that is a [Trigger 2](#trigger-2-same-correction-or-fix-has-appeared-2-times) signal to promote it into a real memory entry.
+
+---
+
 ## Maintenance
 
 Memory decays. Projects evolve. A memory entry written six months ago may now be wrong (the rule changed, the workaround is no longer needed, the file it references no longer exists). Without maintenance, the memory directory becomes a graveyard of stale advice.
@@ -559,6 +587,7 @@ The healthy state: each rule lives at the lowest layer that captures its actual 
 | Memory entry is hundreds of lines long. | Probably belongs as a regular doc (pillar, architecture refinement, design doc). Memory is for short, focused lessons. |
 | User explicitly said "forget this" but the entry is still there. | Delete the entry. Honor explicit forget requests. |
 | Memory references session-specific context ("the bug I fixed last Tuesday"). | Generalize the lesson. Session context decays; the durable pattern does not. |
+| Volatile "where am I" state (current focus, next steps) stuffed into a memory entry. | Move it to the [active-context file](#active-context-the-volatile-working-file). Memory is for durable lessons; the active-context file is for session state. |
 
 ---
 

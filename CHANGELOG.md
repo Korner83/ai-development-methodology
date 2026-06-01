@@ -13,6 +13,21 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.21.0 — 2026-06-01
+
+### Added: EARS acceptance criteria + active-context working file
+
+A second landscape-informed pass (see v1.20.0). Two additive, markdown-only conventions: **EARS** acceptance-criteria syntax (from spec-driven tools — Kiro / GitHub Spec Kit / SDD) and the **active-context** working file (from the Cline/Roo "Memory Bank" persistent-context pattern). Trust posture unchanged — markdown + git only.
+
+### Changed
+
+- **`methodology/04_backlog_items.md`** — added **"Writing testable acceptance criteria (EARS)"**: a five-pattern convention (ubiquitous / event-driven / state-driven / unwanted-behavior / optional) for writing `Done means:` criteria as testable trigger→response statements that map onto the `Test:` field. Pointed the vague-criteria common-mistake row at it.
+- **`methodology/08_lessons_and_memory.md`** — added **"Active context: the volatile working file"**: a single fast-changing file (current focus / recent changes / next steps) kept separate from durable memory, with an explicit save-before-reset / rehydrate-on-resume ritual for surviving context compaction and agent handoffs. Added a common-mistake row.
+- **`templates/AUTONOMOUS_LOOP.md`** — added a **"Surviving context resets"** note wiring the active-context flush/reload ritual into long loops.
+- **Version strings** → v1.21.0 (`README.md`, `CHEATSHEET.md`).
+
+---
+
 ## v1.20.0 — 2026-06-01
 
 ### Added: memory archival lifecycle + skill self-check
