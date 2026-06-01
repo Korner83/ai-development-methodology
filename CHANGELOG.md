@@ -9,7 +9,9 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-(nothing yet)
+### Fixed
+
+- **`templates/AUTONOMOUS_LOOP.md`** — fixed step numbering in the prompt: the steps ran 1–8 then restarted at 6, 7 before 9, 10. Renumbered to a clean 1–12 sequence (content unchanged). T0 cosmetic fix.
 
 ---
 
