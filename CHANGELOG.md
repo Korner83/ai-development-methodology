@@ -9,6 +9,23 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
+(nothing yet)
+
+---
+
+## v1.22.0 — 2026-06-01
+
+### Added: constitution check, two-stage review, rule pressure-testing
+
+A third landscape-informed pass. Three additive, markdown-only conventions from spec-driven and skills-discipline tools (GitHub Spec Kit; obra/superpowers; BMAD). Trust posture unchanged — markdown + git only.
+
+### Changed
+
+- **`methodology/00_README.md`** — added **"The constitution check"**: names the existing hard-rules table as the project's constitution and re-confirms it at each gate (plan approval, item DoD, once per autonomous-loop iteration) instead of assuming it. (From Spec Kit's constitution gate.)
+- **`methodology/07_definition_of_done.md`** — augmented Gate 1 (code review) with a **two-stage framing** — spec-compliance first, then quality, ideally by different reviewers — built on the existing findings-verification / cross-AI concepts; added a constitution cross-link. (From superpowers / BMAD.)
+- **`methodology/08_lessons_and_memory.md`** — added **"Pressure-test before promoting"** to the promotion path: stress a rule against deadline pressure, sunk cost, the confident-wrong case, and edge cases before elevating it a layer. (From superpowers' skill pressure-testing.)
+- **Version strings** → v1.22.0 (`README.md`, `CHEATSHEET.md`).
+
 ### Fixed
 
 - **`templates/AUTONOMOUS_LOOP.md`** — fixed step numbering in the prompt: the steps ran 1–8 then restarted at 6, 7 before 9, 10. Renumbered to a clean 1–12 sequence (content unchanged). T0 cosmetic fix.

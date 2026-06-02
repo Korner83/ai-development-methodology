@@ -545,6 +545,17 @@ This is the upward limit. A rule belongs in the methodology when:
 
 Methodology additions go via the patterns in [Memory as a leading indicator for methodology gaps](#memory-as-a-leading-indicator-for-methodology-gaps).
 
+### Pressure-test before promoting
+
+A rule that holds in the calm of the moment it was written can still fail under the conditions where rules actually get broken. Before promoting one up a layer (memory → instruction file, or instruction file → methodology), stress it against the situations that break rules:
+
+- **Deadline pressure.** Does it still hold when the work is due in an hour? A rule everyone abandons under pressure isn't a rule — it's a preference. Either harden it (and state *why* it survives pressure) or keep it advisory.
+- **Sunk cost.** Does it hold after a day of work has already gone the other way? Rules that demand throwing away effort are the first ones rationalized away; the rule needs a `Why:` strong enough to justify the loss.
+- **The confident-wrong case.** Does it hold when the contributor is *sure* the exception applies? Most violations feel justified in the moment. State the trigger precisely enough that "I'm sure this one is different" doesn't qualify.
+- **Edge cases.** Name two or three concrete situations at the rule's boundary and check it gives a sensible answer in each. If it doesn't, scope it down to where it does.
+
+A rule that survives the stress earns promotion — and should carry the reasoning that got it there. A rule that cracks gets narrowed, kept advisory in memory, or dropped. Promoting a brittle rule just teaches contributors to route around the layer it lives in.
+
 ### Why explicit promotion matters
 
 Without the named loop: mistakes get fixed in conversation, forgotten, recur, get fixed again, recur, get added to memory once someone notices, sit in memory forever even after they've graduated, and never reach the instruction file or the methodology where they would prevent the failure mode systematically.
