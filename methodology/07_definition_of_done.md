@@ -43,6 +43,15 @@ If you find an issue, fix it. Then review again. Continue until you complete a f
 
 This is a loop, not a single review.
 
+#### Two ordered stages: spec, then quality
+
+Run the review as two questions in order, not one blurred pass:
+
+1. **Spec-compliance** — does the change actually satisfy the item's `**Done means:**` acceptance criteria (and nothing it shouldn't)? This is *findings-verification* — see [10_testing_and_verification.md "Two modes"](10_testing_and_verification.md#two-modes-findings-verification-and-diff-verification).
+2. **Quality** — *given* that it meets the spec, is it well-made? The checks listed above: logic, edge cases, security, adherence to the principles.
+
+Where possible, the two stages get **different eyes.** The author is the worst-placed reviewer for stage 1 — they will tend to confirm the interpretation they already built. A fresh session or a second contributor (a human, or a different model — see [cross-AI validation](10_testing_and_verification.md#cross-ai-validation)) catches "built the wrong thing, correctly," the failure a same-author quality pass sails straight past.
+
 ### Gate 2 — Automated tests pass
 
 Run the project's full test suite locally. Not just the new tests. Not just the file you changed. The full suite.
@@ -479,6 +488,7 @@ The DoD is the floor for every item. If a project wants to allow some items to s
 
 ## How DoD relates to other parts of the methodology
 
+- **The constitution** ([00_README.md "The constitution check"](00_README.md#the-constitution-check)). The hard-rules set is re-confirmed at the DoD gate, not only at plan time — the DoD is where "did we hold every non-negotiable?" gets its final check before `done`.
 - **Working Principles** ([06_working_principles.md](06_working_principles.md)) govern *how* you work. DoD governs *whether the work is finished.* Both required.
 - **Backlog item lifecycle** ([04_backlog_items.md](04_backlog_items.md)) describes the path a single item takes. DoD is the final gate on that path.
 - **Locking** ([05_locks_and_parallel_work.md](05_locks_and_parallel_work.md)) is released as part of Gate 6.
