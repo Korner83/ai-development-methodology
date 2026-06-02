@@ -96,6 +96,21 @@ Pick any line in your diff. Ask: "Did the task require this?" If the answer is n
 
 Bundled "improvements" make diffs unreadable, expand the regression surface, and hide the real change. The reviewer cannot tell what was the task and what was the side trip. Surgical changes are reviewable; bundled changes are not.
 
+### Protected regions (declared edit boundaries)
+
+Principle 3 limits the *scope of a single change.* Some files go further: they are off-limits to ordinary work *regardless of the task* — editing them is almost always a mistake, and when it isn't, it needs explicit authorization. A project declares these **protected regions** once, in its instruction file, so every contributor (human or AI) knows the lanes before starting rather than discovering them through a bad diff.
+
+Typical protected regions:
+
+- **Generated or compiled artifacts** — anything emitted by a build step or codegen (`dist/`, hand-edited lockfiles, generated clients, snapshots). Edit the source and regenerate; never hand-edit the output.
+- **Vendored or framework code** — third-party code copied into the repo, or the shared framework/core in a product-on-a-framework layout. Product behavior goes in the product's own modules (e.g. `src/modules/<name>/`), not in the generic core.
+- **Machine-managed config and infrastructure** — files a tool owns (CI-managed secrets, environment manifests, migration history). Hand-editing them desyncs them from the tool that manages them.
+- **Anything the project marks "do not touch"** — a file with a known reason it looks the way it does (a shim mid-migration, a security-reviewed boundary). The reason usually lives in a memory entry (see [08_lessons_and_memory.md](08_lessons_and_memory.md)).
+
+The rule: **treat declared protected regions as read-only. If the task genuinely requires touching one, stop and get explicit authorization first** — surface *what* you need to change and *why*, the same way Principle 1 surfaces an assumption. Editing a protected region silently is the failure this prevents.
+
+This is the code-side sibling of the autonomous-loop [tier matrix](../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts), which draws the same kind of boundary around *authoritative docs* (what a loop may auto-edit vs. what a human must author). Both say the same thing: not every file is fair game, and the off-limits ones are named in advance.
+
 ---
 
 ## Principle 4 — Goal-driven execution
@@ -286,6 +301,7 @@ A short list of behaviors that are always wrong under these principles. Use it a
 | Adding a feature flag for "future flexibility" with no current caller. | P2 |
 | Building a `BaseFooBar` abstract class because there might be more subclasses later. | P2 |
 | Bundling a small refactor into a bug fix "while I'm here." | P3 |
+| Hand-editing a generated, vendored, or framework-core file instead of its source — or touching a declared protected region without authorization. | P3 (protected regions) |
 | Adding fallback behavior for a state that the type system already rules out. | P2 |
 | Continuing to write code after you have lost the thread, rather than stopping and naming the confusion. | P1 |
 

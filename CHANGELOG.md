@@ -13,6 +13,20 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.23.0 — 2026-06-02
+
+### Added: protected regions (declared edit boundaries)
+
+A landscape-informed addition drawn from velobase-harness's `AGENTS.md` framework-boundary rules (agents edit product modules, not framework core). Markdown-only; trust posture unchanged.
+
+### Changed
+
+- **`methodology/06_working_principles.md`** — added **"Protected regions (declared edit boundaries)"** under Principle 3 (surgical changes): a project declares zones agents treat as read-only regardless of task — generated/compiled output, vendored or framework-core code, machine-managed config/migrations, and anything marked "do not touch" — editable only with explicit authorization. Framed as the code-side sibling of the autonomous-loop tier matrix (which bounds edits to authoritative *docs*). Added an anti-pattern row.
+- **`templates/CLAUDE.md` + `templates/AGENTS.md`** — added a matching **protected-regions hard rule** with a `<<paths>>` slot so adopters declare their off-limits zones where agents actually read them.
+- **Version strings** → v1.23.0 (`README.md`, `CHEATSHEET.md`).
+
+---
+
 ## v1.22.0 — 2026-06-01
 
 ### Added: constitution check, two-stage review, rule pressure-testing
