@@ -493,6 +493,7 @@ Key properties:
 - The loop terminates only when *one full pass* has zero issues.
 - Each iteration of the loop checks *all* surfaces and dimensions, not just the ones where issues were found previously.
 - The loop is the gate. A single pass with zero issues is not enough if it was preceded by no checking — the fix might be undocumented or untested.
+- The loop is bounded per issue. When the *same* issue fails repeatedly, the attempt cap applies (default: 3 failed fix attempts) — escalate to a handle / postpone / mark disposition instead of retrying a fourth time. See [12_milestone_evaluation.md "The attempt cap"](12_milestone_evaluation.md#the-attempt-cap-making-resists-multiple-attempts-executable). Clean-pass termination governs success; the cap governs the failure path.
 
 ---
 

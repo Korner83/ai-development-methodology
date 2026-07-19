@@ -11,6 +11,13 @@ Pairs with [methodology/](../methodology/). This prompt *operationalizes* the me
 - **Use it for** focused milestone work where you've already agreed on the goal and want the AI to grind toward it autonomously between check-ins.
 - **Don't use it for** open-ended exploration, early architecture decisions, or anything where each individual step needs your review.
 
+Before starting a loop, check that all four qualification conditions hold. If any fails, run the work interactively instead — a loop without them burns tokens without converging:
+
+1. **The work recurs.** There is enough backlog volume toward the milestone that the loop will iterate many times; a loop set up for two items is overhead, not leverage.
+2. **An automated rejection mechanism exists.** Tests, the DoD gates (methodology/07), or the milestone rubric (methodology/12) can fail the work without you in the room. If the only judge of "good enough" is your eye, each iteration needs you anyway.
+3. **The agent can complete items end-to-end.** Environment, credentials, tooling, and permissions cover the full fix-test cycle. A loop that blocks mid-item on access you must grant each time is an interactive session with extra steps.
+4. **Success is objectively measurable.** Acceptance criteria are testable (methodology/04 "EARS") and the milestone target has a rubric. "Make it better" is not a loop goal; "every rubric area ≥ 8" is.
+
 ---
 
 ## The prompt
@@ -68,8 +75,11 @@ Mission (loop; do NOT stop at single-task completion):
    - Produce a deep-eval report at evaluations/YYYY-MM-DD-eval-NN.md.
    - Halt for maintainer signoff before declaring a milestone reached.
 
-7. UNSOLVABLE-ISSUE HANDLING — when an issue resists multiple loop
-   attempts, do not force progression. Pick one of:
+7. UNSOLVABLE-ISSUE HANDLING — when an issue resists repeated
+   attempts, do not force progression. Count attempts explicitly:
+   after the attempt cap (default: 3 failed fix-test attempts at the
+   same issue), a disposition is mandatory — do not try a fourth time.
+   Pick one of:
    - Handle: workaround acceptable; close with Limitation: note.
    - Postpone: real fix needed but priority doesn't justify blocking;
      move to FUTURE.md with reason.
@@ -139,6 +149,10 @@ For projects with project-specific gates (specific security scanner, accessibili
 ### Surviving context resets
 
 A multi-hour loop gets compacted, and a multi-session loop starts cold. Keep a short **active-context file** — current focus, recent changes, next steps — and treat it as a cache to flush and reload: write it *before* a context reset, read it *first* on resume (then verify against live `git log` and item state). This is what lets a resumed loop pick up where it left off instead of re-deriving context from scratch. See [methodology/08 "Active context"](../methodology/08_lessons_and_memory.md#active-context-the-volatile-working-file).
+
+### Loop cost compounds
+
+A loop is not priced like a single request: the goal, relevant code, and prior results re-enter the model on **every** iteration, so token spend grows with loop length — and a stuck loop is the most expensive kind, re-spending full context on each retry of the same issue while producing nothing. Two mechanisms above are also the cost controls: the active-context file (a tight summary re-loaded each iteration is far cheaper than re-deriving history from the repo) and the step-7 attempt cap (bounds how much a single stubborn issue can consume before it's forced to a disposition). If a loop's spend is growing while its report section "what was implemented" is not, treat that as a stop signal, not a reason to loop harder.
 
 ---
 

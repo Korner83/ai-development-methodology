@@ -1,6 +1,6 @@
 # Cheatsheet — AI Development Methodology
 
-_One-page reference. For learning, read [`methodology/`](methodology/). For setup, see [`templates/`](templates/). Pinned-against methodology v1.23.0._
+_One-page reference. For learning, read [`methodology/`](methodology/). For setup, see [`templates/`](templates/). Pinned-against methodology v1.24.0._
 
 ## The 4 planning layers
 
@@ -94,7 +94,7 @@ Default thresholds: **min 8/10 per area, average 9/10 across all areas.** No are
 
 **Scope of the rubric:** project-wide (default) / per-pillar / per-epic / per-item — mix as needed.
 
-Unsolvable issues: **handle / postpone / mark — never force.**
+Unsolvable issues: **handle / postpone / mark — never force.** Attempt cap: **3 failed fix-test attempts at the same issue → disposition mandatory** (counter resets on genuinely new information). [12](methodology/12_milestone_evaluation.md#the-attempt-cap-making-resists-multiple-attempts-executable)
 
 ## AUTONOMOUS_LOOP.md + HUMAN_NEEDED.md + FEEDBACK.md
 

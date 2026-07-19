@@ -13,6 +13,21 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.24.0 — 2026-07-19
+
+### Added: loop guardrails — attempt cap, loop-cost note, loop-qualification checklist
+
+An evaluation of a widely-shared external write-up on agentic loops (Anatoli Kopadze, *"Loops explained: Claude, GPT, Mira and what actually works"*, X, June 2026) confirmed the methodology already covers loop structure, verification, state, and stop conditions in more depth — but surfaced three small hardening gaps, adopted here. Markdown-only; trust posture unchanged.
+
+### Changed
+
+- **`methodology/12_milestone_evaluation.md`** — added **"The attempt cap: making 'resists multiple attempts' executable"** under "Unsolvable issues": a default of **three failed fix-test attempts at the same issue** makes choosing a handle / postpone / mark disposition mandatory, turning a previously judgment-dependent trigger into one an agent can execute. The cap triggers a decision (not an automatic `rejected`), the counter resets on genuinely new information, and projects may tune the number in writing.
+- **`methodology/10_testing_and_verification.md`** — wired the attempt cap into the fix-test loop's key properties: clean-pass termination governs success; the cap governs the failure path.
+- **`templates/AUTONOMOUS_LOOP.md`** — three edits: (1) step 7 (unsolvable-issue handling) now names the default attempt cap inside the prompt; (2) "When to use this" gained a **four-condition loop-qualification checklist** (work recurs / automated rejection exists / agent can complete end-to-end / success objectively measurable); (3) new **"Loop cost compounds"** note — context re-enters the model every iteration, the active-context file and attempt cap double as cost controls, and spend growing without progress is a stop signal.
+- **Version strings** → v1.24.0 (`README.md`, `CHEATSHEET.md`).
+
+---
+
 ## v1.23.0 — 2026-06-02
 
 ### Added: protected regions (declared edit boundaries)
