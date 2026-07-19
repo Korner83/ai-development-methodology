@@ -215,6 +215,16 @@ Some issues do not yield to additional loop iterations. The methodology is hones
 | **Postponed** | The issue's correct fix is real but its priority doesn't justify blocking the current milestone. | Item moves to `FUTURE.md` with a postponement reason; re-surface at the next milestone planning cycle. |
 | **Marked (known-broken)** | The issue can't be fixed cleanly within the project's constraints, and forcing a fix would make things worse. | Item closes with `Status: rejected` + a `Known issue:` documentation entry in CHANGELOG / README. User-facing if it affects users. |
 
+### The attempt cap: making "resists multiple attempts" executable
+
+"Multiple attempts" is judgment-dependent unless a number makes it executable — an autonomous loop with no cap will happily attempt the same issue a tenth time, re-spending its full context on every retry. The default cap: **three failed fix-test attempts at the same issue** — three iterations that each ended with verification still red, or that shipped a regression — makes choosing a disposition *mandatory*. The loop does not attempt a fourth fix; it picks handle, postpone, or mark.
+
+Three clarifications keep the cap honest:
+
+- **The cap triggers a decision, not a verdict.** Hitting it does not mean `Status: rejected`; the third failure's disposition can still be "handled" via an acceptable workaround. The cap only forbids *silent retry number four*.
+- **The counter resets on genuinely new information** — a root cause identified, a dependency fixed upstream, human input that reframes the problem. "Let me try a slightly different phrasing of the same fix" is not new information.
+- **Projects may tune the number** (a cheap-to-verify project might afford 5; an expensive end-to-end suite might justify 2) — but the tuned value is written down in the project's loop prompt, not decided per-issue in the moment.
+
 ### What "forcing a fix would make things worse" looks like
 
 - **The fix requires a refactor whose scope exceeds the original problem.** A 50-line bug fix becomes a 5000-line architectural rewrite; the rewrite introduces new bugs at higher rate than the original bug caused harm.
