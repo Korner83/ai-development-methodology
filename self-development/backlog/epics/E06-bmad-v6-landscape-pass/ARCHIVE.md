@@ -250,3 +250,46 @@ but `08` says "a few hundred lines" and illustrates with 200 — the 300 actuall
 explicit note that a second copy would drift. A second finding promoted the section from a
 `###` under "Body sections" to a top-level `##`, since three of its four rows describe
 artifacts owned by `03` and `08` rather than item bodies.
+
+---
+
+### BL-0021 — Derivable-from-source admission test for memory and instruction entries
+
+| Field    | Value                              |
+|----------|------------------------------------|
+| Epic     | E06-bmad-v6-landscape-pass         |
+| Pillar   | P9                                 |
+| Priority | P2                                 |
+| Effort   | S                                  |
+| Status   | done                               |
+| Test     | pass — repo-wide consistency check; no conflict with the v1.20 archival lifecycle it complements |
+| Deps     | —                                  |
+| Lock     | —                                  |
+
+**Why / Description:** `08`'s "do not save" list already ruled out "patterns derivable from
+reading the current code," but only as one bullet among seven, with no general criterion behind
+it. Promoted the bullet into an explicit **admission test**: if a contributor can learn it by
+reading the repo right now, it is read live and never written down; only intent, rationale,
+policy, and observed pitfalls earn a line. Paired with the audit rule that a consolidation pass
+**ends smaller or equal, never larger**, and with the asymmetry that keeps it honest — a rule
+that is working erases its own evidence, so low reference frequency is never grounds for
+retirement.
+
+**Done means:**
+
+- [x] `08` states the admission test with a not-stored / stored contrast.
+- [x] The "ends smaller or equal" audit rule is stated and tied to the size budgets.
+- [x] The admission/retirement asymmetry is stated and cross-linked to the archival lifecycle
+      and the `pinned` flag, so the new rule cannot be read as licence to prune working rules.
+- [x] CHANGELOG entry shipped in the same release (v1.26.0).
+
+**Files (actual):**
+
+- `methodology/08_lessons_and_memory.md` — "The admission test: derivable from source is never
+  stored", under "What NOT to save as memory".
+
+**Resolution:** Promoted from [FUTURE.md](FUTURE.md) at maintainer direction and shipped in
+v1.26.0, **after E06 had already closed** — recorded here rather than by re-opening the epic,
+since the charter's exit criteria (BL-0015…BL-0019) were genuinely met at closure and
+back-dating them would falsify the record. E06's item count reflects six archived items against
+five chartered; the four remaining Tier-2 deferrals stay in `FUTURE.md`.

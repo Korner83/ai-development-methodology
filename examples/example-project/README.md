@@ -30,6 +30,11 @@ The artifacts under this folder match the methodology's prescribed shape:
 
 This is the minimum-viable set for an adopter to see the methodology operationalized. A real adopter project would add more pillars, more epics, more items as the project grew; this example shows the starting shape.
 
+Two conventions worth looking at specifically, because they are easier to copy than to describe:
+
+- **[Code Maps](../../methodology/04_backlog_items.md#the-code-map--writing-m-items-for-cold-handoff)** on the two Effort-M items (BL-0002, BL-0005) — annotated paths, the utility to reuse, and the constraint that isn't obvious from the code. The S/XS items keep a plain `Files (probable):` list, which is the point: the upgrade is keyed to effort, not applied everywhere.
+- **[Frozen intent](../../methodology/04_backlog_items.md#frozen-intent--approved-goals-are-human-owned)** markers on BL-0002 and on the E01 charter — the approved goal and criteria are human-owned; everything else in the body stays editable.
+
 ## Things NOT included (intentionally)
 
 - **Source code.** This is docs-only; a real adopter would have `src/`, `tests/`, etc. alongside.

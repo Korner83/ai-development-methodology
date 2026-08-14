@@ -18,15 +18,11 @@ escalate-by-default stance), **Never** (non-goals and forbidden approaches). Sha
 agents than "Out of scope" prose alone. **Source:** the Boundaries & Constraints block in
 BMAD's `spec-template.md`. **Targets:** `templates/`, `04_backlog_items.md`, `03_epics.md`.
 
-### BL-0021 — Derivable-from-source admission test for memory and instruction entries
+### ~~BL-0021 — Derivable-from-source admission test for memory and instruction entries~~
 
-Add an admission rule to `08`: anything an agent can derive by reading the repo live (commands,
-file layout, current structure) is **never stored** — only intent, rationale, policy, and
-observed pitfalls earn an entry. Pair with the audit rule that a memory/instruction
-consolidation pass ends **smaller or equal, never larger**. Complements the v1.20 archival
-lifecycle (which governs *retirement*; this governs *admission*). **Source:** BMAD
-`bmad-project-context` + `docs/explanation/project-context-theory.md`. **Target:**
-`08_lessons_and_memory.md`.
+**Promoted and shipped in v1.26.0** — see [ARCHIVE.md](ARCHIVE.md#bl-0021--derivable-from-source-admission-test-for-memory-and-instruction-entries).
+Promoted out of order (ahead of BL-0020) at maintainer direction, after E06 had already closed;
+the entry stays here struck through so the deferral decision and its reversal are both legible.
 
 ### BL-0022 — Optional per-epic context digest with a staleness rule
 
