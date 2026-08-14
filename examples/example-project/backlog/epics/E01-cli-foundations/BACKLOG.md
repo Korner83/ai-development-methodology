@@ -26,6 +26,9 @@ _4 example items demonstrating the canonical [04_backlog_items.md](../../../../.
 | Deps     | BL-0001, BL-0005                   |
 | Lock     | claude-sess-9d12@2026-05-25T18:00Z |
 
+> **Frozen intent** — `Why / Description:` and `Done means:` approved by
+> maintainer on 2026-05-20. Agents do not edit them; halt and renegotiate instead.
+
 **Why / Description:** Core capture command. Writes a note with auto-attached context (cwd, git branch if applicable). Foundation for the entire P1 capability.
 
 **Approach:**

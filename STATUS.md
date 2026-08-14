@@ -13,6 +13,10 @@ The methodology has been in active use through:
 
 It works as designed in that one context. Whether the same shape transplants cleanly to a different stack, team, or product category will become clear only as others try it.
 
+**Second instance: the methodology applied to itself.** [`self-development/`](self-development/) runs this repo's own development under these rules — strategy, nine pillars, chartered epics, locked items, DoD gates, an autonomous loop with tiered autonomy over the docs it edits, and a semi-annual self-evaluation. It is a real instance, but a docs-only one; it exercises the planning, review, and memory disciplines far harder than it exercises the UI-verification and testing disciplines.
+
+**Honest current state** (v1.26.0): the [first self-evaluation](self-development/evaluations/2026-05-25-eval-01.md) scored the project **8.11 average, minimum 6** and returned **NOT READY for closed beta** — one area (adopter discoverability) sits below the rubric's minimum, and under the *no area averaged away* rule that single score decides the verdict. The blocker is not a doc gap; it is that no external promotion has happened yet. That eval also flags its own weakness: it was conducted by the session that authored the release under review, so its scoring is biased toward charity.
+
 ## Maintenance commitment
 
 **Lean.** This repo is published as a *reference artifact,* not a *managed project.*
@@ -27,7 +31,16 @@ What that means in practice:
 
 If this approach to maintenance doesn't work for you: **fork freely.** The CC BY 4.0 license exists for exactly this case. You don't need permission to maintain your own fork; you can rename it, restructure it, and adapt it to your needs without involving the upstream — just keep the attribution.
 
-## Workflow exception: this repo uses direct-to-main
+## Workflow: PR-only (the direct-to-main exception has been retired)
+
+**Current practice:** this repo follows the methodology's [09_git_workflow.md](methodology/09_git_workflow.md) rule in full. Every change lands on `main` via a feature branch and a PR — see PRs #13 onward, including every versioned methodology release since v1.19.0.
+
+The exception below applied to this repo's early life and is **retired**, on its own stated trigger: independent AI sessions now work in this repo, which is the second-contributor condition the exception named. The original text is preserved rather than deleted, because it documents a decision someone may have read and copied.
+
+> [!IMPORTANT]
+> **Superseded.** The section below described this repo's practice until the PR-only flow was adopted. It is kept for lineage; it no longer describes how this repo works.
+
+### ~~Workflow exception: this repo uses direct-to-main~~ (historical)
 
 The methodology's own [09_git_workflow.md](methodology/09_git_workflow.md) requires PR-only merges to the trunk and forbids direct commits. **This repo deliberately doesn't follow that rule** — every commit here lands directly on `main` without a feature branch or PR.
 
@@ -49,9 +62,9 @@ Don't take this as license to skip PRs on multi-contributor projects. It's not. 
 
 Documents will change as understanding sharpens. Material changes will:
 
-- Increment the relevant doc's version (the methodology itself uses a strategy-doc-style versioning pattern internally; see [01_strategy.md](methodology/01_strategy.md)).
+- Increment the methodology version (semantic-ish: a new or changed convention is a minor bump, a correction is a patch).
 - Preserve old versions where the original made a substantive claim someone may have built on.
-- Be summarized in commit messages and (eventually) in a `CHANGELOG.md`.
+- Be summarized in [`CHANGELOG.md`](CHANGELOG.md), which is the single source of truth for what changed and why. Each release entry names the docs touched and, for landscape-informed additions, where the idea came from.
 
 Forks that need to pin to a specific state should pin to a specific commit hash or a tagged release.
 

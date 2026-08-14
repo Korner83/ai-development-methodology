@@ -295,6 +295,23 @@ Before saving, ask: *will this still be useful and correct in six months?*
 - "The tests for module X are slow because Y" — durable until the slowness is fixed; save with the understanding that it should be removed when fixed.
 - "I just fixed a typo in the README" — useless as memory; don't save.
 
+### The admission test: derivable from source is never stored
+
+The first "do not save" rule above generalizes into the sharpest single filter for both layers. **If a contributor can learn it by reading the repo right now, it is read live — never written down.** What earns a line is only what the source *cannot* tell you:
+
+| Not stored (derivable) | Stored (not derivable) |
+|---|---|
+| The test command — it's in `package.json` | *"The suite takes eleven minutes, so run the focused file first"* |
+| The directory layout — it's on disk | *"`legacy/` is mid-migration; new code goes in `core/`"* |
+| Which library handles dates — it's in the imports | *"We moved off X because of its DST bug; don't reintroduce it"* |
+| That a function exists — grep finds it | *"That function looks generic but is load-bearing for billing"* |
+
+Four things pass this test: **intent, rationale, policy, and observed pitfalls.** Everything else is a snapshot of a moving target, and a snapshot is worse than nothing — it goes stale silently, and a confidently wrong instruction file costs more than an absent one.
+
+This is also why a consolidation pass **ends smaller or equal, never larger.** An audit that grows the file has usually re-derived things the code already says. The [size budgets](04_backlog_items.md#size-budgets--context-artifacts-must-earn-their-length) give the same rule a number; this gives it a criterion.
+
+**The asymmetry worth knowing:** admission is strict, but *retirement* is not symmetric with it. A policy or pitfall retires when the thing it guards is gone — not when it stops being mentioned. A rule that is working erases its own evidence: nobody reintroduces the DST-buggy library, so the entry looks inert precisely because it succeeded. Low reference frequency is never grounds for removal; see [Archive, don't destroy](#archive-dont-destroy-the-memory-lifecycle) and the `pinned` flag.
+
 ---
 
 ## Active context: the volatile working file

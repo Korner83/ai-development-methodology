@@ -87,14 +87,16 @@ _Items currently in scope for this epic. See [charter](README.md) for exit crite
 - [ ] No content silently lost (cross-AI diff review confirms all removals were deliberate).
 - [ ] Item moved from `BACKLOG.md` to `ARCHIVE.md` after cross-AI validation passes.
 
-**Files (probable):**
+**Code Map:** (Effort L — annotated per [04 "The Code Map"](../../../../methodology/04_backlog_items.md#the-code-map--writing-m-items-for-cold-handoff))
 
-- `methodology/09_git_workflow.md` (modified or split)
-- `methodology/09a_*.md`, `methodology/09b_*.md`, `methodology/09c_*.md` (new, if split)
-- `methodology/00_README.md` (doc index update if split)
-- `self-development/evaluations/2026-05-09-git-workflow-decision.md` (append removal log)
+- `methodology/09_git_workflow.md` — the subject doc (986 lines at v1.6.0). Trimmed in place, or reduced to an index pointing at the splits.
+- `methodology/09a_*.md`, `09b_*.md`, `09c_*.md` (new, only if BL-0011 chose split) — target grouping is named in BL-0011's decision doc, not re-derived here.
+- `methodology/00_README.md` — the doc index; only needs touching if the split adds files.
+- `self-development/evaluations/2026-05-09-git-workflow-decision.md` — append the removal log; BL-0011 wrote the decision into this same file, so read it before starting.
+- Constraint: the **affirmative git-operation list** (~26 rows of ✓/⚠/✗) and the **patch-branch convention** are load-bearing and cross-referenced from `10` and `templates/AUTONOMOUS_LOOP.md` — trimming either breaks inbound links that BL-0013 then has to repair. Prefer cutting prose density over cutting whole sections.
+- Constraint: inbound references exist from `00`, `07`, `10`, `12`, the templates, and the skill. BL-0013 owns fixing them, but a split that changes anchors multiplies that work — factor it into the trim-vs-split choice.
 
-**Notes:** This item touches `methodology/*.md` and thus violates the autonomous-loop **Constraint 1** (never modify abstract methodology docs autonomously). The loop CANNOT execute this item autonomously; it must surface to the maintainer for human-authored execution. This is a known limitation; the loop's role for this item is to *prepare* (BL-0011 decision) and then halt for maintainer handoff.
+**Notes:** This item touches `methodology/*.md`. Under the current tier matrix that is **T2/T3 — maintainer-authored** (the older "never modify autonomously" phrasing was superseded when [Constraint 1](../../../AUTONOMOUS_LOOP.md#constraint-1--tiered-autonomy-on-abstract-methodology-docs) moved to tiered autonomy). The loop's role for this item is to *prepare* (BL-0011's decision) and then halt for maintainer handoff.
 
 ---
 

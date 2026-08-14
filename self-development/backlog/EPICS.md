@@ -1,6 +1,6 @@
 # Epics
 
-_Last refreshed: 2026-08-14 (E06 chartered, executed, and closed — v1.25.0; 4 done, 1 active, 1 planned; WIP cap = 2; one slot still open if maintainer wants concurrency)._
+_Last refreshed: 2026-08-14 (post-v1.26.0 consistency pass; E06 closed with 6 archived items; 4 done, 1 active, 1 planned; WIP cap = 2; one slot still open if maintainer wants concurrency)._
 
 ## Rollup
 
@@ -11,7 +11,7 @@ _Last refreshed: 2026-08-14 (E06 chartered, executed, and closed — v1.25.0; 4 
 | [E05](epics/E05-cheatsheet/README.md) | CHEATSHEET.md (one-page reference) | P1 Doc completeness | **done** (2026-05-25) | Phase 1 | — / 1 | Shipped in v1.15.0 (CHEATSHEET.md at repo root, ~80 lines). |
 | [E03](epics/E03-git-workflow-trim/README.md) | Trim or split `09_git_workflow.md` | P2 Doc clarity | **active** (2026-05-25, v1.16.0) | Phase 1 | 4 / 0 | Promoted to active per maintainer direction. Several E02 T2 findings flow here. BL-0012 touches `methodology/` (T3-equivalent — maintainer handoff). |
 | [E04](epics/E04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | planned | Phase 1 | 0 / 0 | Defer until closed-beta milestone work reveals which native templates adopters actually need. |
-| [E06](epics/E06-bmad-v6-landscape-pass/README.md) | BMAD v6 landscape pass (context-handoff + review-triage conventions) | P9 Self-improvement velocity + P1 Doc completeness | **done** (2026-08-14) | Phase 1 | 0 / 5 | Chartered and closed same day at maintainer direction; all 5 items shipped in v1.25.0. 5 Tier-2 ideas remain in FUTURE.md. |
+| [E06](epics/E06-bmad-v6-landscape-pass/README.md) | BMAD v6 landscape pass (context-handoff + review-triage conventions) | P9 Self-improvement velocity + P1 Doc completeness | **done** (2026-08-14) | Phase 1 | 0 / 6 | Chartered and closed same day at maintainer direction; 5 chartered items shipped in v1.25.0, plus BL-0021 promoted from FUTURE.md post-closure and shipped in v1.26.0. 4 Tier-2 ideas remain in FUTURE.md. |
 
 **Counts:** **1 active** (E03), 1 planned (E04), 4 done (E01, E02, E05, E06).
 

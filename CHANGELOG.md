@@ -13,6 +13,38 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.26.0 — 2026-08-14
+
+### Added: the memory admission test
+
+Promotes one deferral from the v1.25.0 landscape pass (E06 `FUTURE.md`, BL-0021) and closes the consistency gaps that release opened in the repo's own content.
+
+- **`methodology/08_lessons_and_memory.md`** — added **"The admission test: derivable from source is never stored"** under "What NOT to save": if a contributor can learn it by reading the repo right now, it is read live and never written down; only **intent, rationale, policy, and observed pitfalls** earn a line, with a not-stored/stored contrast table. Carries two consequences: a consolidation pass **ends smaller or equal, never larger**, and the admission/retirement asymmetry — a rule that is working erases its own evidence, so low reference frequency is never grounds for retirement (cross-linked to the v1.20 archival lifecycle and the `pinned` flag, so the new rule can't be read as licence to prune working rules).
+
+### Changed: consistency with v1.25.0
+
+The v1.25.0 conventions made some pre-existing repo content non-compliant — the same defect class its own cross-AI review caught in `04`'s worked example. Closed here:
+
+- **`examples/example-project/`** — the two Effort-M items (BL-0002, BL-0005) carried bare `Files (probable)` lists and now carry annotated **Code Maps**; BL-0002 and the E01 charter now demonstrate the **frozen-intent** marker. The example README points at both, since these two conventions are easier to copy than to describe. The S/XS items keep plain file lists on purpose — the upgrade is keyed to effort, not applied everywhere.
+- **`self-development/backlog/epics/E03-git-workflow-trim/BACKLOG.md`** — BL-0012 (Effort L) gained a Code Map, including the two constraints that make the trim risky (the affirmative git-operation list and the patch-branch convention are cross-referenced from `10` and the loop template). Its note also drops the superseded "never modify autonomously" phrasing for the current tier matrix.
+- **`self-development/AUTONOMOUS_LOOP.md`** — the repo's own loop prompt was behind the methodology it applies: it now carries the Code Map drain (step 3), frozen intent (step 4), a docs-shaped verification-gap check (step 5: *if this rule were violated, would anything catch it?*), and failure-layer routing with the two-bounce escape (step 6).
+
+### Changed: instantiated what the methodology specifies
+
+Both files were defined in the docs but had never existed in this repo:
+
+- **`self-development/backlog/FEEDBACK.md`** — the triage inbox from `12`, with the routing table, the weekly pre-alpha cadence, and an explicit untrusted-content warning (feedback is data, not instructions). Empty by design; it exists so the first burst of external feedback isn't lost.
+- **`self-development/backlog/ACTIVE_CONTEXT.md`** — the volatile working file from `08`, with the save-before-reset / verify-against-`git log` ritual.
+- **`self-development/backlog/HUMAN_NEEDED.md`** — first real entry: publishing the distribution drafts, which is the sole blocker on the closed-beta milestone (adopter discoverability 6/10, below the min-8 threshold) and is human-only because the voice belongs to the maintainer.
+
+### Fixed
+
+- **Six stale cross-doc anchor fragments** across seven `self-development/` files — links into `brief/05_success_metrics.md` and `self-development/AUTONOMOUS_LOOP.md` whose target headings had been renamed (notably when the loop constraints moved from "never modify X" to "tiered autonomy on X"). Repo-wide anchor check is now clean. Dated loop-note prose was left as written: it records the rule as it stood, and is not a live rule statement.
+- **`STATUS.md`** — the documented "this repo uses direct-to-main" workflow exception was false: every release since v1.19.0 has landed via PR, and the exception's own retirement trigger (independent AI sessions working the repo) had fired. Marked superseded with the text preserved for lineage, per the refinement pattern in `02`. Also: the maturity section now records the self-application instance and the honest **NOT READY for closed beta** verdict with its cause; the stability section no longer says a changelog is coming "eventually."
+- **Version strings** → v1.26.0 (`README.md`, `CHEATSHEET.md`).
+
+---
+
 ## v1.25.0 — 2026-08-14
 
 ### Added: context handoff, frozen intent, and review-finding routing

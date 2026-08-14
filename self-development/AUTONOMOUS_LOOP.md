@@ -203,20 +203,48 @@ completion unless the run target says to):
    Write a short acceptance checklist before implementing. Surface
    the plan to the maintainer if work scope feels larger than the
    item's Effort estimate suggests.
+   For Effort M+ items, drain what you learn while planning into
+   the item's Code Map (methodology/04) — which docs and sections
+   the change touches, which existing conventions it extends, which
+   constraints aren't obvious from reading the doc. A later session
+   (or the maintainer authoring a T2 change) must be able to work
+   from the item alone, without re-deriving the investigation.
 
 4. EXECUTE — apply the four working principles (methodology/06).
    Pass every gate in the Definition of Done (methodology/07).
    HARD RULE: Status: done requires Test: pass.
+   Once the maintainer has approved an item's goal or Done means,
+   they are frozen intent (methodology/04) — do not reword them to
+   match what you built. If execution shows the goal is wrong, halt
+   and surface it for renegotiation; that is a maintainer decision,
+   not a loop edit.
 
 5. VERIFY — per methodology/10. For docs-only changes (most items
    in this backlog), verification is the cross-AI cold-read +
    maintainer review at the item-done gate. For items that involve
    running scripts (link scans, etc.), verify the script's output
    matches the expected condition.
+   Docs-shaped verification-gap check (methodology/07 Gate 2): for
+   each rule this change adds or alters, ask "if this rule were
+   violated, would anything catch it?" A convention with no gate,
+   no checklist row, and no example is unverifiable text. The prose
+   equivalent of a skipped test is a rule stated once and wired
+   nowhere.
 
 6. CROSS-AI VALIDATION — never self-validate. When an item reaches
    Status: to-be-tested, halt and surface for cross-AI review per
    the bootstrap plan's DoD pattern.
+   Route each finding by the layer the defect entered
+   (methodology/07 "Routing findings by failure layer"): the item's
+   approved goal wrong → halt for the maintainer (frozen intent);
+   the item's approach wrong → fix the item body, then re-derive
+   the change from it; the wording wrong → patch; real but out of
+   scope → FUTURE.md or a new item; invalid → reject with a reason.
+   An intent/plan finding cancels the wording findings below it.
+   Same item bounces at intent or plan level more than twice → stop
+   and surface. (That bounds re-deriving from a definition that
+   keeps proving wrong; the attempt cap in methodology/12 bounds
+   retrying a fix that keeps failing.)
 
 7. COMMIT — per methodology/09. Conventional-commits style. One
    commit per item (or per sub-step of large items). Push after

@@ -9,6 +9,9 @@ _Example epic charter. Following the [03_epics.md](../../../../../methodology/03
 **Target close:** ~6 weeks
 **Owner:** maintainer + AI coding agent
 
+> **Frozen intent** — Outcome and exit criteria approved by maintainer on
+> 2026-05-18. Agents do not edit them; halt and renegotiate instead.
+
 ## Outcome (jobs-to-be-done)
 
 When a developer wants to capture a quick note in the middle of a coding session, they want a `tinker capture` command that works in one keystroke from anywhere on the system, so the note exists by the time their attention returns to the code.
