@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="License: CC BY 4.0" src="https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg"></a>
-  <a href="CHANGELOG.md"><img alt="Methodology version" src="https://img.shields.io/badge/methodology-v1.27.1-1e40af"></a>
+  <a href="CHANGELOG.md"><img alt="Methodology version" src="https://img.shields.io/badge/methodology-v1.27.2-1e40af"></a>
   <a href="SECURITY.md"><img alt="No code - markdown + git" src="https://img.shields.io/badge/code-none%20%C2%B7%20markdown%20%2B%20git-2ea44f"></a>
   <a href=".github/workflows/gitleaks.yml"><img alt="gitleaks secret scan" src="https://github.com/Korner83/ai-development-methodology/actions/workflows/gitleaks.yml/badge.svg"></a>
 </p>
@@ -30,7 +30,7 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Autonomous goal-oriented development cycles** - paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration - 0–10 rubric per area; unsolvable issues get *handled/postponed/marked* after a default 3-attempt cap, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.27.1](CHANGELOG.md).
+- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.27.2](CHANGELOG.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
 
 ---
@@ -97,20 +97,14 @@ For the file layout and how the cascade physically lives on disk, see [How the w
 
 ## What you get
 
-The concrete payoffs after a week or two of adoption:
+After a week or two:
 
-- **Work stops drifting.** Items trace from today's commit back to a phase in the strategy. "Why are we doing this?" is answerable without re-arguing it every quarter.
-- **The backlog tells the truth.** `Status: done` requires `Test: pass` - no partial credit. Trust in the backlog comes back.
-- **Parallel agents stop colliding.** File-based locks with TTL handle the coordination that chat-based "I've got this" can't.
-- **The same mistake doesn't come back.** Memory entries make recurring fixes a one-time cost.
-- **AI agents stay on task.** Four working principles forbid the speculative-abstraction / scope-creep / "let me also clean this up" pattern that LLMs default to.
-- **Verification catches what tests miss.** White pages, broken dark mode, bypassed auth gates, missing imports - caught at the actual-UI gate, not in production.
-- **AI-as-yes-man becomes visible.** A copy-paste counter-prompt ("what's wrong with this plan?") makes you challenge before approving.
-- **The cheating agent gets caught.** When one model writes both the implementation and the tests that validate it, the green suite hides bugs. A different model auditing catches them.
-- **The goalposts stay where you put them.** Once you approve what "done" means, agents can't quietly reshape it to fit what they built - the one drift that's invisible in a diff.
-- **Handoffs stop losing what was learned.** The session that planned the work writes down which files, which existing helpers, and which constraints - so the next session doesn't re-investigate from scratch.
-- **Portable across tools.** Switching Claude Code → Cursor → Codex doesn't mean re-learning your process - only swapping the project-instruction filename.
-- **No vendor lock-in.** Markdown and git. If your AI tool is gone in 18 months, your methodology isn't.
+- **The backlog stops lying.** `Status: done` requires `Test: pass`. No partial credit, no judgment calls.
+- **Agents stop colliding.** File-based locks with TTL do the coordination that "I've got this" in chat never did.
+- **The goalposts stay put.** Approve what "done" means and agents can't quietly reshape it to fit what they built - the one drift that's invisible in a diff.
+- **Handoffs stop amnesia.** What the planning session learned lands in the item, so the next session doesn't rediscover it.
+- **The same mistake stops coming back.** Memory turns a recurring fix into a one-time cost.
+- **Nothing is locked in.** Markdown and git. If your AI tool is gone in 18 months, your process isn't.
 
 ---
 
@@ -146,41 +140,19 @@ Most projects accumulate the same failure modes once they last more than a few w
 
 ```
 ai-development-methodology/
-├── README.md                 # this file
-├── CHANGELOG.md              # version history (self-applies the methodology)
-├── CHEATSHEET.md             # one-page quick reference (NEW v1.17.3)
-├── LICENSE                   # CC BY 4.0
-├── SECURITY.md               # security policy + how to verify the repo (NEW v1.18.0)
-├── STATUS.md                 # maintenance posture
-├── .github/workflows/        # gitleaks secret scan — read-only CI (NEW v1.18.0)
-├── methodology/              # the 14 methodology docs (00–13; doc 13 NEW v1.18.0)
-├── skills/                   # NEW v1.19.0 - `npx skills add` installs SKILL.md into any agent
-│   └── ai-dev-methodology/SKILL.md   # self-contained operating rules (markdown only)
-├── assets/                   # README hero banner (static SVG, no script)
-├── templates/
-│   ├── CLAUDE.md             # project-instruction file (Claude Code)
-│   ├── AGENTS.md             # vendor-neutral version (extra plan/tool/safety sections)
-│   ├── AGENT_KICKOFF.md      # planning-mode prompt for new projects
-│   ├── AUTONOMOUS_LOOP.md    # prompt for long autonomous dev sessions (extended v1.17.3 with periodic deep-eval)
-│   └── PROJECT_STRUCTURE.md  # recommended folder layout + naming conventions
-├── examples/                 # NEW v1.17.3 - fictional `tinker` project showing methodology applied end-to-end
-│   ├── README.md             # 3-row comparison: methodology/ vs self-development/ vs examples/
-│   └── example-project/
-│       ├── README.md
-│       ├── strategy/00_master_plan.md
-│       ├── pillars/P1_capture.md, P2_retrieval.md
-│       └── backlog/TEST_BACKLOG.md + EPICS.md + epics/E01-cli-foundations/ (charter + BACKLOG + ARCHIVE + FUTURE + TEST)
-└── self-development/         # the methodology applied to its own development
-    ├── AUTONOMOUS_LOOP.md    # Step 4 - adapted loop config (operational cycle)
-    ├── brief/                # Step 0 outputs - vision, audience, competitive landscape, etc.
-    ├── strategy/             # Step 1 - master plan (vision + 4 phases + pillar roadmap)
-    ├── pillars/              # Step 1 - 9 capability-layer pillars (P1..P9)
-    ├── backlog/              # Step 2 - 5 epic charters; Step 3 - items inside active epics
-    ├── evaluations/          # semi-annual self-eval reports (first pass 2026-05-25)
-    └── loop-notes/           # loop-detected methodology insights for maintainer review
+├── methodology/              # the 14 docs (00–13) - this is the methodology
+├── templates/                # CLAUDE.md · AGENTS.md · AGENT_KICKOFF.md
+│                             # AUTONOMOUS_LOOP.md · PROJECT_STRUCTURE.md
+├── skills/                   # `npx skills add` drops SKILL.md into any agent
+├── examples/                 # fictional `tinker` project - the methodology, applied
+├── self-development/         # the methodology applied to its own development:
+│                             # brief · strategy · 9 pillars · backlog · evaluations · loop-notes
+├── CHEATSHEET.md             # one page, everything that fits on it
+├── CHANGELOG.md · STATUS.md · SECURITY.md · LICENSE
+└── .github/workflows/        # gitleaks secret scan - the only CI, read-only
 ```
 
-~15,000+ lines across 85+ files at v1.27.1. Longest doc ~800 lines. Each doc is self-contained - read in any order.
+~15,000+ lines across 85+ files at v1.27.2. Longest doc ~800 lines. Each doc is self-contained - read in any order.
 
 ---
 
@@ -296,36 +268,23 @@ The methodology is tool-agnostic. Only the project-instruction filename differs:
 
 ## When to use this methodology
 
-### What this is good for
+**Good fit**
 
-- **Projects where humans and AI agents collaborate as peers.** The file-based lock + tier matrix + per-item DoD all assume contributors will arrive at AI velocity; the practices are designed for that.
-- **Adopters who want markdown + git as the substrate.** No SaaS, no signup, no vendor lock-in, no monthly cost. Everything lives in the repo where the code lives.
-- **Solo maintainers + small teams.** Scales down to one human + one AI agent without ceremony; scales up to a small team + multiple agents via the lock + WIP cap.
-- **Long-running projects where direction matters.** The four-layer planning cascade (strategy → pillars → epics → items) prevents the silent drift that "let's just keep shipping features" produces over months.
-- **AI-assisted projects that want a defense against the "cheating agent" anti-pattern.** Most testing approaches assume tests-pass = done; this one explicitly addresses the case where the same agent writes both broken code AND the broken tests that validate it.
-- **Projects shipping toward declared milestones.** The periodic deep-eval ([doc 12](methodology/12_milestone_evaluation.md)) catches the aggregate problems that per-item DoD can't see - compounded UX debt, cross-cutting perf regressions, security drift.
-- **Teams willing to write things down.** Strategy docs, pillar files, epic charters, items, memory entries - everything is markdown text. The methodology rewards teams whose culture is "if it isn't written, it doesn't exist."
+- Humans and AI agents as peers - locks, tier matrix, and DoD all assume contributors arrive at AI velocity.
+- Markdown + git as the substrate. No SaaS, no signup, no monthly cost; it lives where the code lives.
+- One human + one agent, up to a small team + several agents. The lock and WIP cap carry the range.
+- Long-running work where direction matters - the four-layer cascade is what stops months of silent drift.
+- Shipping toward declared milestones, where deep-eval catches the aggregate rot per-item DoD can't see.
+- Teams who write things down. "If it isn't written, it doesn't exist" is the assumed culture.
 
-### What this is NOT good for
+**Bad fit**
 
-- **Teams that want a hosted PM tool with permissions, dashboards, and a web UI.** This isn't that. If you want one, use one.
-- **Projects where ceremony is the value.** This methodology removes ceremony where it can. If your team's process culture depends on ritualized standups + sprint demos + retros, this doesn't replace those.
-- **Regulated-industry projects without further adaptation.** The default scoring rubric in [doc 12](methodology/12_milestone_evaluation.md) has no Compliance area; the lock protocol has no audit trail beyond git. You can add these, but they're not built in.
-- **Single-shot scripts or throwaway prototypes.** The overhead doesn't pay off until a project has > 1 month of work ahead of it.
-- **Replacing institutional knowledge that already works.** If your team has implicit conventions that produce good outcomes, don't replace them with this methodology's explicit ones just because the explicit version is shinier. Layer over what works; don't bulldoze.
-- **Verbal-only teams.** If your culture is "we discussed it in chat last week," this methodology won't fit until that culture shifts. Adoption is hard because the methodology assumes writing is the default.
-
-## Why these particular structural choices
-
-The methodology commits to a few patterns that are worth naming explicitly:
-
-- **The "cheating agent" anti-pattern is named + defended.** Tests pass ≠ done. Cross-AI validation + the actual-UI fix-test loop + cross-AI diff-verification together make it hard for the implementing session to silently ship a self-validated bug.
-- **File-based locks with TTL - same protocol for humans and AI agents.** No tier system where humans coordinate one way and agents another. Same `Lock:` field, same TTL, same release discipline. ([Doc 05](methodology/05_locks_and_parallel_work.md).)
-- **Challenge-before-consenting** as a named pattern with a copy-paste prompt - defends against AI's agreement bias when the maintainer is approving a non-trivial plan. ([Doc 06](methodology/06_working_principles.md).)
-- **Four-layer planning hierarchy** (strategy → pillars → epics → items) keeps work laddered to long-term direction rather than shipped as disconnected features. ([Docs 01–04](methodology/00_README.md).)
-- **DoD coupled to the item frontmatter itself.** `Status: done` requires `Test: pass` (or narrow exceptions with body-documented reasons). "Done" is mechanically auditable, not maintainer-judgment-dependent. ([Docs 04 + 07](methodology/04_backlog_items.md).)
-- **Tier matrix for autonomous loops on authoritative content.** Cosmetic + surgical patches are loop-eligible with cross-AI diff-verification; substantive changes stay human-authored. Compounding without sacrificing safety. ([`AUTONOMOUS_LOOP.md`](templates/AUTONOMOUS_LOOP.md).)
-- **Periodic deep-eval every Nth loop.** Catches aggregate quality drift (UX debt, perf regression, security drift) on a 0–10 rubric per area, with `handle / postpone / mark` discipline for unsolvable issues. ([Doc 12](methodology/12_milestone_evaluation.md).)
+- You want a hosted PM tool with dashboards and permissions. Use one; this isn't that.
+- Ceremony is the value. This removes ceremony; it won't replace your standups and demos.
+- Regulated industries, unadapted - the default rubric has no Compliance area, and locks have no audit trail beyond git. Addable, not built in.
+- Throwaway prototypes. The overhead doesn't pay back under about a month of runway.
+- Your implicit conventions already work. Layer over what works; don't bulldoze it for explicitness.
+- Verbal-only teams. If decisions live in last week's chat, this won't fit until that changes.
 
 ---
 
@@ -363,7 +322,7 @@ For modified versions, indicate you've made changes. Only obligation the license
 
 ## Status
 
-Battle-tested in one production project. Currently v1.27.1 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.27.2 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 
