@@ -9,7 +9,13 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-(nothing yet)
+### Added: E06 chartered — BMAD v6 landscape pass (self-development meta work)
+
+Reviewed BMAD-METHOD at v6.11.0 (commit `c96b7d1`, 2026-08-14) against the methodology and converted the findings into backlog intake. Project-meta work only — no `methodology/` docs change in this entry; each adopted convention ships later as its own maintainer-authored release (tier matrix, T2), like the v1.20–v1.23 landscape passes.
+
+- **`self-development/backlog/epics/E06-bmad-v6-landscape-pass/`** — new planned epic (primary pillar P9 self-improvement velocity, secondary P1): charter with binary exit criteria, five T2 items **BL-0015…BL-0019** (spec-as-sole-context "Code Map" handoff; frozen-intent convention for approved goals; failure-layer triage of review findings; verification-gap lens + test-actually-ran audit; size budgets for context artifacts), and five Tier-2 deferrals **BL-0020…BL-0024** in `FUTURE.md` (boundaries triad, derivable-from-source memory admission test, per-epic context digest, brownfield "ratify what's there" pass, human-review walkthrough ergonomics). Rejected imports (personas/menus, installers/web bundles, elicitation catalogs, executable tooling) are recorded in the charter's out-of-scope with reasons.
+- **`self-development/backlog/EPICS.md`** — E06 row added (planned; does not consume the open WIP slot); counts updated; pillar-coverage rows refreshed to reflect the May closures (E01/E02/E05 done) and P9's first dedicated epic; maintainer-recommendation list updated (E03 entry was stale — promoted since 2026-05-25).
+- The full comparison analysis lives in `self-development/brief/03_competitive_landscape.md` — **local-only, gitignored** per the repo's competitive-analysis convention; it is deliberately absent from this commit.
 
 ---
 
