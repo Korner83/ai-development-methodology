@@ -72,9 +72,12 @@ Mission (loop; do NOT stop at single-task completion):
    "Routing findings by failure layer"): approved goal wrong → halt
    for the human (frozen intent); plan/item wrong → fix the item body,
    re-derive the code; code wrong → patch; out of scope → FUTURE.md or
-   a new item; invalid → reject with a reason. Intent/plan findings
-   moot the code findings below them. Same item bounces at intent or
-   plan level more than twice → stop and surface it.
+   a new item; invalid → reject with a reason. An intent/plan finding
+   cancels the code findings below it. Same item bounces at intent or
+   plan level more than twice → stop and surface it. (This bounds
+   re-deriving from a definition that keeps proving wrong; step 7's
+   attempt cap bounds retrying a fix that keeps failing. Different
+   counters, different triggers — both end with a human deciding.)
 
 6. AFTER EVERY Nth LOOP — run a milestone deep-eval per methodology/12:
    - Default N = 3 (early-phase projects), N = 5 (stable), N = 10 (late).

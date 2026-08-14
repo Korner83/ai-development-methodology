@@ -424,11 +424,10 @@ Below the frontmatter table, the item body has these sections, in this order:
 - [ ] <Acceptance criterion 2>
 - [ ] <Acceptance criterion 3>
 
-**Files (probable):**
+**Files (probable):** (at Effort M+ this becomes a **Code Map** — each path
+annotated with its role, the utilities to reuse, the non-obvious constraints)
 - `<path/to/likely/file/1>`
 - `<path/to/likely/file/2>`
-<!-- At Effort M+ this becomes a Code Map: annotate each path with its role,
-     name the utilities to reuse, list the non-obvious constraints. -->
 
 **Blocker:** (only if Status: blocked)
 <One-line reason. Reference to the blocker — another item, an external dependency, a decision pending.>
@@ -490,37 +489,39 @@ The rule that makes it work: **whoever plans the item drains their investigation
 
 **The cold-handoff test:** could a fresh session, holding only this item body, start implementing without re-investigating the codebase? For an M+ item the answer must be yes. This extends the existing bar — "self-describing enough that a contributor who has never seen it can pick it up" — from *what* to build to *where and how*.
 
-**The dispatch rule:** when the item is handed off — to a [subagent](05_locks_and_parallel_work.md#subagent-delegation), to tomorrow's session, to another contributor — the instruction is *"work BL-####,"* pointing at the item. Don't paste a summary of the item into the handoff prompt: the summary drifts from the item, and now two versions of the truth exist. If the item body isn't good enough to work from, fix the item body.
+**The dispatch rule:** when the item is handed off — to a [subagent](05_locks_and_parallel_work.md#subagent-delegation), to tomorrow's session, to another contributor — the instruction is *"work BL-####,"* pointing at the item. Don't paste a summary of the item into the handoff prompt: the summary drifts from the item, and now two versions of the truth exist. If the item body isn't good enough to work from, fix the item body. (A subagent handed a *slice* of the item — research this, test that — is still told what its slice is; the rule is that the item's own goal and constraints are read from the item rather than restated around it. See [05 — Subagent delegation](05_locks_and_parallel_work.md#subagent-delegation).)
 
 The Code Map is *durable item knowledge*, distinct from the volatile session state in the [active-context file](08_lessons_and_memory.md#active-context-the-volatile-working-file): the Code Map says "reuse `buildActivityQuery()`"; active context says "halfway through step 3." One survives the item's whole life; the other is wiped at handoff.
 
 ### Frozen intent — approved goals are human-owned
 
-Once a human approves an item's goal and `**Done means:**` criteria — or an epic charter's exit criteria — that region becomes **frozen intent: human-owned, agent-immutable.** The rest of the body (Approach, Code Map, Notes) stays editable as the work teaches; the *definition of success* does not.
+Once a human approves an item's **`Why / Description:`** (the goal) and its **`Done means:`** criteria — or an epic charter's **Outcome** and **Exit criteria** — those sections become **frozen intent: human-owned, agent-immutable.** Every other section (`Approach`, `Code Map` / `Files (probable)`, `Blocker`, `Notes`) stays editable as the work teaches; the *definition of success* does not.
 
-Mark the region at approval time with a one-line badge directly above it:
+The two frozen sections are not adjacent — `Approach` sits between them — so the marker goes **once, directly below the frontmatter table**, and names what it covers rather than fencing a contiguous block:
 
 ```markdown
-> 🔒 **Frozen intent** — approved by <who>, <YYYY-MM-DD>. Agents do not
-> edit the goal or `Done means:` below. Wrong? Halt and renegotiate.
+> **Frozen intent** — `Why / Description:` and `Done means:` approved by
+> <who> on <YYYY-MM-DD>. Agents do not edit them; halt and renegotiate instead.
 ```
 
-Greppable (`rg "Frozen intent" backlog/`), visible in rendered markdown, one line.
+One line, greppable (`rg "Frozen intent" backlog/`), and unambiguous about scope without needing the frozen text to be contiguous.
 
 **Why this exists.** Without the boundary, the drift is invisible: an agent that rewords an acceptance criterion to match what it actually built produces a diff that looks like editing, not scope change — and the item then "passes" a [spec-compliance review](07_definition_of_done.md#two-ordered-stages-spec-then-quality) against criteria the implementation wrote for itself. Freezing the intent leaves exactly one path: **halt and renegotiate** — surface what's wrong with the approved goal, get explicit re-approval from the human who approved it (or higher [authority](00_README.md#authority-across-the-methodology)), and land the change as a visible edit with a one-line reason next to the badge. The executing agent never thaws its own item.
 
 This is the third member of a family: [protected regions](06_working_principles.md#protected-regions-declared-edit-boundaries) bound the *code* an agent may touch, the [tier matrix](../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts) bounds *authoritative docs*, and frozen intent bounds the *approved definition of the work itself.*
 
-### Size budgets — context artifacts must earn their length
+## Size budgets — context artifacts must earn their length
 
-Every artifact an agent loads routinely costs context even when it's correct. Two budgets already exist in [08](08_lessons_and_memory.md): the instruction file at a few hundred lines, memory entries at 30–100. Generalized: **each context artifact has a target size, and "too big" is a signal with a defined response, not a style complaint.**
+Every artifact an agent loads routinely costs context even when it's correct. [08](08_lessons_and_memory.md) already budgets the two it owns — the instruction file and memory entries. Generalized across the artifacts a contributor loads to do an item: **each has a target size, and "too big" is a signal with a defined response, not a style complaint.**
 
 | Artifact | Target | Too big means |
 |---|---|---|
 | Item body | ~1–2 pages | It's more than one item. Split it — the [beyond-XL splitting shapes](#when-effort-grows-beyond-xl) apply below XL too; mid-task, use [scope-creep recovery](#scope-creep-mid-task). |
 | Epic charter | ~2–3 pages | It's absorbing design content. Move that to `docs/planning/` or a pillar ([03](03_epics.md)); the charter keeps decisions and links. |
-| Instruction file | a few hundred lines, ~300 max | Demote entries to memory ([08 demotion loop](08_lessons_and_memory.md#the-reverse-loop-demotion-and-deletion)). |
-| Memory entry | 30–100 lines | It's a doc, not a memory ([08](08_lessons_and_memory.md#length)). Promote to a pillar or design doc; the entry keeps the pointer. |
+| Instruction file | see [08](08_lessons_and_memory.md#keeping-the-file-short) | Demote entries to memory ([08 demotion loop](08_lessons_and_memory.md#the-reverse-loop-demotion-and-deletion)). |
+| Memory entry | see [08](08_lessons_and_memory.md#length) | It's a doc, not a memory. Promote to a pillar or design doc; the entry keeps the pointer. |
+
+The bottom two rows carry links, not numbers, on purpose: [08](08_lessons_and_memory.md) owns those figures, and a second copy here would drift from it.
 
 Defaults, not laws — a project re-tunes them in its instruction file, the same pattern as the [per-project DoD overlay](07_definition_of_done.md#per-project-dod-overlay). The rationale travels with the numbers: **a context artifact is a liability that must earn its length.** An 800-line item body doesn't make the work clearer; it makes every session that loads it duller on what matters.
 
@@ -619,7 +620,7 @@ The happy path is `backlog` → `ready` → `in-progress` → `under-review` →
 - **Keep the lock.** You're still actively working on the item.
 - **Set `Status: in-progress` and `Test: fail: <one-line detail>`.** Be specific: not "tests failed" but "fail: trip-summary card throws on empty trips array."
 - **Fix in the same PR** that originally landed the work. Don't open a separate item for the fix — it's part of finishing the original.
-- **Only release-and-re-backlog** if the failure reveals the original scope was wrong. Then: shrink the original's scope and mark `done` on the shrunk version, file follow-up items for the rest per the splitting rules below.
+- **Only release-and-re-backlog** if the failure reveals the original scope was wrong. Then: shrink the original's scope and mark `done` on the shrunk version, file follow-up items for the rest per the splitting rules below. If the goal or `Done means:` was approved, shrinking it is a [frozen-intent](#frozen-intent--approved-goals-are-human-owned) renegotiation — surface it and get re-approval, exactly as in the scope-creep flow below.
 
 ### External blocker discovered
 
@@ -829,6 +830,10 @@ Paste this to start a new item:
 | Deps     | —         |
 | Lock     | —         |
 
+<!-- Once a human approves the goal + Done means, add the frozen-intent marker here:
+> **Frozen intent** — `Why / Description:` and `Done means:` approved by <who>
+> on <YYYY-MM-DD>. Agents do not edit them; halt and renegotiate instead. -->
+
 **Why / Description:** <One paragraph: problem, approach, done.>
 
 **Approach:** (optional)
@@ -839,12 +844,9 @@ Paste this to start a new item:
 - [ ] <Criterion>
 - [ ] <Criterion>
 
-**Files (probable):**
-- `<path>`
-- `<path>`
-<!-- Effort M+? Replace with a Code Map: `<path>` — role in this change;
-     reuse `<existing helper>`; constraint: <what isn't obvious from the code>.
-     Goal: a cold session can implement from this item alone. -->
+**Code Map:** (Effort M+; at XS/S a plain `**Files (probable):**` list is enough)
+- `<path>` — <role in this change>; reuse `<existing helper>`
+- Constraint: <what isn't obvious from reading the code>
 
 **Notes:** (optional)
 <Context, links, design rationale.>
@@ -895,19 +897,22 @@ table including filters.
 - [ ] Verified manually in actual UI: button appears, downloads work,
       filters are respected.
 
-**Files (probable):**
-- `apps/api/src/routes/reports.ts`
-- `apps/api/src/test/reports.test.ts`
-- `apps/web/src/pages/Reports/ActivityReport.tsx`
-- `apps/web/src/pages/Reports/ActivityReport.test.tsx`
+**Code Map:** (Effort M — annotated per "The Code Map" above)
+- `apps/api/src/routes/reports.ts` — add `GET /reports/activity.csv`;
+  reuse `buildActivityQuery()`, already filter-aware and already shared
+  with the email-summary job.
+- `apps/api/src/test/reports.test.ts` — endpoint tests (success + empty).
+- `apps/web/src/pages/Reports/ActivityReport.tsx` — toolbar gets the
+  button; reuse the page's existing filter state, don't re-derive it.
+- `apps/web/src/pages/Reports/ActivityReport.test.tsx` — download test.
+- Constraint: the response must stream. Tested locally at 50k rows —
+  buffered hit the default response timeout.
 
-**Notes:** The activity-report query is already shared between the table
-view and the email-summary job; reusing it for CSV keeps things DRY.
-Tested locally with 50k rows — streaming works; non-streaming hit the
-default response timeout.
+**Notes:** Reusing the shared query keeps the table view, the email-
+summary job, and the export on one code path.
 ```
 
-Every field is filled. Every section is concrete. A contributor who has never seen this item can pick it up cold and know what to do.
+Every field is filled. Every section is concrete. A contributor who has never seen this item can pick it up cold and know what to do — which is the [cold-handoff test](#the-code-map--writing-m-items-for-cold-handoff) passing.
 
 ---
 

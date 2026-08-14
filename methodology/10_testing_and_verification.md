@@ -69,7 +69,7 @@ A change can pass *its own* new tests while breaking three pre-existing ones. Ru
 
 Run the full suite locally before marking the change ready for review. If the suite is slow, find ways to make it faster (parallelism, test selection by changed file, smarter mocking) — *don't* skip running it.
 
-And **count only the tests that ran.** A test that exists but was skipped, filtered out by a test-selection pattern, or never executed in the verifying run is a *missing* test, not a passing one. `it.skip`, an accidentally-narrowed `--grep`, a suite excluded from the runner config — each produces a green run that silently verifies less than it claims. "The suite passed" speaks only for what actually executed.
+And **count only the tests that ran** (the gate form is [DoD Gate 2](07_definition_of_done.md#the-verification-gap-question)). `it.skip`, an accidentally-narrowed `--grep`, a suite excluded from the runner config — each produces a green run that silently verifies less than it claims.
 
 ### Test framework agnostic
 
@@ -119,7 +119,9 @@ For a bug fix:
 
 ### The verification-gap question
 
-Coverage percentages measure lines; the useful question measures *behavior*. For each behavior the change adds or alters, ask: **"if this behavior broke, would any test fail?"** — counting only tests that actually ran. Every "no" is a verification gap — an untested behavior change — and the gap list, not the green run, is what tells you whether the suite protects the change. The canonical statement of this check (and its two sharpening rules: ran-only counting, never editing the expectation to fit the code) lives at the DoD's [Gate 2](07_definition_of_done.md#the-verification-gap-question); it also makes a strong standing lens for a [cross-AI validation](#cross-ai-validation) pass — a reviewer hunting only for untested behavior changes finds what a bug-hunting reviewer skips past.
+Coverage percentages measure lines; the useful question measures *behavior*. For each behavior the change adds or alters, ask: **"if this behavior broke, would any test fail?"** Every "no" is a verification gap — an untested behavior change — and the gap list, not the green run, is what tells you whether the suite protects the change.
+
+The gate form of this check, with its sharpening rules, is the DoD's [Gate 2](07_definition_of_done.md#the-verification-gap-question). Worth adding here: it makes a strong standing lens for a [cross-AI validation](#cross-ai-validation) pass — a reviewer hunting only for untested behavior changes finds what a bug-hunting reviewer skips past, because the two are looking for different things (absence versus error).
 
 ---
 

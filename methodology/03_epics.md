@@ -273,6 +273,13 @@ Three to seven checkboxes, each of which:
 
 If the epic genuinely cannot enumerate criteria, the epic is not ready to start. Charter it more carefully or break it into smaller, sharper epics.
 
+Once a human approves them, the Outcome and the exit criteria are **[frozen intent](04_backlog_items.md#frozen-intent--approved-goals-are-human-owned)** — human-owned, not agent-editable. An epic whose exit criteria drift toward whatever the work happened to produce has no gate left. Mark the charter once, under the header:
+
+```markdown
+> **Frozen intent** — Outcome and exit criteria approved by <who> on <YYYY-MM-DD>.
+> Agents do not edit them; halt and renegotiate instead.
+```
+
 #### KPIs
 
 The measurable outcomes that prove the epic worked, *not* the exit criteria. KPIs may extend beyond the epic's close date (e.g., "30-day retention after Phase 2 launch ≥ X%"). Two or three is the right number. More than five and the epic is unfocused.

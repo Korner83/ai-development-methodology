@@ -2,10 +2,10 @@
 
 **Pillar (primary):** [P9 — Self-improvement velocity](../../../pillars/P9_self_improvement_velocity.md)
 **Pillar (secondary):** [P1 — Doc completeness](../../../pillars/P1_doc_completeness.md)
-**Status:** planned
+**Status:** done (2026-08-14)
 **Phase:** Phase 1 — Foundation
-**Started:** — (not yet active; chartered 2026-08-14)
-**Target close:** TBD (items ship one-per-release like the v1.20–v1.23 landscape passes)
+**Started:** 2026-08-14 (chartered and executed same day, at maintainer direction)
+**Closed:** 2026-08-14 — all five items shipped in v1.25.0
 **Owner:** maintainer + AI coding agent
 
 ## Outcome (jobs-to-be-done)
@@ -21,15 +21,21 @@ ideas are chartered as items; five Tier-2 ideas are parked in [FUTURE.md](FUTURE
 
 ## Exit criteria (binary)
 
-- [ ] Each of BL-0015…BL-0019 is resolved: **shipped** in a versioned methodology release,
+- [x] Each of BL-0015…BL-0019 is resolved: **shipped** in a versioned methodology release,
       **moved to FUTURE.md**, or **rejected** — with the decision and reasoning recorded in the
-      item (and in the CHANGELOG for shipped ones).
-- [ ] No shipped item duplicates a convention already present in `methodology/` (the v1.20–v1.23
-      imports are the known overlap risk; each item's draft names what it extends).
-- [ ] Every shipped change is markdown-only: no scripts, no installers, no new runtime
-      dependencies (trust posture unchanged).
-- [ ] The competitive-landscape brief's BMAD entry is marked reviewed/current at close (or
-      annotated stale if BMAD v7 shipped meanwhile).
+      item (and in the CHANGELOG for shipped ones). — *All five shipped in v1.25.0; each
+      carries a `**Resolution:**` note in [ARCHIVE.md](ARCHIVE.md).*
+- [x] No shipped item duplicates a convention already present in `methodology/` (the v1.20–v1.23
+      imports are the known overlap risk; each item's draft names what it extends). — *Cross-AI
+      contradiction check ran explicitly against the two-stage review (v1.22), EARS and
+      active-context (v1.21), protected regions (v1.23), and the lock rules; the one real
+      duplication found (the ran-only test rule stated three times) was reduced to a single
+      canonical statement.*
+- [x] Every shipped change is markdown-only: no scripts, no installers, no new runtime
+      dependencies (trust posture unchanged). — *Verified: the diff touches only `.md` files.*
+- [x] The competitive-landscape brief's BMAD entry is marked reviewed/current at close (or
+      annotated stale if BMAD v7 shipped meanwhile). — *Entry dated 2026-08-14, pinned to BMAD
+      commit `c96b7d1` / v6.11.0, with a next-review trigger on BMAD v7.*
 
 ## KPIs
 

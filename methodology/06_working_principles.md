@@ -109,13 +109,7 @@ Typical protected regions:
 
 The rule: **treat declared protected regions as read-only. If the task genuinely requires touching one, stop and get explicit authorization first** — surface *what* you need to change and *why*, the same way Principle 1 surfaces an assumption. Editing a protected region silently is the failure this prevents.
 
-This is the code-side sibling of the autonomous-loop [tier matrix](../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts), which draws the same kind of boundary around *authoritative docs* (what a loop may auto-edit vs. what a human must author). Both say the same thing: not every file is fair game, and the off-limits ones are named in advance.
-
-### Frozen intent (approved work definitions)
-
-The third member of that family bounds not files but *the definition of the work itself.* Once a human approves an item's goal and acceptance criteria (or an epic charter's exit criteria), that region is **frozen intent — human-owned.** Principle 3 says don't touch code the task doesn't require; frozen intent says don't touch the *task's own success definition* to fit what you built. Principle 4 depends on it: a verifiable goal only converges if the goal holds still while you work toward it.
-
-If execution shows the approved goal is genuinely wrong, the move is the same as Principle 1's: **halt and surface it.** Get explicit re-approval; the change lands as a visible edit, never a silent one. Mechanics — the marker badge, who can thaw, how it meets scope-creep recovery — live in [04_backlog_items.md "Frozen intent"](04_backlog_items.md#frozen-intent--approved-goals-are-human-owned).
+This is the code-side sibling of the autonomous-loop [tier matrix](../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts), which draws the same kind of boundary around *authoritative docs* (what a loop may auto-edit vs. what a human must author). Both say the same thing: not every file is fair game, and the off-limits ones are named in advance. A third boundary of the same shape — [frozen intent](#frozen-intent-approved-work-definitions), which fences the approved *definition of the work* — sits under Principle 4, because what it protects is the goal rather than the code.
 
 ---
 
@@ -147,6 +141,14 @@ If a step has no verification, it is not a step. It is a wish. Replace it or spl
 ### Why this matters
 
 Strong success criteria let a contributor — human or AI — loop independently. "Make it work" provides no stopping condition; the contributor keeps changing things until they get tired. "Make this specific test pass" stops when the test passes. Goal-driven execution is the difference between a task that converges and one that drifts.
+
+### Frozen intent (approved work definitions)
+
+A verifiable goal only converges if the goal holds still while you work toward it. So once a human approves an item's goal and acceptance criteria (or an epic charter's exit criteria), those become **frozen intent — human-owned.** Principle 3 says don't touch code the task doesn't require; this says don't touch the *task's own definition of success* to fit what you built.
+
+It completes a family of declared boundaries: [protected regions](#protected-regions-declared-edit-boundaries) fence code, the [tier matrix](../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts) fences authoritative docs, frozen intent fences the approved definition of the work.
+
+If execution shows the approved goal is genuinely wrong, the move is Principle 1's: **halt and surface it.** Get explicit re-approval; the change lands as a visible edit, never a silent one. Mechanics — where the marker goes, who can thaw it, how it meets scope-creep recovery — live in [04_backlog_items.md "Frozen intent"](04_backlog_items.md#frozen-intent--approved-goals-are-human-owned).
 
 ---
 
@@ -309,7 +311,7 @@ A short list of behaviors that are always wrong under these principles. Use it a
 | Bundling a small refactor into a bug fix "while I'm here." | P3 |
 | Hand-editing a generated, vendored, or framework-core file instead of its source — or touching a declared protected region without authorization. | P3 (protected regions) |
 | Rewording an approved goal or acceptance criterion to match what was actually built, instead of halting and renegotiating. | P4 (frozen intent) |
-| Patching code to compensate for a plan the review showed to be wrong, instead of fixing the plan and re-deriving the code. | P4 (see [07 — Routing findings by failure layer](07_definition_of_done.md#routing-findings-by-failure-layer)) |
+| Patching code to compensate for a plan the review showed to be wrong, instead of fixing the plan and re-deriving the code. | P4 (failure-layer routing) |
 | Adding fallback behavior for a state that the type system already rules out. | P2 |
 | Continuing to write code after you have lost the thread, rather than stopping and naming the confusion. | P1 |
 
