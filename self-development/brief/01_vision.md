@@ -34,7 +34,7 @@ This project fills those gaps without depending on a specific AI vendor, a speci
 
 ### Early signals (within ~12 months)
 
-- **External adoption signal exists.** Stars are a baseline-existence indicator (not the goal — see [05_success_metrics.md "What's NOT"](05_success_metrics.md#whats-not-a-success-metric)); the real signal is at least *some* baseline discoverability so adoption is possible at all.
+- **External adoption signal exists.** Stars are a baseline-existence indicator (not the goal — see [05_success_metrics.md "What's NOT"](05_success_metrics.md#what-success-is-not)); the real signal is at least *some* baseline discoverability so adoption is possible at all.
 - **Externally-authored adoption stories exist.** At least one blog post, conference talk, podcast mention, or public engineering blog where someone says "we use this and here's how it shaped the project."
 - **Forks have commits.** Adopters who have made meaningful additions to the methodology, not just bookmarked-and-forgotten. Forks with substantive additions prove the methodology is generative.
 - **A contributor pipeline is forming.** At least one accepted upstream contribution from an external contributor — substantive (not a patch).

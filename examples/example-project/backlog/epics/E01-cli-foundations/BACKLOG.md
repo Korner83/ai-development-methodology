@@ -41,9 +41,18 @@ _4 example items demonstrating the canonical [04_backlog_items.md](../../../../.
 - [ ] p95 latency < 300ms on test machine.
 - [ ] Test exercises the capture + the durability across simulated crash.
 
-**Files (probable):**
+**Code Map:** (Effort M — annotated per [04 "The Code Map"](../../../../../methodology/04_backlog_items.md#the-code-map--writing-m-items-for-cold-handoff))
 
-- `src/cli.rs`, `src/capture.rs`, `tests/capture.rs`.
+- `src/cli.rs` — add the `capture` subcommand; follow the existing `clap`
+  derive pattern used by `recent` (BL-0004), don't hand-roll parsing.
+- `src/capture.rs` (new) — command body. Context detection lives here:
+  `std::env::current_dir()` plus `git symbolic-ref --short HEAD`, which
+  must degrade to `None` outside a repo rather than erroring.
+- `src/storage.rs` — consume the write path from BL-0005; do not open the
+  store directly, or the crash-durability guarantee is bypassed.
+- `tests/capture.rs` (new) — capture + context attachment + the p95 budget.
+- Constraint: the 300ms p95 KPI is measured cold, including process start,
+  so avoid lazy-loading anything on the capture path.
 
 ---
 
@@ -137,6 +146,15 @@ _4 example items demonstrating the canonical [04_backlog_items.md](../../../../.
 - [ ] Storage layer implemented with: write, read-by-cwd, read-all.
 - [ ] Tests: 100 simulated crashes; zero notes lost.
 
-**Files (probable):**
+**Code Map:** (Effort M — annotated per [04 "The Code Map"](../../../../../methodology/04_backlog_items.md#the-code-map--writing-m-items-for-cold-handoff))
 
-- `docs/storage.md` (new), `src/storage.rs` (new), `tests/storage_crash.rs`.
+- `docs/storage.md` (new) — the schema as the P1↔P2 contract; this is the
+  artifact BL-0006 (retrieval) reads, so it lands before the code.
+- `src/storage.rs` (new) — thin layer exposing exactly `write`,
+  `read_by_cwd`, `read_all`. Keep the backend behind this surface: the
+  SQLite-vs-JSONL decision must not leak into callers, or the blocker's
+  outcome ripples through every consuming item.
+- `tests/storage_crash.rs` (new) — the 100-simulated-crash durability run.
+- Constraint: schema changes after this item ships require a migration
+  path, which is why the backend decision blocks the item rather than
+  being deferred.
