@@ -69,6 +69,8 @@ A change can pass *its own* new tests while breaking three pre-existing ones. Ru
 
 Run the full suite locally before marking the change ready for review. If the suite is slow, find ways to make it faster (parallelism, test selection by changed file, smarter mocking) — *don't* skip running it.
 
+And **count only the tests that ran** (the gate form is [DoD Gate 2](07_definition_of_done.md#the-verification-gap-question)). `it.skip`, an accidentally-narrowed `--grep`, a suite excluded from the runner config — each produces a green run that silently verifies less than it claims.
+
 ### Test framework agnostic
 
 This doc does not prescribe a test framework. Pick what fits the stack:
@@ -114,6 +116,12 @@ For any non-trivial unit:
 For a bug fix:
 
 - A **regression test** that fails on the broken code and passes after the fix. This is non-negotiable — see "Regression tests" below.
+
+### The verification-gap question
+
+Coverage percentages measure lines; the useful question measures *behavior*. For each behavior the change adds or alters, ask: **"if this behavior broke, would any test fail?"** Every "no" is a verification gap — an untested behavior change — and the gap list, not the green run, is what tells you whether the suite protects the change.
+
+The gate form of this check, with its sharpening rules, is the DoD's [Gate 2](07_definition_of_done.md#the-verification-gap-question). Worth adding here: it makes a strong standing lens for a [cross-AI validation](#cross-ai-validation) pass — a reviewer hunting only for untested behavior changes finds what a bug-hunting reviewer skips past, because the two are looking for different things (absence versus error).
 
 ---
 
@@ -509,6 +517,7 @@ This is the AI-coding equivalent of marking your own homework.
 - **Cross-AI validate the tests.** Have a different AI (or the same model in a different session with no prior context) review the test suite for: *does this test actually exercise the intended behavior? Could a broken implementation slip through?* See "Cross-AI validation" below for the broader practice.
 - **Human review of test names and acceptance criteria.** Even if the AI writes the test body, the test *name* and the acceptance criteria it asserts should come from human intent. "Test does the right thing" is the gap; "test asserts that X happens when Y" is the fix.
 - **Audit a sample of AI-written test/implementation pairs periodically.** Pick a random sample and read both halves cold. If the test looks suspiciously specific to one implementation choice, dig deeper.
+- **Never edit the expectation to match the code.** The compact form of the whole anti-pattern: a test fails, and instead of fixing the code the agent adjusts the assertion until it goes green. The fix for a failing test is the code — or, when the *criterion* itself is wrong, a visible [frozen-intent renegotiation](04_backlog_items.md#frozen-intent--approved-goals-are-human-owned). It is never a quiet assertion edit.
 
 ### The deeper implication
 
@@ -708,6 +717,8 @@ When the user accepts a feature ("yes, this works"), the loop terminates. Until 
 | Empty state never tested; page crashes for a new user. | Empty state is its own dimension; verify it. |
 | Error state never tested; user gets a stack trace on a transient API failure. | Error state is its own dimension; verify the recovery path. |
 | Console errors ignored because "they were there before." | Triage them. Pre-existing console errors are technical debt; new ones are regressions. Don't conflate. |
+| A skipped or filtered-out test counted as coverage. | A test that didn't run is a missing test. Re-enable it (or fix the selection pattern) and re-run; only executed tests back `Test: pass`. |
+| Review showed the plan was wrong; the code was patched to compensate. | Fix the item body first, then re-derive the code. See [07 — Routing findings by failure layer](07_definition_of_done.md#routing-findings-by-failure-layer). |
 
 ---
 

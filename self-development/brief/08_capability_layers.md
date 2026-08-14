@@ -111,7 +111,7 @@ The layers are roughly sequentially dependent: doc completeness comes before doc
 - Accepted contributions from external contributors.
 - Maintainer's "I learned X from an adopter" notes in CHANGELOG entries.
 
-**Current state (v1.6.0):** Discussions enabled with welcome thread; one external contributor has been the user (the maintainer himself); no external community yet. This capability is mostly dormant until external adoption starts producing feedback signal (see [05_success_metrics.md "Early signals"](05_success_metrics.md#early-signals-within-12-months)).
+**Current state (v1.6.0):** Discussions enabled with welcome thread; one external contributor has been the user (the maintainer himself); no external community yet. This capability is mostly dormant until external adoption starts producing feedback signal (see [05_success_metrics.md "Early signals"](05_success_metrics.md#early-signals-first-year)).
 
 **Pillar shape:** P7 — Community feedback loop.
 
@@ -138,7 +138,7 @@ The layers are roughly sequentially dependent: doc completeness comes before doc
 **Why it matters:** this is the compounding mechanism. If the cycle works, the methodology evolves with less effort over time; if it doesn't work, the cycle is overhead.
 
 **Tested by:**
-- Whether the self-development cycle ships methodology improvements (not just self-development cleanup). The cycle is the methodology's most distinctive claim; if it doesn't produce real methodology releases, the claim is theoretical. See [05_success_metrics.md "Early signals"](05_success_metrics.md#early-signals-within-12-months).
+- Whether the self-development cycle ships methodology improvements (not just self-development cleanup). The cycle is the methodology's most distinctive claim; if it doesn't produce real methodology releases, the claim is theoretical. See [05_success_metrics.md "Early signals"](05_success_metrics.md#early-signals-first-year).
 - "This came from the cycle" attribution in CHANGELOG entries.
 - Methodology shifts the maintainer wouldn't have discovered solo (see [05_success_metrics.md "Sustained signals"](05_success_metrics.md#sustained-signals-multi-year)).
 

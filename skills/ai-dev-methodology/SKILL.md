@@ -120,6 +120,7 @@ A compact gate to self-apply before marking any work complete under this methodo
 - [ ] **Secrets safe** — no tokens, keys, or env vars exposed.
 - [ ] **Docs current** — changelog/docs updated if the change is material.
 - [ ] **Verification is real** — observed, not assumed. An honest partial beats a false "complete."
+- [ ] **Verification-gap checked** — for each behavior added or changed: if it broke, would a test that *actually ran* fail? Skipped/filtered tests count as missing; no expectation was edited to match the code; the approved goal / `Done means:` was not reworded to fit what was built.
 
 ## Full docs (read for depth)
 

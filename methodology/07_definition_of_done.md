@@ -52,6 +52,24 @@ Run the review as two questions in order, not one blurred pass:
 
 Where possible, the two stages get **different eyes.** The author is the worst-placed reviewer for stage 1 — they will tend to confirm the interpretation they already built. A fresh session or a second contributor (a human, or a different model — see [cross-AI validation](10_testing_and_verification.md#cross-ai-validation)) catches "built the wrong thing, correctly," the failure a same-author quality pass sails straight past.
 
+#### Routing findings by failure layer
+
+The two stages order the *review*; this routes each *finding*. A defect enters the work at some layer — classify which one, and fix at that layer, not below it.
+
+Note what this asks of stage 1. Checking "does the change satisfy the criteria?" can only ever produce Code- and Plan-layer findings; the reviewer must also ask **"are the criteria themselves right?"** — because a faithful build of a wrong goal still fails the user. That second question is the only thing that produces an Intent-layer finding, and it is the one an author reviewing their own work almost never asks.
+
+| Layer the defect entered | Finding looks like | Route |
+|---|---|---|
+| **Intent** — the approved goal itself is mistaken | "This does what the item says, and what the item says is wrong." | Halt. Back to the human who approved it — this is a [frozen-intent](04_backlog_items.md#frozen-intent--approved-goals-are-human-owned) renegotiation, not a code fix. |
+| **Plan** — goal fine; the approach or [Code Map](04_backlog_items.md#the-code-map--writing-m-items-for-cold-handoff) led the code astray | "The code faithfully implements a wrong approach." | Fix the item body first, then re-derive the code from it. **Never patch code to compensate for a wrong plan** — the patch encodes the confusion permanently. |
+| **Code** — goal and plan fine; implementation wrong | The ordinary bug. | Patch. This is the normal review-loop case. |
+| **Out of scope** — real, but not this item | "While reviewing, I noticed X elsewhere." | File it — `FUTURE.md` or a new item per [scope-creep recovery](04_backlog_items.md#scope-creep-mid-task). Don't fix inline. |
+| **Invalid** — the finding is wrong | A misread, a false positive. | Reject with a one-line reason (findings from [cross-AI validation](10_testing_and_verification.md#cross-ai-validation) are candidates, not ground truth). |
+
+Process in that order — **an intent- or plan-level finding cancels the code-level findings below it**, because the code will be re-derived anyway. Triage the layer first, then spend effort.
+
+**The escape hatch:** if the same item bounces at the intent or plan layer more than twice, stop looping and surface it to the human — repeated upper-layer findings mean the item wasn't ready to work. This is the definition-side sibling of the [attempt cap](12_milestone_evaluation.md#the-attempt-cap-making-resists-multiple-attempts-executable): that cap bounds how many times you retry a *fix* that keeps failing; this bounds how many times you re-derive from a *definition* that keeps proving wrong. Both end the same way — a human picks a disposition per [handle / postpone / mark — never force](12_milestone_evaluation.md#unsolvable-issues-handle-postpone-or-mark--never-force), rather than the loop grinding on.
+
 ### Gate 2 — Automated tests pass
 
 Run the project's full test suite locally. Not just the new tests. Not just the file you changed. The full suite.
@@ -60,6 +78,13 @@ Run the project's full test suite locally. Not just the new tests. Not just the 
 - Every bug fix has a regression test that fails on the broken code and passes after the fix.
 - Tests test behavior, not implementation. A refactor should not require rewriting tests.
 - The suite must pass cleanly. Skipped tests, expected failures, and flaky tests are not "passing."
+
+#### The verification-gap question
+
+Before ticking this gate, ask once per behavior the change adds or alters: **"if this behavior broke, would any test fail?"** The output is not a list of bugs — it is a list of *untested behavior changes*. Each one needs a test; where a behavior genuinely can't be automated, it takes the sanctioned route — `manual-verified` plus a `regression-needed` follow-up item ([the hard rule](#the-hard-rule)) — never a skipped test left sitting in the suite. Two rules sharpen it:
+
+- **A test counts only if it ran.** A test that exists but was skipped, filtered out, or never executed in the verifying run is a missing test — "the suite passed" speaks only for the tests that actually ran. This is the bullet above ("skipped tests … are not 'passing'") applied per behavior rather than per suite.
+- **Never edit the expectation to match the code.** When a test fails, the fix is the code — or, if the *criterion* is wrong, a [frozen-intent renegotiation](04_backlog_items.md#frozen-intent--approved-goals-are-human-owned). Adjusting the assertion until it goes green is the [cheating-agent move](10_testing_and_verification.md#the-cheating-agent-anti-pattern) in its most compact form.
 
 For details on testing approach, see [10_testing_and_verification.md](10_testing_and_verification.md).
 

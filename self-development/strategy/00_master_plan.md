@@ -46,7 +46,7 @@ Four phases, each with binary exit criteria. Phases gate: until the prior phase'
 
 **Exit criteria (all must hold):**
 
-- [ ] External adoption signal exists — baseline discoverability indicators (stars, traffic, search-found rate). No specific star count; see [brief/05_success_metrics.md "What's NOT a success metric"](../brief/05_success_metrics.md#whats-not-a-success-metric) for why.
+- [ ] External adoption signal exists — baseline discoverability indicators (stars, traffic, search-found rate). No specific star count; see [brief/05_success_metrics.md "What's NOT a success metric"](../brief/05_success_metrics.md#what-success-is-not) for why.
 - [ ] Externally-authored adoption stories exist — at least one substantive public account (blog post, conference talk, podcast mention, public engineering blog) where someone says "we use this and here's how it shaped the project."
 - [ ] At least one accepted upstream contribution from an external contributor — substantive PR (not patch), proving a contributor pipeline is forming.
 - [ ] Self-development loop has produced methodology releases attributed to the autonomous cycle (not just self-development cleanup).
@@ -54,7 +54,7 @@ Four phases, each with binary exit criteria. Phases gate: until the prior phase'
 
 **Active pillars:** P5 Adopter discoverability, P6 Example richness, P7 Community feedback loop become primary. Phase 1 pillars (P1–P4, P9) continue as baseline.
 
-**Indicator of phase health:** discoverability signals climb but no adoption stories appear → people are bookmarking, not using; investigate friction (see [brief/05_success_metrics.md "Counter-signals"](../brief/05_success_metrics.md#counter-signals-early-warning)).
+**Indicator of phase health:** discoverability signals climb but no adoption stories appear → people are bookmarking, not using; investigate friction (see [brief/05_success_metrics.md "Counter-signals"](../brief/05_success_metrics.md#counter-signals--when-things-are-failing-not-succeeding)).
 
 ### Phase 3 — Establishment (12 → 24 months from Phase 2 exit)
 
