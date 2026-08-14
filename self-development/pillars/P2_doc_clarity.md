@@ -36,8 +36,8 @@ This pillar is also the most direct counter to the "AI-bloat" failure mode — d
 The pillar is *delivered* when:
 
 - [ ] Most recent semi-annual self-evaluation has been completed within the last 6 months AND the cross-AI reviewer flagged no methodology docs as "unclear" or "requires re-reading."
-- [ ] README is under 350 lines (currently 306 lines as of v1.7.0).
-- [ ] Longest single methodology doc is under 1,050 lines (currently `09_git_workflow.md` at 986).
+- [ ] README is under 350 lines (currently 374 lines as of v1.27.0).
+- [x] Longest single methodology doc is under 1,050 lines — **met at v1.27.0**: `09_git_workflow.md` trimmed 1,026 → **798**; the new longest is `04_backlog_items.md` at ~1,018, still under the cap but now the doc to watch.
 - [ ] During the most recent maintainer review pass, no methodology doc contained the AI-bloat indicator list (defined: "comprehensive overview" framings, stacked defensive caveats unrelated to the topic, sentences over ~50 words, subsection nesting deeper than `####`).
 
 **Re-tested:** semi-annual self-evaluation; spot-check whenever the maintainer notices "this doc is hard to read."
@@ -76,7 +76,8 @@ The pillar is *delivered* when:
 
 **Known gaps:**
 
-- Some methodology docs are at the edge of "too long" — `09_git_workflow.md` at 986 lines is close to the soft cap. v1.6.0 added 5 new sections; another pass to ensure each is genuinely needed is worth doing.
+- **`04_backlog_items.md` is now the doc at the edge** (~1,018 lines), having absorbed the Code Map, frozen intent, and size-budget sections in v1.25.0. `09_git_workflow.md` was trimmed to 798 in v1.27.0 (E03) and is no longer the constraint. The E03 decision doc records the trim-vs-split reasoning if 04 reaches the same point — note that 04 will not have 09's ~120 lines of outright duplication to harvest.
+- **`README.md` is over its own criterion: 374 lines against a 350 target** (breached some time before v1.27.0; v1.27.0 added ~7 more reflecting the new conventions). The growth is structural — the "Why this exists" problem/solution table is now 18 rows, because every convention added to the methodology earns a row. That table will keep growing unless it is capped deliberately (e.g. hold the most compelling ~12 and let the rest live only in the docs). Maintainer call: the README's job is to *sell and orient*, not to enumerate, so a shorter table may serve better than a complete one.
 - Mid-doc cross-references are sometimes still buried in prose where a table at the top would scan faster.
 - No automated way to detect AI-bloat patterns — relies on maintainer eye and cross-AI review.
 

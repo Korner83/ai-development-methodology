@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="License: CC BY 4.0" src="https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg"></a>
-  <a href="CHANGELOG.md"><img alt="Methodology version" src="https://img.shields.io/badge/methodology-v1.27.0-1e40af"></a>
+  <a href="CHANGELOG.md"><img alt="Methodology version" src="https://img.shields.io/badge/methodology-v1.27.1-1e40af"></a>
   <a href="SECURITY.md"><img alt="No code - markdown + git" src="https://img.shields.io/badge/code-none%20%C2%B7%20markdown%20%2B%20git-2ea44f"></a>
   <a href=".github/workflows/gitleaks.yml"><img alt="gitleaks secret scan" src="https://github.com/Korner83/ai-development-methodology/actions/workflows/gitleaks.yml/badge.svg"></a>
 </p>
@@ -26,10 +26,11 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **File-based locks with TTL** so two AI agents (or two humans) don't both grab the same item.
 - **Fix-test loop for the actual UI** because "tests pass" doesn't mean "the page renders."
 - **Cross-AI validation + user testing** as the final gates.
+- **Work survives the handoff** - an approved goal is frozen against silent rewording, and at Effort M+ the item body carries the planning session's findings so a cold session can pick it up.
 - **Autonomous goal-oriented development cycles** - paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration - 0–10 rubric per area; unsolvable issues get *handled/postponed/marked* after a default 3-attempt cap, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.27.0](CHANGELOG.md).
+- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.27.1](CHANGELOG.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
 
 ---
@@ -106,6 +107,8 @@ The concrete payoffs after a week or two of adoption:
 - **Verification catches what tests miss.** White pages, broken dark mode, bypassed auth gates, missing imports - caught at the actual-UI gate, not in production.
 - **AI-as-yes-man becomes visible.** A copy-paste counter-prompt ("what's wrong with this plan?") makes you challenge before approving.
 - **The cheating agent gets caught.** When one model writes both the implementation and the tests that validate it, the green suite hides bugs. A different model auditing catches them.
+- **The goalposts stay where you put them.** Once you approve what "done" means, agents can't quietly reshape it to fit what they built - the one drift that's invisible in a diff.
+- **Handoffs stop losing what was learned.** The session that planned the work writes down which files, which existing helpers, and which constraints - so the next session doesn't re-investigate from scratch.
 - **Portable across tools.** Switching Claude Code → Cursor → Codex doesn't mean re-learning your process - only swapping the project-instruction filename.
 - **No vendor lock-in.** Markdown and git. If your AI tool is gone in 18 months, your methodology isn't.
 
@@ -125,6 +128,10 @@ Most projects accumulate the same failure modes once they last more than a few w
 | AI agents wander off-task - speculation, scope creep, "while I'm here" refactors. | [Working principles](methodology/06_working_principles.md) - distilled from real LLM failure modes. |
 | AI agrees with you and you're both wrong. | [Challenge before consenting](methodology/06_working_principles.md). |
 | AI writes broken code AND broken tests that validate it. | [Cheating agent anti-pattern](methodology/10_testing_and_verification.md) + cross-AI validation. |
+| The agent quietly reworded the acceptance criteria to match what it built - and the diff looks like editing, not scope change. | [Frozen intent](methodology/04_backlog_items.md#frozen-intent--approved-goals-are-human-owned) - an approved goal and `Done means:` are human-owned. Wrong? Halt and renegotiate; never silently amend. |
+| Everything the planning session learned about the codebase dies when that session ends. | [Code Map](methodology/04_backlog_items.md#the-code-map--writing-m-items-for-cold-handoff) - at Effort M+, planning drains its investigation into the item body, so a cold session implements from the item alone. |
+| The suite is green, but nothing actually covers the behavior that changed. | [The verification-gap question](methodology/07_definition_of_done.md#the-verification-gap-question) - "if this behavior broke, would any test fail?", counting only tests that actually ran. |
+| Review finds a real problem, so the code gets patched - even when the *plan* was what was wrong. | [Failure-layer routing](methodology/07_definition_of_done.md#routing-findings-by-failure-layer) - findings are classified by the layer the defect entered and fixed there. Never patch code to compensate for a wrong plan. |
 | Humans become strangers in their own codebase. | [Human roles](methodology/11_human_roles.md) - supervisory layer, four anti-patterns. |
 | The trunk breaks; force-push, destructive command, day gone. | [Git workflow rules](methodology/09_git_workflow.md) - branch protection, AI never deploys, never destructive. |
 | Work doesn't compound across sessions, contributors, or tools - each new session re-derives the context. | [Plans, items, and memory all persist in files](methodology/00_README.md#how-the-system-enables-long-term-multi-session-work). Drop items today; another agent picks them up next week. The backlog *is* the queue. |
@@ -173,7 +180,7 @@ ai-development-methodology/
     └── loop-notes/           # loop-detected methodology insights for maintainer review
 ```
 
-~15,000+ lines across 85+ files at v1.27.0. Longest doc ~800 lines. Each doc is self-contained - read in any order.
+~15,000+ lines across 85+ files at v1.27.1. Longest doc ~800 lines. Each doc is self-contained - read in any order.
 
 ---
 
@@ -356,7 +363,7 @@ For modified versions, indicate you've made changes. Only obligation the license
 
 ## Status
 
-Battle-tested in one production project. Currently v1.27.0 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.27.1 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 

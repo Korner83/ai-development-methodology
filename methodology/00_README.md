@@ -232,12 +232,12 @@ The docs are designed to be readable in any order — each cross-links to the ot
 | [01_strategy.md](01_strategy.md) | Long-term direction as versioned strategy docs: master plan + supporting research + phase roadmap. |
 | [02_pillars.md](02_pillars.md) | Pillars as evergreen, sequentially-dependent capability layers between strategy and execution. |
 | [03_epics.md](03_epics.md) | Epic charters as 3–12-week delivery containers with binary exit criteria, advancing one primary pillar. |
-| [04_backlog_items.md](04_backlog_items.md) | The BL-### item format: fields, status enums, lifecycle, body sections, hard rules. |
+| [04_backlog_items.md](04_backlog_items.md) | The BL-### item format: fields, status enums, lifecycle, body sections, hard rules. Also the Code Map (writing M+ items for cold handoff), frozen intent (approved goals are human-owned), EARS acceptance criteria, and size budgets for context artifacts. |
 | [05_locks_and_parallel_work.md](05_locks_and_parallel_work.md) | File-based locks with TTL that let multiple humans and AI agents work the same backlog safely. |
-| [06_working_principles.md](06_working_principles.md) | The four principles every contributor follows: think first, simplicity, surgical changes, goal-driven execution. |
-| [07_definition_of_done.md](07_definition_of_done.md) | The six gates an item must pass before `Status: done`. The hard rule that prevents done-in-name-only. |
-| [08_lessons_and_memory.md](08_lessons_and_memory.md) | Two-layer memory: a project instruction file plus a per-agent memory directory of focused entries. |
-| [09_git_workflow.md](09_git_workflow.md) | Branch protection, PR discipline, worktrees for parallel agents, destructive-command rules, deploy boundaries. |
+| [06_working_principles.md](06_working_principles.md) | The four principles every contributor follows: think first, simplicity, surgical changes, goal-driven execution. Plus the declared-boundary family — protected regions (code) and frozen intent (approved work definitions). |
+| [07_definition_of_done.md](07_definition_of_done.md) | The six gates an item must pass before `Status: done`. The hard rule that prevents done-in-name-only. Includes two-stage review, routing findings by the layer the defect entered, and the verification-gap question. |
+| [08_lessons_and_memory.md](08_lessons_and_memory.md) | Two-layer memory: a project instruction file plus a per-agent memory directory of focused entries. The admission test (derivable from source is never stored), the promotion path, the archive-don't-destroy lifecycle, and the volatile active-context file. |
+| [09_git_workflow.md](09_git_workflow.md) | Branch protection, PR discipline, worktrees for parallel agents, the ✓/⚠/✗ operation table governing what agents may run, release tagging, hot-fixes, and deploy boundaries. |
 | [10_testing_and_verification.md](10_testing_and_verification.md) | Automated tests plus the actual-UI fix-test loop. What "tests pass" does and does not prove. |
 | [11_human_roles.md](11_human_roles.md) | How humans stay meaningfully involved when AI agents drive most of the implementation. Supervisory layer, spec-as-primary-artifact, four anti-patterns (cheating agent, yes-man, stranger in own code, tribal-knowledge loss), and the skills that matter now. |
 | [12_milestone_evaluation.md](12_milestone_evaluation.md) | Milestone-driven evaluation cadence: named milestones (alpha → beta → public → GA) with binary readiness criteria; 0–10 scoring rubric per area; periodic deep-eval every Nth loop; unsolvable-issue handling (handle/postpone/mark); human-review gate; feedback triage flow. The aggregate gate that complements per-item DoD. |
@@ -284,6 +284,8 @@ The smallest set of inviolable constraints. If a change violates one of these, i
 | AI agents never run production deploys. | [09](09_git_workflow.md) |
 | Never bypass pre-commit hooks without explicit authorization. | [09](09_git_workflow.md) |
 | Never steal a live lock; skip and pick another item. | [05](05_locks_and_parallel_work.md) |
+| Never edit an approved goal or its `Done means:` to match what was built; halt and renegotiate instead. | [04](04_backlog_items.md#frozen-intent--approved-goals-are-human-owned), [06](06_working_principles.md) |
+| Never edit a declared protected region (generated output, vendored or framework-core code, machine-managed config) without explicit authorization. | [06](06_working_principles.md#protected-regions-declared-edit-boundaries) |
 | Items live in exactly one epic; new items always go into a specific epic. | [04](04_backlog_items.md) |
 | WIP cap on active epics is real; new active epics require closing or parking another. | [03](03_epics.md) |
 | The DoD's six gates apply to every item. No partial credit. | [07](07_definition_of_done.md) |
