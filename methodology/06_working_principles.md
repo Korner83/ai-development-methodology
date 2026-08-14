@@ -111,6 +111,12 @@ The rule: **treat declared protected regions as read-only. If the task genuinely
 
 This is the code-side sibling of the autonomous-loop [tier matrix](../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts), which draws the same kind of boundary around *authoritative docs* (what a loop may auto-edit vs. what a human must author). Both say the same thing: not every file is fair game, and the off-limits ones are named in advance.
 
+### Frozen intent (approved work definitions)
+
+The third member of that family bounds not files but *the definition of the work itself.* Once a human approves an item's goal and acceptance criteria (or an epic charter's exit criteria), that region is **frozen intent — human-owned.** Principle 3 says don't touch code the task doesn't require; frozen intent says don't touch the *task's own success definition* to fit what you built. Principle 4 depends on it: a verifiable goal only converges if the goal holds still while you work toward it.
+
+If execution shows the approved goal is genuinely wrong, the move is the same as Principle 1's: **halt and surface it.** Get explicit re-approval; the change lands as a visible edit, never a silent one. Mechanics — the marker badge, who can thaw, how it meets scope-creep recovery — live in [04_backlog_items.md "Frozen intent"](04_backlog_items.md#frozen-intent--approved-goals-are-human-owned).
+
 ---
 
 ## Principle 4 — Goal-driven execution
@@ -302,6 +308,8 @@ A short list of behaviors that are always wrong under these principles. Use it a
 | Building a `BaseFooBar` abstract class because there might be more subclasses later. | P2 |
 | Bundling a small refactor into a bug fix "while I'm here." | P3 |
 | Hand-editing a generated, vendored, or framework-core file instead of its source — or touching a declared protected region without authorization. | P3 (protected regions) |
+| Rewording an approved goal or acceptance criterion to match what was actually built, instead of halting and renegotiating. | P4 (frozen intent) |
+| Patching code to compensate for a plan the review showed to be wrong, instead of fixing the plan and re-deriving the code. | P4 (see [07 — Routing findings by failure layer](07_definition_of_done.md#routing-findings-by-failure-layer)) |
 | Adding fallback behavior for a state that the type system already rules out. | P2 |
 | Continuing to write code after you have lost the thread, rather than stopping and naming the confusion. | P1 |
 

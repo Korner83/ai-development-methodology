@@ -53,6 +53,11 @@ Mission (loop; do NOT stop at single-task completion):
      light AND dark, empty / error / loading / offline states.
      Cross-AI validate where useful; user testing remains the final
      gate.
+   - Before Test: pass, run the verification-gap check (methodology/07
+     Gate 2): for each behavior added or changed — if it broke, would
+     any test fail? Count only tests that actually ran; skipped or
+     filtered tests are missing tests. Never edit a test's expectation
+     to match the code.
 
 4. AFTER EVERY 3 LARGER UPDATES — commit and push per methodology/09.
    Each commit message clearly states what changed.
@@ -63,6 +68,13 @@ Mission (loop; do NOT stop at single-task completion):
    the same loop iteration; re-run verification; only mark Test: pass
    when the verification is actually green. The fix-test loop runs
    until clean — see methodology/10 "Fix-test loop flow."
+   Route each finding by the layer the defect entered (methodology/07
+   "Routing findings by failure layer"): approved goal wrong → halt
+   for the human (frozen intent); plan/item wrong → fix the item body,
+   re-derive the code; code wrong → patch; out of scope → FUTURE.md or
+   a new item; invalid → reject with a reason. Intent/plan findings
+   moot the code findings below them. Same item bounces at intent or
+   plan level more than twice → stop and surface it.
 
 6. AFTER EVERY Nth LOOP — run a milestone deep-eval per methodology/12:
    - Default N = 3 (early-phase projects), N = 5 (stable), N = 10 (late).

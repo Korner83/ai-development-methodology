@@ -9,13 +9,37 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
+(nothing yet)
+
+---
+
+## v1.25.0 — 2026-08-14
+
+### Added: context handoff, frozen intent, and review-finding routing
+
+Another landscape-informed pass, drawn from reviewing BMAD-METHOD v6.11.0 (commit `c96b7d1`) — a spec-driven, installer-based peer methodology. Five additive, markdown-only conventions that close gaps the review surfaced: nothing about *what* an item means to build, everything about *how the definition survives the handoff to whoever builds it.* Trust posture unchanged — markdown + git only, no tooling adopted.
+
+The maintainer authored all five (T2 per the tier matrix); the diff was cross-AI reviewed in a fresh session on a different model before merge.
+
+### Changed
+
+- **`methodology/04_backlog_items.md`** — three additions: the **Code Map** (at Effort M+, `Files (probable)` is upgraded to an annotated map of paths, reusable utilities, and constraints, *drained from planning* so a cold session can implement from the item body alone — with a cold-handoff test and a dispatch rule that hands off the item, not a summary of it); **frozen intent** (a human-approved goal and `Done means:` are human-owned and agent-immutable, marked with a greppable badge; execution that proves them wrong halts and renegotiates rather than silently rewording); and a **size-budgets table** for context artifacts (item body, epic charter, instruction file, memory entry), each with a defined "too big means" response, framed as *a context artifact is a liability that must earn its length*. Scope-creep recovery now routes goal-narrowing through the renegotiation path; two common-mistake rows added.
+- **`methodology/06_working_principles.md`** — added **"Frozen intent (approved work definitions)"** as the third member of the boundary family alongside protected regions (code) and the tier matrix (authoritative docs), tied to Principles 3 and 4. Two anti-pattern rows added (rewording criteria to fit the build; patching code to compensate for a wrong plan).
+- **`methodology/07_definition_of_done.md`** — Gate 1 gained **"Routing findings by failure layer"**: classify each review finding by the layer the defect entered (intent / plan / code / out-of-scope / invalid), fix at that layer, process in cascade order (an intent- or plan-level finding moots the code-level findings below it), and escape to the human when an item bounces twice at the upper layers — the definition-side sibling of v1.24.0's attempt cap (that cap bounds retrying a *fix*; this bounds re-deriving from a *definition* that keeps proving wrong). Names the anti-pattern *never patch code to compensate for a wrong plan.* Gate 2 gained **the verification-gap question** ("if this behavior broke, would any test fail?", counting only tests that actually ran) plus two rules: a skipped or filtered test counts as missing, and you never edit an expectation to match the code.
+- **`methodology/10_testing_and_verification.md`** — the ran-only counting rule added to the full-suite discipline; a **verification-gap** subsection added as a standing cross-AI review lens; the never-edit-the-expectation defense added to the cheating-agent anti-pattern; two common-mistake rows added.
+- **`templates/AUTONOMOUS_LOOP.md`** — the loop now runs the verification-gap check before `Test: pass` (step 3) and routes findings by failure layer with the two-bounce escape (step 5).
+- **`templates/CLAUDE.md` + `templates/AGENTS.md`** — added a **frozen-intent hard rule** so adopters carry it where agents actually read it.
+- **`skills/ai-dev-methodology/SKILL.md`** — added a verification-gap row to the "Quick self-check before done" checklist.
+- **`CHEATSHEET.md`** — new hard rule (frozen intent), failure-layer routing table, and the size-budget defaults.
+- **Version strings** → v1.25.0 (`README.md`, `CHEATSHEET.md`); README doc-stats line refreshed (~15,000 lines across 85+ files — the previous figures predated several releases).
+
 ### Added: E06 chartered — BMAD v6 landscape pass (self-development meta work)
 
-Reviewed BMAD-METHOD at v6.11.0 (commit `c96b7d1`, 2026-08-14) against the methodology and converted the findings into backlog intake. Project-meta work only — no `methodology/` docs change in this entry; each adopted convention ships later as its own maintainer-authored release (tier matrix, T2), like the v1.20–v1.23 landscape passes.
+The intake epic that produced the above. Reviewed BMAD-METHOD at v6.11.0 against the methodology and converted the findings into backlog items rather than a loose notes file.
 
-- **`self-development/backlog/epics/E06-bmad-v6-landscape-pass/`** — new planned epic (primary pillar P9 self-improvement velocity, secondary P1): charter with binary exit criteria, five T2 items **BL-0015…BL-0019** (spec-as-sole-context "Code Map" handoff; frozen-intent convention for approved goals; failure-layer triage of review findings; verification-gap lens + test-actually-ran audit; size budgets for context artifacts), and five Tier-2 deferrals **BL-0020…BL-0024** in `FUTURE.md` (boundaries triad, derivable-from-source memory admission test, per-epic context digest, brownfield "ratify what's there" pass, human-review walkthrough ergonomics). Rejected imports (personas/menus, installers/web bundles, elicitation catalogs, executable tooling) are recorded in the charter's out-of-scope with reasons.
-- **`self-development/backlog/EPICS.md`** — E06 row added (planned; does not consume the open WIP slot); counts updated; pillar-coverage rows refreshed to reflect the May closures (E01/E02/E05 done) and P9's first dedicated epic; maintainer-recommendation list updated (E03 entry was stale — promoted since 2026-05-25).
-- The full comparison analysis lives in `self-development/brief/03_competitive_landscape.md` — **local-only, gitignored** per the repo's competitive-analysis convention; it is deliberately absent from this commit.
+- **`self-development/backlog/epics/E06-bmad-v6-landscape-pass/`** — new epic (primary pillar P9 self-improvement velocity, secondary P1): charter with binary exit criteria, five items **BL-0015…BL-0019** (all shipped above), and five Tier-2 deferrals **BL-0020…BL-0024** in `FUTURE.md` (boundaries triad, derivable-from-source memory admission test, per-epic context digest, brownfield "ratify what's there" pass, human-review walkthrough ergonomics). Rejected imports (personas/menus, installers/web bundles, elicitation catalogs, executable tooling) are recorded in the charter's out-of-scope with reasons — each conflicts with the documented no-code, tool-agnostic stance.
+- **`self-development/backlog/EPICS.md`** — E06 row added; counts updated; pillar-coverage rows refreshed to reflect the May closures (E01/E02/E05 done) and P9's first dedicated epic; maintainer-recommendation list updated (the E03 entry was stale — promoted since 2026-05-25).
+- The full comparison analysis lives in `self-development/brief/03_competitive_landscape.md` — **local-only, gitignored** per the repo's competitive-analysis convention; deliberately not shipped.
 
 ---
 
