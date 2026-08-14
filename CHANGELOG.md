@@ -13,6 +13,23 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.27.2 — 2026-08-14
+
+### Changed: README trimmed 374 → 333 lines and sharpened
+
+Closes the gap v1.27.1 recorded but deliberately left open — the README had breached its own P2 exit criterion (under 350 lines). Fixed at maintainer direction. Content-only; no rule changed.
+
+The diagnosis was that **three sections told the same story**: "What you get" (payoffs), "Why this exists" (problem → fix), and "Why these particular structural choices" (the same seven features a third time). The third was pure restatement.
+
+- **Deleted "Why these particular structural choices"** — every one of its seven bullets (cheating agent, locks, challenge-before-consenting, four-layer planning, DoD-in-frontmatter, tier matrix, deep-eval) was already covered by the table above it or by "What you get". Two inbound references from `self-development/brief/` redirected to "Why this exists".
+- **"What you get"** — 12 explanatory bullets → 6 punchy ones. The section earns its place by being a fast scan, not a second index.
+- **"When to use this methodology"** — the good-fit / bad-fit lists were prose paragraphs pretending to be bullets; now they're one-liners.
+- **Repo tree** — dropped stale `(NEW v1.17.3)`-style annotations and per-file enumeration that duplicated what the directories already say.
+- **Version strings** → v1.27.2 (`README.md`, `CHEATSHEET.md`, `STATUS.md`).
+- **`self-development/pillars/P2_doc_clarity.md`** — the README criterion is now **met** (333 lines). Known-gaps updated with the honest caveat: this release bought room by removing a duplicate section, which is a **one-time** saving. The table still gains a row per convention, so the next breach will have nothing redundant to harvest — the options then are capping the table or moving it into the docs.
+
+---
+
 ## v1.27.1 — 2026-08-14
 
 ### Fixed: the docs that describe the methodology had fallen behind the methodology
