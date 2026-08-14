@@ -13,6 +13,23 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.27.1 — 2026-08-14
+
+### Fixed: the docs that describe the methodology had fallen behind the methodology
+
+Three releases (v1.25.0–v1.27.0) added six conventions, but the entry points that tell a reader what this set contains were never updated. Documentation-only; no rule changed.
+
+- **`methodology/00_README.md` — the constitution was incomplete.** The hard-rules table is named the project's constitution and re-confirmed at every gate, yet it was missing **two rules the templates already enforce as hard**: never edit an approved goal or `Done means:` to match what was built (frozen intent, v1.25.0), and never edit a declared protected region without authorization (v1.23.0). Both rows added — a constitution that omits rules the instruction files carry is worse than no constitution, because the gate check passes while the rule goes unchecked.
+- **`methodology/00_README.md` — doc index refreshed** for the five docs that gained substantial content: `04` (Code Map, frozen intent, EARS, size budgets), `06` (the declared-boundary family), `07` (two-stage review, failure-layer routing, verification-gap), `08` (admission test, promotion path, archival lifecycle, active context), `09` (the ✓/⚠/✗ operation table, now one table instead of two).
+- **`README.md`** — TL;DR gained a "work survives the handoff" line; four rows added to the problem/solution table (silently reworded acceptance criteria; planning knowledge dying with the session; a green suite that covers nothing that changed; patching code when the plan was wrong); two payoffs added to "What you get".
+- **`self-development/pillars/P2_doc_clarity.md`** — the longest-doc exit criterion is now **met** (`09` at 798, from 986 when the criterion was written); the known-gaps section updated to name `04_backlog_items.md` (~1,018 lines) as the new doc to watch, with the caveat that it won't have `09`'s ~120 lines of duplication to harvest if it needs trimming.
+
+### Known gap recorded, not fixed
+
+**`README.md` is 374 lines against its own 350-line target** in P2, and this release added ~7 of them. The growth is structural: the problem/solution table gains a row per convention and is now 18 rows. Recorded in P2's known gaps as a maintainer call — the README's job is to sell and orient, not to enumerate, so capping the table may serve better than completing it. Not fixed unilaterally because deciding what the front door says is the maintainer's, not a cleanup task.
+
+---
+
 ## v1.27.0 — 2026-08-14
 
 ### Changed: `09_git_workflow.md` trimmed 1,026 → 798 lines
