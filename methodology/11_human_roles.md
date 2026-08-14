@@ -222,7 +222,7 @@ The point isn't to rank these tiers. The point is that the *shape of work* chang
 
 The [supervisory layer](#the-new-supervisory-layer) lists *what humans do.* This section gets concrete about *which decisions are theirs.* Without an explicit ownership map, two failure modes appear: AI agents quietly making decisions that turn out to need human judgment, or humans bottlenecking decisions an AI is fully capable of making.
 
-The map below is a starting point — a default that fits most projects. Adapt to your team's risk tolerance. **Pairs with [`09_git_workflow.md` "What AI agents can and can't do in git"](09_git_workflow.md#what-ai-agents-can-and-cant-do-in-git--the-affirmative-list)** — that table maps the same ownership logic to specific git operations; this table maps it to decision types.
+The map below is a starting point — a default that fits most projects. Adapt to your team's risk tolerance. **Pairs with [`09_git_workflow.md` "What AI agents can and can't do in git"](09_git_workflow.md#what-ai-agents-can-and-cant-do-in-git--the-operation-table)** — that table maps the same ownership logic to specific git operations; this table maps it to decision types.
 
 ### A default matrix
 

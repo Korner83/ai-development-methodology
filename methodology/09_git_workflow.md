@@ -58,16 +58,7 @@ release/<slug>   # release preparation
 - **Action-oriented when feasible.** `fix-date-parser-overflow` beats `date-parser`.
 - **Item reference is welcome but optional.** `feature/bl-0428-csv-export` is fine. So is `feature/csv-export`.
 
-### Examples
-
-```
-feature/add-csv-export
-fix/date-parser-overflow
-chore/upgrade-typescript-to-5-4
-refactor/extract-session-middleware
-docs/methodology-rollout
-test/regression-for-bl-0517
-```
+In practice: `feature/add-csv-export`, `fix/date-parser-overflow`, `refactor/extract-session-middleware`, `test/regression-for-bl-0517`.
 
 ### Why named branches matter
 
@@ -214,23 +205,13 @@ Closes BL-0517.
 ```
 
 ```
-chore(deps): upgrade typescript to 5.4
-
-No behavioral change. Picks up new control-flow narrowing.
-```
-
-```
 refactor(auth): extract session validation into shared helper
 
 No behavior change. Three routes were duplicating the same check; now
 they all call validateSession() from the shared module.
 ```
 
-```
-docs(methodology): add 09 git workflow
-
-Initial draft of the git practices doc.
-```
+Short-body types need no ceremony: `chore(deps): upgrade typescript to 5.4`, `docs(methodology): add 09 git workflow`.
 
 ### What not to commit
 
@@ -281,13 +262,9 @@ A massive lock-file diff usually indicates a dependency cascade — one dependen
 
 ### Why this matters specifically for AI agents
 
-A single agent session that runs `npm install` to set up the workspace can produce a lock-file diff that:
+An agent that runs `npm install` just to set up the workspace can produce a diff carrying unintended transitive bumps, conflicts with the user's pinned versions, and hundreds of lines of noise that bury the actual work.
 
-- Includes upgrades the agent didn't intend (transitive bumps from registry changes since the last update).
-- Conflicts with the user's pinned versions.
-- Bloats the agent's PR with hundreds of lines of lock-file noise that obscure the actual work.
-
-**Defensive pattern:** agents do not commit lock-file changes unless their work directly involved dependency changes. When in doubt, discard the lock-file diff and reinstall from the committed lock.
+**Defensive pattern:** agents do not commit lock-file changes unless the work directly involved dependencies. When in doubt, discard the diff and reinstall from the committed lock.
 
 ---
 
@@ -319,21 +296,9 @@ Two sections, always:
 - [ ] <Specific verification step 3>
 ```
 
-#### Summary
+**Summary:** one to three bullets on *what* changed and *why* — not a diff recap, since the diff is right there. Highlight what the reviewer would otherwise miss.
 
-One to three bullets. *What* changed, *why* it changed. Not a diff recap — the diff is right there. Highlight the parts the reviewer would otherwise miss.
-
-#### Test plan
-
-Specific, checkable verifications. Match the [Definition of Done](07_definition_of_done.md) gates relevant to this change:
-
-```markdown
-- [ ] Ran the full test suite locally; all tests pass.
-- [ ] Manually verified the CSV download in the activity report at /reports.
-- [ ] Verified the export respects the date-range filter.
-- [ ] Verified in both light and dark themes.
-- [ ] Updated CHANGELOG.md and README.md.
-```
+**Test plan:** specific, checkable verifications matching the [Definition of Done](07_definition_of_done.md) gates relevant to this change — "ran the full suite locally," "verified the CSV download at /reports respects the date filter," "verified in both themes," "updated CHANGELOG and README." Vague entries ("tested it") are not a test plan.
 
 ### Tie to backlog items
 
@@ -357,10 +322,7 @@ Never include co-author credit unless explicitly agreed. Auto-adding a `Co-autho
 
 ### What not to put in a PR
 
-- **Multiple unrelated items.** One PR closes one (or a few tightly-coupled) items.
-- **WIP commits left in.** Squash or rewrite before opening.
-- **Debug code left in.** `console.log`, commented-out blocks, scratch comments.
-- **Secrets, generated files, lock-file changes unrelated to the work.**
+Multiple unrelated items (one PR closes one, or a few tightly-coupled, items); WIP commits left in; debug code (`console.log`, commented-out blocks); and everything on the [never-commit list](#what-not-to-commit) — secrets, generated files, unrelated lock-file churn.
 
 ---
 
@@ -382,17 +344,9 @@ Mixing strategies on the same trunk produces a confusing history (some PRs squas
 
 **Squash merge** is the default for most projects. The benefits (clean trunk, easy revert, simple `git log`) outweigh the loss of intra-PR commit granularity — which is usually noise (WIP commits, "fix typo", "address review") that the squash usefully discards.
 
-Exceptions where merge-commit or rebase-merge make sense:
+Merge-commit or rebase-merge earn their place where per-commit granularity is load-bearing: monorepos generating changelogs per package, long-running PRs whose contributors want multi-commit attribution, or projects where `git bisect` precision matters at the commit level.
 
-- Monorepos where individual commits per package matter for changelog generation.
-- Long-running PRs from contributors who want multi-commit work attributed individually.
-- Projects where `git bisect` precision matters at the per-commit level.
-
-### What this is NOT a choice about
-
-- **PR review.** All three strategies still require the PR to be reviewed before merging.
-- **Branch protection.** All three still require the trunk to be protected against direct commits and force-pushes.
-- **Conventional commit format.** The squash-merge commit subject should still follow [conventional commits](#commit-message-convention) — usually it's the PR title.
+The choice changes only history shape. Review, branch protection, and [conventional-commit format](#commit-message-convention) apply identically under all three.
 
 ---
 
@@ -490,21 +444,18 @@ Each session operates in its own directory. HEAD-shifts in one tree do not affec
 - A single session in a single workspace — no benefit.
 - Trivial work (read-only investigation) — no benefit.
 
-### Cleanup
+### Command reference
 
-When the worktree is no longer needed:
-
-```
-git worktree remove <path>
-```
-
-Or, if the directory is already gone:
-
-```
-git worktree prune
+```bash
+git worktree add <path> <branch>                  # existing branch
+git worktree add -b <new-branch> <path> <base>    # new branch
+git worktree list
+git worktree remove <path>                        # clean state
+git worktree remove --force <path>                # DISCARDS uncommitted work
+git worktree prune                                # directory already deleted
 ```
 
-A *recurring failure to clean up* worktrees clutters the disk and the worktree list. Build cleanup into the end of the session.
+A *recurring failure to clean up* worktrees clutters the disk and the worktree list. Build cleanup into the end of the session. Note that `remove --force` is on the [✗ rows of the operation table](#what-ai-agents-can-and-cant-do-in-git--the-operation-table) — it discards uncommitted work in that tree.
 
 ### Symlink / junction caution
 
@@ -514,46 +465,9 @@ If you need shared installation state (e.g., a shared package cache), use the pa
 
 ---
 
-## Destructive command discipline
+## What AI agents can and can't do in git — the operation table
 
-Some git commands cannot be cleanly reversed. Treat them with extreme care.
-
-### The list
-
-| Command | What it does irreversibly |
-|---------|---------------------------|
-| `git push --force` | Overwrites the remote branch. If others have based work on the previous version, their work becomes orphaned. |
-| `git push --force-with-lease` | Safer than `--force` but still rewrites; safe only if no one else has pushed since you pulled. |
-| `git reset --hard` | Discards uncommitted changes and resets HEAD. Local-only work is gone. |
-| `git checkout .` / `git restore .` | Discards uncommitted changes in the working tree. |
-| `git clean -fdx` | Removes untracked files and ignored files. Includes the contents of `.gitignore`. |
-| `git branch -D` | Force-deletes a branch even if unmerged. The branch's commits may become unreachable. |
-| `git worktree remove --force` | Removes a worktree with uncommitted changes. |
-| `git rebase --onto` | Rewrites commits onto a new base; can lose commits if mishandled. |
-| `git filter-branch` / `git filter-repo` | Rewrites history. Heavy-handed; usually for secret-scrubbing. |
-| `rm -rf <repo>` | Removes the working tree. |
-
-### The rules
-
-- **AI agents do not run these autonomously.** If an AI agent decides a destructive command is needed, it surfaces the intent and waits for explicit user confirmation. "I'm about to run `git reset --hard origin/main`; this will discard your local uncommitted changes. Confirm?"
-- **Humans run them with care.** Before destructive commands, ask: *is there a safer alternative?* A revert instead of a force-push; a stash instead of a reset; a soft-delete-then-archive instead of a `branch -D`.
-- **Investigate unfamiliar state before deleting.** A branch you don't recognize might be someone else's in-flight work. A file you don't recognize might be a partial result of a fix. Look before you delete.
-
-### Recovery
-
-When a destructive command has caused damage:
-
-- `git reflog` shows recent HEAD movements; lost commits often live there until garbage collection runs.
-- Backups of the remote (your hosting platform's mirror, or an internal mirror) may have the lost state.
-- The longer you wait to recover, the higher the chance the data is collected.
-
-Move fast on recovery. Move slow on the original destructive command.
-
----
-
-## What AI agents can and can't do in git — the affirmative list
-
-The [Destructive command discipline](#destructive-command-discipline) section above is a *negative* list (forbidden operations). This section is the matching *affirmative* table — what agents are explicitly allowed and expected to do without asking.
+One table, three autonomy levels. ✓ = do it without asking. ⚠ = surface the intent and wait for an explicit yes. ✗ = never autonomously; the operation is destructive or irreversible, and the note says what it costs.
 
 Pairs with the [decision-ownership matrix in 11_human_roles.md](11_human_roles.md#the-decision-ownership-matrix), which covers decisions broadly. This table is git-operation-specific.
 
@@ -563,9 +477,9 @@ Pairs with the [decision-ownership matrix in 11_human_roles.md](11_human_roles.m
 | `git add <specific files>` | ✓ | Staging known files. Prefer this over `git add .` which can stage unintended files. |
 | `git commit` (on a feature branch) | ✓ | The agent's normal flow per [commit cadence](#commit-cadence). |
 | `git push origin <feature-branch>` | ✓ | Pushing the agent's own feature branch. |
-| `git fetch` / `git pull --ff-only` | ✓ | Idempotent sync (not strictly read-only — `pull --ff-only` does update local refs and the working tree, but only if a fast-forward is possible; the `--ff-only` flag prevents accidental merges). |
+| `git fetch` / `git pull --ff-only` | ✓ | Idempotent sync (not strictly read-only — `pull --ff-only` updates local refs and the working tree, but only if a fast-forward is possible; the flag prevents accidental merges). |
 | `git checkout <branch>` (in a worktree the agent owns) | ✓ | In its own worktree, not the user's primary checkout. |
-| `git worktree add` / `git worktree remove` (own worktrees) | ✓ | Manage agent's own isolation. |
+| `git worktree add` / `git worktree remove` (own, clean) | ✓ | Manage agent's own isolation. `remove --force` is ✗ — see below. |
 | `git merge <other>` (into agent's own feature branch) | ✓ | Bringing trunk into feature is normal. |
 | `git rebase <upstream>` (own feature branch, not pushed-and-shared) | ✓ | Rewriting your own un-shared history is fine. |
 | `gh pr create` / `gh pr comment` / `gh pr view` | ✓ | Standard PR workflow on agent's own branch. |
@@ -574,14 +488,28 @@ Pairs with the [decision-ownership matrix in 11_human_roles.md](11_human_roles.m
 | `git push origin <tag>` | ⚠ | Same. Tag pushes are public. |
 | `gh pr merge` (squash / merge / rebase) | ⚠ | Merging to main is consequential; user-led decision. |
 | `gh release create` | ⚠ | Release pages are durable; user-authorized. |
-| `git push --force` / `git push --force-with-lease` | ✗ | Never autonomously. Always requires explicit user authorization for the specific operation. |
-| `git reset --hard` | ✗ | Discards uncommitted work. Always confirm with the user. |
-| `git checkout -- <file>` / `git restore <file>` | ✗ | Discards working changes. Always confirm. |
-| `git clean -fd` | ✗ | Removes untracked files (which may be the user's). |
-| `git branch -D` | ✗ | Force-deletes a branch; commits may become unreachable. |
-| `git filter-branch` / `git filter-repo` | ✗ | History rewriting. Heavy-handed; always user-led. |
+| `git rebase --onto` | ⚠ | Rewrites commits onto a new base; can lose commits if mishandled. |
+| `git push --force` | ✗ | Overwrites the remote branch. Work others based on the previous version becomes orphaned. |
+| `git push --force-with-lease` | ✗ | Safer than `--force` but still rewrites; safe only if no one else has pushed since you pulled. |
+| `git reset --hard` | ✗ | Discards uncommitted changes and resets HEAD. Local-only work is gone. |
+| `git checkout -- <file>` / `git restore <file>` / `git checkout .` | ✗ | Discards uncommitted changes in the working tree. |
+| `git clean -fd` / `-fdx` | ✗ | Removes untracked files — and with `-x`, ignored files too, including `.gitignore`d contents. |
+| `git branch -D` | ✗ | Force-deletes a branch even if unmerged; its commits may become unreachable. |
+| `git worktree remove --force` | ✗ | Removes a worktree along with its uncommitted changes. |
+| `git filter-branch` / `git filter-repo` | ✗ | Rewrites history. Heavy-handed; usually for secret-scrubbing. Always user-led. |
+| `rm -rf <repo>` | ✗ | Removes the working tree. |
 | Any direct push to the trunk | ✗ | Trunk lands via PR only. See [Branch protection](#branch-protection). |
 | Production deploys (`./deploy prod`, etc.) | ✗ | See [Production deploys](#production-deploys). |
+
+### Handling the ✗ rows
+
+- **Agents surface, never execute.** "I'm about to run `git reset --hard origin/main`; this will discard your local uncommitted changes. Confirm?" — then wait.
+- **Humans run them with care.** First ask: *is there a safer alternative?* A revert instead of a force-push; a stash instead of a reset; archive-then-delete instead of `branch -D`.
+- **Investigate unfamiliar state before deleting.** An unrecognized branch may be someone's in-flight work; an unrecognized file may be a partial fix. Look before you delete.
+
+### Recovery when damage is done
+
+`git reflog` shows recent HEAD movements, and lost commits usually live there until garbage collection. Your hosting platform's mirror may hold the lost remote state. **The longer you wait, the lower the chance of recovery** — move fast on recovery, slow on the original destructive command.
 
 ### The principle
 
@@ -616,24 +544,7 @@ None of these is recoverable by reverting code. They require operational respons
 
 ### How to document the deploy command
 
-In the project instruction file, document the deploy command with a clear warning:
-
-```markdown
-## Deploy
-
-Production deploy is run via:
-
-  scripts/deploy.bat production
-
-**This command is user-only.** AI agents and automated workflows must
-never run it. The user controls the timing of every production deploy.
-
-For dev or staging deploys, use:
-
-  scripts/deploy.bat staging
-```
-
-The warning is not subtle on purpose. It tells future contributors immediately that this is off-limits.
+Name the command in the project instruction file, with the prohibition attached to it rather than filed elsewhere — *"Production deploy: `scripts/deploy.bat production`. **This command is user-only**; AI agents and automated workflows never run it. Staging: `scripts/deploy.bat staging`."* The warning is unsubtle on purpose: a contributor reading the command learns it is off-limits in the same breath.
 
 ### What an AI agent can do
 
@@ -697,23 +608,11 @@ Annotated tags carry the tagger's identity, timestamp, and message. Lightweight 
 
 ### Pushing the release
 
-Two pushes — never combined into one:
-
-```bash
-git push origin main           # the release commit
-git push origin vX.Y.Z         # the tag
-```
-
-Combining via `git push --follow-tags` works if configured, but the explicit two-step form makes the order visible and intentional.
+Two pushes, never combined — `git push origin main` (the release commit), then `git push origin vX.Y.Z` (the tag). `--follow-tags` works if configured, but the two-step form makes the order visible and intentional.
 
 ### Release notes vs. CHANGELOG
 
-Same content, two audiences:
-
-- **CHANGELOG.md** — durable, in the repo, structured (categorized entries with dates and references). The canonical record.
-- **Release notes on the hosting platform** (GitHub Releases, GitLab Releases, etc.) — polished for browsing; can include media (screenshots, demo links) the CHANGELOG doesn't.
-
-Generate release notes from the CHANGELOG entry — don't write them twice. Release notes can be shorter (executive summary linking to the CHANGELOG for full detail) and that's fine.
+Same content, two audiences: `CHANGELOG.md` is the canonical, durable, structured record; platform release notes are polished for browsing and can carry media the CHANGELOG can't. **Generate the notes from the CHANGELOG entry** — never write them twice. Shorter notes that link to the CHANGELOG for detail are fine.
 
 ### Anti-patterns
 
@@ -815,10 +714,7 @@ Git history is the project's permanent record. Every commit, every PR, every bac
 
 ### What this enables
 
-- **`git log -p -- <file>`** shows every change to a specific file with diffs. Useful for understanding why a decision was made.
-- **`git blame <file>`** annotates each line with its last-modifying commit. Useful for finding the commit that introduced a particular line.
-- **`git log --grep="<pattern>"`** searches commit messages. Useful for finding all commits related to an item or topic.
-- **`git log --all --source`** with the right filters can reconstruct what happened on branches that have been deleted.
+`git log -p -- <file>` gives every change to a file with diffs (why a decision was made); `git blame <file>` finds the commit behind a specific line; `git log --grep="<pattern>"` finds every commit for an item or topic; `git log --all --source` can reconstruct work on deleted branches.
 
 ### Backlog state changes are commits too
 
@@ -826,113 +722,7 @@ Every change to a `BACKLOG.md` or `ARCHIVE.md` — adding an item, flipping a st
 
 ### Implications
 
-- Treat commit messages as documentation. They will be read months later by people who do not have the context you have right now.
-- Treat commits as durable. A messy commit history is a permanent tax on every future reader.
-- Treat the audit trail as evidence. In an incident, the git history is often the first source consulted.
-
----
-
-## PR body skeleton
-
-Paste this when opening a new PR:
-
-```markdown
-## Summary
-
-- <One bullet describing what changed and why.>
-- <Optional bullet for a non-obvious decision.>
-- <Optional bullet for a tradeoff worth flagging.>
-
-## Test plan
-
-- [ ] <Specific verification step 1>
-- [ ] <Specific verification step 2>
-- [ ] <Specific verification step 3>
-
-Closes BL-###.
-```
-
-If the PR closes multiple items: `Closes BL-###, BL-###.`
-
----
-
-## Conventional commit examples (copy-paste reference)
-
-```
-feat(<scope>): <imperative subject under 70 chars>
-
-<Optional body. Why, not what.>
-
-Closes BL-###.
-```
-
-```
-fix(<scope>): <imperative subject>
-
-<Body explaining the bug and the fix.>
-
-Closes BL-###.
-```
-
-```
-chore(deps): upgrade <package> to <version>
-
-<Body if the upgrade requires action by callers.>
-```
-
-```
-refactor(<scope>): <imperative subject>
-
-No behavior change. <Why the restructure was needed.>
-```
-
-```
-docs(<scope>): <imperative subject>
-```
-
-```
-test(<scope>): add regression test for <bug>
-
-Closes BL-### (regression test for the fix in BL-###).
-```
-
-```
-release: v<version>
-
-<Changelog summary.>
-```
-
-```
-revert: "<original commit subject>"
-
-This reverts commit <hash>.
-
-<Why the revert.>
-```
-
----
-
-## Worktree command reference
-
-```bash
-# Create a new worktree at <path> on <branch>
-git worktree add <path> <branch>
-
-# Create a new worktree on a new branch
-git worktree add -b <new-branch> <path> <base-branch>
-
-# List all worktrees
-git worktree list
-
-# Remove a worktree (clean state)
-git worktree remove <path>
-
-# Remove a worktree forcefully (uncommitted changes will be lost)
-git worktree remove --force <path>
-
-# Clean up stale worktree entries (directories already deleted)
-git worktree prune
-```
+Commit messages are documentation read months later by people without your context; a messy history is a permanent tax on every future reader; and in an incident, git history is usually the first source consulted.
 
 ---
 
@@ -953,28 +743,11 @@ Most real projects have operational concerns beyond writing code: deploys, data 
 | Idempotent batch jobs. | A re-run of a stuck job should produce the same end state, not corrupt it. |
 | One-way data flows where possible. | If content syncs from dev to prod, never the reverse, the failure modes shrink. |
 
-### Operational items in the backlog
+### Operational work in the backlog
 
-Backlog items can be operational, not just code:
+Operational work is normal backlog work: "rotate the third-party API key," "investigate Tuesday's 500 spike," "build the DR runbook." Items and epics follow the usual lifecycle — the `Test:` field just means something operational ("the rotation completed and the smoke test passed"). Adapt the DoD gates to the operation; verifiable completion is the invariant.
 
-- "Run the monthly content sync to prod."
-- "Rotate the API key for the third-party service."
-- "Investigate the spike in 500 errors on Tuesday."
-
-These follow the same item lifecycle (`Status`, `Test`, `Lock`) as code items. The `Test:` for an operational item might mean "the spike subsided" or "the rotation completed and the smoke test passed." Adapt the DoD gates to the operation; the principle (verifiable completion) stays the same.
-
-### Operational epics
-
-A project may have epics dedicated to operational work — e.g., "Set up monitoring," "Build the disaster recovery runbook." Charter them like any other epic. The pillar may be cross-cutting (often the quality / feedback pillar, or a dedicated operations pillar).
-
-### What the methodology deliberately doesn't specify
-
-- Specific deploy tooling (CI, container orchestrator, hosting platform).
-- Specific monitoring stack.
-- Specific incident response procedures.
-- Specific runbook formats.
-
-These are too project-specific to fix. The methodology asks you to *have* them; it doesn't tell you *which* ones.
+The methodology deliberately doesn't pick your deploy tooling, monitoring stack, incident procedures, or runbook format. It asks you to *have* them.
 
 ### The hard rule for operational work
 
