@@ -9,37 +9,38 @@ and item state**, which are authoritative when they disagree with this file.
 Overwritten, not appended. The durable record lives in commits, `ARCHIVE.md`, and memory.
 If a line here is worth keeping, it belongs in one of those instead.
 
-_Last updated: 2026-08-14 — after v1.25.0 merged._
+_Last updated: 2026-08-14 — after E03 closed (v1.27.0)._
 
 ## Current focus
 
-Post-v1.25.0 consistency pass on branch `docs/post-v1.25-consistency`: closing the gaps the
-release itself opened (repo content that predates the new conventions) plus the two files the
-methodology specifies but this repo never instantiated.
+Nothing in flight. **No active epic**, no open items in any epic, working tree clean.
+Three releases shipped today: v1.25.0, v1.26.0, v1.27.0.
 
 ## Recent changes (this session)
 
-- **v1.25.0 merged** (`b9a68dd`, PR #22): Code Map, frozen intent, failure-layer routing,
-  verification-gap question, size budgets. Epic E06 chartered → executed → closed.
-- `main` synced, three stale worktrees and two merged branches removed.
-- Six stale cross-doc anchors fixed; repo-wide anchor check is clean.
-- Examples project brought up to the Code Map rule and now demonstrates frozen intent.
+- **v1.25.0** (PR #22): Code Map, frozen intent, failure-layer routing, verification-gap
+  question, size budgets. E06 chartered → executed → closed.
+- **v1.26.0** (PR #23): memory admission test; post-v1.25 consistency; `FEEDBACK.md` +
+  `ACTIVE_CONTEXT.md` instantiated; six stale anchors fixed; `STATUS.md`'s false
+  direct-to-main claim retired.
+- **v1.27.0**: E03 closed — `09_git_workflow.md` trimmed 1,026 → 798 lines (−22%), trim chosen
+  over split, zero content lost, one anchor renamed and three inbound links repaired.
+- Repo hygiene: `main` synced, all stale worktrees and merged branches removed.
 
 ## Next steps
 
-Consistency pass is complete and cut as **v1.26.0**; the PR is the last step of this session.
-What is genuinely next, for whoever picks this up:
+The backlog is no longer the binding constraint — the milestone is.
 
-1. **Publish the distribution drafts** — now the top entry in
-   [HUMAN_NEEDED.md](HUMAN_NEEDED.md), and the only thing holding the closed-beta milestone.
-   Maintainer-only; no agent should do this.
-2. **E03** (`09_git_workflow.md` trim/split) is the one active epic — BL-0011 decides
-   trim-vs-split, and BL-0012 is maintainer-authored (T2) with a Code Map now in place.
+1. **Publish the distribution drafts** — top entry in [HUMAN_NEEDED.md](HUMAN_NEEDED.md) and the
+   sole blocker on closed beta (adopter discoverability 6/10 decides the verdict under *no area
+   averaged away*). **Maintainer-only**; no agent should do this.
+2. **Both WIP slots are free** and only E04 remains planned — deliberately deferred until
+   adopter feedback says which native templates matter. Promoting an epic is a maintainer
+   decision; the loop should halt rather than pick one.
 3. **Four Tier-2 deferrals** remain in
-   [E06's FUTURE.md](epics/E06-bmad-v6-landscape-pass/FUTURE.md); BL-0021 was promoted out of
-   that list in v1.26.0.
-4. **Semi-annual self-evaluation due 2026-11-25** — it should specifically check whether the
-   v1.25.0/v1.26.0 conventions are actually being used or have become dead text.
+   [E06's FUTURE.md](epics/E06-bmad-v6-landscape-pass/FUTURE.md).
+4. **Semi-annual self-evaluation due 2026-11-25** — it should check whether the v1.25.0–v1.27.0
+   conventions are actually being used or have become dead text.
 
 ## Watch out for
 

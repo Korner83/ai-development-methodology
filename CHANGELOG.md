@@ -13,6 +13,28 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.27.0 — 2026-08-14
+
+### Changed: `09_git_workflow.md` trimmed 1,026 → 798 lines
+
+Closes **E03**, open since 2026-05-25. The doc was at 98% of the 1,050-line soft cap and was the longest in the corpus. **Trim chosen over split** — the full trim-vs-split analysis, execution log, and clarity assessment are in `self-development/evaluations/2026-05-09-git-workflow-decision.md`.
+
+Why trim: the measurement argued against splitting. Mean section length was only ~43 lines — no section was bloated. The length came from 24 genuine facets of one cohesive topic, while ~120 lines were outright duplication (three appendix sections restating content given better, earlier, inline). Splitting would additionally have spent a T3 restructure, broken the README's "fourteen short docs" identity, and scattered anchors across three files.
+
+**No rule, table, or reasoning was removed — only second tellings.** Each of the six cuts is logged with where its content still lives.
+
+- **Removed three duplicate appendices** — "Conventional commit examples" (the inline Examples section already gives the same shapes as worked examples with real bodies), "PR body skeleton" (identical to the skeleton in PR discipline), and "Worktree command reference" (folded into the Worktrees section, which now carries all six commands including the two that were unique to the appendix).
+- **Merged the destructive-command list into the affirmative list** → one **operation table** with ✓ / ⚠ / ✗. This is the structural win beyond length: previously an agent consulted a negative list and an affirmative list that disagreed by omission on six operations; now a single table answers "may I run this?" for every operation the doc covers, and each ✗ row keeps its irreversibility note.
+- **Condensed the operational-work section** to its pattern table and hard rule — the transferable parts — and collapsed prose density across branch naming, commit examples, PR discipline, merge strategy, release pushing, the audit trail, and lock-file guidance.
+- **Kept deliberately:** the "Common mistakes" table, several rows of which restate rules stated above. That repetition is the point — restating each rule in failure form is a corpus-wide convention present in every methodology doc.
+- **Anchor repair:** merging two sections renamed one anchor, breaking three inbound links (`11_human_roles.md`, and `self-development/AUTONOMOUS_LOOP.md` ×2). All updated. Repo-wide scan across 86 tracked files: zero broken anchors; 85 inbound references to `09` verified. One reference was deliberately left stale — a dated historical eval cites the old section by name, and rewriting it would falsify what that eval examined.
+
+**Clarity outcome:** mean section length stayed flat (~41 → ~40) while total length fell 22% — the signal that the reduction came from deleting duplicate sections rather than thinning uniformly. Headroom against the soft cap went from 2% to 24%. Honest caveat: `09` is still the corpus's longest doc, and the duplication that made this trim easy won't be available next time; the split analysis stands ready if it recurs.
+
+- **Version strings** → v1.27.0 (`README.md`, `CHEATSHEET.md`, `STATUS.md`); README's "longest doc" figure corrected from ~1,000 to ~800 lines.
+
+---
+
 ## v1.26.0 — 2026-08-14
 
 ### Added: the memory admission test

@@ -73,7 +73,7 @@ The loop continues to read these as authority (audience and competitive position
 
 ### Constraint 3 — Production deploys, force-push, destructive git ops
 
-Per [`methodology/09_git_workflow.md` "What AI agents can and can't do in git"](../methodology/09_git_workflow.md#what-ai-agents-can-and-cant-do-in-git--the-affirmative-list), the loop:
+Per [`methodology/09_git_workflow.md` "What AI agents can and can't do in git"](../methodology/09_git_workflow.md#what-ai-agents-can-and-cant-do-in-git--the-operation-table), the loop:
 
 - ✗ Never force-pushes anywhere.
 - ✗ Never `git reset --hard` autonomously.
@@ -104,7 +104,7 @@ The ROI heuristic and dependency graph determine *which item is next*. The loop 
 | **Methodology design changes** surfaced during loop runs | These go through the maintainer-reviewed cycle, not the loop. Loop logs the insight and surfaces. |
 | **Items that close an epic without user approval** | Closing an epic is a milestone-level event; the maintainer reviews before the loop marks `Status: done` on the closing item. The loop completes the *work* of the closing item (deliverable, verification steps, closure note) and brings it to `Status: to-be-tested`, then halts and surfaces. The final `Status: done` flip + epic state change happen after maintainer approval. |
 | **Performance benchmarking, loop-velocity measurement, or other "measure how the system is doing" work** | These require human interpretation of the numbers + judgment about what they mean. The loop can collect raw data (line counts, item counts, time-to-close); it does not interpret or set targets based on the data. Surface findings to the maintainer instead. |
-| **Items requiring git history rewrite** (e.g., `git rebase -i`, `git filter-branch`, squashing across PRs) | Per [`methodology/09_git_workflow.md "What AI agents can and can't do in git"`](../methodology/09_git_workflow.md#what-ai-agents-can-and-cant-do-in-git--the-affirmative-list) — never autonomously. Always user-led. |
+| **Items requiring git history rewrite** (e.g., `git rebase -i`, `git filter-branch`, squashing across PRs) | Per [`methodology/09_git_workflow.md "What AI agents can and can't do in git"`](../methodology/09_git_workflow.md#what-ai-agents-can-and-cant-do-in-git--the-operation-table) — never autonomously. Always user-led. |
 
 ---
 

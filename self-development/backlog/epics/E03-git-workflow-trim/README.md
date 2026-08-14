@@ -1,10 +1,10 @@
 # E03 — Trim or split `09_git_workflow.md`
 
 **Pillar (primary):** [P2 — Doc clarity](../../../pillars/P2_doc_clarity.md)
-**Status:** active
+**Status:** done (2026-08-14)
 **Phase:** Phase 1 — Foundation
 **Started:** 2026-05-25
-**Target close:** TBD (discovery-driven)
+**Closed:** 2026-08-14 — trimmed to 798 lines, shipped in v1.27.0
 **Owner:** maintainer + AI coding agent
 
 ## Outcome (jobs-to-be-done)
@@ -13,12 +13,12 @@ When `methodology/09_git_workflow.md` approaches the 1,050-line soft cap (curren
 
 ## Exit criteria (binary)
 
-- [ ] `methodology/09_git_workflow.md` is either (a) under 800 lines after trimming OR (b) split into 2–3 focused docs with a top-level `09_git_workflow.md` that indexes them.
-- [ ] No content present in the v1.6.0 version has been silently lost. Any removed sections are deliberately removed (with the deletion documented in the CHANGELOG entry) — not accidentally dropped.
-- [ ] All inbound cross-references to `09_git_workflow.md` (from other methodology docs, README, brief, pillars) still resolve. If a section was moved or its slug changed, the inbound link is updated.
-- [ ] The trim-vs-split decision is documented (in the epic's eventual closure note + CHANGELOG entry) with reasoning.
-- [ ] If split: each resulting doc is under 700 lines.
-- [ ] Closure note includes a clarity assessment comparing the post-change doc(s) to the v1.6.0 (pre-change) state — covers scannability, section count, and worst-case "longest unbroken stretch of prose" length. Does not depend on E02's semi-annual eval timing.
+- [x] `methodology/09_git_workflow.md` is either (a) under 800 lines after trimming OR (b) split into 2–3 focused docs with a top-level `09_git_workflow.md` that indexes them. — *(a): **798 lines**, from 1,026.*
+- [x] No content present in the v1.6.0 version has been silently lost. Any removed sections are deliberately removed (with the deletion documented in the CHANGELOG entry) — not accidentally dropped. — *Six cuts, each logged with where the content still lives; spot-checked that every command and rule survives.*
+- [x] All inbound cross-references to `09_git_workflow.md` (from other methodology docs, README, brief, pillars) still resolve. If a section was moved or its slug changed, the inbound link is updated. — *85 references checked; 3 updated after an anchor rename; repo-wide scan across 86 files reports zero broken anchors.*
+- [x] The trim-vs-split decision is documented (in the epic's eventual closure note + CHANGELOG entry) with reasoning. — *[decision doc](../../../evaluations/2026-05-09-git-workflow-decision.md), both options costed.*
+- [x] If split: each resulting doc is under 700 lines. — *N/A (trim path chosen).*
+- [x] Closure note includes a clarity assessment comparing the post-change doc(s) to the v1.6.0 (pre-change) state — covers scannability, section count, and worst-case "longest unbroken stretch of prose" length. Does not depend on E02's semi-annual eval timing. — *Five-measure comparison in the decision doc; key finding is that mean section length stayed flat while total length fell 22%.*
 
 ## KPIs
 
