@@ -11,6 +11,14 @@
   sections that genuinely don't apply. Add project-specific sections
   at the bottom as needed.
 
+  PATHS ARE RELATIVE TO *YOUR* REPO, NOT THIS ONE. Links below point at
+  docs/methodology/, backlog/, memory/ and so on — the layout this file
+  expects once you have copied it into your project (see
+  templates/PROJECT_STRUCTURE.md). They deliberately do not resolve
+  while the template is sitting in the methodology repo; they resolve
+  where the file is meant to live. If your layout differs, update the
+  links once here rather than working around them.
+
   See docs/methodology/08_lessons_and_memory.md for the full guidance
   on what belongs here vs. in memory.
 

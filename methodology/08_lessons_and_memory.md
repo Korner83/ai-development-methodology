@@ -70,7 +70,7 @@ Typical contents:
 | Code conventions | How to write code in this project. Naming, file organization, formatting tools. |
 | Frontend/backend patterns | Pattern conventions specific to each layer. |
 | Database/data conventions | Schema rules, migration discipline, data ownership boundaries. |
-| Backlog and methodology pointers | Link to the backlog folder and the methodology docs. "Read [backlog/README.md](#) before picking up a task." |
+| Backlog and methodology pointers | Link to the backlog folder and the methodology docs. *"Read `backlog/README.md` before picking up a task."* |
 | Hard rules | A short list of "never do this in this project" rules. Things that have burned the team before. |
 | UX or design principles | Top-level design philosophy. Detailed design system docs go elsewhere; the broad rules go here. |
 
