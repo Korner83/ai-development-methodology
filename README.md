@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="License: CC BY 4.0" src="https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg"></a>
-  <a href="CHANGELOG.md"><img alt="Methodology version" src="https://img.shields.io/badge/methodology-v1.28.0-1e40af"></a>
+  <a href="CHANGELOG.md"><img alt="Methodology version" src="https://img.shields.io/badge/methodology-v1.28.1-1e40af"></a>
   <a href="SECURITY.md"><img alt="No code - markdown + git" src="https://img.shields.io/badge/code-none%20%C2%B7%20markdown%20%2B%20git-2ea44f"></a>
   <a href=".github/workflows/gitleaks.yml"><img alt="gitleaks secret scan" src="https://github.com/Korner83/ai-development-methodology/actions/workflows/gitleaks.yml/badge.svg"></a>
 </p>
@@ -30,7 +30,7 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Autonomous goal-oriented development cycles** - paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration - 0–10 rubric per area; unsolvable issues get *handled/postponed/marked* after a default 3-attempt cap, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.28.0](CHANGELOG.md).
+- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.28.1](CHANGELOG.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
 
 ---
@@ -131,6 +131,8 @@ Most projects accumulate the same failure modes once they last more than a few w
 | Work doesn't compound across sessions, contributors, or tools - each new session re-derives the context. | [Plans, items, and memory all persist in files](methodology/00_README.md#how-the-system-enables-long-term-multi-session-work). Drop items today; another agent picks them up next week. The backlog *is* the queue. |
 | Picking the next item turns into "whichever feels interesting"; cheap high-value work gets skipped. | [ROI-based prioritization](methodology/04_backlog_items.md#prioritization--the-roi-heuristic) - `Priority:` + `Effort:` fields make "highest-impact-per-effort" the default picking rule. Deviation is explicit, not silent. |
 | Human-blocked work freezes agents indefinitely; AI sits on a lock for credentials it'll never get. | [`HUMAN_NEEDED.md`](methodology/04_backlog_items.md#human_neededmd--work-blocked-on-human-agency) - dedicated file tracks blocked items so agents release the lock and move on; humans see pending delegations in one place. |
+| The instruction file fills with facts the repo already states, then goes stale and confidently lies. | [The admission test](methodology/08_lessons_and_memory.md#the-admission-test-derivable-from-source-is-never-stored) - if a contributor could learn it by reading the repo, it's read live, never stored. Only intent, rationale, policy, and observed pitfalls earn a line. |
+| A session ends mid-task and the next one restarts from nothing. | [Active context](methodology/08_lessons_and_memory.md#active-context-the-volatile-working-file) - one volatile file, flushed before a reset and re-read on resume, kept deliberately separate from durable memory. |
 | Long autonomous runs (overnight, weekend, milestone push) drift without a structure to ratchet against. | [`AUTONOMOUS_LOOP.md`](templates/AUTONOMOUS_LOOP.md) - loop prompt that picks the highest-impact ready item, executes through the DoD, archives, repeats. Stops at milestone, when no ready items remain, or on user check-in. |
 | Done items pile up and become unsearchable; deferred ideas get lost. | `ARCHIVE.md` keeps every done item grep-able forever. `FUTURE.md` keeps deferred ideas alive without cluttering active work. Both are standard files in every epic folder. |
 
@@ -152,7 +154,7 @@ ai-development-methodology/
 └── .github/workflows/        # gitleaks secret scan - the only CI, read-only
 ```
 
-~15,000+ lines across 85+ files at v1.28.0. Longest doc ~800 lines. Each doc is self-contained - read in any order.
+~15,000+ lines across 85+ files at v1.28.1. Longest doc ~800 lines. Each doc is self-contained - read in any order.
 
 ---
 
@@ -322,7 +324,7 @@ For modified versions, indicate you've made changes. Only obligation the license
 
 ## Status
 
-Battle-tested in one production project. Currently v1.28.0 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.28.1 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 

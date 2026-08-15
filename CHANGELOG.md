@@ -13,6 +13,27 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.28.1 — 2026-08-14
+
+### Fixed: every rendering link in the repo now resolves
+
+A full link audit across all 89 tracked markdown files, excluding fenced blocks and inline code so the check measures what a reader can actually click.
+
+- **`methodology/08_lessons_and_memory.md`** — a live link with `#` as its target (`[backlog/README.md](#)`) inside the instruction-file guidance table. It was illustrating what a pointer *looks like*, so it is now inline code rather than a link that goes nowhere.
+- **`self-development/evaluations/2026-05-first-pass.md`** — a quoted example index row rendered as a real link to a non-existent `beta_strategy.md`. Code-formatted; the eval's finding is untouched.
+- **`templates/CLAUDE.md` + `templates/AGENTS.md`** — 53 links point at `docs/methodology/`, `backlog/`, `memory/`. These are **correct and deliberately left alone**: a template is addressed to the adopter's repo, and the links resolve once the file is copied there. Rewriting them to resolve inside this repo would break them where they are actually used. Both templates now say so in their header block, so the paths read as intentional rather than as rot.
+
+### Changed
+
+- **`README.md`** — two rows added to the problem/solution table for capabilities that had shipped without surfacing there: the memory **admission test** (v1.26.0) and the **active-context** file (v1.21.0). 335 lines, within the 350 target.
+- **Version strings** → v1.28.1.
+
+### Note on the audit method
+
+The first pass of this audit reported 102 "broken" links. Most were false: illustrative placeholders inside fenced skeletons (`P<N+1>_<short_name>.md`, `epics/E02-payments/...`) and examples already wrapped in backticks, neither of which renders as a link. A checker that does not model fenced blocks and inline code produces a list long enough to be ignored — which is worse than no checker. The rule worth keeping: **measure what renders.**
+
+---
+
 ## v1.28.0 — 2026-08-14
 
 ### Added: the example project now demonstrates memory, the blocked-item protocol, and active context

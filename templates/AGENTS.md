@@ -19,6 +19,14 @@
   (with identical content, or one as a symlink to the other) if your
   team mixes tools.
 
+  PATHS ARE RELATIVE TO *YOUR* REPO, NOT THIS ONE. Links below point at
+  docs/methodology/, backlog/, memory/ and so on — the layout this file
+  expects once you have copied it into your project (see
+  templates/PROJECT_STRUCTURE.md). They deliberately do not resolve
+  while the template is sitting in the methodology repo; they resolve
+  where the file is meant to live. If your layout differs, update the
+  links once here rather than working around them.
+
   Replace every <<placeholder>> with your project's specifics. Delete
   sections that genuinely don't apply. Add project-specific sections
   at the bottom as needed.
