@@ -1,6 +1,6 @@
 # Examples
 
-This folder shows what an adopter project looks like when it adopts the methodology. Pinned to **v1.17.3**.
+This folder shows what an adopter project looks like when it adopts the methodology. Pinned to **v1.28.0**.
 
 ## Three artifact types, three purposes
 
@@ -20,6 +20,9 @@ The three are complementary: read `methodology/` to understand the rules; read `
 - [`example-project/backlog/EPICS.md`](example-project/backlog/EPICS.md) — epic rollup.
 - [`example-project/backlog/epics/E01-cli-foundations/`](example-project/backlog/epics/E01-cli-foundations/) — one epic with all 5 standard files (README, BACKLOG, ARCHIVE, FUTURE, TEST) demonstrating the canonical table-form frontmatter from [04_backlog_items.md](../methodology/04_backlog_items.md) and the [03_epics.md "Standard epic-folder structure"](../methodology/03_epics.md#standard-epic-folder-structure).
 - [`example-project/backlog/TEST_BACKLOG.md`](example-project/backlog/TEST_BACKLOG.md) — cross-epic manual-QA queue (pairs with each epic's per-epic `TEST.md`).
+- [`example-project/backlog/HUMAN_NEEDED.md`](example-project/backlog/HUMAN_NEEDED.md) — the blocked-item protocol in full: BL-0005 is `blocked`, its lock is released, its body carries a `Blocker:` line, and the registry entry says what only a human can decide. Read the three together — the protocol only makes sense as a set.
+- [`example-project/backlog/ACTIVE_CONTEXT.md`](example-project/backlog/ACTIVE_CONTEXT.md) — volatile session state, caught mid-item, with an explicit note on what deliberately isn't in it.
+- [`example-project/memory/`](example-project/memory/) — the [two-layer memory](../methodology/08_lessons_and_memory.md) with three active entries and one archived. Shows the entry format, a `pinned` entry (a latency budget whose own success makes it look unused), the [admission test](../methodology/08_lessons_and_memory.md#the-admission-test-derivable-from-source-is-never-stored) applied — nothing derivable from the repo is stored — and an [archived entry](example-project/memory/archive/project_editor_precedence.md) showing the healthy retirement path: the lesson became a test, so the entry retired.
 
 ## About the fictional project
 

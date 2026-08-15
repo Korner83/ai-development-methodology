@@ -1,6 +1,6 @@
 # Cheatsheet — AI Development Methodology
 
-_One-page reference. For learning, read [`methodology/`](methodology/). For setup, see [`templates/`](templates/). Pinned-against methodology v1.27.2._
+_One-page reference. For learning, read [`methodology/`](methodology/). For setup, see [`templates/`](templates/). Pinned-against methodology v1.28.0._
 
 ## The 4 planning layers
 
