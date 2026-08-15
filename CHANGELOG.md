@@ -13,6 +13,25 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.28.0 — 2026-08-14
+
+### Added: the example project now demonstrates memory, the blocked-item protocol, and active context
+
+`examples/example-project/` showed the planning cascade (strategy → pillars → epics → items) but stopped there. Three of the methodology's operational artifacts had **no worked example anywhere in the repo** — including one the example already referenced but did not contain.
+
+- **`backlog/HUMAN_NEEDED.md`** (new) — **fixes a dangling reference**: BL-0005 is `blocked` and its body said *"Logged in `backlog/HUMAN_NEEDED.md`"*, but the file did not exist. Now it does, and the blocked-item protocol reads end to end: `Status: blocked` + `Lock: —` released + a `Blocker:` line + a registry entry naming what only a human can decide (SQLite's richer queries vs. JSONL's one-line install — a distribution promise traded against a query capability, which is a product call, not an engineering one). Also carries a recently-unblocked entry and a "what does not belong here" list.
+- **`memory/`** (new) — the two-layer memory had no instance anywhere, despite being one of the three discipline overlays. Now: an index with active and archived sections, plus four entries chosen to demonstrate the mechanics rather than just the format —
+  - a **`pinned`** feedback entry (the 300ms cold-start capture budget, blown twice by innocuous-looking changes) that exists to show *why* pinning matters: a rule that works erases its own evidence, so low reference frequency must not trigger a sweep;
+  - a **project** entry recording a deliberately-unresolved decision, so an agent doesn't "helpfully" pick a storage backend to unblock itself;
+  - a **reference** entry on the crash-durability harness, explaining why it `SIGKILL`s a real process instead of mocking a failed write;
+  - an **archived** entry showing the healthy retirement path — the lesson became a test, so the entry retired, and it was archived rather than deleted so the lineage survives.
+  Every entry passes the [admission test](methodology/08_lessons_and_memory.md#the-admission-test-derivable-from-source-is-never-stored): the crate layout, the `clap` version, and the test command are all deliberately absent, because a contributor reads those live.
+- **`backlog/ACTIVE_CONTEXT.md`** (new) — volatile session state caught mid-item on BL-0002, including what is deliberately *not* in it.
+- **`examples/example-project/README.md` + `examples/README.md`** — file maps updated; the "what to look at" list now points at the blocked-item protocol as a *set of three files* and at the memory mechanics. `FEEDBACK.md` is now named in the omissions list **with its reason**: `tinker` is pre-alpha with no users, and an empty inbox would demonstrate the file rather than the practice.
+- **Version pins** — the example project and `examples/README.md` were still pinned to **v1.17.3**, ten releases stale. Both now read v1.28.0, alongside `README.md`, `CHEATSHEET.md`, and `STATUS.md`.
+
+---
+
 ## v1.27.2 — 2026-08-14
 
 ### Changed: README trimmed 374 → 333 lines and sharpened
