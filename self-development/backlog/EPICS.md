@@ -1,6 +1,6 @@
 # Epics
 
-_Last refreshed: 2026-08-14 (E03 closed — `09_git_workflow.md` trimmed to 798 lines, v1.27.0; 5 done, 0 active, 1 planned; WIP cap = 2, both slots now free)._
+_Last refreshed: 2026-08-14 (E04 parked by maintainer decision; 5 done, 0 active, 0 planned, 1 parked. **The backlog is empty** — no chartered work remains.)_
 
 ## Rollup
 
@@ -10,10 +10,10 @@ _Last refreshed: 2026-08-14 (E03 closed — `09_git_workflow.md` trimmed to 798 
 | [E01](epics/E01-examples-folder/README.md) | Examples folder | P1 Doc completeness + P6 Example richness | **done** (2026-05-25) | Phase 1 | 0 / 5 | Shipped in v1.15.0 (examples/ folder with tinker fictional project). |
 | [E05](epics/E05-cheatsheet/README.md) | CHEATSHEET.md (one-page reference) | P1 Doc completeness | **done** (2026-05-25) | Phase 1 | — / 1 | Shipped in v1.15.0 (CHEATSHEET.md at repo root, ~80 lines). |
 | [E03](epics/E03-git-workflow-trim/README.md) | Trim or split `09_git_workflow.md` | P2 Doc clarity | **done** (2026-08-14) | Phase 1 | 0 / 4 | Trim chosen over split; 1,026 → 798 lines (−22%), 24 → 20 sections, zero content lost. Shipped in v1.27.0. |
-| [E04](epics/E04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | planned | Phase 1 | 0 / 0 | Defer until closed-beta milestone work reveals which native templates adopters actually need. |
+| [E04](epics/E04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | **parked — will not resume** (2026-08-14) | Phase 1 | 0 / 0 | Dropped by maintainer decision: `AGENTS.md` + adaptation is the permanent answer. Charter preserved with the reasoning. Reopens only if an adopter reports adaptation actually failing. |
 | [E06](epics/E06-bmad-v6-landscape-pass/README.md) | BMAD v6 landscape pass (context-handoff + review-triage conventions) | P9 Self-improvement velocity + P1 Doc completeness | **done** (2026-08-14) | Phase 1 | 0 / 6 | Chartered and closed same day at maintainer direction; 5 chartered items shipped in v1.25.0, plus BL-0021 promoted from FUTURE.md post-closure and shipped in v1.26.0. 4 Tier-2 ideas remain in FUTURE.md. |
 
-**Counts:** **0 active**, 1 planned (E04), 5 done (E01, E02, E03, E05, E06).
+**Counts:** **0 active**, 0 planned, 5 done (E01, E02, E03, E05, E06), 1 parked (E04 — will not resume). **The backlog is empty.**
 
 ### WIP cap note
 
@@ -28,33 +28,31 @@ Inverse view: which epics touch each pillar.
 | P1 Doc completeness | — | — | E01 + E05 (primary) done in v1.15.0; E06 (secondary) done in v1.25.0 |
 | P2 Doc clarity | — | — | E02 secondary (done v1.14.0); E03 primary (done v1.27.0 — 09 trimmed to 798 lines) |
 | P3 Doc currency | — | — | E02 (primary) done 2026-05-25; next semi-annual pass due 2026-11-25 |
-| P4 Tool compatibility | — | E04 (primary) | Planned |
+| P4 Tool compatibility | — | — | E04 (primary) parked 2026-08-14 — `AGENTS.md` + adaptation is the accepted answer, so the pillar no longer waits on native templates |
 | P5 Adopter discoverability | — | — | Dormant (Phase 2 pillar) |
 | P6 Example richness | — | — | E01 (secondary) done in v1.15.0 (examples/ folder shipped) |
 | P7 Community feedback loop | — | — | Dormant (Phase 2/3 pillar) |
 | P8 Maintenance sustainability | — | — | Dormant (Phase 3 pillar) |
 | P9 Self-improvement velocity | — | — | First dedicated epic (E06) closed 2026-08-14 — external-landscape import intake, shipped as v1.25.0; pillar otherwise carried by the bootstrap itself |
 
-**Observation:** With 5 epics done, **both WIP slots are now free** and only E04 remains planned. Two of the five closures (E03, E06) ran to completion inside a single maintainer-directed session rather than through a sustained `active` period, so the cap has still never actually been contended. Raising it to 3 (the methodology default) would be premature on that evidence — the cap should rise when concurrency is real, not when the counter allows it.
+**Observation:** Every pillar with a chartered epic has had it closed, and E04 — the last planned one — is parked by decision. **Both WIP slots are free and there is nothing to put in them.** Note also that two of the five closures (E03, E06) ran to completion inside a single maintainer-directed session rather than a sustained `active` period, so the cap has never actually been contended; raising it to 3 (the methodology default) would be premature on that evidence.
 
 ## Maintainer's next decision
 
-One planned epic remains, and both WIP slots are free:
+**There is no backlog decision to make.** No epic is active, none is planned, and E04 — the last one — was parked by decision on 2026-08-14. Chartering new work is now a deliberate act, not a matter of picking the next queued thing.
 
-1. **E04 (Native templates Cursor/Aider/Continue.dev)** — P4 + medium-large effort. Depends on adopter feedback on which native templates are most useful; might pair well with closed-beta milestone work once external adopters provide signal.
+The binding constraint has moved off the backlog entirely: it is the **Phase 1 → Phase 2 transition** (closed-beta readiness per [`methodology/12`](../../methodology/12_milestone_evaluation.md)). That needs the distribution plan activated, ≥ 2 external adopters recruited, and structured feedback collected — the first of which is the sole entry in [`HUMAN_NEEDED.md`](HUMAN_NEEDED.md) and is maintainer-only. `FEEDBACK.md` becomes load-bearing the moment it lands.
 
-Also available without chartering new work: the four remaining Tier-2 ideas in [E06's FUTURE.md](epics/E06-bmad-v6-landscape-pass/FUTURE.md) (boundaries triad, epic context digest, brownfield discovery pass, human-review walkthrough — the memory admission test was promoted and shipped in v1.26.0). Promoting any of them means re-opening E06 or chartering a successor.
+If work is wanted before then, the cheapest source is the four Tier-2 ideas parked in [E06's FUTURE.md](epics/E06-bmad-v6-landscape-pass/FUTURE.md) — boundaries triad, epic context digest, brownfield discovery pass, human-review walkthrough. (The memory admission test was promoted from that list and shipped in v1.26.0.) Promoting any means re-opening E06 or chartering a successor.
 
-Suggested: **keep E04 deferred** until alpha → closed-beta milestone work reveals which native templates adopters actually want. With no active epic and no doc-quality work outstanding, the binding constraint is no longer the backlog — it is the Phase 1 → Phase 2 transition below.
-
-Alternatively the maintainer may pause new-epic promotion and prioritize Phase 1 → Phase 2 milestone work (closed beta readiness per `methodology/12`): activate distribution plan, recruit ≥ 2 external adopters, collect structured feedback. The `FEEDBACK.md` triage flow becomes load-bearing at this transition.
+**Worth noticing:** an empty backlog is a signal, not an achievement. It usually means either the project is genuinely between phases — which is the case here — or that nobody is filing what they notice. The next self-evaluation should check which.
 
 ## Status legend
 
 - **planned** — charter exists; work has not started. Does not count against WIP cap.
 - **active** — work in progress; counts against WIP cap. Currently 0 of 2 slots used.
 - **done** — all items closed, exit criteria met, charter frozen.
-- **parked** — work halted (priority shift, blocker, etc.); charter preserved, exit criteria not met.
+- **parked** — work halted; charter preserved, exit criteria not met. There is no `rejected` epic state, so a *decided-against* epic is `parked` with an explicit will-not-resume marker and the reasoning in its charter (see E04).
 
 ## How to use this file
 

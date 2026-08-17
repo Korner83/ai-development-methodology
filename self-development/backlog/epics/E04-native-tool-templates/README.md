@@ -1,11 +1,48 @@
 # E04 — Native templates for Cursor, Aider, Continue.dev
 
 **Pillar (primary):** [P4 — Tool compatibility](../../../pillars/P4_tool_compatibility.md)
-**Status:** planned
+**Status:** parked — **will not resume** (2026-08-14, maintainer decision)
 **Phase:** Phase 1 — Foundation
-**Started:** — (not yet active)
-**Target close:** TBD (depends on E01, E02, or E03 closing to free a WIP slot)
+**Started:** — (never activated; no items were ever filed)
+**Closed:** 2026-08-14 — decided against, see "Why this epic was dropped" below
 **Owner:** maintainer + AI coding agent
+
+> **Frozen intent** — Outcome and exit criteria approved and now closed. The charter below is
+> preserved unchanged as the record of what was proposed; only this header and the closing
+> section are new. Do not edit the original text to make it agree with the decision.
+
+## Why this epic was dropped
+
+**Maintainer decision, 2026-08-14: `AGENTS.md` + adaptation is the permanent answer for Cursor,
+Aider, and Continue.dev — not an interim state waiting on native templates.**
+
+The reasoning that closed it:
+
+- **Maintenance surface for a thin gain.** Three more template files, each needing to stay in
+  sync with `AGENTS.md` on every release, to save adopters a rename and a small edit. The
+  charter's own Risks section already predicted the failure mode: *"Native templates diverge
+  from AGENTS.md subtly over time, breaking the 'AGENTS.md is the canonical superset' claim."*
+- **The vendor conventions are still moving.** The charter's own open questions couldn't settle
+  Cursor's `.cursorrules`-vs-`.cursor/rules/` split or Continue.dev's location. Shipping
+  snapshots of unstable conventions produces files that are wrong within months and that
+  adopters trust anyway because they came from upstream.
+- **No adopter has asked.** The epic was always gated on demand signal that never arrived —
+  and per the [first self-evaluation](../../../evaluations/2026-05-25-eval-01.md), no external
+  adopter has used a non-Claude tool with this methodology at all yet. Building for a need
+  nobody has reported is exactly what the epic said it would wait for.
+
+**What replaces it:** nothing new is needed. `AGENTS.md` is already the vendor-neutral superset,
+the README's tool table already names the target filename for each tool, and "adapt AGENTS.md"
+is now documented as the *answer* rather than a placeholder.
+
+**What would reopen it:** an adopter reporting that adaptation actually failed them — that
+`AGENTS.md` carried an assumption their tool couldn't honour. That is a real bug in the
+superset claim, and it would justify either a native template or a fix to `AGENTS.md`. Demand
+alone ("it'd be nice to have") is not enough; the maintenance-drift risk above outweighs it.
+
+**Lifecycle note:** epics have no `rejected` state — the enum is `planned | active | done |
+parked` — so this is recorded as `parked` with an explicit will-not-resume marker. See the
+[EPICS.md](../../EPICS.md) legend.
 
 ## Outcome (jobs-to-be-done)
 

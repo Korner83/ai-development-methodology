@@ -13,6 +13,37 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.28.2 — 2026-08-14
+
+### Changed: E04 (native Cursor / Aider / Continue.dev templates) dropped
+
+Maintainer decision: **`AGENTS.md` + adaptation is the permanent answer for those three tools**, not an interim state waiting on native templates. The epic was never activated and had no items filed.
+
+The reasoning, recorded in full in the charter:
+
+- **Maintenance surface for a thin gain** — three more files to keep in sync with `AGENTS.md` on every release, to save adopters a rename and a small edit. The charter's own Risks section had already predicted the failure mode: *"native templates diverge from AGENTS.md subtly over time, breaking the 'AGENTS.md is the canonical superset' claim."*
+- **The vendor conventions are still moving** — the charter's open questions couldn't settle Cursor's `.cursorrules`-vs-`.cursor/rules/` split or Continue.dev's location. Shipping snapshots of unstable conventions produces files that go wrong within months and that adopters trust anyway because they came from upstream.
+- **No adopter has asked** — and per the first self-evaluation, no external adopter has used a non-Claude tool with this methodology at all yet.
+
+**Reopens only** if an adopter reports that adaptation actually failed them — that `AGENTS.md` carried an assumption their tool couldn't honour. That would be a real bug in the superset claim. Demand alone is not enough.
+
+**Two pillar exit criteria depended on E04 and would have become permanently unmeetable.** Both are now marked met, because adaptation *is* a usable starting template:
+
+- `P4_tool_compatibility.md` — "all 6 tools have a usable starting template" no longer waits on native files.
+- `P1_doc_completeness.md` — same criterion from the completeness angle.
+
+Also updated: `EPICS.md` (rollup, pillar coverage, status legend, next-decision section), `brief/08_capability_layers.md`, and the `self-development/AUTONOMOUS_LOOP.md` T3 example that cited E04 as pending work.
+
+### Noted: epics have no `rejected` state
+
+The epic enum is `planned | active | done | parked` — there is no equivalent of an item's `rejected`. A decided-against epic can only be recorded as `parked`, which normally implies "may resume." E04 is therefore `parked` with an explicit **will-not-resume** marker plus the reasoning in its charter, and the `EPICS.md` status legend now documents that convention. Whether the enum should gain a `rejected` state is left for the semi-annual self-evaluation rather than decided here.
+
+### The backlog is now empty
+
+Zero active, zero planned, five done, one parked. No chartered work remains; the binding constraint is the Phase 1 → Phase 2 transition, whose first step is the sole entry in `HUMAN_NEEDED.md` and is maintainer-only. `EPICS.md` now says so, with the caveat that an empty backlog is a signal rather than an achievement — it means either the project is between phases, or nobody is filing what they notice.
+
+---
+
 ## v1.28.1 — 2026-08-14
 
 ### Fixed: every rendering link in the repo now resolves
