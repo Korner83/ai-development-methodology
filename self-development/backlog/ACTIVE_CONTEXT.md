@@ -34,9 +34,10 @@ The backlog is no longer the binding constraint — the milestone is.
 1. **Publish the distribution drafts** — top entry in [HUMAN_NEEDED.md](HUMAN_NEEDED.md) and the
    sole blocker on closed beta (adopter discoverability 6/10 decides the verdict under *no area
    averaged away*). **Maintainer-only**; no agent should do this.
-2. **Both WIP slots are free** and only E04 remains planned — deliberately deferred until
-   adopter feedback says which native templates matter. Promoting an epic is a maintainer
-   decision; the loop should halt rather than pick one.
+2. **The backlog is empty** — zero active, zero planned. E04 (native Cursor/Aider/Continue.dev
+   templates) was parked by maintainer decision on 2026-08-14: `AGENTS.md` + adaptation is the
+   permanent answer. Chartering new work is now a deliberate act, not picking the next queued
+   thing; the loop should halt and surface rather than promoting anything itself.
 3. **Four Tier-2 deferrals** remain in
    [E06's FUTURE.md](epics/E06-bmad-v6-landscape-pass/FUTURE.md).
 4. **Semi-annual self-evaluation due 2026-11-25** — it should check whether the v1.25.0–v1.27.0

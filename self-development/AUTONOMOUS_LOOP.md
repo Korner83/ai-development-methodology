@@ -52,7 +52,7 @@ The five template files in `templates/` (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md,
 - **T0 / T1 enabled:** typos, broken anchors, version drift, stale examples grounded in a cold-read finding. Patch branch + cross-AI diff-verification → maintainer fast-forwards.
 - **T2 / T3 disabled:** new template, removed template, change in template shape, addition of a new tool's native support. Loop drafts in `loop-notes/`; maintainer authors.
 
-A new template (e.g., adding `.cursorrules` for native Cursor support, which is what E04 plans) is T3 — loop's role is to prepare via supporting items, not to author the template file itself.
+A new template (e.g., adding `.cursorrules` for native Cursor support — what the parked E04 proposed) is T3 — loop's role is to prepare via supporting items, not to author the template file itself.
 
 ### Constraint 2a — Tiered autonomy on `self-development/brief/`, `self-development/strategy/`, `self-development/pillars/`
 
