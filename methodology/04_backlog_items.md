@@ -229,7 +229,7 @@ backlog | ready | in-progress | under-review | to-be-tested | done | blocked | r
 | Status | Meaning |
 |--------|---------|
 | `backlog` | Filed but not yet ready for work. Missing detail, blocked on a dependency, awaiting refinement. |
-| `ready` | All prerequisites met. The item can be picked up immediately by any contributor with the right context. |
+| `ready` | All prerequisites met — no unresolved `Deps:`, no open [`Needs clarification`](#needs-clarification--an-unanswered-question-blocks-ready) marker. The item can be picked up immediately by any contributor with the right context. |
 | `in-progress` | A contributor is actively working this item. `Lock:` is set. |
 | `under-review` | Code complete. Awaiting review, CI, or merge. |
 | `to-be-tested` | Review passed, merged or ready to merge, awaiting UI verification per [Definition of Done](07_definition_of_done.md). |
@@ -512,6 +512,22 @@ One line, greppable (`rg "Frozen intent" backlog/`), and unambiguous about scope
 
 This is the third member of a family: [protected regions](06_working_principles.md#protected-regions-declared-edit-boundaries) bound the *code* an agent may touch, the [tier matrix](../templates/AUTONOMOUS_LOOP.md#tiered-autonomy-for-authoritative-artifacts) bounds *authoritative docs*, and frozen intent bounds the *approved definition of the work itself.*
 
+### Needs clarification — an unanswered question blocks `ready`
+
+An item can be filed with a question its author could not answer; without somewhere to put it, the question gets guessed at implementation time. Epic charters already carry open questions and a closing gate ([03](03_epics.md)); items get the same in one line, reusing the frozen-intent marker shape — below the frontmatter table, one per question:
+
+```markdown
+> **Needs clarification** — <the specific unanswered question>
+```
+
+Greppable like the other (`rg "Needs clarification" backlog/`). Three rules keep it a gate rather than a note:
+
+- **An unresolved marker blocks `Status: ready`** — the same block as an unresolved `Deps:` entry. A question that doesn't stop pickup gets answered by whoever picks up.
+- **An autonomous loop never resolves one itself.** It routes the item to `HUMAN_NEEDED.md` and picks the next. An agent that answers its own clarifying question has quietly converted a decision into an assumption, with nobody watching.
+- **Resolving deletes the marker** and folds the answer into the body. A stack of markers means the item was filed too early, not that it is well documented.
+
+Distinct from [Principle 1](06_working_principles.md#principle-1--think-before-coding): that governs an implementer stating assumptions before coding an item they *can* work; this governs an author who could not finish specifying one. One happens after pickup; the other prevents it.
+
 ## Size budgets — context artifacts must earn their length
 
 Every artifact an agent loads routinely costs context even when it's correct. [08](08_lessons_and_memory.md) already budgets the two it owns — the instruction file and memory entries. Generalized across the artifacts a contributor loads to do an item: **each has a target size, and "too big" is a signal with a defined response, not a style complaint.**
@@ -596,7 +612,7 @@ stateDiagram-v2
 ### Stage-by-stage
 
 1. **Filed.** A contributor identifies work that needs doing. Assigns the next monotonic ID. Files the item in the right epic's `BACKLOG.md` with `Status: backlog`, `Test: not-tested`, `Lock: —`.
-2. **Refined.** Description filled out, acceptance criteria written, effort estimated, dependencies named. Move to `Status: ready`.
+2. **Refined.** Description filled out, acceptance criteria written, effort estimated, dependencies named, open questions resolved (no [`Needs clarification`](#needs-clarification--an-unanswered-question-blocks-ready) marker left standing). Move to `Status: ready`.
 3. **Picked up.** A contributor takes the item. Sets `Lock: <holder>@<now + TTL>`. Sets `Status: in-progress`. Both changes in the same commit.
 4. **Code complete.** The change is implemented locally and committed (typically on a feature branch). Open the PR. Move to `Status: under-review`.
 5. **Reviewed.** Reviewer approves; CI passes. Move to `Status: to-be-tested`.

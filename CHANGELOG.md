@@ -9,7 +9,100 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-(nothing yet)
+_Staged for v1.31.0. **Not released.**
+[Cross-AI findings-verification](methodology/10_testing_and_verification.md#three-modes-spec--findings--and-diff-verification)
+— fresh session, different model, each item's `Done means:` as the checklist — is the gate every
+prior landscape pass passed before `Test: pass`, and it has not run here; the session that authored
+the diff cannot be the one that verifies it. Version badge, `STATUS.md` and the E09 epic's `done`
+marker are all deliberately unbumped until then._
+
+### Added: skills-format conformance, and a clarification marker that blocks `ready`
+
+Output of **E09**, a landscape pass over six external repositories requested on 2026-08-19:
+`addyosmani/agent-engineer`, `agentskills/agentskills`, `obra/superpowers`,
+`NousResearch/hermes-agent`, `msitarzewski/agency-agents`, `github/spec-kit`. **Four of the six
+yielded nothing new**, which is the more useful half of the result — the prior passes had already
+taken what they had (v1.20.0 memory archival from Hermes Agent, v1.21.0 EARS from the
+spec-driven tools, v1.22.0 the constitution check from Spec Kit and rule pressure-testing from
+superpowers). Markdown-only, as always.
+
+- **`skills/ai-dev-methodology/SKILL.md` + `README.md`** — the skill now **states which open
+  format it is written in.** It already conformed to the Agent Skills format; nothing said so, so
+  an adopter whose tool is not in the README's list had no way to tell whether it would load. The
+  claim was verified before it was written — `name` (18 chars, lowercase, matches its parent
+  directory), `description` (472 of 1024), `license` (a permitted optional field), no undefined
+  fields, body 131 lines against a 500-line recommendation — and the field-by-field record is kept
+  in the item so the next currency pass can re-run it rather than trust it. **The wording also
+  corrects an attribution:** the README credited cross-tool support to the `skills` CLI installer.
+  The installer is one delivery route; the portability comes from the format.
+- **`methodology/04_backlog_items.md`** — a **`Needs clarification` marker: a one-line, greppable
+  note for a question the item's author could not answer, and an unresolved one blocks
+  `Status: ready`.** Epic charters have carried open questions and a closing gate since `03` was
+  written; items never had the equivalent, so an authoring-time question had nowhere to live and
+  got guessed at implementation time instead. It reuses the frozen-intent marker shape rather than
+  inventing a second one, and is distinguished from Principle 1 in a sentence, because the two are
+  easy to conflate: Principle 1 governs an implementer stating assumptions about an item they *can*
+  work; this governs an author who could not finish specifying one. **One happens after pickup, the
+  other prevents it.** Source: the inline clarification marker in GitHub Spec Kit's spec template.
+- **`templates/AUTONOMOUS_LOOP.md`** — v1.30.0 added the caution that unattended mode is *not a
+  license to answer your own questions*, and left the halted question nowhere to go. It now lands
+  on the item as a marker. The half-sentence that is genuinely new is the one the old caution could
+  not make: **the marker is what makes the halt outlive the session** — an unresolved one blocks
+  `ready`, so the next run cannot pick the item up and quietly answer it either. No new rule was
+  added here; the existing one was wired to a mechanism.
+- **`methodology/00_README.md` + `templates/ROLE_BRIEFS.md`** — the daily-pickup checklist and the
+  item-authoring brief both name the marker. The `00` edit is strictly redundant with the `ready`
+  definition and was made anyway: that checklist already spells out `no unresolved Deps:`, which
+  means readers use it as the operative list, and a checklist missing a condition is worse than no
+  checklist.
+
+### Rejected, with reasoning
+
+Recorded because an unrecorded rejection gets re-litigated by the next pass — the reason personas
+were declined cleanly on the third look.
+
+- **Agent personas** (`msitarzewski/agency-agents`) — **fourth consideration, fourth decline.** 230+
+  personalities across 15 divisions is the most complete version of the idea we have seen, and it
+  changes none of the reasoning from E06, E07 and E08: per-turn token cost, coupling to
+  persona-capable tooling, and existing coverage from the challenge prompt, cross-AI validation and
+  the decision-ownership matrix. `ROLE_BRIEFS.md` is the deliberate alternative — **a brief
+  describes a stance for a phase; a persona describes a character for an agent.**
+- **Bundling the methodology docs into the skill as `references/`** (`agentskills/agentskills`) —
+  the format supports it and it would make the skill work offline. Declined: it duplicates ~17,000
+  lines into a second location and creates a permanent sync burden against doc currency. Link-out
+  stays the single source of truth. Revisit if an adopter reports an agent without network access
+  getting the operating contract and none of the depth.
+- **`NousResearch/hermes-agent`** — its curator memory pattern was already taken in v1.20.0. The
+  rest is runtime machinery with no markdown analogue, and its agent-authored *executable* skills
+  run against the no-code stance.
+- **`addyosmani/agent-engineer`** — a course on *building* agents. This methodology governs
+  *projects that use* them: a different axis, not a competing answer on the same one.
+
+Two ideas were deferred rather than rejected and are recorded in E09's `FUTURE.md`: superpowers'
+baseline-before-rule sequencing for authoring rules, and Spec Kit's cross-artifact coverage check.
+Separately, Spec Kit's convergence command was logged in E06's `FUTURE.md` as a **second,
+independent source** for the long-parked brownfield "ratify what's there" idea.
+
+### Verification
+
+**1,110 rendering links across 109 tracked markdown files, zero broken** — measured on the final
+tree after the last edit, per the process fix recorded in v1.30.1. Anchor targets were resolved as
+well as file paths, so the four new cross-doc links to the marker section are checked rather than
+assumed. Line caps: `04_backlog_items.md` **1,036** (cap 1,050; grew 16 against a self-imposed 25),
+`templates/ROLE_BRIEFS.md` 199 (self-imposed 200), `README.md` 333 (cap 350),
+`skills/ai-dev-methodology/SKILL.md` 131 (the format's 500-line recommendation). Markdown-only
+diff. `https://agentskills.io` returns 200.
+
+**What has not been verified:** cross-AI findings-verification, and a cold read of the new section
+by a session without this context. Both are the maintainer's to run. The tier matrix's T2
+requirement is a separate thing and is already met — it asks that the *maintainer* author
+substantive changes to authoritative content rather than the loop drafting them autonomously, and
+this pass was maintainer-directed from the request onward, on the same basis E08 recorded. The mechanical checks above say the diff is internally consistent; they say
+nothing about whether the marker is a good idea, and this record should not be read as if they did.
+
+**At release, these still need moving** and are deliberately untouched: the README version badge
+and its two prose version references, `STATUS.md`'s version line, and the README repo-stats
+sentence — which becomes **~17,400 lines across 114 files, longest doc ~1,036 lines**.
 
 ---
 

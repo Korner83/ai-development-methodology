@@ -42,6 +42,14 @@ file and pillar backfill (stage E). **Source:** BMAD `bmad-project-context` disc
 architecture "ratify the conventions already there." **Target:** `00_README.md` brownfield
 section.
 
+**Second source (2026-08-19, E09).** GitHub Spec Kit ships a convergence command that does the
+same move from the other direction — assess the existing codebase against the spec/plan/task
+artifacts and append the remaining work rather than assuming the artifacts describe reality. Two
+independent tools converging on "reconcile the written record with what is actually there" is a
+stronger case for this entry than the single BMAD source it was filed on. Noted rather than
+promoted: E09 was deliberately scoped to one convention, and this one is still a `00_README.md`
+restructure.
+
 ### BL-0024 — Human-review walkthrough ergonomics at the user gate
 
 Guidance for the moment work reaches the human final gate: instead of a raw diff, provide an

@@ -78,7 +78,9 @@ item alone, without re-investigating what you already worked out?
   it and say where the seam is.
 
 Ask me about anything genuinely ambiguous before writing. Do not resolve
-an ambiguity by picking the reasonable-looking option.
+an ambiguity by picking the reasonable-looking option. If I am not there
+to answer, leave it on the item as a `Needs clarification` marker - an
+item carrying one is not ready for anyone to pick up.
 ```
 
 ---

@@ -329,7 +329,7 @@ A working day under this methodology looks like:
 
 1. **Pull the latest from the repo.**
 2. **Read [`EPICS.md`](03_epics.md#epic-rollup-epicsmd) for the current state of active epics.** Identify which epic you are picking from.
-3. **Open the epic's `BACKLOG.md`.** Find an item with `Status: ready`, `Lock: —`, and no unresolved `Deps:`.
+3. **Open the epic's `BACKLOG.md`.** Find an item with `Status: ready`, `Lock: —`, no unresolved `Deps:`, and no open [`Needs clarification`](04_backlog_items.md#needs-clarification--an-unanswered-question-blocks-ready) marker.
 4. **Acquire the lock** ([05](05_locks_and_parallel_work.md)): set `Lock: <holder>@<now + TTL>`, set `Status: in-progress`, commit, push.
 5. **Read the item body.** Understand the goal. State assumptions if any (Principle 1, [06](06_working_principles.md)).
 6. **Transform the task into a verifiable goal** if not already one (Principle 4).
