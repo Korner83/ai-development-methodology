@@ -57,3 +57,5 @@ The agent reads the methodology, asks the right questions, produces a complete p
 ---
 
 For long-running autonomous milestone work (after the kickoff is done), see [AUTONOMOUS_LOOP.md](AUTONOMOUS_LOOP.md) — a different prompt for a different mode of work.
+
+For the ordinary phases after that — chartering the next epic, writing items, implementing, reviewing, verifying — see [ROLE_BRIEFS.md](ROLE_BRIEFS.md).

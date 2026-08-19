@@ -36,7 +36,7 @@ This pillar is also the most direct counter to the "AI-bloat" failure mode — d
 The pillar is *delivered* when:
 
 - [ ] Most recent semi-annual self-evaluation has been completed within the last 6 months AND the cross-AI reviewer flagged no methodology docs as "unclear" or "requires re-reading."
-- [x] README is under 350 lines — **met at v1.27.2**: 333 lines, down from 374.
+- [x] README is under 350 lines — **met at v1.27.2** (333, down from 374) and **structurally secured at v1.30.0** (329): the problem/solution table is capped, with the full version in `methodology/00_README.md`.
 - [x] Longest single methodology doc is under 1,050 lines — **met at v1.27.0**: `09_git_workflow.md` trimmed 1,026 → **798**; the new longest is `04_backlog_items.md` at ~1,018, still under the cap but now the doc to watch.
 - [ ] During the most recent maintainer review pass, no methodology doc contained the AI-bloat indicator list (defined: "comprehensive overview" framings, stacked defensive caveats unrelated to the topic, sentences over ~50 words, subsection nesting deeper than `####`).
 
@@ -77,7 +77,7 @@ The pillar is *delivered* when:
 **Known gaps:**
 
 - **`04_backlog_items.md` is now the doc at the edge** (~1,018 lines), having absorbed the Code Map, frozen intent, and size-budget sections in v1.25.0. `09_git_workflow.md` was trimmed to 798 in v1.27.0 (E03) and is no longer the constraint. The E03 decision doc records the trim-vs-split reasoning if 04 reaches the same point — note that 04 will not have 09's ~120 lines of outright duplication to harvest.
-- **`README.md` length is resolved for now (374 → 333 at v1.27.2), but the mechanism that caused it is not.** The "Why this exists" table gains a row per convention, so it grows every time the methodology does. v1.27.2 bought its room mostly by deleting a *third* telling of the same feature set — "Why these particular structural choices" restated what the table and "What you get" already said — which is a one-time saving. The next breach will have no duplicate section to harvest; the honest options then are capping the table or moving it into the docs.
+- **`README.md` length is structurally resolved as of v1.30.0** — the growth mechanism, not just the symptom. The "Why this exists" table gained a row per convention, so it grew every time the methodology did; v1.27.2 bought room by deleting a *third* telling of the same feature set, which was a one-time saving with nothing left to harvest. **The policy now: the README table is capped at ~12 rows, chosen to sell rather than to enumerate, and the canonical full table lives in [`methodology/00_README.md`](../../methodology/00_README.md#why-this-exists) — where it replaced a stale five-bullet subset of itself. A new convention adds its row *there*, not to the README.** Revisit only if the README breaches 350 again from some other cause.
 - Mid-doc cross-references are sometimes still buried in prose where a table at the top would scan faster.
 - No automated way to detect AI-bloat patterns — relies on maintainer eye and cross-AI review.
 

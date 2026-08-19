@@ -326,6 +326,7 @@ The check-in is the maintainer's gating loop *around* the autonomous loop. The m
 - **Not a substitute for the maintainer.** Per [`methodology/11_human_roles.md`](../methodology/11_human_roles.md), the human supervisory layer is the load-bearing part of an AI-collaborated workflow. The loop runs *between* check-ins; it doesn't replace them.
 - **Not a methodology-evolution engine** by itself. Methodology insights from loop runs go through the human-reviewed promotion cycle; the loop can't ship methodology changes on its own.
 - **Not a permission to skip cross-AI validation.** Cross-AI is the gate every item passes before `Status: done`; the loop completes the work, surfaces for cross-AI, then continues.
+- **Not a license to answer its own questions.** The loop's characteristic failure is not a broken constraint but a silently resolved one: it forms a good clarifying question, answers it itself, and reports the answer as a finding. Each self-answer is locally reasonable, so the loss only shows in aggregate. The test is whether the maintainer would recognize the choice as theirs — if yes, it is a [`HUMAN_NEEDED.md`](backlog/HUMAN_NEEDED.md) entry, not an assumption. A run that surfaces five real questions beats one that quietly settled them.
 - **Not safe to run if the constraints aren't enforced.** If the loop encounters a situation where the constraints feel inconvenient ("just this once, let me edit `methodology/`..."), that's the moment the loop must halt. Constraint violations compound.
 
 ---

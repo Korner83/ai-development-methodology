@@ -60,6 +60,12 @@ See [ARCHIVE.md](ARCHIVE.md) — all five closed. [BACKLOG.md](BACKLOG.md) is em
   different optimal **stance**, and only two of ours are captured as paste-able prompts
   (`AGENT_KICKOFF.md`, `AUTONOMOUS_LOOP.md`) — is a real gap. Raised by the maintainer during
   execution; deliberately **not** folded into this epic to avoid scope creep mid-flight.
+  **Resolved 2026-08-19** — chartered as [E08](../E08-role-briefs/README.md) and shipped in
+  v1.30.0 as [`templates/ROLE_BRIEFS.md`](../../../../templates/ROLE_BRIEFS.md). Personas stayed
+  rejected; the briefs carry a stance per phase and link to the rules rather than restating them.
+  A re-read of this epic's source during that pass also surfaced two gaps E07 did not extract
+  (blast-radius verification, self-answered clarifying questions under unattended runs), both
+  filed on E08. This charter's Outcome and Exit criteria are unchanged.
 
 ## Risks
 
