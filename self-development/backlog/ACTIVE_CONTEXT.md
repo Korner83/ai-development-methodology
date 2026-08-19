@@ -36,12 +36,12 @@ Nothing in flight. **No active epic**, no open items in any epic, working tree c
 
 The backlog is not the binding constraint — the milestone is.
 
-1. **The distribution question is open and maintainer-only.** The drafts in the gitignored
-   `self-development/distribution/` were about to be refreshed to v1.30.0 when the maintainer
-   raised deleting the folder outright ("if the project is good it will sell itself"). Nothing has
-   been deleted. Whichever way it goes, note that P5 adopter discoverability stays at 6/10 either
-   way — deleting the drafts removes the prepared path, it does not change the score — so
-   `HUMAN_NEEDED.md` and this list need rewriting if the folder goes.
+1. **The distribution drafts were deleted (2026-08-19), by decision.** Maintainer position: a
+   good project sells itself. The four staged drafts are gone and are **not recoverable** — the
+   folder was gitignored, so no commit contains them. What this does *not* change: P5 stays at
+   6/10 and closed beta stays **NOT READY**. Adoption now rests on passive channels only
+   (GitHub search and topics, Pages, the awesome-list listings). `HUMAN_NEEDED.md` is empty.
+   Expect a long quiet period before any adopter signal, if one comes.
 2. **The backlog is empty** — zero active, zero planned. Chartering is a deliberate act; the loop
    should halt and surface rather than promoting anything itself.
 3. **Four Tier-2 deferrals** remain in

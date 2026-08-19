@@ -43,6 +43,16 @@ Three further findings from the transcript re-read, deferred rather than rejecte
 
 Also verified as **already covered**: the source's preserved question-and-answer artifact is what the [Code Map](methodology/04_backlog_items.md#the-code-map--writing-m-items-for-cold-handoff) already requires, since it carries "which approach was rejected and why."
 
+### Decided: the active-distribution route is closed
+
+The four staged pre-publication drafts in the gitignored `self-development/distribution/` (Show HN post, awesome-list PR text, launch blog post, Discussions seeds) were **deleted** at maintainer direction, on the position that a good project sells itself. They were never tracked, so nothing leaves the public repo — but the decision is recorded here because it closes the only route the project had planned to its own closed-beta milestone.
+
+**What it does not change, stated plainly:** [P5 adopter discoverability](self-development/pillars/P5_adopter_discoverability.md) stays at **6/10** and the closed-beta verdict stays **NOT READY**. Deleting the drafts removed the prepared path to moving that score, not the gap it measures. Adoption now depends entirely on passive channels — GitHub search and topics, the Pages site, and the existing awesome-list listings.
+
+Updated to match: `HUMAN_NEEDED.md` (its sole entry, closed by decision rather than by action, with what would reopen the question), `EPICS.md`, `FEEDBACK.md` (which expected external feedback "until the distribution plan runs"), `P5`, and `.gitignore`, whose distribution block is now dead config.
+
+**A correction surfaced while doing this.** The 2026-05-25 evaluation gave "zero external promotion has happened" as the root cause of the 6/10. That was **already inaccurate when written**: P5's own inventory records 13 GitHub topics, a live Pages site, and two awesome-list submissions (one confirmed live, one merged). The accurate statement is that no *active campaign* had run — and now none is planned. The eval is a dated snapshot and has been left unedited; the correction lives in P5.
+
 ### Epic
 
 **E08 chartered, executed, and closed** — BL-0030…BL-0033, all shipped here. Named agent personas were considered and **rejected for the third time** (E06, E07, E08), on unchanged reasoning. Verification: a repo-wide rendering-link check across all 105 markdown files — **994 links, zero broken** — using a checker that models fenced blocks and inline code, per the method note in v1.28.1. Line caps all met: `README.md` 331 (cap 350), `ROLE_BRIEFS.md` 197 (self-imposed 200), longest methodology doc `04_backlog_items.md` 1,020 (cap 1,050).

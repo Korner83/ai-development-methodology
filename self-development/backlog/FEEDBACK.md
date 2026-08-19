@@ -47,7 +47,7 @@ that external humans have engaged, and the first such evidence is easy to lose.
 
 | Date | What happened | Where |
 |---|---|---|
-| — | _No external feedback yet. Expected: this file stays empty until the distribution plan runs — see the [master plan](../strategy/00_master_plan.md) Phase 2._ | — |
+| — | _No external feedback yet. With the active-campaign drafts deleted on 2026-08-19, this file now depends on organic arrival through the passive channels — GitHub search, topics, the awesome-list listings. That is a slower and less certain path, and it is the deliberate choice recorded in [P5](../pillars/P5_adopter_discoverability.md)._ | — |
 
 ## Why this file exists while it is empty
 

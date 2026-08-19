@@ -66,7 +66,7 @@ The pillar is *delivered* (evergreen) when:
 - **Focusing on stars over real adoption.** Stars are vanity; adoption stories are the goal. A methodology with 50,000 stars and 50 real adopters is failing.
 - **Burying the value prop.** The README's first line and the GitHub description are the entire snippet most visitors see. Each must convey what the methodology is in one phrase.
 
-## 6. Current state (v1.8.0)
+## 6. Current state (last reviewed v1.30.0; the inventory below dates from v1.8.0)
 
 **Strong:**
 
@@ -85,7 +85,9 @@ The pillar is *delivered* (evergreen) when:
 - Profile pinning hasn't been done — the maintainer's GitHub profile doesn't surface this repo prominently. (Highest single GitHub-internal visibility action still pending.)
 - No proactive outreach in adjacent communities (Anthropic's Discord, Cursor's community, etc.).
 
-**Honest:** discoverability is currently the most underdeveloped pillar relative to its eventual primary-pillar status. Phase 1 work is foundation; Phase 2 work is the discovery push. This pillar moves from "set up infrastructure" (now) to "actively work" when Phase 2 begins.
+**Decision, 2026-08-19 — the active-campaign route is closed.** The four staged distribution drafts (Show HN, awesome-list PR, blog post, Discussions seeds) were **deleted** by the maintainer, on the position that a good project sells itself. This pillar therefore does *not* move from "set up infrastructure" to "actively work" when Phase 2 begins; the infrastructure above is the whole of the discovery surface, and adoption depends on organic arrival through it.
+
+**Honest:** discoverability remains the most underdeveloped pillar relative to its eventual primary-pillar status, and the decision above does not change that — it changes what we are willing to do about it. Two things follow that should not be blurred. First, **the 6/10 score and the NOT READY closed-beta verdict stand**; deleting the drafts removed the prepared path to moving them, not the gap itself. Second, the [2026-05-25 eval](../evaluations/2026-05-25-eval-01.md) gave "zero external promotion has happened" as the root cause, and **that was already inaccurate when written** — the inventory above records topics, a live Pages site, and two awesome-list submissions. The accurate statement is that no *active campaign* has run and now none is planned. The passive channels are real but slow, and the honest expectation is a long quiet period before any adopter signal arrives, if one does.
 
 ## 7. Delivering epics
 
