@@ -6,12 +6,21 @@ _All four items shipped together in **v1.30.0** (2026-08-19)._
 session. That direction is what satisfies the **T2 / maintainer-authored** requirement — human-
 directed, not loop-initiated. Both WIP slots stayed free in practice.
 
-**Shared verification:** repo-wide rendering-link check across all 100 tracked markdown files —
-**966 links, zero broken.** The checker models fenced blocks and inline code so it measures what a
+**Shared verification:** repo-wide rendering-link check across all 105 tracked markdown files —
+**1,001 links, zero broken.** The checker models fenced blocks and inline code so it measures what a
 reader can actually click, per the method note in v1.28.1; the adopter-relative links in
 `templates/CLAUDE.md` and `templates/AGENTS.md` are excluded by design, as that release established.
 Line caps: `README.md` 331 (cap 350), `templates/ROLE_BRIEFS.md` 197 (self-imposed 200), longest
 methodology doc `04_backlog_items.md` 1,020 (cap 1,050). Markdown-only diff.
+
+**Post-release review note (v1.30.1).** The counts above were wrong when first written — the
+archive said 100 files / 966 links and the CHANGELOG said 105 / 994, against an actual
+105 / 1,001. Both were snapshots taken *while the work was still in progress*, and every
+subsequent edit added links. Nothing was mis-verified; the check itself was clean each time it
+ran. But a verification record that does not match what a reader can reproduce is a defect in
+the record, and this repo's whole claim rests on those records being trustworthy. **Routing it
+by layer puts the fix in process, not wording: take the count last, after the final edit, or the
+number is stale before it ships.** Corrected in v1.30.1.
 
 ---
 

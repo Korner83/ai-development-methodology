@@ -69,7 +69,7 @@ The pillar is *delivered* when:
 
 **Strong:**
 
-- 5 templates in `templates/` cover the major surfaces (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md).
+- 6 templates in `templates/` cover the major surfaces (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md, ROLE_BRIEFS.md — the last added in v1.30.0).
 - AGENTS.md is the vendor-neutral superset; CLAUDE.md is the Claude-Code-harness variant.
 - README "AI tool support" table maps each tool to its expected filename.
 - "Permissions and vendor compatibility" section in README (added v1.3.1) makes the vendor-agnostic stance explicit.

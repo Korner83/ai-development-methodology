@@ -69,7 +69,7 @@ The pillar is *delivered* (not done — it's evergreen) when:
 **Strong:**
 
 - 12 methodology docs cover planning, discipline, operations, human roles.
-- 5 templates cover the major AI tools (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md).
+- 6 templates cover the major AI tools and the working phases (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md, ROLE_BRIEFS.md — the last added in v1.30.0).
 - v1.5.0 added 4 substantive new sections (stdlib growth loop, verification taxonomy, brownfield onboarding, decision matrix).
 - v1.6.0 added 5 more (self-evaluation cadence, lock-file management, squash-vs-merge, AI-autonomy-in-git, release tagging, hot-fix workflow).
 - `self-development/` worked example exists.
