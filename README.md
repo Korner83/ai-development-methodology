@@ -45,6 +45,8 @@ npx skills add Korner83/ai-development-methodology
 
 Then ask process questions naturally, or invoke explicitly: `/ai-dev-methodology "how do I mark this item done?"`. The skill is **markdown only - nothing executes on install.** Source: [`skills/ai-dev-methodology/SKILL.md`](skills/ai-dev-methodology/SKILL.md).
 
+The portability comes from the format rather than the installer: the skill is written in the [Agent Skills](https://agentskills.io) open format - a `SKILL.md` carrying `name` and `description` frontmatter - so any client that reads that format can load it, with or without the CLI. Copying the folder in by hand works too.
+
 **As a project scaffold - full structure.** To drop the methodology docs plus a project-instruction file into a new project (strategy → pillars → epics → backlog), follow [How to use it → Step 1](#how-to-use-it). Everything is files you copy; there is nothing to build or install.
 
 ---

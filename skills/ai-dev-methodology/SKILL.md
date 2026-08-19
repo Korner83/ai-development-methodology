@@ -10,6 +10,8 @@ A markdown + git methodology for running software projects where some contributo
 
 > **Full docs:** <https://github.com/Korner83/ai-development-methodology> · **One-page reference:** [CHEATSHEET](https://github.com/Korner83/ai-development-methodology/blob/main/CHEATSHEET.md)
 
+Written in the [Agent Skills](https://agentskills.io) open format — a `SKILL.md` carrying `name` and `description` frontmatter — so any client that reads that format can load it.
+
 When this skill and a project's own `CLAUDE.md`/`AGENTS.md` disagree, **the project's instruction file and the user win.** This skill is general guidance, not project-specific authority.
 
 ## When to use this skill
