@@ -13,6 +13,35 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.29.0 — 2026-08-14
+
+### Added: context integrity, spec-time verification, and doc altitude
+
+A landscape pass over a Unity-based agentic workflow (specialised agents per phase, context "start tokens", output compression, a doc orchestrator). Five ideas passed the fit test; the rest were rejected in review and recorded in E07's charter. Markdown-only.
+
+- **`methodology/08_lessons_and_memory.md`** — **the context-integrity canary.** The two-layer memory design rested on an assumption nothing checked: that the instruction file is *still in context*. It is read at session start, and as context fills the earliest content goes first — with no announcement, so the agent keeps working, equally confident, with the project's rules no longer applying. The instruction file now requires a short marker on every response, and **the marker's absence is the signal**, with a protocol for what to do (stop, re-read, rehydrate from active context, or restart). Its limits are stated in the same section rather than buried: it detects loss not decay, produces false positives, and some harnesses strip leading tokens. **A smoke alarm, not proof of safety — no gate depends on it.**
+- **`methodology/08_lessons_and_memory.md`** — **house verbosity as an instruction-file setting.** The corpus had no guidance at all, so verbosity was re-negotiated per session or set by inertia. It costs tokens and, more expensively, reader attention. The boundary is explicit: **cut filler, never cut reasoning** — dropping *"great question"* costs nothing, but an agent that answers terseness guidance by going confidently silent about its uncertainty is worse than a wordy one, and that means the setting is too aggressive.
+- **`methodology/10_testing_and_verification.md`** — cross-AI validation gains a **third mode: spec-verification.** A fresh session checks the item body and its Code Map *against the real codebase before implementation* — grounded (do these files and functions exist), coherent (does the approach fit what's there), sufficient (would executing it satisfy the goal). This is the shift-left of v1.25.0's failure-layer routing: an intent- or plan-layer finding cancels everything beneath it, so catching those layers earliest beats routing them best. Keyed to Effort M+; ceremony on an XS fix.
+- **`methodology/07_definition_of_done.md`** — **write docs at the altitude that survives change.** Document interactions and contracts, not implementations, with a one-question test: *if I rewrote this implementation tomorrow, would this paragraph become false?* Same principle as v1.26.0's memory admission test, applied to system documentation — a confidently wrong document costs more than an absent one, because the absent one sends you to the code and the code is never out of date.
+- **`methodology/07_definition_of_done.md` + `06_working_principles.md`** — failure-layer routing extended one level up: **when the architecture is what's wrong.** An external requirement change can invalidate the architecture itself, and the default failure is wedging the new requirement into the old shape — a codebase that "works" while every future item pays interest. That fix is a strategy/pillar-level re-evaluation, not something an item absorbs quietly.
+- **`templates/CLAUDE.md` + `templates/AGENTS.md`** — both carry the canary rule and a communication-style section.
+- **`methodology/04_backlog_items.md`** — the Code Map now points at spec-verification as the cheapest point to catch a wrong plan.
+- **`CHEATSHEET.md`** — three modes replace two; context-integrity section added.
+
+### Changed: the instruction-file line target now names what it measures
+
+`AGENTS.md` reached 288 lines against a "~300" target it declared for itself. Rather than compress or abandon the number, it is now **scoped to the filled-in file**: a starter template legitimately runs longer because it carries guidance and `<<placeholders>>` that get replaced or deleted on adoption. What matters is the length of the file that actually loads every session. Stated in both template headers and in `08`.
+
+### Rejected in review (recorded in E07's charter)
+
+Severity tiers on findings (we route by *layer* — layer says where to fix, severity only says how loud to be); named agent personas (same reasoning as E06); split doc architecture, manual triggering, and story pre-filtering (already present); platform-specific and context-window-size practices.
+
+### Epic
+
+**E07 chartered, executed, and closed** — BL-0025…BL-0029, all shipped here. Verification: repo-wide anchor check after BL-0026's section rename (**zero broken**; four inbound references repointed, two of which also had stale link *text*), every touched doc under the 1,050-line cap. One open question is recorded on the charter rather than folded in mid-flight: **role briefs per phase** — the source assigns each phase a named agent, and while we reject personas, the underlying point that each phase has a different optimal *stance* is a real gap, since only two of ours exist as paste-able prompts.
+
+---
+
 ## v1.28.2 — 2026-08-14
 
 ### Changed: E04 (native Cursor / Aider / Continue.dev templates) dropped

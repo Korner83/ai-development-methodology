@@ -47,7 +47,7 @@ This is a loop, not a single review.
 
 Run the review as two questions in order, not one blurred pass:
 
-1. **Spec-compliance** — does the change actually satisfy the item's `**Done means:**` acceptance criteria (and nothing it shouldn't)? This is *findings-verification* — see [10_testing_and_verification.md "Two modes"](10_testing_and_verification.md#two-modes-findings-verification-and-diff-verification).
+1. **Spec-compliance** — does the change actually satisfy the item's `**Done means:**` acceptance criteria (and nothing it shouldn't)? This is *findings-verification* — see [10_testing_and_verification.md "Three modes"](10_testing_and_verification.md#three-modes-spec--findings--and-diff-verification).
 2. **Quality** — *given* that it meets the spec, is it well-made? The checks listed above: logic, edge cases, security, adherence to the principles.
 
 Where possible, the two stages get **different eyes.** The author is the worst-placed reviewer for stage 1 — they will tend to confirm the interpretation they already built. A fresh session or a second contributor (a human, or a different model — see [cross-AI validation](10_testing_and_verification.md#cross-ai-validation)) catches "built the wrong thing, correctly," the failure a same-author quality pass sails straight past.
@@ -67,6 +67,8 @@ Note what this asks of stage 1. Checking "does the change satisfy the criteria?"
 | **Invalid** — the finding is wrong | A misread, a false positive. | Reject with a one-line reason (findings from [cross-AI validation](10_testing_and_verification.md#cross-ai-validation) are candidates, not ground truth). |
 
 Process in that order — **an intent- or plan-level finding cancels the code-level findings below it**, because the code will be re-derived anyway. Triage the layer first, then spend effort.
+
+**When the architecture is what's wrong.** The table's layers stop at the item. Sometimes a finding is bigger than any item: an external requirement changed, and the *architecture* the items were built on no longer fits it. The same rule applies one level up — **fix at the layer the defect entered.** Wedging new requirements into an architecture those requirements invalidated is the plan-layer anti-pattern at larger scale, and it produces the codebase that "works" while every future item pays interest on it. That fix is a [strategy or pillar-level change](02_pillars.md), not something an item absorbs quietly; surface it as a re-evaluation rather than routing it as a bug.
 
 **The escape hatch:** if the same item bounces at the intent or plan layer more than twice, stop looping and surface it to the human — repeated upper-layer findings mean the item wasn't ready to work. This is the definition-side sibling of the [attempt cap](12_milestone_evaluation.md#the-attempt-cap-making-resists-multiple-attempts-executable): that cap bounds how many times you retry a *fix* that keeps failing; this bounds how many times you re-derive from a *definition* that keeps proving wrong. Both end the same way — a human picks a disposition per [handle / postpone / mark — never force](12_milestone_evaluation.md#unsolvable-issues-handle-postpone-or-mark--never-force), rather than the loop grinding on.
 
@@ -352,6 +354,16 @@ See [08_lessons_and_memory.md](08_lessons_and_memory.md) for the full discipline
 - An old rule is no longer relevant — delete it; the file is supposed to be compact.
 
 **The "explained twice" rule.** Whenever you find yourself explaining the same project-specific rule to a contributor (human or AI) more than once, that's the signal to write it down in the instruction file.
+
+### Write docs at the altitude that survives change
+
+The fastest way to make documentation lie is to write it at implementation level. A paragraph describing *how* a function does its job is false the first time someone rewrites the function — and nothing fails when it goes stale, so it rots silently while still being read as authority.
+
+Document **interactions and contracts**, not implementations: what talks to what, what each part guarantees, what the invariants are, why a non-obvious boundary exists. Those change on the order of quarters. Implementation details change on the order of afternoons.
+
+**The test — one question:** *if I rewrote this implementation tomorrow, would this paragraph become false?* If yes, it is at the wrong altitude. Either lift it to the contract it is really describing, move it into a code comment where it sits next to the thing that would change it, or delete it.
+
+This is the same principle as the memory [admission test](08_lessons_and_memory.md#the-admission-test-derivable-from-source-is-never-stored) — *derivable from source is never stored* — applied to system documentation instead of memory entries. Both exist because a confidently wrong document costs more than an absent one: the absent one sends you to the code, and the code is never out of date.
 
 ### When all the docs disagree, the docs all lose
 

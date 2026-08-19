@@ -567,9 +567,21 @@ Cross-AI validation is *not* a substitute for code review by a human or for actu
 - Cross-AI validation will produce false positives. Treat findings as candidates for investigation, not as ground truth.
 - Cross-AI validation cannot judge user experience. Only actual users can.
 
-### Two modes: findings-verification and diff-verification
+### Three modes: spec-, findings-, and diff-verification
 
-Cross-AI validation has two distinct modes, each appropriate at a different step:
+Cross-AI validation has three distinct modes, each appropriate at a different step:
+
+**Spec-verification (before implementation starts).** The planning session produces an item body — goal, approach, and at Effort M+ a [Code Map](04_backlog_items.md#the-code-map--writing-m-items-for-cold-handoff) making factual claims about the codebase. A fresh session checks those claims *against the actual code, before anyone implements*:
+
+1. **Grounded:** do the named files, functions, and types actually exist, and do they do what the item says they do?
+2. **Coherent:** does the approach work given what is really there — or does it assume a shape the codebase doesn't have?
+3. **Sufficient:** does the plan, if executed exactly, actually satisfy the goal?
+
+Output: PASS / FAIL per claim, with citations.
+
+**Why this mode earns its cost.** [Failure-layer routing](07_definition_of_done.md#routing-findings-by-failure-layer) says an intent- or plan-layer finding cancels every code-layer finding beneath it — the code gets re-derived, so the review effort spent on it was wasted. That is an argument for catching those layers *earliest*, not just routing them best. Spec-verification is that argument applied: it moves the plan-layer check to before the code exists, where the fix is editing a paragraph rather than reverting a branch.
+
+Use it where a wrong plan is expensive: Effort M+, anything whose Code Map asserts things about unfamiliar code, and anything where the implementer will be a cold session that cannot sanity-check the premises. For an XS typo fix it is pure ceremony.
 
 **Findings-verification (the usual mode).** The implementing session produces work; the fresh session verifies the work meets a checklist (e.g., "this BL-#### item's `**Done means:**` checkboxes — see [`04_backlog_items.md` item skeleton](04_backlog_items.md#item-heading--frontmatter-table-skeleton) — are all satisfied," or "this PR's described changes match what the diff actually does"). The validator is checking *completeness and correctness of claims.* Output: PASS / FAIL per checklist item, with grounded citations.
 
@@ -581,7 +593,7 @@ Cross-AI validation has two distinct modes, each appropriate at a different step
 
 Diff-verification is the cross-AI gate for the patch-branch convention in [`09_git_workflow.md` "Patch-branch convention for authoritative artifacts"](09_git_workflow.md#patch-branch-convention-for-authoritative-artifacts). Without it, an autonomous loop's "I fixed the typo" claim is unverified. With it, the maintainer reviews a *verified diff* — yes/no on a concrete change, not translate-finding-into-fix (matching the [09 framing](09_git_workflow.md#patch-branch-convention-for-authoritative-artifacts)).
 
-Both modes use the same "fresh session, different model where possible" setup. The difference is the input shape (a checklist vs. an original + proposed-edit + finding triple) and the output shape (PASS/FAIL per checklist item vs. PASS/FAIL on grounded/correct/scoped).
+All three modes use the same "fresh session, different model where possible" setup. What differs is *when* they run and what they take as input: spec-verification runs before implementation against the plan's claims; findings-verification runs after, against a checklist; diff-verification runs against an original + proposed-edit + finding triple. Their outputs share a shape — PASS/FAIL per claim, with citations.
 
 ---
 

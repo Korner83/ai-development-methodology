@@ -4,8 +4,13 @@
   PROJECT-INSTRUCTION FILE — STARTER TEMPLATE
 
   This is the single file every contributor (human or AI agent) reads
-  on every session. Keep it under ~300 lines. Move detail into the
-  methodology docs (docs/methodology/) and the memory directory.
+  on every session. Move detail into the methodology docs
+  (docs/methodology/) and the memory directory.
+
+  THE ~300-LINE TARGET APPLIES TO YOUR FILLED-IN FILE, NOT TO THIS
+  TEMPLATE. The template runs longer because it carries guidance and
+  <<placeholders>> you will replace or delete. What matters is the
+  length of the file that actually loads on every session.
 
   Replace every <<placeholder>> with your project's specifics. Delete
   sections that genuinely don't apply. Add project-specific sections
@@ -185,6 +190,39 @@ A short list of "never do this in this project" rules. Each one exists because t
 - **Never edit declared protected regions without explicit authorization** — generated/compiled output, vendored or framework-core code, machine-managed config/migrations. Put product changes in their own module, not the shared core; edit the source and regenerate, never hand-edit the output. See [docs/methodology/06_working_principles.md](docs/methodology/06_working_principles.md) "Protected regions." Protected regions in this project: `<<paths — e.g. dist/, vendor/, src/framework/, *.generated.*>>`.
 - **<<project-specific hard rule>>** — <<why this exists>>.
 - **<<project-specific hard rule>>** — <<why this exists>>.
+
+---
+
+## Context integrity
+
+**Begin every response with `<<marker — e.g. [✓]>>`.**
+
+This is a canary, not decoration. This file is read at session start; as context fills it can be
+dropped or compacted, and nothing announces when that happens — the agent keeps working with the
+project's rules no longer applying. **The signal is the marker's absence.**
+
+If you notice it has stopped appearing: stop before landing more work, re-read this file, and
+rehydrate from `<<backlog/ACTIVE_CONTEXT.md>>` — or start a fresh session, which is usually cheaper
+than nursing a degraded one. If you cannot see this instruction at all, say so rather than
+continuing.
+
+It detects context *loss*, not context *decay*, and it produces false positives. Treat it as a
+prompt to go look, never as proof the rules are intact — the Definition of Done and cross-AI
+validation are what actually catch a degraded session. See
+[docs/methodology/08_lessons_and_memory.md](docs/methodology/08_lessons_and_memory.md)
+"The context-integrity canary."
+
+---
+
+## Communication style
+
+Technical and direct. No praise preamble, no restating the question back, no summarizing what was
+just said. Answer, then stop.
+
+**Cut filler, never cut reasoning.** Dropping *"great question"* costs nothing. Dropping the *why*
+breaks the working principles: state your assumptions (Principle 1), show the reasoning behind a
+plan before executing it, and report honestly what failed. Terseness that turns into confident
+silence about uncertainty is worse than being wordy.
 
 ---
 

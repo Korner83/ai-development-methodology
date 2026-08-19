@@ -72,6 +72,8 @@ Typical contents:
 | Database/data conventions | Schema rules, migration discipline, data ownership boundaries. |
 | Backlog and methodology pointers | Link to the backlog folder and the methodology docs. *"Read `backlog/README.md` before picking up a task."* |
 | Hard rules | A short list of "never do this in this project" rules. Things that have burned the team before. |
+| Context-integrity marker | A short token the agent prefixes to every response, so its *absence* signals this file has dropped out of context. See [The context-integrity canary](#the-context-integrity-canary). |
+| Communication style | How much prose responses should carry. See [Setting the house verbosity](#setting-the-house-verbosity). |
 | UX or design principles | Top-level design philosophy. Detailed design system docs go elsewhere; the broad rules go here. |
 
 ### What does NOT go in the instruction file
@@ -90,7 +92,40 @@ Periodically (e.g., once a quarter), re-read the instruction file critically. Lo
 - Duplicates of other docs — link instead.
 - Items that have become so universally known that they no longer need to be written down (rare, but it happens).
 
-A 200-line instruction file that every contributor reads every session beats a 2000-line file that gets skimmed.
+A 200-line instruction file that every contributor reads every session beats a 2000-line file that gets skimmed. Treat **a few hundred lines — ~300 as a working target** — as the bar, and measure the *filled-in* file: a starter template legitimately runs longer because it carries guidance and placeholders that get deleted on adoption. The number that matters is what actually loads every session.
+
+### The context-integrity canary
+
+The whole two-layer design rests on an assumption nobody checks: **that the instruction file is still in the agent's context.** It is read at session start, then the session runs for hours. As context fills, the earliest content is the first to be dropped or compacted — and when it goes, nothing announces it. The agent keeps working, sounding exactly as confident, with the project's rules no longer applying.
+
+A cheap detector: **have the instruction file require a short marker at the start of every response.**
+
+```
+Begin every response with `<<marker>>`. If you cannot see this instruction,
+you have lost the project rules — say so instead of continuing.
+```
+
+**The signal is the marker's absence, not its presence.** When it stops appearing, treat the last several turns as having run without the rules and do three things: stop before landing more work, re-read the instruction file, and rehydrate from the [active-context file](#active-context-the-volatile-working-file) — or start a fresh session, which is usually cheaper than nursing a degraded one.
+
+Choose a marker that is short, and that will not appear in normal output by chance.
+
+**What this does not do — state it plainly so nobody over-trusts it:**
+
+- It detects context *loss*, not context *decay*. A model can still emit the marker while having lost the detail of the rules it names.
+- It produces false positives. A model may simply forget the marker while retaining the rules perfectly well.
+- Some tools and harnesses strip or reformat leading tokens, which breaks the signal without any context loss at all.
+
+It is a smoke alarm, not a proof of safety: cheap enough to be worth wiring in, weak enough that no gate should depend on it. Where correctness actually matters, the [Definition of Done](07_definition_of_done.md) and [cross-AI validation](10_testing_and_verification.md#cross-ai-validation) are the mechanisms that catch a degraded session — this only tells you to go look.
+
+### Setting the house verbosity
+
+Response verbosity is a project setting, and the instruction file is where it belongs — otherwise every contributor re-negotiates it per session, or nobody does and the default wins by inertia.
+
+It costs twice. Tokens are the obvious one. The larger cost is **reader attention**: a four-paragraph answer to a one-line question trains the reader to skim, and skimming is how a real caveat gets missed.
+
+A reasonable default to state in the file: *technical and direct; no praise preamble, no restating the question back, no summary of what was just said.*
+
+**The line not to cross: cut filler, never cut reasoning.** Dropping *"that's a great approach"* costs nothing. Dropping the *why* dismantles the methodology — [Principle 1](06_working_principles.md) requires stated assumptions, [plan-mode](06_working_principles.md#plan-before-executing-non-trivial-work) requires the reasoning behind the approach, and the [DoD](07_definition_of_done.md) requires an honest account of what failed. An agent that has been told to be terse, and responds by becoming confidently silent about its uncertainty, is a worse agent than a wordy one. If verbosity guidance starts eating explanations, it is set too aggressively.
 
 ---
 
