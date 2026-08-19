@@ -2,7 +2,7 @@
 
 > **Pillar goal:** the methodology improves itself via the self-development cycle, faster than ad-hoc maintenance could — and the loop's outputs compound across phases.
 >
-> **Last updated:** 2026-05-25
+> **Last updated:** 2026-08-19
 
 **Related:**
 - Brief: [Capability layer 9](../brief/08_capability_layers.md#9-self-improvement-velocity)
@@ -72,16 +72,16 @@ The pillar is *delivered* (evergreen) when:
 - **Mistaking activity for improvement.** A cycle that runs and runs but produces no real methodology improvements is overhead, not value. Measure outputs (releases shipped, patterns surfaced), not runtime.
 - **Ignoring the cycle's cost in compute / tokens.** The cycle runs on AI tools that cost money. Sustainable cost is part of P8 sustainability; not a separate concern but worth noting here.
 
-## 6. Current state (v1.8.0)
+## 6. Current state (last reviewed 2026-08-19; entries below date from v1.8.0 unless noted)
 
 **Bootstrap progress:**
 
 - ✓ Step 0 (brief) shipped in v1.7.0.
 - ✓ Step 1 (strategy + pillars) shipping in v1.8.0 (this release).
-- Pending: Step 2 (first epics) — will ship as the next release.
-- Pending: Step 3 (first items) — will ship after Step 2.
-- Pending: Step 4 (autonomous loop config) — will ship after Step 3. **This is the moment the pillar becomes truly testable.**
-- Pending: Step 5+ (loop runs) — operational after Step 4.
+- ✓ Step 2 (first epics) — shipped; nine epics chartered (E01–E09), seven closed, one parked, one active.
+- ✓ Step 3 (first items) — shipped; item IDs now run to BL-0038.
+- ✓ Step 4 (autonomous loop config) — shipped as [`self-development/AUTONOMOUS_LOOP.md`](../AUTONOMOUS_LOOP.md), with the tiered-autonomy matrix.
+- ✓ Step 5+ (loop runs) — at least one recorded run ([`loop-notes/2026-05-25.md`](../loop-notes/2026-05-25.md)). **This list corrected 2026-08-19; it had described Steps 2–5 as pending since v1.8.0.**
 
 **Cycle health (pre-operational):**
 

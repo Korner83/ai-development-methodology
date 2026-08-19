@@ -2,7 +2,7 @@
 
 > **Pillar goal:** the methodology's protocols work with any AI coding tool that reads a project-instruction file, without adopter rework when tools change.
 >
-> **Last updated:** 2026-05-25
+> **Last updated:** 2026-08-19
 
 **Related:**
 - Brief: [Capability layer 4](../brief/08_capability_layers.md#4-tool-compatibility)
@@ -65,7 +65,7 @@ The pillar is *delivered* when:
 - **Predicting tool features.** "When Tool X adds capability Y, the methodology will..." is speculation. Wait for the tool, then adapt.
 - **Promising support for tools the maintainer doesn't use.** Adopters can adapt AGENTS.md for any tool; the maintainer doesn't need to validate every variant personally.
 
-## 6. Current state (v1.8.0)
+## 6. Current state (last reviewed 2026-08-19; entries below date from v1.8.0 unless noted)
 
 **Strong:**
 

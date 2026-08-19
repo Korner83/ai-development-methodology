@@ -9,7 +9,7 @@ and item state**, which are authoritative when they disagree with this file.
 Overwritten, not appended. The durable record lives in commits, `ARCHIVE.md`, and memory.
 If a line here is worth keeping, it belongs in one of those instead.
 
-_Last updated: 2026-08-19 — after E08 closed (v1.30.0)._
+_Last updated: 2026-08-19 — after E09 closed (v1.31.0)._
 
 ## Current focus
 
@@ -17,61 +17,51 @@ Nothing in flight. **No active epic**, no open items in any epic, working tree c
 
 ## Recent changes (this session)
 
-- **v1.30.0**: E08 chartered → executed → closed. Four items:
-  - **BL-0030** `templates/ROLE_BRIEFS.md` (new, 197 lines) — six paste-able per-phase briefs for
-    the phases that had rules but no prompt. Briefs link to their rules doc and restate nothing.
-  - **BL-0031** wired it into `README.md`, `00_README.md`, and both existing prompt templates;
-    closed E07's open question in the charter *and* in E07's `FUTURE.md`.
-  - **BL-0032** blast radius as a seventh required verification dimension in `10`.
-  - **BL-0033** the unattended-mode caution in both `AUTONOMOUS_LOOP.md` files.
-- **README table capped.** The 21-row problem/solution table moved to `methodology/00_README.md`
-  (where it replaced a stale five-bullet subset of itself); the README keeps 12 rows plus a link.
-  374 → 333 → **331**. The growth mechanism is now closed, not just the symptom — policy recorded
-  in `P2_doc_clarity.md`.
-- **Staleness swept** in `backlog/README.md` (epic tree still said `01-` … `05-cheatsheet`, ID
-  space said "starts at BL-0001", status section still described the bootstrap as in progress) and
-  `E04/BACKLOG.md` (said `planned`, is `parked — will not resume`).
+- **v1.31.0**: E09 chartered → executed → closed. A landscape pass over six external repos
+  requested by the maintainer. **Four of the six yielded nothing new** — the value had already
+  been taken by earlier passes. Three items:
+  - **BL-0034** the skill now states it is written in the Agent Skills open format. Conformance
+    was verified field by field against the normative frontmatter table *before* the claim was
+    written, and the record is kept in the item so it can be re-run rather than trusted. Also
+    corrects an attribution: the README credited cross-tool support to the `skills` CLI, but the
+    portability comes from the format.
+  - **BL-0035** `Needs clarification` marker in `04` — a one-line greppable note for a question
+    the author could not answer; an unresolved one blocks `Status: ready`. Reuses the
+    frozen-intent marker shape. Wired into `00`'s pickup checklist, `ROLE_BRIEFS.md` brief 2, and
+    `AUTONOMOUS_LOOP.md`, where it gives BL-0033's never-self-answer caution somewhere to put the
+    halted question.
+  - **BL-0036** records: rejections in the charter, two deferrals in `FUTURE.md`, and Spec Kit's
+    convergence command logged against **BL-0023** in E06's `FUTURE.md` as a second independent
+    source for the brownfield ratify idea.
+- **Correction pass, same release.** An independent session re-derived every count from the tree
+  rather than the records and found **six stale enumerations, three of them gates**: the
+  `self-development/AUTONOMOUS_LOOP.md` Constraint 2 list governing what the loop may edit, a
+  Phase 1 exit criterion in the master plan, and `P1`'s self-evaluation gate scoped to 12 docs
+  against 14 — meaning `12` and `13` had never been inside the gate that exists to catch drift.
+  Also swept `P3` (the doc-currency pillar, and the stalest file in the repo), `P6`, `P9`, the tag
+  count, and the cheatsheet line count.
+- **`CHEATSHEET.md` back under its 100-line cap** — 144 → 99, over cap since v1.20.0. It was also
+  missing blast radius and role briefs, so trimming and wiring-in were one item, not two.
+
+## Known deviations carried forward
+
+- **Cross-AI findings-verification was waived** for E09 by maintainer decision. E06, E07 and E08
+  each passed it before `Test: pass`; E06's returned 16 PASS / 2 FAIL with both failures real.
+  **E09 is the first landscape pass to close without it.** Flagged for the semi-annual evaluation
+  due 2026-11-25 — the question is whether this is a standing trade or a one-off.
+- **No template carries a methodology version stamp**, which a Phase 1 exit criterion in the
+  master plan requires. Surfaced during the correction pass and recorded as unmet rather than
+  quietly dropped.
 
 ## Next steps
 
 The backlog is not the binding constraint — the milestone is.
 
-1. **The distribution drafts were deleted (2026-08-19), by decision.** Maintainer position: a
-   good project sells itself. The four staged drafts are gone and are **not recoverable** — the
-   folder was gitignored, so no commit contains them. What this does *not* change: P5 stays at
-   6/10 and closed beta stays **NOT READY**. Adoption now rests on passive channels only
-   (GitHub search and topics, Pages, the awesome-list listings). `HUMAN_NEEDED.md` is empty.
-   Expect a long quiet period before any adopter signal, if one comes.
-2. **The backlog is empty** — zero active, zero planned. Chartering is a deliberate act; the loop
-   should halt and surface rather than promoting anything itself.
-3. **Four Tier-2 deferrals** remain in
-   [E06's FUTURE.md](epics/E06-bmad-v6-landscape-pass/FUTURE.md). Three further findings are held
-   with reasoning in [E08's charter](epics/E08-role-briefs/README.md#out-of-scope) — two-level
-   acceptance criteria, chronological task ordering, spec/plan artifact split.
-4. **Semi-annual self-evaluation due 2026-11-25** — it should check whether the **v1.25.0–v1.30.0**
-   conventions are actually being used or have become dead text. Three landscape passes and a
-   dozen-plus conventions have now shipped with zero external adopters exercising any of them.
-5. **A second example project** (web-app / database / small-team shaped) is a known gap and is
-   deliberately **not** chartered: its shape should come from adopter signal, not a guess.
-
-## Watch out for
-
-- **Check `origin/main` before branching.** An earlier session lost time to a stale local `main`.
-- **The version number is claimed in seven places**, not four: `README.md` badge plus three prose
-  lines, `CHEATSHEET.md` pin, `STATUS.md`, and the `CHANGELOG` heading. Grep for the old version
-  rather than working from a list.
-- **Line endings are mixed.** Most files are CRLF, but some (`backlog/README.md`,
-  `E04/BACKLOG.md`) are LF-only, and `core.autocrlf=true` hides it. Any script that edits files
-  must match per file or it produces a whole-file diff.
-- **Do not build a `\x{...}` character into a byte-mode perl edit.** It upgrades the whole string
-  and a following `utf8::encode` double-encodes every existing multi-byte character in the file.
-  Cost this session: one file silently mojibaked and regenerated. Use raw UTF-8 byte sequences.
-- **A link checker must model fenced blocks and inline code**, and must map each space in a
-  heading to its own dash (`frozen intent — approved goals` → `frozen-intent--approved-goals`).
-  Collapsing space runs produces ~100 false "broken anchors" and an unusable report.
-
-## Not here on purpose
-
-Durable lessons (the mixed-line-endings and slug-generation ones above are candidates for memory
-entries), decisions with lasting force, and anything another session would need *after* this work
-ships. Those go to `memory/`, the changelog, or the item body — not to a file that gets overwritten.
+1. **Phase 1 → Phase 2** still needs ≥ 2 external adopters and structured feedback. The
+   active-campaign route was closed by decision on 2026-08-19; the passive channels recorded in
+   [P5](../pillars/P5_adopter_discoverability.md) are the whole discovery surface.
+2. **Semi-annual self-evaluation due 2026-11-25.** Its charge now covers v1.25.0 through v1.31.0,
+   plus the two deviations above.
+3. If work is wanted before then, the cheapest source is the four Tier-2 ideas in
+   [E06's FUTURE.md](epics/E06-bmad-v6-landscape-pass/FUTURE.md) and the two in
+   [E09's](epics/E09-external-landscape-pass/FUTURE.md).

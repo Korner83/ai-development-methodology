@@ -2,7 +2,7 @@
 
 > **Pillar goal:** methodology docs accurately describe how the project (and adopters) actually work today, not how they worked at some earlier point.
 >
-> **Last updated:** 2026-05-25
+> **Last updated:** 2026-08-19
 
 **Related:**
 - Brief: [Capability layer 3](../brief/08_capability_layers.md#3-doc-currency)
@@ -61,7 +61,7 @@ The pillar is *delivered* (evergreen, not done) when:
 - **Treating release notes as authoritative over CHANGELOG.** CHANGELOG is canonical; release notes are derived. If they disagree, CHANGELOG wins.
 - **Adding "verified 2027-05-25" stamps as theater.** Verification is in the actual fact-checking, not the stamp. Stamps that aren't earned by real verification mislead.
 
-## 6. Current state (v1.8.0)
+## 6. Current state (last reviewed 2026-08-19; entries below date from v1.8.0 unless noted)
 
 **Strong:**
 
@@ -72,8 +72,8 @@ The pillar is *delivered* (evergreen, not done) when:
 
 **Known gaps:**
 
-- No automated link-checking; relies on manual scans (which have caught broken links twice — `EVALUATION.md` in v1.3.1 and others surfaced via PowerShell scripts).
-- The first semi-annual self-evaluation hasn't happened yet (the cadence was just added in v1.6.0). Next one due ~2026-11-25.
+- No automated link-checking; relies on manual scans (which have caught broken links twice — `EVALUATION.md` in v1.3.1 and others surfaced via PowerShell scripts). **A `docs-check` CI workflow did run these checks and was removed on 2026-05-26** (commit `1f76761`) on the reasoning that a solo maintainer can run them locally. Every count defect since has been a manual-measurement error — see the v1.30.1 correction.
+- **Corrected 2026-08-19:** this entry read "the first semi-annual self-evaluation hasn't happened yet" long after it had. It ran on 2026-05-25 ([eval-01](../evaluations/2026-05-25-eval-01.md)); the next is due 2026-11-25, with a charge covering v1.25.0–v1.30.0.
 - No process for catching "rule the team consistently routes around" — that's a deeper currency check that requires adopter telemetry.
 
 **Honest:** currency is fragile in solo-maintained projects. The cadence is the protection.

@@ -2,9 +2,10 @@
 
 **Pillar (primary):** [P4 — Tool compatibility](../../../pillars/P4_tool_compatibility.md)
 **Pillar (secondary):** [P1 — Doc completeness](../../../pillars/P1_doc_completeness.md)
-**Status:** active
+**Status:** done (2026-08-19)
 **Phase:** Phase 1 — Foundation
 **Started:** 2026-08-19 (chartered at maintainer direction)
+**Closed:** 2026-08-19 — all three items shipped in v1.31.0
 **Owner:** maintainer + AI coding agent
 
 > **Frozen intent** — Outcome and exit criteria approved by maintainer on 2026-08-19.
@@ -41,15 +42,15 @@ This epic adds **one** named convention. That is the point of it, not a limitati
 
 ## Exit criteria (binary)
 
-- [ ] Each of BL-0034 through BL-0036 is resolved — shipped, deferred, or rejected with reasoning.
-- [ ] The conformance claim was **verified before it was written** — the normative spec read,
+- [x] Each of BL-0034 through BL-0036 is resolved — shipped, deferred, or rejected with reasoning.
+- [x] The conformance claim was **verified before it was written** — the normative spec read,
       the frontmatter checked field by field — and the check is recorded, not asserted.
-- [ ] The conformance wording is a format claim, not peer positioning (see "Out of scope").
-- [ ] The clarification marker reuses the existing frozen-intent marker shape rather than
+- [x] The conformance wording is a format claim, not peer positioning (see "Out of scope").
+- [x] The clarification marker reuses the existing frozen-intent marker shape rather than
       inventing a second one, and is distinguished in one sentence from Principle 1 in
       [`06`](../../../../methodology/06_working_principles.md).
-- [ ] Every change is markdown-only — no scripts, no runtime dependencies.
-- [ ] Repo-wide rendering-link check clean; every touched methodology doc under the 1,050-line cap.
+- [x] Every change is markdown-only — no scripts, no runtime dependencies.
+- [x] Repo-wide rendering-link check clean; every touched methodology doc under the 1,050-line cap.
       **Counts taken after the final edit**, per the v1.30.1 correction.
 
 ## KPIs
@@ -101,7 +102,7 @@ baseline-before-rule sequencing, and Spec Kit's cross-artifact coverage check.
 
 ## Item roster
 
-See [BACKLOG.md](BACKLOG.md). Closed items move to [ARCHIVE.md](ARCHIVE.md).
+See [ARCHIVE.md](ARCHIVE.md) — all three closed. [BACKLOG.md](BACKLOG.md) is empty.
 
 ## Risks
 
@@ -119,3 +120,14 @@ See [BACKLOG.md](BACKLOG.md). Closed items move to [ARCHIVE.md](ARCHIVE.md).
   human then answers. Ours sits in a hand-authored item, where the risk is that it accumulates
   instead of blocking. Mitigated by binding it to the `ready` gate: an item carrying an
   unresolved marker cannot be picked up, so the marker has teeth or it has none.
+
+## Closing note
+
+**One exit criterion is met by waiver rather than by passing.** Cross-AI findings-verification was
+waived by maintainer decision on 2026-08-19; the criterion above covers the mechanical checks,
+which did run and are reproducible. The three landscape passes before this one each cleared that
+gate. Recorded in [ARCHIVE.md](ARCHIVE.md) and in the v1.31.0 CHANGELOG entry rather than folded
+into a checkbox, so the next evaluation can weigh it.
+
+**KPIs met.** `04_backlog_items.md` grew 16 lines against a ≤25 budget, landing at 1,036 of a 1,050
+cap. One new named concept, as chartered. Conformance declared in exactly two places.

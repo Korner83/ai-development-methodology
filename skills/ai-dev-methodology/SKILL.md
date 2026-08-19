@@ -9,6 +9,8 @@ license: CC-BY-4.0
 A markdown + git methodology for running software projects where some contributors are AI agents. This skill is the **operating contract** — the rules an agent needs in-session. It is self-contained; the full docs live in the repo and are the canonical source:
 
 > **Full docs:** <https://github.com/Korner83/ai-development-methodology> · **One-page reference:** [CHEATSHEET](https://github.com/Korner83/ai-development-methodology/blob/main/CHEATSHEET.md)
+>
+> **Tracks methodology v1.31.0.** An installed copy carries no other date — compare against the [CHANGELOG](https://github.com/Korner83/ai-development-methodology/blob/main/CHANGELOG.md) if the repo's docs look newer than this file.
 
 Written in the [Agent Skills](https://agentskills.io) open format — a `SKILL.md` carrying `name` and `description` frontmatter — so any client that reads that format can load it.
 
@@ -125,6 +127,8 @@ A compact gate to self-apply before marking any work complete under this methodo
 - [ ] **Verification-gap checked** — for each behavior added or changed: if it broke, would a test that *actually ran* fail? Skipped/filtered tests count as missing; no expectation was edited to match the code; the approved goal / `Done means:` was not reworded to fit what was built.
 
 ## Full docs (read for depth)
+
+**Scope of this file.** A compact operating contract, not a mirror of the corpus: it carries what an agent applies *while working an item*, and leaves authoring-time and maintainer-time conventions to the docs — protected regions, the attempt cap, frozen intent, review-finding layer routing, the memory admission test, the context-integrity canary, spec-verification, doc altitude, and blast radius among them. Reach for the links below when a task gets near one.
 
 Per-phase stances (chartering, item authoring, implementation, review, verification, milestone evaluation) have paste-able briefs: [ROLE_BRIEFS.md](https://github.com/Korner83/ai-development-methodology/blob/main/templates/ROLE_BRIEFS.md).
 

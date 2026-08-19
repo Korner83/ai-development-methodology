@@ -2,7 +2,7 @@
 
 > **Pillar goal:** for every common situation an adopter encounters, the methodology has explicit, findable guidance.
 >
-> **Last updated:** 2026-05-25
+> **Last updated:** 2026-08-19
 
 **Related:**
 - Brief: [Capability layer 1](../brief/08_capability_layers.md#1-doc-completeness)
@@ -34,9 +34,9 @@ Doc completeness asks: for each common adopter situation, does the methodology s
 
 The pillar is *delivered* (not done — it's evergreen) when:
 
-- [ ] All 12 methodology docs have been reviewed in the most recent semi-annual self-evaluation pass with no "missing" gaps surfaced by cross-AI review.
+- [ ] All 14 methodology docs (`00`–`13`) have been reviewed in the most recent semi-annual self-evaluation pass with no "missing" gaps surfaced by cross-AI review. **This criterion read "12 docs" until 2026-08-19**, which scoped it to `00`–`11` and silently excluded `12_milestone_evaluation.md` and `13_ai_safety_and_prompt_injection.md` — both added after the criterion was written. The 2026-05-25 pass ran against the old scope.
 - [x] Each of the 6 supported AI tools (Claude Code, OpenAI Codex, Google Antigravity, Cursor, Aider, Continue.dev) has a usable starting template — either native (3: CLAUDE.md, AGENTS.md, and AGENTS.md again for Antigravity) or adaptable (3, from AGENTS.md). Adaptation is the accepted permanent answer; the epic that proposed native files for the latter three (E04) was parked 2026-08-14.
-- [ ] At least one worked example folder exists in the repo (the `self-development/` folder satisfies this as of v1.7.0).
+- [x] At least one worked example folder exists in the repo (the `self-development/` folder satisfies this as of v1.7.0; `examples/example-project/` added in v1.15.0).
 - [ ] Every Discussions / Issues thread tagged as a "how do I" question has a recorded response (from maintainer or community) within 30 days that either links to an existing doc as the answer or is logged as a methodology gap candidate for the next release.
 
 **Re-tested:** every semi-annual self-evaluation pass (per [methodology/07_definition_of_done.md](../../methodology/07_definition_of_done.md#methodology-self-evaluation-semi-annual)). The fourth criterion above only becomes testable once Discussions activity exists; until then, treat as N/A.
@@ -64,11 +64,11 @@ The pillar is *delivered* (not done — it's evergreen) when:
 - **Over-specifying** — writing 800 lines when 200 would do. Completeness is "covers the surface," not "exhausts the surface."
 - **Treating completeness as binary** — the surface area grows as adopters use the methodology in new contexts. Re-evaluate continuously.
 
-## 6. Current state (v1.8.0)
+## 6. Current state (last reviewed 2026-08-19; entries below date from v1.8.0 unless noted)
 
 **Strong:**
 
-- 12 methodology docs cover planning, discipline, operations, human roles.
+- 14 methodology docs (`00`–`13`) cover planning, discipline, operations, human roles, milestone evaluation, and AI safety.
 - 6 templates cover the major AI tools and the working phases (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md, ROLE_BRIEFS.md — the last added in v1.30.0).
 - v1.5.0 added 4 substantive new sections (stdlib growth loop, verification taxonomy, brownfield onboarding, decision matrix).
 - v1.6.0 added 5 more (self-evaluation cadence, lock-file management, squash-vs-merge, AI-autonomy-in-git, release tagging, hot-fix workflow).
