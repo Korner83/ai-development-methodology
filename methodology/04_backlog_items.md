@@ -491,6 +491,8 @@ The rule that makes it work: **whoever plans the item drains their investigation
 
 **The dispatch rule:** when the item is handed off — to a [subagent](05_locks_and_parallel_work.md#subagent-delegation), to tomorrow's session, to another contributor — the instruction is *"work BL-####,"* pointing at the item. Don't paste a summary of the item into the handoff prompt: the summary drifts from the item, and now two versions of the truth exist. If the item body isn't good enough to work from, fix the item body. (A subagent handed a *slice* of the item — research this, test that — is still told what its slice is; the rule is that the item's own goal and constraints are read from the item rather than restated around it. See [05 — Subagent delegation](05_locks_and_parallel_work.md#subagent-delegation).)
 
+**Verify the Code Map before implementing, not after.** A Code Map makes factual claims about the codebase — these files exist, that helper does this, this constraint holds. If any of them is wrong, everything derived from it is wrong, and the review that catches it comes after the code is written. For M+ items, have a fresh session check those claims against the actual code first: see [spec-verification](10_testing_and_verification.md#three-modes-spec--findings--and-diff-verification), the cheapest point at which a wrong plan can be caught.
+
 The Code Map is *durable item knowledge*, distinct from the volatile session state in the [active-context file](08_lessons_and_memory.md#active-context-the-volatile-working-file): the Code Map says "reuse `buildActivityQuery()`"; active context says "halfway through step 3." One survives the item's whole life; the other is wiped at handoff.
 
 ### Frozen intent — approved goals are human-owned

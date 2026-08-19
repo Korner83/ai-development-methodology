@@ -1,6 +1,6 @@
 # Cheatsheet — AI Development Methodology
 
-_One-page reference. For learning, read [`methodology/`](methodology/). For setup, see [`templates/`](templates/). Pinned-against methodology v1.28.2._
+_One-page reference. For learning, read [`methodology/`](methodology/). For setup, see [`templates/`](templates/). Pinned-against methodology v1.29.0._
 
 ## The 4 planning layers
 
@@ -103,10 +103,15 @@ Unsolvable issues: **handle / postpone / mark — never force.** Attempt cap: **
 - `backlog/HUMAN_NEEDED.md` — passive registry of work blocked on human-only action (credentials, business decisions, payments). [04](methodology/04_backlog_items.md#human_neededmd--work-blocked-on-human-agency)
 - `backlog/FEEDBACK.md` — single-inbox for user feedback; triaged on cadence (weekly alpha → daily public). [12](methodology/12_milestone_evaluation.md#the-feedback-triage-flow)
 
-## Cross-AI validation — two modes
+## Cross-AI validation — three modes
 
+- **Spec-verification:** are the plan's claims about the codebase true, *before* implementing? Grounded / coherent / sufficient. Effort M+. [10](methodology/10_testing_and_verification.md#three-modes-spec--findings--and-diff-verification)
 - **Findings-verification:** does the work meet the checklist? Used at item DoD gate.
-- **Diff-verification:** does the proposed patch fix the cited finding without scope creep? Grounded / correct / scoped. Used at the patch-branch gate. [10](methodology/10_testing_and_verification.md#two-modes-findings-verification-and-diff-verification)
+- **Diff-verification:** does the proposed patch fix the cited finding without scope creep? Grounded / correct / scoped. Used at the patch-branch gate.
+
+## Context integrity
+
+Instruction file requires a marker on every response; **its absence** means the file dropped out of context → stop, re-read, rehydrate or restart. Smoke alarm, not proof — no gate depends on it. [08](methodology/08_lessons_and_memory.md#the-context-integrity-canary)
 
 Always **fresh session, different model where possible.** [10](methodology/10_testing_and_verification.md#cross-ai-validation)
 

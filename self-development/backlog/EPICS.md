@@ -1,6 +1,6 @@
 # Epics
 
-_Last refreshed: 2026-08-14 (E04 parked by maintainer decision; 5 done, 0 active, 0 planned, 1 parked. **The backlog is empty** — no chartered work remains.)_
+_Last refreshed: 2026-08-14 (E07 chartered, executed and closed — v1.29.0; 6 done, 0 active, 0 planned, 1 parked.)_
 
 ## Rollup
 
@@ -11,9 +11,10 @@ _Last refreshed: 2026-08-14 (E04 parked by maintainer decision; 5 done, 0 active
 | [E05](epics/E05-cheatsheet/README.md) | CHEATSHEET.md (one-page reference) | P1 Doc completeness | **done** (2026-05-25) | Phase 1 | — / 1 | Shipped in v1.15.0 (CHEATSHEET.md at repo root, ~80 lines). |
 | [E03](epics/E03-git-workflow-trim/README.md) | Trim or split `09_git_workflow.md` | P2 Doc clarity | **done** (2026-08-14) | Phase 1 | 0 / 4 | Trim chosen over split; 1,026 → 798 lines (−22%), 24 → 20 sections, zero content lost. Shipped in v1.27.0. |
 | [E04](epics/E04-native-tool-templates/README.md) | Native templates for Cursor / Aider / Continue.dev | P4 Tool compatibility | **parked — will not resume** (2026-08-14) | Phase 1 | 0 / 0 | Dropped by maintainer decision: `AGENTS.md` + adaptation is the permanent answer. Charter preserved with the reasoning. Reopens only if an adopter reports adaptation actually failing. |
+| [E07](epics/E07-agentic-workflow-pass/README.md) | Agentic-workflow landscape pass (context integrity + spec-time verification) | P9 Self-improvement velocity + P1 Doc completeness | **done** (2026-08-14) | Phase 1 | 0 / 5 | Chartered and closed same day at maintainer direction; 5 items shipped in v1.29.0. Personas and severity tiers rejected in review. |
 | [E06](epics/E06-bmad-v6-landscape-pass/README.md) | BMAD v6 landscape pass (context-handoff + review-triage conventions) | P9 Self-improvement velocity + P1 Doc completeness | **done** (2026-08-14) | Phase 1 | 0 / 6 | Chartered and closed same day at maintainer direction; 5 chartered items shipped in v1.25.0, plus BL-0021 promoted from FUTURE.md post-closure and shipped in v1.26.0. 4 Tier-2 ideas remain in FUTURE.md. |
 
-**Counts:** **0 active**, 0 planned, 5 done (E01, E02, E03, E05, E06), 1 parked (E04 — will not resume). **The backlog is empty.**
+**Counts:** **0 active**, 0 planned, 6 done (E01, E02, E03, E05, E06, E07), 1 parked (E04 — will not resume). **The backlog is empty.**
 
 ### WIP cap note
 
@@ -33,7 +34,7 @@ Inverse view: which epics touch each pillar.
 | P6 Example richness | — | — | E01 (secondary) done in v1.15.0 (examples/ folder shipped) |
 | P7 Community feedback loop | — | — | Dormant (Phase 2/3 pillar) |
 | P8 Maintenance sustainability | — | — | Dormant (Phase 3 pillar) |
-| P9 Self-improvement velocity | — | — | First dedicated epic (E06) closed 2026-08-14 — external-landscape import intake, shipped as v1.25.0; pillar otherwise carried by the bootstrap itself |
+| P9 Self-improvement velocity | — | — | Two landscape-import epics closed 2026-08-14: E06 (BMAD, v1.25.0–v1.26.0) and E07 (agentic workflow, v1.29.0) |
 
 **Observation:** Every pillar with a chartered epic has had it closed, and E04 — the last planned one — is parked by decision. **Both WIP slots are free and there is nothing to put in them.** Note also that two of the five closures (E03, E06) ran to completion inside a single maintainer-directed session rather than a sustained `active` period, so the cap has never actually been contended; raising it to 3 (the methodology default) would be premature on that evidence.
 

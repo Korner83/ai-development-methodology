@@ -180,7 +180,7 @@ The tiered-autonomy pattern preserves safety (maintainer's merge gate stays) whi
 | Tier | Examples | Loop autonomy |
 |---|---|---|
 | **T0 — Cosmetic** | Typos, broken anchor `#section`, dead relative path, version-number drift across files. | Loop opens a patch branch (see [`methodology/09_git_workflow.md` "Patch-branch convention"](../methodology/09_git_workflow.md#patch-branch-convention-for-authoritative-artifacts)) with the edit, CHANGELOG entry, and diff-verification request. Maintainer fast-forwards. |
-| **T1 — Surgical** | Stale regex pattern, template/example mismatch, missing-default callout, single-paragraph clarification grounded in a specific finding. | Same as T0 — patch branch + cross-AI diff-verification (per [`methodology/10_testing_and_verification.md` "Diff-verification"](../methodology/10_testing_and_verification.md#two-modes-findings-verification-and-diff-verification)) before the branch is offered for merge. |
+| **T1 — Surgical** | Stale regex pattern, template/example mismatch, missing-default callout, single-paragraph clarification grounded in a specific finding. | Same as T0 — patch branch + cross-AI diff-verification (per [`methodology/10_testing_and_verification.md` "Diff-verification"](../methodology/10_testing_and_verification.md#three-modes-spec--findings--and-diff-verification)) before the branch is offered for merge. |
 | **T2 — Substantive** | Rule wording changes, new constraints, removed concepts, multi-paragraph reframing. | Loop drafts the proposal in `loop-notes/` as advice. Maintainer authors the actual change. |
 | **T3 — Architectural** | New doc, removed doc, discipline restructure, breaking-change to the artifact's shape. | Human-only. Loop can flag the need, can't draft the change. |
 

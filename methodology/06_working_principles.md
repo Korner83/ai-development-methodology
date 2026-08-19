@@ -312,6 +312,7 @@ A short list of behaviors that are always wrong under these principles. Use it a
 | Hand-editing a generated, vendored, or framework-core file instead of its source — or touching a declared protected region without authorization. | P3 (protected regions) |
 | Rewording an approved goal or acceptance criterion to match what was actually built, instead of halting and renegotiating. | P4 (frozen intent) |
 | Patching code to compensate for a plan the review showed to be wrong, instead of fixing the plan and re-deriving the code. | P4 (failure-layer routing) |
+| Fitting new requirements into an architecture those requirements invalidated, rather than surfacing that the architecture is what changed. | P4 (failure-layer routing) |
 | Adding fallback behavior for a state that the type system already rules out. | P2 |
 | Continuing to write code after you have lost the thread, rather than stopping and naming the confusion. | P1 |
 
