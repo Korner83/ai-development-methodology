@@ -2,7 +2,7 @@
 
 > **Pillar goal:** adopters can see how the abstract methodology patterns translate to real projects — not just read about them.
 >
-> **Last updated:** 2026-05-25
+> **Last updated:** 2026-08-19
 
 **Related:**
 - Brief: [Capability layer 6](../brief/08_capability_layers.md#6-example-richness)
@@ -62,7 +62,7 @@ The pillar is *delivered* when:
 - **Over-curated examples that hide real friction.** If the example smooths over the actual messiness of real-project work, it teaches the wrong lesson. Show the loop fix-test, the blocker discovery, the scope split.
 - **Treating the self-development folder as the only example needed.** It's *an* example, but it's a docs-only project. Adopters with code projects need code-shaped examples too.
 
-## 6. Current state (v1.8.0)
+## 6. Current state (last reviewed 2026-08-19; entries below date from v1.8.0 unless noted)
 
 **Strong:**
 
@@ -72,7 +72,7 @@ The pillar is *delivered* when:
 
 **Known gaps:**
 
-- No `examples/` folder yet. The brief's menu (from very early in this project's history) noted this as missing; remains missing.
+- **Corrected 2026-08-19:** this entry read "No `examples/` folder yet … remains missing." `examples/example-project/` shipped in v1.15.0 (epic E01, closed 2026-05-25), which [`EPICS.md`](../backlog/EPICS.md) has recorded correctly the whole time. The narrower gap that remains: the worked example is CLI-shaped and docs-only.
 - No anonymized real-project artifacts beyond inline methodology-doc examples.
 - No public adopter case studies (the project is too new).
 - The self-development folder is docs-only; adopters with code-heavy projects lack a code-shaped worked example.

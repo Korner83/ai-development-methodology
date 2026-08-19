@@ -9,12 +9,11 @@ This is the single source of truth for the changelog.
 
 ## [Unreleased]
 
-_Staged for v1.31.0. **Not released.**
-[Cross-AI findings-verification](methodology/10_testing_and_verification.md#three-modes-spec--findings--and-diff-verification)
-— fresh session, different model, each item's `Done means:` as the checklist — is the gate every
-prior landscape pass passed before `Test: pass`, and it has not run here; the session that authored
-the diff cannot be the one that verifies it. Version badge, `STATUS.md` and the E09 epic's `done`
-marker are all deliberately unbumped until then._
+(nothing yet)
+
+---
+
+## v1.31.0 — 2026-08-19
 
 ### Added: skills-format conformance, and a clarification marker that blocks `ready`
 
@@ -83,21 +82,109 @@ baseline-before-rule sequencing for authoring rules, and Spec Kit's cross-artifa
 Separately, Spec Kit's convergence command was logged in E06's `FUTURE.md` as a **second,
 independent source** for the long-parked brownfield "ratify what's there" idea.
 
+### Fixed: a second review pass — six stale enumerations, three of them gates
+
+An independent session re-derived every count in the repo from the tree rather than reading the
+records. **The v1.30.1 figures reproduce exactly** — 1,003 relative links across 105 tracked
+markdown files, and 1,001 / 105 re-measured from the `v1.30.0` tag — so the correction that
+release made was sound. What did not hold up is the class it opened and did not close: **a rule
+that contains a count goes stale silently, because a wrong count still reads as a fact.**
+
+- **The "5 templates" fix reached two of five places.** v1.30.1 corrected `P1` and `P4`. Three
+  still said five, and two of those are gates rather than prose:
+  [`self-development/AUTONOMOUS_LOOP.md`](self-development/AUTONOMOUS_LOOP.md) **Constraint 2**,
+  the enumeration governing what the loop may edit — `ROLE_BRIEFS.md` sat outside it — and
+  [`strategy/00_master_plan.md`](self-development/strategy/00_master_plan.md), a **Phase 1 exit
+  criterion**; plus [`brief/08_capability_layers.md`](self-development/brief/08_capability_layers.md).
+  This is the anti-pattern `P3` names against itself: *"updating only the line that's wrong rather
+  than scanning for related drift."* While correcting the master plan, a second gap surfaced in the
+  same criterion: it requires each template to carry a **current methodology version stamp**, and
+  no template has ever carried one. Recorded as unmet rather than quietly dropped.
+- **`P1`'s self-evaluation gate under-counted the corpus by two docs** — "All 12 methodology docs"
+  against 14. [`2026-05-first-pass.md`](self-development/evaluations/2026-05-first-pass.md) confirms
+  the pass ran `00`–`11`, so **`12_milestone_evaluation.md` and `13_ai_safety_and_prompt_injection.md`
+  have never been inside the gate that exists to catch drift.** Both postdate the criterion. Now 14,
+  with the old scope disclosed rather than silently replaced.
+- **v1.30.1 landed a v1.30.0 fact under a v1.8.0 heading.** It edited `P1` and `P4` without touching
+  either file's `Last updated: 2026-05-25` or its `## 6. Current state (v1.8.0)`. Both now use the
+  disclosure form `P5` already had, which was the right model sitting unused next door.
+- **`P3` — the doc-currency pillar — was the stalest file in the repo.** It still said the first
+  semi-annual self-evaluation "hasn't happened yet"; it ran 2026-05-25 and is the eval `STATUS.md`
+  quotes. Scanning adjacent pillars per `P3`'s own rule found two more: **`P6`** said "No
+  `examples/` folder yet … remains missing" — it shipped in v1.15.0, and `EPICS.md` has recorded
+  that correctly the whole time — and **`P9`** still listed bootstrap Steps 2–5 as pending, the
+  same bootstrap-era staleness v1.30.0 swept out of `backlog/README.md` but not out of here.
+- **"44 tags for 44 releases"** counted the state *before this release's own tag existed* — the same
+  mid-flight snapshot the line directly above it corrects. It is 45 tags for 45 releases.
+- **`EPICS.md` advertised the cheatsheet at "~80 lines."** It was 97 at close and is 144 today. The
+  same "~80" sat in `E05/ARCHIVE.md`. Both corrected.
+- **Spelling** — one remaining "licence" in the v1.26.0 entry.
+
+### Changed: `CHEATSHEET.md` is back under its 100-line cap and carries v1.30.0
+
+**144 lines against E05's 100-line hard exit criterion, over cap since v1.20.0 — eleven releases.**
+It was also *missing content*: zero mentions of blast radius or role briefs, so v1.30.0's two
+additions never reached the one-page surface. Trimming and wiring-in were therefore the same item,
+not two, which is why this is done here rather than deferred again.
+
+**99 lines. Every rule and every link target from the previous version survives** (checked
+mechanically: all 47 bolded rule phrases and all link targets present, one added for
+`ROLE_BRIEFS.md`). The savings are structural, not editorial cuts: the four working principles fold
+into one overlay bullet, context integrity becomes a seventh overlay rather than its own section,
+lock format joins the lock hard-rule, the routing table becomes bullets, and the two-paragraph
+sections merge. **One thing was deleted** — the closing "Cheatsheet is reference, not learning"
+sign-off, which the header line already says. Added: **blast radius** as the seventh verification
+dimension with its stated limit, and a pointer to `ROLE_BRIEFS.md`.
+
+### Changed: the skill states which methodology version it carries, and what it deliberately omits
+
+[`skills/ai-dev-methodology/SKILL.md`](skills/ai-dev-methodology/SKILL.md) is the one-line-install
+surface and **carried no date of any kind**, so an installed copy could not be checked against the
+repo. It now names the version it tracks — in the body, not the frontmatter, so the field-by-field
+format conformance verified above stays true. It also carries **none of the conventions added in
+v1.22.0 through v1.30.0** (protected regions, attempt cap, frozen intent, layer routing, the memory
+admission test, the canary, spec-verification, doc altitude, blast radius). That is defensible as
+scope — it is an in-session operating contract, not a mirror — but nothing said so, so it read as
+rot. The boundary is now stated, with the omitted conventions named so a reader knows when to go to
+the docs. The version is consequently claimed in **eight** places, not seven; `ACTIVE_CONTEXT.md`
+updated.
+
 ### Verification
 
-**1,110 rendering links across 109 tracked markdown files, zero broken** — measured on the final
-tree after the last edit, per the process fix recorded in v1.30.1. Anchor targets were resolved as
-well as file paths, so the four new cross-doc links to the marker section are checked rather than
-assumed. Line caps: `04_backlog_items.md` **1,036** (cap 1,050; grew 16 against a self-imposed 25),
+**1,118 links across 109 tracked markdown files, zero broken** — measured on the final tree after
+the last edit, per the process fix recorded in v1.30.1. Anchor targets were resolved as well as
+file paths, so the new cross-doc links to the marker section are checked rather than assumed. Line
+caps: `04_backlog_items.md` **1,036** (cap 1,050; grew 16 against a self-imposed 25),
+`CHEATSHEET.md` **99** (cap 100, back under it for the first time since v1.20.0),
 `templates/ROLE_BRIEFS.md` 199 (self-imposed 200), `README.md` 333 (cap 350),
-`skills/ai-dev-methodology/SKILL.md` 131 (the format's 500-line recommendation). Markdown-only
+`skills/ai-dev-methodology/SKILL.md` 135 (the format's 500-line recommendation). Markdown-only
 diff. `https://agentskills.io` returns 200.
 
-**What has not been verified:** cross-AI findings-verification, and a cold read of the new section
-by a session without this context. Both are the maintainer's to run. The tier matrix's T2
-requirement is a separate thing and is already met — it asks that the *maintainer* author
-substantive changes to authoritative content rather than the loop drafting them autonomously, and
-this pass was maintainer-directed from the request onward, on the same basis E08 recorded. The mechanical checks above say the diff is internally consistent; they say
+**Metric note — the denominator changed here.** v1.30.0 and v1.30.1 counted *relative* links only
+(1,001 and 1,003); the 1,118 above counts relative + external + same-file anchors, because this pass
+started resolving anchors too. Both numbers are correct, but only one of them continues the series,
+so the definition belongs next to the count. Of the 1,118, **1,039 are relative** — that is the
+figure comparable to v1.30.1's 1,003. The remaining 55 unresolved paths are the adopter-relative
+template links documented in v1.28.1, unchanged in count.
+
+Two earlier figures were drafted mid-flight during this release and are superseded by the ones
+above: 1,110 (before the correction pass) and 1,120 (before E09 closed). Neither was wrong when
+taken; both were taken before the last edit. **Recording only the final number, and saying what it
+counts, is the v1.30.1 fix actually being applied** rather than restated.
+
+**Cross-AI findings-verification was waived by maintainer decision on 2026-08-19** — not run, not
+passed. Every prior landscape pass (E06, E07, E08) went through it before `Test: pass`, and E06's
+returned 16 PASS / 2 FAIL, so this release carries a verification step less than the three before
+it. Recorded here rather than absorbed silently, because the deviation is the kind the next
+evaluation should weigh. What *did* run: the mechanical checks above, the field-by-field format
+conformance, and — for the correction pass — an independent session re-deriving every count in the
+repo from the tree rather than from the records, which is the same shape as cross-AI validation
+even though it was not chartered as one. A cold read of the new `04` section by a session without
+this context also did not run.
+
+**T2 was satisfied throughout** — the tier matrix asks that the *maintainer* author substantive
+changes to authoritative content rather than the loop drafting them autonomously, and this pass was
+maintainer-directed from the request onward, on the same basis E08 recorded. The mechanical checks above say the diff is internally consistent; they say
 nothing about whether the marker is a good idea, and this record should not be read as if they did.
 
 **At release, these still need moving** and are deliberately untouched: the README version badge
@@ -112,7 +199,7 @@ sentence — which becomes **~17,400 lines across 114 files, longest doc ~1,036 
 
 A post-release review of what v1.30.0 actually shipped, plus the tag gap it surfaced. No rule changed; every item here is a correction.
 
-- **Sixteen releases had no git tag.** Tags stopped at `v1.17.3` and resumed at `v1.30.0` — **v1.18.0 through v1.29.0 shipped untagged**, against the annotated-tag-per-release rule in [`09_git_workflow.md`](methodology/09_git_workflow.md). All sixteen are now tagged, each against the squashed PR commit that introduced its CHANGELOG section, each annotated and dated to its release date with the retroactive tagging disclosed in the tag message. The repo now has 44 tags for 44 releases. **This is the practice-versus-docs divergence the semi-annual evaluation exists to catch, and it went unnoticed for twelve versions** — worth remembering when judging how much the written rules are actually load-bearing.
+- **Sixteen releases had no git tag.** Tags stopped at `v1.17.3` and resumed at `v1.30.0` — **v1.18.0 through v1.29.0 shipped untagged**, against the annotated-tag-per-release rule in [`09_git_workflow.md`](methodology/09_git_workflow.md). All sixteen are now tagged, each against the squashed PR commit that introduced its CHANGELOG section, each annotated and dated to its release date with the retroactive tagging disclosed in the tag message. The repo now has **45 tags for 45 releases** — corrected 2026-08-19 from "44 tags for 44 releases," which counted the state *before this release's own tag existed* and was therefore the same mid-flight snapshot the item above corrects. **This is the practice-versus-docs divergence the semi-annual evaluation exists to catch, and it went unnoticed for twelve versions** — worth remembering when judging how much the written rules are actually load-bearing.
 - **The verification numbers in v1.30.0's own records were wrong.** `E08/ARCHIVE.md` claimed 100 files / 966 links and the CHANGELOG claimed 105 / 994; the real figure is **105 markdown files / 1,001 rendering links, zero broken.** Both were snapshots taken while the work was still in progress. The check was clean every time it ran — what failed is the record, and a verification record a reader cannot reproduce is worth less than none. The fix is process, recorded in E08's archive: **take the count last.**
 - **`P1_doc_completeness.md` and `P4_tool_compatibility.md` still said "5 templates."** There are six as of v1.30.0. Both are live current-state claims in pillar docs, and v1.30.0's own wire-in item missed them — the same staleness class that release spent three separate fixes cleaning up elsewhere.
 - **`STATUS.md` still carried the "no external promotion has happened yet" claim.** v1.30.0 corrected this in `P5` but not here, leaving the two disagreeing. Now corrected in both, with the same content: the claim was inaccurate when the eval wrote it (13 GitHub topics, a live Pages site, two awesome-list submissions), the accurate statement is that no *active campaign* has run, and as of 2026-08-19 none is planned.
@@ -338,7 +425,7 @@ Why trim: the measurement argued against splitting. Mean section length was only
 
 Promotes one deferral from the v1.25.0 landscape pass (E06 `FUTURE.md`, BL-0021) and closes the consistency gaps that release opened in the repo's own content.
 
-- **`methodology/08_lessons_and_memory.md`** — added **"The admission test: derivable from source is never stored"** under "What NOT to save": if a contributor can learn it by reading the repo right now, it is read live and never written down; only **intent, rationale, policy, and observed pitfalls** earn a line, with a not-stored/stored contrast table. Carries two consequences: a consolidation pass **ends smaller or equal, never larger**, and the admission/retirement asymmetry — a rule that is working erases its own evidence, so low reference frequency is never grounds for retirement (cross-linked to the v1.20 archival lifecycle and the `pinned` flag, so the new rule can't be read as licence to prune working rules).
+- **`methodology/08_lessons_and_memory.md`** — added **"The admission test: derivable from source is never stored"** under "What NOT to save": if a contributor can learn it by reading the repo right now, it is read live and never written down; only **intent, rationale, policy, and observed pitfalls** earn a line, with a not-stored/stored contrast table. Carries two consequences: a consolidation pass **ends smaller or equal, never larger**, and the admission/retirement asymmetry — a rule that is working erases its own evidence, so low reference frequency is never grounds for retirement (cross-linked to the v1.20 archival lifecycle and the `pinned` flag, so the new rule can't be read as license to prune working rules).
 
 ### Changed: consistency with v1.25.0
 

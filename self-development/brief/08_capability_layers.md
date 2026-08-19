@@ -60,7 +60,7 @@ The layers are roughly sequentially dependent: doc completeness comes before doc
 **Why it matters:** vendor-neutral is one of the methodology's core values. Tool compatibility is a *prerequisite for adoption*, not a downstream concern — adopters who find the methodology immediately ask "does this work with my tool?" before they read further. If the answer is "you need to use vendor X," adopters who already use vendor Y leave.
 
 **Tested by:**
-- The 5 template files in `templates/` support all 6 major AI tools — 3 natively (Claude Code via CLAUDE.md, Codex/Antigravity via AGENTS.md) and 3 via adaptation from AGENTS.md (Cursor, Aider, Continue.dev). Adaptation is the settled answer: E04 proposed native files for the latter three and was parked 2026-08-14 (sync burden against still-moving vendor conventions, for unreported demand).
+- The 5 tool-facing template files in `templates/` support all 6 major AI tools — 3 natively (Claude Code via CLAUDE.md, Codex/Antigravity via AGENTS.md) and 3 via adaptation from AGENTS.md (Cursor, Aider, Continue.dev). Adaptation is the settled answer: E04 proposed native files for the latter three and was parked 2026-08-14 (sync burden against still-moving vendor conventions, for unreported demand). `templates/` holds six files as of v1.30.0 — the sixth, `ROLE_BRIEFS.md`, is phase-facing rather than tool-facing and so does not change the tool count.
 - Adopter reports of cross-tool use without methodology adjustment.
 - New AI tools entering the field — does the methodology gracefully support them?
 

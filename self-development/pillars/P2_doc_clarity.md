@@ -2,7 +2,7 @@
 
 > **Pillar goal:** any methodology doc can be read once and applied without re-reading.
 >
-> **Last updated:** 2026-05-25
+> **Last updated:** 2026-08-19
 
 **Related:**
 - Brief: [Capability layer 2](../brief/08_capability_layers.md#2-doc-clarity)
@@ -66,7 +66,7 @@ The pillar is *delivered* when:
 - **Defensive caveats stacked.** "This is not legal advice. This is not financial advice. This is not medical advice." (...the methodology is about software.) One caveat where genuinely needed; otherwise none.
 - **Writing in the voice of "the methodology says."** The methodology doesn't have a voice. The maintainer does. Write in plain direct prose; let the methodology emerge from the content.
 
-## 6. Current state (v1.8.0)
+## 6. Current state (last reviewed 2026-08-19; entries below date from v1.8.0 unless noted)
 
 **Strong:**
 

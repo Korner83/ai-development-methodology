@@ -47,7 +47,7 @@ The `self-development/backlog/`, `self-development/evaluations/`, and `self-deve
 
 ### Constraint 2 — Tiered autonomy on templates
 
-The five template files in `templates/` (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md) are adopter-facing artifacts that support six AI tools (three natively, three via adaptation from AGENTS.md). Same tier matrix as Constraint 1:
+The six template files in `templates/` (CLAUDE.md, AGENTS.md, AGENT_KICKOFF.md, AUTONOMOUS_LOOP.md, PROJECT_STRUCTURE.md, ROLE_BRIEFS.md) are adopter-facing artifacts. Five are tool-facing and support six AI tools (three natively, three via adaptation from AGENTS.md); `ROLE_BRIEFS.md` (added v1.30.0) is phase-facing, carrying the per-phase stances. Same tier matrix as Constraint 1:
 
 - **T0 / T1 enabled:** typos, broken anchors, version drift, stale examples grounded in a cold-read finding. Patch branch + cross-AI diff-verification → maintainer fast-forwards.
 - **T2 / T3 disabled:** new template, removed template, change in template shape, addition of a new tool's native support. Loop drafts in `loop-notes/`; maintainer authors.
