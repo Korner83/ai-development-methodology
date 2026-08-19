@@ -13,6 +13,53 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.30.0 — 2026-08-19
+
+### Added: per-phase role briefs, and blast radius as a verification dimension
+
+Two sources: E07's one open question, and a re-read of the same Unity workflow transcript that fed E07 — which turned out to have residue worth extracting. Markdown-only.
+
+- **`templates/ROLE_BRIEFS.md`** (new) — **six paste-able briefs, one per phase that had documented rules but no prompt**: epic chartering, item authoring, implementation, review, verification, milestone evaluation. The two phases that already had prompts (`AGENT_KICKOFF.md`, `AUTONOMOUS_LOOP.md`) are referenced, not duplicated. The design decision that makes it safe is a negative one: **a brief carries no rules of its own.** It names the stance a phase requires and hands off to the doc. A brief that restated a rule would become a second copy that goes stale silently — the failure `07` calls *when all the docs disagree, the docs all lose*. Two briefs carry a constraint that is not obvious from their source doc and would otherwise be re-litigated every time: the review brief routes findings by **layer, not severity** (severity tiers were rejected in E07), and the evaluation brief forbids fixing anything in the session that scored it.
+- **`methodology/10_testing_and_verification.md`** — a **seventh required verification dimension: blast radius.** The existing six — theme, viewport, auth state, empty state, error state, offline state — are all *states of the surface you changed*. None of them asks **what else consumes what I changed, and did I check one of each?** So shared code reached through a different configuration profile, platform build, feature flag, tenant, or locale went unverified by default: correct on the screen you developed against, broken on the three that share it. Its limit is stated in the same breath rather than footnoted, because the failure mode of this dimension is over-trust — it is only as good as your ability to enumerate consumers, and where they are not enumerable it degrades into "run the full suite," which the doc already required, with contract tests at the boundary as the real protection.
+- **`templates/AUTONOMOUS_LOOP.md` + `self-development/AUTONOMOUS_LOOP.md`** — **unattended mode is not a licence to answer your own questions.** Observed rather than theorized: running with approvals bypassed, the source's agent formed a good set of clarifying questions and then resolved them itself. "Make only bounded safe assumptions" does not catch this, because each self-answer is locally reasonable and the loss only appears in aggregate — by the time a human reads the run output, the decisions have been reformatted as findings, and nothing distinguishes a question the maintainer answered from one the agent answered for itself. The test is now operational: **not whether the assumption was reasonable, but whether a human would recognize the choice as theirs.** If yes, it is a halt-and-surface via the blocked-item protocol. A run that surfaces five real questions is worth more than one that silently resolved them.
+
+### Changed: the README's problem/solution table is capped, and the mechanism behind its growth is closed
+
+v1.27.2 got the README from 374 to 333 lines by deleting a duplicate section, and said plainly that this was a **one-time** saving with nothing left to harvest. The table gained a row per convention, so it grew every time the methodology did.
+
+- **The full 21-row table now lives in [`methodology/00_README.md`](methodology/00_README.md#why-this-exists)**, where it replaced a stale five-bullet list that was already a subset of it. This removed a duplication rather than creating one, and all 21 link targets were rewritten from repo-root-relative to sibling-relative.
+- **`README.md` keeps 12 rows** — chosen to sell rather than to enumerate — plus a pointer to the full set. **331 lines.**
+- **The policy is recorded** in `self-development/pillars/P2_doc_clarity.md`, deliberately kept there rather than in the methodology: it is repo-local editorial policy, not a convention adopters have to learn. **A new convention adds its row to `00_README.md`, not to the README.**
+
+### Fixed
+
+- **`self-development/backlog/README.md`** — three bootstrap-era claims that had gone false: the epic tree still listed `01-examples-folder` … `05-cheatsheet` (predating both E06/E07/E08 and the `E0N-` folder rename), the ID space said item numbering "starts at `BL-0001` when Step 3 populates items" (it runs to `BL-0033`), and the status section still described the bootstrap as in progress.
+- **`self-development/backlog/epics/E04-native-tool-templates/BACKLOG.md`** — said the epic was `planned` (not yet active); it has been `parked — will not resume` since 2026-08-14, which `EPICS.md` recorded correctly and this file contradicted.
+- **`self-development/backlog/epics/E07-agentic-workflow-pass/FUTURE.md`** — asserted the role-briefs thread was open *and unscoped*. Closing an open question means closing every place that describes it as open, not only the charter.
+
+### Held, with reasoning (recorded in E08's charter)
+
+Three further findings from the transcript re-read, deferred rather than rejected, each with the symptom that would justify revisiting. **Two-level acceptance criteria** — deriving technical acceptance criteria from a client-language story plus a mapping table proving coverage; a real item-level gap, held because it is a whole new item-body convention that only pays off when someone *else* writes your stories in a language that omits your layer. **Chronological task ordering** so replanning a later step never invalidates completed earlier ones — real, but one clause, and `Approach` plus `Deps` already house sequencing. **Spec and plan as two separately-reviewed artifacts at two altitudes** — held because splitting the item body is a restructure of `04` rather than an addition to it, and the altitude rule plus spec-verification already capture most of the benefit; revisit if Effort L+ items start showing spec churn caused by planning discoveries.
+
+Also verified as **already covered**: the source's preserved question-and-answer artifact is what the [Code Map](methodology/04_backlog_items.md#the-code-map--writing-m-items-for-cold-handoff) already requires, since it carries "which approach was rejected and why."
+
+### Decided: the active-distribution route is closed
+
+The four staged pre-publication drafts in the gitignored `self-development/distribution/` (Show HN post, awesome-list PR text, launch blog post, Discussions seeds) were **deleted** at maintainer direction, on the position that a good project sells itself. They were never tracked, so nothing leaves the public repo — but the decision is recorded here because it closes the only route the project had planned to its own closed-beta milestone.
+
+**What it does not change, stated plainly:** [P5 adopter discoverability](self-development/pillars/P5_adopter_discoverability.md) stays at **6/10** and the closed-beta verdict stays **NOT READY**. Deleting the drafts removed the prepared path to moving that score, not the gap it measures. Adoption now depends entirely on passive channels — GitHub search and topics, the Pages site, and the existing awesome-list listings.
+
+Updated to match: `HUMAN_NEEDED.md` (its sole entry, closed by decision rather than by action, with what would reopen the question), `EPICS.md`, `FEEDBACK.md` (which expected external feedback "until the distribution plan runs"), `P5`, and `.gitignore`, whose distribution block is now dead config.
+
+**A correction surfaced while doing this.** The 2026-05-25 evaluation gave "zero external promotion has happened" as the root cause of the 6/10. That was **already inaccurate when written**: P5's own inventory records 13 GitHub topics, a live Pages site, and two awesome-list submissions (one confirmed live, one merged). The accurate statement is that no *active campaign* had run — and now none is planned. The eval is a dated snapshot and has been left unedited; the correction lives in P5.
+
+### Epic
+
+**E08 chartered, executed, and closed** — BL-0030…BL-0033, all shipped here. Named agent personas were considered and **rejected for the third time** (E06, E07, E08), on unchanged reasoning. Verification: a repo-wide rendering-link check across all 105 markdown files — **994 links, zero broken** — using a checker that models fenced blocks and inline code, per the method note in v1.28.1. Line caps all met: `README.md` 331 (cap 350), `ROLE_BRIEFS.md` 197 (self-imposed 200), longest methodology doc `04_backlog_items.md` 1,020 (cap 1,050).
+
+**The honest caveat, recorded because it is the load-bearing one:** this is the third convention-adding pass in a short window, and **no external adopter has exercised any of them.** BL-0032 and BL-0033 were deliberately written as a row on an existing list and a caution on an existing rule rather than as new named conventions, and `ROLE_BRIEFS.md` is a template — read when used, not memorized. The next semi-annual evaluation's charge is now **v1.25.0–v1.30.0**, and it should check the risk this release makes live: that work gets chartered because it is available to do rather than because anything demanded it.
+
+---
 ## v1.29.0 — 2026-08-14
 
 ### Added: context integrity, spec-time verification, and doc altitude

@@ -10,22 +10,24 @@ self-development/backlog/
 ├── EPICS.md              # rollup of all epics with status counts + pillar coverage
 ├── HUMAN_NEEDED.md       # items blocked on human-only action
 └── epics/
-    ├── 01-examples-folder/
+    ├── E01-examples-folder/
     │   ├── README.md     # charter
-    │   ├── BACKLOG.md    # active items (populated in Step 3)
-    │   ├── ARCHIVE.md    # done items (created when first item closes)
-    │   └── FUTURE.md     # deferred items (created when first deferral happens)
-    ├── 02-first-semiannual-self-evaluation/
-    │   └── README.md (and same shape as above)
-    ├── 03-git-workflow-trim/
-    ├── 04-native-tool-templates/
-    └── 05-cheatsheet/
+    │   ├── BACKLOG.md    # active items
+    │   ├── ARCHIVE.md    # done items
+    │   └── FUTURE.md     # deferred items
+    ├── E02-first-semiannual-self-evaluation/   # same shape as above
+    ├── E03-git-workflow-trim/
+    ├── E04-native-tool-templates/
+    ├── E05-cheatsheet/
+    ├── E06-bmad-v6-landscape-pass/
+    ├── E07-agentic-workflow-pass/
+    └── E08-role-briefs/
 ```
 
 ## ID space
 
-- **Epic IDs:** `E<NN>` (zero-padded). Currently `E01` through `E05`.
-- **Item IDs:** `BL-<####>` monotonic across all epics in this self-development backlog. Starts at `BL-0001` when Step 3 populates items.
+- **Epic IDs:** `E<NN>` (zero-padded). Currently `E01` through `E08`. Folder names carry the `E` prefix (`E01-examples-folder`), per "Standard epic-folder structure" in [`03_epics.md`](../../methodology/03_epics.md).
+- **Item IDs:** `BL-<####>` monotonic across all epics in this self-development backlog, and shared with `FUTURE.md` items so promotion needs no renumbering. Highest assigned: `BL-0033` (E08, v1.30.0).
 
 Per the methodology's [project structure convention](../../templates/PROJECT_STRUCTURE.md): item IDs are repo-wide-monotonic within this backlog (so items can move between epics without renumbering and `grep BL-0042` is unambiguous within the self-development backlog).
 
@@ -33,7 +35,7 @@ Per the methodology's [project structure convention](../../templates/PROJECT_STR
 
 Standard methodology workflow per [`methodology/04_backlog_items.md`](../../methodology/04_backlog_items.md). Three project-specific overrides:
 
-1. **The autonomous loop (when active, after Step 4 of the bootstrap) MUST NOT modify abstract methodology docs in `methodology/` autonomously.** Cycle outputs that suggest methodology changes are surfaced to the maintainer; methodology updates ship as a normal release cycle. The full constraint set is in [`../AUTONOMOUS_LOOP.md`](../AUTONOMOUS_LOOP.md) "Hard constraints."
+1. **The autonomous loop MUST NOT modify abstract methodology docs in `methodology/` autonomously.** Cycle outputs that suggest methodology changes are surfaced to the maintainer; methodology updates ship as a normal release cycle. The full constraint set is in [`../AUTONOMOUS_LOOP.md`](../AUTONOMOUS_LOOP.md) "Hard constraints."
 2. **All releases that touch `self-development/` ship as minor or patch versions of the public repo** — the work is in the public repo, but it's project-meta work, not methodology work. The abstract methodology in `methodology/` versions independently.
 3. **WIP cap is 1 active epic** (not the methodology's typical 3). See `EPICS.md` "WIP cap note" for reasoning. The cap rises after epics close and the maintainer observes the loop's behavior.
 
@@ -45,4 +47,4 @@ Standard methodology workflow per [`methodology/04_backlog_items.md`](../../meth
 
 ## Status
 
-Bootstrapped on 2026-05-25 as Step 2 of the self-development plan. Step 3 (item population in each epic's `BACKLOG.md`) is the next gate.
+Bootstrapped on 2026-05-25; the bootstrap completed long ago. As of v1.30.0: eight epics chartered, six done, one parked (E04, will not resume), one active (E08). Item IDs run to `BL-0033`. The live rollup is [`EPICS.md`](EPICS.md) — this section records origin, not current state.

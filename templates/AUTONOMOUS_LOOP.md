@@ -10,6 +10,7 @@ Pairs with [methodology/](../methodology/). This prompt *operationalizes* the me
 
 - **Use it for** focused milestone work where you've already agreed on the goal and want the AI to grind toward it autonomously between check-ins.
 - **Don't use it for** open-ended exploration, early architecture decisions, or anything where each individual step needs your review.
+- **For a single phase**, use the matching brief in [ROLE_BRIEFS.md](ROLE_BRIEFS.md) instead. This prompt is the unattended multi-item cadence; those are one stance for one phase, run interactively.
 
 Before starting a loop, check that all four qualification conditions hold. If any fails, run the work interactively instead — a loop without them burns tokens without converging:
 
@@ -215,5 +216,6 @@ When the AI produces a confident-sounding answer to a complex problem, also appl
 - **Not a substitute for the methodology.** If you paste this prompt without `docs/methodology/` in the repo, the AI has no operating contract to apply.
 - **Not a substitute for user testing.** The loop terminates only on milestone-level readiness, which includes real-user acceptance — not just automated gates.
 - **Not a permission to skip the DoD.** "Autonomous" means *between approvals,* not *without them.* Every item still passes Definition of Done before it's marked done.
+- **Not a license to answer your own questions.** This is the failure mode unattended runs actually produce, and it does not look like a failure: the agent forms a good clarifying question, then resolves it itself and reports the answer as a finding. Step 12's "bounded safe assumptions" does not catch it, because each self-answer is locally reasonable — the loss is only visible in aggregate, once several have compounded into a design nobody chose. **The test is not whether the assumption was reasonable; it is whether a human would recognize the choice as theirs.** If yes, that is a halt-and-surface, not an assumption: record the blocker, release the lock, log it per the blocked-item protocol in methodology/04, and move to unblocked work. A run that surfaces five real questions is worth more than one that silently resolved them.
 
 The autonomous loop is a *cadence,* not a *bypass.*

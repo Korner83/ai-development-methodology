@@ -248,6 +248,31 @@ If the product is meant to work offline:
 
 Skip this dimension only if the product genuinely does not support offline.
 
+#### Blast radius
+
+The six dimensions above are all *states of the surface you changed.* This one asks a different
+question: **what else consumes what I changed, and did I check one of each?**
+
+- Enumerate the consumers of the code you touched — other callers, other screens, other services.
+- Add the ones that are not code paths: configuration profiles, feature-flag variants, platform or
+  device builds, tenants, plan tiers, locales.
+- Verify at least one representative of each distinct consumer, not just the one you developed
+  against.
+
+Common blast-radius failures:
+
+- A shared component is corrected for the screen in front of you and broken on the three that
+  render it differently.
+- A change is verified on the flag-on path; the flag-off path still ships to most users.
+- A fix is correct on desktop web and wrong on the mobile build that shares the module.
+
+**Its honest limit:** this dimension is only as good as your ability to enumerate. When the
+consumers are listable — and in most codebases a grep for the symbol lists them — list them and
+check one of each. When they are not, this degrades into "run the full suite," which
+[the automated layer](#run-the-full-suite-not-just-the-new-tests) already requires, and the real
+protection is contract tests at the boundary rather than manual sweeps.
+
+
 ### What to do when verification fails
 
 The discipline is: *fix what you find, then re-verify from upstream.*
@@ -451,6 +476,9 @@ The short form. Adapt by removing dimensions that genuinely don't apply.
 - [ ] Empty state verified.
 - [ ] Error state verified (API failure path).
 - [ ] Offline state verified (if applicable).
+- [ ] Blast radius checked: other consumers of the changed code
+      enumerated (profiles, flags, platform builds, tenants, locales)
+      and one representative of each verified.
 - [ ] Documentation updated:
   - [ ] CHANGELOG.
   - [ ] README (if commands or setup changed).

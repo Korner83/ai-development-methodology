@@ -8,13 +8,32 @@ This is the index. It explains why the methodology exists, how the pieces fit to
 
 ## Why this exists
 
-Long-running software projects fail in predictable ways:
+Long-running software projects fail in predictable ways. Each row names one failure mode and the
+practice that closes it. This is the canonical list; the README carries a shortened version.
 
-- **Direction drifts.** Without an explicit long-term anchor, every quarter's plan is litigated from scratch.
-- **Work fragments.** Without a layer between "the vision" and "this week's bug," contributors cannot see how their task ladders up to anything.
-- **Done-ness is fuzzy.** Items are marked complete while still buggy, untested, or undocumented. Trust in the backlog erodes.
-- **Lessons evaporate.** The same mistake gets made every six months because no one wrote down what worked or what burned.
-- **Parallel contributors collide.** Especially with AI agents in the loop, two contributors silently pick the same item and produce conflicting work.
+| The problem | How this set closes it |
+|---|---|
+| Direction drifts; every quarter re-litigates "what are we building?" | [Strategy docs](01_strategy.md) - versioned phases with exit criteria. |
+| "Done" means whatever the contributor decides. | [Definition of Done](07_definition_of_done.md) - six binary gates; hard rule `Status: done` requires `Test: pass`. |
+| "Tests pass" but the page is white, dark mode broken, auth bypassed. | [Actual-UI fix-test loop](10_testing_and_verification.md) with required dimensions. |
+| Lessons evaporate; same mistake every six months. | [Two-layer memory](08_lessons_and_memory.md) - instruction file + memory directory. |
+| Parallel contributors collide; two agents grab the same item silently. | [File-based locks with TTL](05_locks_and_parallel_work.md) - humans and agents, same protocol. |
+| AI agents wander off-task - speculation, scope creep, "while I'm here" refactors. | [Working principles](06_working_principles.md) - distilled from real LLM failure modes. |
+| AI agrees with you and you're both wrong. | [Challenge before consenting](06_working_principles.md). |
+| AI writes broken code AND broken tests that validate it. | [Cheating agent anti-pattern](10_testing_and_verification.md) + cross-AI validation. |
+| The agent quietly reworded the acceptance criteria to match what it built - and the diff looks like editing, not scope change. | [Frozen intent](04_backlog_items.md#frozen-intent--approved-goals-are-human-owned) - an approved goal and `Done means:` are human-owned. Wrong? Halt and renegotiate; never silently amend. |
+| Everything the planning session learned about the codebase dies when that session ends. | [Code Map](04_backlog_items.md#the-code-map--writing-m-items-for-cold-handoff) - at Effort M+, planning drains its investigation into the item body, so a cold session implements from the item alone. |
+| The suite is green, but nothing actually covers the behavior that changed. | [The verification-gap question](07_definition_of_done.md#the-verification-gap-question) - "if this behavior broke, would any test fail?", counting only tests that actually ran. |
+| Review finds a real problem, so the code gets patched - even when the *plan* was what was wrong. | [Failure-layer routing](07_definition_of_done.md#routing-findings-by-failure-layer) - findings are classified by the layer the defect entered and fixed there. Never patch code to compensate for a wrong plan. |
+| Humans become strangers in their own codebase. | [Human roles](11_human_roles.md) - supervisory layer, four anti-patterns. |
+| The trunk breaks; force-push, destructive command, day gone. | [Git workflow rules](09_git_workflow.md) - branch protection, AI never deploys, never destructive. |
+| Work doesn't compound across sessions, contributors, or tools - each new session re-derives the context. | [Plans, items, and memory all persist in files](00_README.md#how-the-system-enables-long-term-multi-session-work). Drop items today; another agent picks them up next week. The backlog *is* the queue. |
+| Picking the next item turns into "whichever feels interesting"; cheap high-value work gets skipped. | [ROI-based prioritization](04_backlog_items.md#prioritization--the-roi-heuristic) - `Priority:` + `Effort:` fields make "highest-impact-per-effort" the default picking rule. Deviation is explicit, not silent. |
+| Human-blocked work freezes agents indefinitely; AI sits on a lock for credentials it'll never get. | [`HUMAN_NEEDED.md`](04_backlog_items.md#human_neededmd--work-blocked-on-human-agency) - dedicated file tracks blocked items so agents release the lock and move on; humans see pending delegations in one place. |
+| The instruction file fills with facts the repo already states, then goes stale and confidently lies. | [The admission test](08_lessons_and_memory.md#the-admission-test-derivable-from-source-is-never-stored) - if a contributor could learn it by reading the repo, it's read live, never stored. Only intent, rationale, policy, and observed pitfalls earn a line. |
+| A session ends mid-task and the next one restarts from nothing. | [Active context](08_lessons_and_memory.md#active-context-the-volatile-working-file) - one volatile file, flushed before a reset and re-read on resume, kept deliberately separate from durable memory. |
+| Long autonomous runs (overnight, weekend, milestone push) drift without a structure to ratchet against. | [`AUTONOMOUS_LOOP.md`](../templates/AUTONOMOUS_LOOP.md) - loop prompt that picks the highest-impact ready item, executes through the DoD, archives, repeats. Stops at milestone, when no ready items remain, or on user check-in. |
+| Done items pile up and become unsearchable; deferred ideas get lost. | `ARCHIVE.md` keeps every done item grep-able forever. `FUTURE.md` keeps deferred ideas alive without cluttering active work. Both are standard files in every epic folder. |
 
 This methodology is a set of practices that prevent each of these. Each doc in the set covers one practice in detail. Read together, they describe a complete, low-overhead system that scales from a solo contributor to a team mixing humans and AI agents.
 
@@ -219,6 +238,7 @@ Different readers need different paths. Pick the one that fits your situation.
 | **AI agent landing in a new session on this codebase** | 00 → 06 → 13 → 07. Then load specifics on demand based on the task. |
 | **Auditing an existing project's process health** | 03 → 04 → 07 → 12 → 05. These layers contain the most observable signals of process health; doc 12's rubric is the aggregate health check. |
 | **Running an autonomous loop / scaling AI-assisted work** | 00 → 06 → 07 → 10 → 12 → `templates/AUTONOMOUS_LOOP.md`. The loop runs items through DoD; doc 12 defines the periodic deep-eval that runs every Nth loop. |
+| **Working one phase at a time with an agent** | The phase's own doc, plus its brief in [`templates/ROLE_BRIEFS.md`](../templates/ROLE_BRIEFS.md) — a paste-able stance for chartering, item authoring, implementation, review, verification, and milestone evaluation. Each brief points back at the doc rather than restating it. |
 
 The docs are designed to be readable in any order — each cross-links to the others. The reading paths above are recommendations to keep the first read efficient.
 
