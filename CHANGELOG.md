@@ -13,6 +13,29 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.30.1 — 2026-08-19
+
+### Fixed: a review pass over v1.30.0, and sixteen missing release tags
+
+A post-release review of what v1.30.0 actually shipped, plus the tag gap it surfaced. No rule changed; every item here is a correction.
+
+- **Sixteen releases had no git tag.** Tags stopped at `v1.17.3` and resumed at `v1.30.0` — **v1.18.0 through v1.29.0 shipped untagged**, against the annotated-tag-per-release rule in [`09_git_workflow.md`](methodology/09_git_workflow.md). All sixteen are now tagged, each against the squashed PR commit that introduced its CHANGELOG section, each annotated and dated to its release date with the retroactive tagging disclosed in the tag message. The repo now has 44 tags for 44 releases. **This is the practice-versus-docs divergence the semi-annual evaluation exists to catch, and it went unnoticed for twelve versions** — worth remembering when judging how much the written rules are actually load-bearing.
+- **The verification numbers in v1.30.0's own records were wrong.** `E08/ARCHIVE.md` claimed 100 files / 966 links and the CHANGELOG claimed 105 / 994; the real figure is **105 markdown files / 1,001 rendering links, zero broken.** Both were snapshots taken while the work was still in progress. The check was clean every time it ran — what failed is the record, and a verification record a reader cannot reproduce is worth less than none. The fix is process, recorded in E08's archive: **take the count last.**
+- **`P1_doc_completeness.md` and `P4_tool_compatibility.md` still said "5 templates."** There are six as of v1.30.0. Both are live current-state claims in pillar docs, and v1.30.0's own wire-in item missed them — the same staleness class that release spent three separate fixes cleaning up elsewhere.
+- **`STATUS.md` still carried the "no external promotion has happened yet" claim.** v1.30.0 corrected this in `P5` but not here, leaving the two disagreeing. Now corrected in both, with the same content: the claim was inaccurate when the eval wrote it (13 GitHub topics, a live Pages site, two awesome-list submissions), the accurate statement is that no *active campaign* has run, and as of 2026-08-19 none is planned.
+- **`skills/ai-dev-methodology/SKILL.md`** now points at `ROLE_BRIEFS.md`. The skill is the one-line-install surface, so an agent installing it would otherwise never learn the briefs exist.
+- **Spelling** — "licence" to "license" in the v1.30.0 entry, matching the source file it describes and the other 25 uses in the repo.
+
+### Known and deliberately not fixed here
+
+**`CHEATSHEET.md` is 144 lines against its own 100-line cap** (`E05`'s charter). Pre-existing, unrelated to v1.30.0, and trimming it is an editorial exercise that deserves its own item rather than a drive-by in a patch release.
+
+### Verification
+
+**1,003 rendering links across 105 markdown files, zero broken**, measured on the final tree after the last edit rather than mid-flight — which is the point of the correction above. The v1.30.0 figure now recorded in that release's entry (1,001 / 105) was measured by checking out the `v1.30.0` tag and running the checker against that tree, so it states what was true at that release rather than what is true now.
+
+---
+
 ## v1.30.0 — 2026-08-19
 
 ### Added: per-phase role briefs, and blast radius as a verification dimension
@@ -21,7 +44,7 @@ Two sources: E07's one open question, and a re-read of the same Unity workflow t
 
 - **`templates/ROLE_BRIEFS.md`** (new) — **six paste-able briefs, one per phase that had documented rules but no prompt**: epic chartering, item authoring, implementation, review, verification, milestone evaluation. The two phases that already had prompts (`AGENT_KICKOFF.md`, `AUTONOMOUS_LOOP.md`) are referenced, not duplicated. The design decision that makes it safe is a negative one: **a brief carries no rules of its own.** It names the stance a phase requires and hands off to the doc. A brief that restated a rule would become a second copy that goes stale silently — the failure `07` calls *when all the docs disagree, the docs all lose*. Two briefs carry a constraint that is not obvious from their source doc and would otherwise be re-litigated every time: the review brief routes findings by **layer, not severity** (severity tiers were rejected in E07), and the evaluation brief forbids fixing anything in the session that scored it.
 - **`methodology/10_testing_and_verification.md`** — a **seventh required verification dimension: blast radius.** The existing six — theme, viewport, auth state, empty state, error state, offline state — are all *states of the surface you changed*. None of them asks **what else consumes what I changed, and did I check one of each?** So shared code reached through a different configuration profile, platform build, feature flag, tenant, or locale went unverified by default: correct on the screen you developed against, broken on the three that share it. Its limit is stated in the same breath rather than footnoted, because the failure mode of this dimension is over-trust — it is only as good as your ability to enumerate consumers, and where they are not enumerable it degrades into "run the full suite," which the doc already required, with contract tests at the boundary as the real protection.
-- **`templates/AUTONOMOUS_LOOP.md` + `self-development/AUTONOMOUS_LOOP.md`** — **unattended mode is not a licence to answer your own questions.** Observed rather than theorized: running with approvals bypassed, the source's agent formed a good set of clarifying questions and then resolved them itself. "Make only bounded safe assumptions" does not catch this, because each self-answer is locally reasonable and the loss only appears in aggregate — by the time a human reads the run output, the decisions have been reformatted as findings, and nothing distinguishes a question the maintainer answered from one the agent answered for itself. The test is now operational: **not whether the assumption was reasonable, but whether a human would recognize the choice as theirs.** If yes, it is a halt-and-surface via the blocked-item protocol. A run that surfaces five real questions is worth more than one that silently resolved them.
+- **`templates/AUTONOMOUS_LOOP.md` + `self-development/AUTONOMOUS_LOOP.md`** — **unattended mode is not a license to answer your own questions.** Observed rather than theorized: running with approvals bypassed, the source's agent formed a good set of clarifying questions and then resolved them itself. "Make only bounded safe assumptions" does not catch this, because each self-answer is locally reasonable and the loss only appears in aggregate — by the time a human reads the run output, the decisions have been reformatted as findings, and nothing distinguishes a question the maintainer answered from one the agent answered for itself. The test is now operational: **not whether the assumption was reasonable, but whether a human would recognize the choice as theirs.** If yes, it is a halt-and-surface via the blocked-item protocol. A run that surfaces five real questions is worth more than one that silently resolved them.
 
 ### Changed: the README's problem/solution table is capped, and the mechanism behind its growth is closed
 
@@ -55,7 +78,7 @@ Updated to match: `HUMAN_NEEDED.md` (its sole entry, closed by decision rather t
 
 ### Epic
 
-**E08 chartered, executed, and closed** — BL-0030…BL-0033, all shipped here. Named agent personas were considered and **rejected for the third time** (E06, E07, E08), on unchanged reasoning. Verification: a repo-wide rendering-link check across all 105 markdown files — **994 links, zero broken** — using a checker that models fenced blocks and inline code, per the method note in v1.28.1. Line caps all met: `README.md` 331 (cap 350), `ROLE_BRIEFS.md` 197 (self-imposed 200), longest methodology doc `04_backlog_items.md` 1,020 (cap 1,050).
+**E08 chartered, executed, and closed** — BL-0030…BL-0033, all shipped here. Named agent personas were considered and **rejected for the third time** (E06, E07, E08), on unchanged reasoning. Verification: a repo-wide rendering-link check across all 105 markdown files — **1,001 links, zero broken** — using a checker that models fenced blocks and inline code, per the method note in v1.28.1. Line caps all met: `README.md` 331 (cap 350), `ROLE_BRIEFS.md` 197 (self-imposed 200), longest methodology doc `04_backlog_items.md` 1,020 (cap 1,050).
 
 **The honest caveat, recorded because it is the load-bearing one:** this is the third convention-adding pass in a short window, and **no external adopter has exercised any of them.** BL-0032 and BL-0033 were deliberately written as a row on an existing list and a caution on an existing rule rather than as new named conventions, and `ROLE_BRIEFS.md` is a template — read when used, not memorized. The next semi-annual evaluation's charge is now **v1.25.0–v1.30.0**, and it should check the risk this release makes live: that work gets chartered because it is available to do rather than because anything demanded it.
 

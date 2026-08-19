@@ -124,4 +124,6 @@ A compact gate to self-apply before marking any work complete under this methodo
 
 ## Full docs (read for depth)
 
+Per-phase stances (chartering, item authoring, implementation, review, verification, milestone evaluation) have paste-able briefs: [ROLE_BRIEFS.md](https://github.com/Korner83/ai-development-methodology/blob/main/templates/ROLE_BRIEFS.md).
+
 The methodology is 14 short docs (00–13): strategy, pillars, epics, items, locks, working principles, Definition of Done, lessons + memory, git workflow, testing + verification, human roles, milestone evaluation, and AI safety. Start at [00_README.md](https://github.com/Korner83/ai-development-methodology/blob/main/methodology/00_README.md).
