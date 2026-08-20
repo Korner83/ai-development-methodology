@@ -149,7 +149,7 @@ Zero issues at the end of this pass is the bar.
 The item's metadata must match reality:
 
 - `Status: done`
-- `Test: pass` (never flip `Status: done` from any other Test value — see hard rule below)
+- `Test: pass` — or one of the two narrow exceptions in [the hard rule](#the-hard-rule) below. Gate 6 does not restate the rule; the hard rule is the only definition.
 - `Lock: —` (lock released)
 - The item moved from the epic's `BACKLOG.md` to `ARCHIVE.md` (see [`04_backlog_items.md` "Lifecycle of an item"](04_backlog_items.md#lifecycle-of-an-item) for the archive mechanics).
 - The epic's rollup count incremented (`done` count up by one, `open` count down by one — see [`03_epics.md` "Epic rollup (`EPICS.md`)"](03_epics.md#epic-rollup-epicsmd) for the rollup format).
@@ -463,9 +463,11 @@ Definition of Done (every item, no exceptions):
 [ ] Backlog state correct: Status: done, Test: pass, Lock: —, item moved
     to ARCHIVE.md, epic rollup counts updated.
 
-Hard rule: Status: done REQUIRES Test: pass. If you cannot tick Test: pass,
-the item stays at to-be-tested or under-review. Never flip to done from
-not-tested / fail: / regression-needed.
+Hard rule: Status: done REQUIRES Test: pass -- or one of exactly two narrow
+exceptions: manual-verified (with a regression-needed follow-up item), or
+n/a (with a body-documented reason). Nothing else closes an item. Never flip
+to done from not-tested / pending / partial / fail: / regression-needed; the
+item stays at to-be-tested or under-review until it earns one of the three.
 
 "Servers up" / "tests pass" is not proof. The UI gate is required.
 ```

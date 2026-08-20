@@ -7,9 +7,150 @@ This is the single source of truth for the changelog.
 
 ---
 
-## [Unreleased]
+## v1.32.0 — 2026-08-20
 
-(nothing yet)
+### Fixed: one answer per rule — the response to an external baseline audit
+
+Output of **E10**. An external cold, read-only audit of `be93a05` (v1.30.1) returned **"Not sound for
+stated use"**: 1 Critical, 5 High, 4 Medium, 1 Low. **Ten of the eleven findings still stood at v1.31.0**,
+re-verified against the working tree rather than against these entries. This release closes every Critical
+and High one.
+
+The pattern underneath most of them is worth stating once: **the authoritative sentence was usually right,
+and the surface shaped for *copying* was wrong** — the pasteable DoD checklist, the frontmatter table you
+paste when filing an item, the recording example, the destructive-ops rule of thumb. A cold agent copies
+the wrong rule because it is the one presented for copying.
+
+- **`05_locks_and_parallel_work.md` — the Critical.** Three sentences could not all be true: the lock "is
+  the authority" preventing collision; lock commits live on the active branch, "often the feature branch";
+  every change lands on the trunk via PR. **A contributor pulling the trunk cannot see a lock on someone
+  else's unmerged branch.** Two agents both read `Lock: —`, both push to *different* refs, both succeed —
+  git rejects a non-fast-forward only when two writers update the **same** ref. Both do the work; the
+  conflict appears at merge, after the duplication.
+  The rule is now **a lock has authority only where it is visible**, and the default protocol is named for
+  what it is: cooperative signalling with late collision detection. An opt-in **shared-ref protocol** makes
+  the strong claim true — all lock writes target one ref, the loser's push is rejected, and **that
+  rejection is the compare-and-swap.** No service, no dependency. `09`'s cross-reference was backwards and
+  is inverted: branch protection is what keeps acquires off the trunk, so it is what *hides* the lock, not
+  what enforces it. `STATUS.md`'s battle-tested claim is qualified to the form actually exercised.
+- **`11_human_roles.md`, `09`, `13`, both templates — "destructive" was one word doing three jobs.**
+  "The AI doesn't act, period" / "agents surface, never execute" / "explicit per-operation authorization"
+  / "never *autonomously*", all on an irreversible boundary. Now two disjoint classes: **`approval-gated`**
+  (the agent may execute after an explicit, scoped, per-operation yes that does not carry to the next one)
+  and **`agent-prohibited`** (a human executes; a yes authorizes *the human*, not the agent). The line is
+  **blast radius, not danger.** This resolves the "user direction overrides everything" versus "the AI
+  doesn't act, period" conflict **without amending either** — the prohibited class is defined by who acts,
+  not who consents, so there is nothing for consent to unlock. Six git rows loosened from prohibited to
+  gated; the production subset did not move, and the wording those rows moved *to* is what
+  `templates/AGENTS.md` has shipped since before the audit. **`templates/CLAUDE.md` gained the destructive
+  rule it never had** — its absence had been justified as "covered implicitly by Claude Code's harness",
+  an assumption about one vendor standing in for a safety rule.
+- **`13_ai_safety_and_prompt_injection.md` — trust follows provenance, not the filename.** A contributor
+  edits `AGENTS.md` inside their PR, an agent checks the branch out, the harness auto-loads the modified
+  file **before the diff is read.** No injection marker needed — the file is believed because of where it
+  sits. Authority files are now read **from the reviewed base commit** when evaluating an untrusted branch.
+  The doc already made this argument for backlog items ("anyone, or any prior agent, can write them") and
+  had simply not applied it upward. **Rank is earned at review, not at the path.**
+- **`04`, `00`, `07`, `03` and the examples — the `Test` enum has one definition again.** Eight canonical
+  values; the frontmatter table an agent pastes listed four, and the index's table the same four —
+  omitting `manual-verified` and `n/a`, **two of which the index's own hard rule depends on twelve lines
+  later.** Gate 6 said `pass` and "never any other value" immediately before the hard rule granting two
+  exceptions. Gate 6 now states no rule at all; it points at the one definition. A no-subset rule binds.
+  Grepping under it found drift the audit had not: `03_epics.md` claimed its epic `TEST.md` column
+  "mirrors the Test enum" and then listed seven values including **`not-run`, which exists nowhere in the
+  enum**, inherited into three rows of the example project.
+- **`10_testing_and_verification.md` — `pass` is reserved for the level the change requires.** The
+  examples sanctioned `Test: pass (L3) — cross-AI validated, awaiting user gate` while new features
+  require L4 and levels are cumulative. **`Test:` is a machine-readable token and the DoD closes an item
+  from any value beginning with `pass`** — the prose after the dash does not hold the gate. Now
+  `partial (L3; L4 pending)`, a value the enum already had and nothing pointed at. The DoD's
+  `pass → done` rule is untouched; it was never the defect.
+- **`skills/ai-dev-methodology/SKILL.md` — it did not parse.** `description` was an unquoted plain scalar
+  containing `question: `, so a strict `yaml.safe_load` raised `ScannerError` at line 3, column 212 and
+  **an adopter on a spec-compliant loader could not install it at all.** Fixed by quoting; the text is
+  byte-identical inside the quotes. The same file also carried a retired solo-maintainer trunk exception
+  and a claim that a project's instruction file wins outright; both are gone, and it now defers to `00`'s
+  authority ladder. **How this survived v1.31.0 is the useful part:** that release's field-by-field
+  conformance check recorded `description` as "472 of 1024" — it measured the value's length and never
+  invoked a parser.
+- **`09_git_workflow.md` — counts in a release entry carry an as-of marker.** A stated live total is false
+  the moment the release's own tag is pushed. Three times in this lineage: 44/44, 45/45, and the tree is
+  46/46 — and the v1.31.0 entry **names the failure mode in the same sentence that commits it.** Counts
+  now state arithmetic rather than totals, and corrections go forward because a published entry is history.
+- **`.github/workflows/gitleaks.yml`, `SECURITY.md`, `README.md` — the no-supply-chain claim was false.**
+  `SECURITY.md` said there were no dependencies and that code-scanning tooling did not apply; the one
+  workflow pulled `actions/checkout@v4` and `gitleaks/gitleaks-action@v2` **by mutable major tag** and
+  passed the repository token to the second, on every push. A repointed tag runs attacker code with that
+  token. Both are now full commit SHAs with version comments. **No workflow was added and no script was
+  committed** — this is two `uses:` lines. The claims are *narrowed, not deleted*: the delivered artifact
+  still executes nothing on clone and has no package dependencies; what is no longer claimed is the
+  absence of a supply chain, because the two actions are one — ours, not an adopter's.
+- **New root `AGENTS.md` — the repo now does what it tells adopters to do.** `13` instructs every adopter
+  to paste the safety block into a project instruction file, and **this repository had none**, so agents
+  working here never loaded the checklist it publishes. 49 lines, almost entirely links; the single
+  duplication is the block the methodology itself says to paste verbatim, verified byte-identical rather
+  than retyped.
+- **`self-development/` — three stale records refreshed from the tree.** The backlog README described
+  E01–E08, `BL-0033` and a WIP cap of 1 — stale by two epics, twenty-two IDs and a cap — and drew the
+  **four**-file epic shape as if it were the convention, so the repo contradicted `03`'s five-file rule
+  **and the filesystem matched the diagram rather than the methodology.**
+
+- **New `self-development/ADOPTION_PROFILE.md` — how much of this methodology this repo actually uses.**
+  The README presents `self-development/` as the methodology applied to itself; **the partiality was
+  nowhere stated**, so an adopter could copy an omission and think it was the convention. The profile
+  opens with the omissions on purpose: no committed checker, no `memory/` directory of its own, no
+  context-integrity canary — and the largest, that a docs-only instance **cannot exercise the
+  UI-verification and testing chapters at all.**
+- **All ten epic folders now carry all five files.** `03` has required five since it was written; this
+  backlog shipped four, and its own README drew four as if that were the convention. The nine back-filled
+  `TEST.md` files are **empty-but-present with a pointer to the real verification record** in each
+  `ARCHIVE.md` — **no acceptance rows were reconstructed**, because inventing scenarios that never ran
+  would be fabricated evidence in a repo audited for asserting unperformed checks.
+- **New `self-development/RELEASE_EVIDENCE.md` — the commands behind every published number**, plus the
+  six line budgets that bind this repo, which until now existed only inside closed epic charters. A
+  contributor editing a file fourteen lines from its cap had no way to find the cap.
+- **`methodology/00_README.md` — a map of where each rule is restated.** The only propagation instruction
+  in the entire corpus covered exactly one rule, which is why five hard-rules lists existed with five
+  different memberships. Eight rows, one governing line — *a surface reproduces the rule in full or
+  carries none of it and links* — and it adds nothing to obey.
+- **A sweep of every convention added v1.25.0 → v1.31.0** (`self-development/evaluations/2026-08-20-convention-sweep.md`).
+  **6 of 16 have ever been exercised, and 3 of those for the first time on 2026-08-20** — by this epic.
+  Two could not have been: the canary and the verbosity setting both need a project instruction file, and
+  this repo had none until today. **Unexercised is not wrong**, and no convention was retired here; the
+  finding is that the project has been generating rules faster than it generates evidence.
+
+### Verification
+
+**1,151 relative links across 127 markdown files, zero broken** — 55 are adopter-relative links in the
+templates that resolve only after install, the same 55 the external audit isolated independently. Caps
+hold, counts taken after the final edit: `04_backlog_items.md` **1,036 of 1,050 with a net change of
+zero**; `00` 547, `09` 815, `10` 791, `05` 565, `11` 357, `13` 146; `README.md` 333/350, `CHEATSHEET.md`
+99/100, `ROLE_BRIEFS.md` 199/200, root `AGENTS.md` 49/50. Skill frontmatter parses; `description` 472 of
+1,024, unchanged. **Zero executable files in the tree**; both workflow `uses:` refs are full 40-character
+SHAs. **46 tags as of this release commit**; this release's annotated tag makes 47, matching the 47 changelog
+headings this entry creates. Every one of these was produced by a command in
+[`RELEASE_EVIDENCE.md`](self-development/RELEASE_EVIDENCE.md), which is the point of that file.
+
+### Rejected, with reasoning
+
+**A committed integrity checker, and any new CI.** This would have been the real fix for the recurring
+count drift, and it is declined by maintainer decision: **this repository ships no runnable elements.**
+The cost is stated rather than hidden — F-08 and F-11 now have a *convention* rather than a *control*, so
+hand-maintained counts can drift again and the next occurrence will be caught by a reader, not a build.
+What replaces it is that the commands are written down and reproducible by anyone.
+
+**Mandatory trunk-anchored lock acquisition.** It would have made the original authority claim true as
+written, at the cost of amending *never commit directly to the trunk* and a major version — on behalf of
+a guarantee no adopter has asked for, because there are no adopters. The opt-in form makes it available to
+anyone who needs it.
+
+**Averaging the three destructive framings into one middle position.** Every candidate wording made at
+least one currently-true sentence false. Splitting the category was the only reading under which all of
+them survive.
+
+**Amending `03_epics.md` so the four-file epic shape becomes conformant.** One line, and declined:
+weakening a rule to match what was built is the same move as rewording `Done means:` to match what
+shipped, which frozen intent forbids. The rule stands and the practice catches up.
 
 ---
 

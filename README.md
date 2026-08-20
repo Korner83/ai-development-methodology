@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="License: CC BY 4.0" src="https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg"></a>
-  <a href="CHANGELOG.md"><img alt="Methodology version" src="https://img.shields.io/badge/methodology-v1.31.0-1e40af"></a>
+  <a href="CHANGELOG.md"><img alt="Methodology version" src="https://img.shields.io/badge/methodology-v1.32.0-1e40af"></a>
   <a href="SECURITY.md"><img alt="No code - markdown + git" src="https://img.shields.io/badge/code-none%20%C2%B7%20markdown%20%2B%20git-2ea44f"></a>
   <a href=".github/workflows/gitleaks.yml"><img alt="gitleaks secret scan" src="https://github.com/Korner83/ai-development-methodology/actions/workflows/gitleaks.yml/badge.svg"></a>
 </p>
@@ -30,7 +30,7 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Autonomous goal-oriented development cycles** - paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration - 0–10 rubric per area; unsolvable issues get *handled/postponed/marked* after a default 3-attempt cap, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/)). Currently [v1.31.0](CHANGELOG.md).
+- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/), and [what that instance actually adopts](self-development/ADOPTION_PROFILE.md)). Currently [v1.32.0](CHANGELOG.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
 
 ---
@@ -150,7 +150,7 @@ ai-development-methodology/
 └── .github/workflows/        # gitleaks secret scan - the only CI, read-only
 ```
 
-~17,500 lines across 109 markdown files at v1.31.0 (114 tracked files in total). Longest doc ~1,036 lines. Each doc is self-contained - read in any order.
+~18,900 lines across 127 markdown files at v1.32.0 (132 tracked files in total). Longest doc ~1,036 lines. Each doc is self-contained - read in any order.
 
 ---
 
@@ -179,7 +179,7 @@ flowchart TB
 
     EPICS ==>|"items live inside each epic's BACKLOG.md"| ITEMS
 
-    ITEMS["🔖 <b>Items - BL-XXXX format</b> &nbsp; (sized to the contributor: 1–2 weeks for humans · daily for AI)<br/><br/>Summary table at top - one line per item: <code>ID │ Title │ Priority │ Effort │ Status</code><br/><br/>Each item's detailed block has frontmatter fields:<br/>· <b>Pillar:</b> P3 &nbsp;&nbsp; · <b>Priority:</b> P0–P3 &nbsp;&nbsp; · <b>Effort:</b> XS–XL<br/>· <b>Status:</b> backlog → ready → in-progress → under-review → to-be-tested → done<br/>· <b>Test:</b> not-tested → pass &nbsp;&nbsp; · <b>Lock:</b> &lt;holder&gt;@&lt;TTL-expiry&gt;<br/>+ body: goal · plan · verification step per substep<br/><br/><i>No separate ticket types - features, bug fixes, tasks, and user stories all use the same BL-XXXX shape.</i>"]
+    ITEMS["🔖 <b>Items - BL-XXXX format</b> &nbsp; (sized to the contributor: 1–2 weeks for humans · daily for AI)<br/><br/>Summary table at top - one line per item: <code>ID │ Title │ Priority │ Effort │ Status</code><br/><br/>Each item's detailed block has frontmatter fields:<br/>· <b>Pillar:</b> P3 &nbsp;&nbsp; · <b>Priority:</b> P0–P3 &nbsp;&nbsp; · <b>Effort:</b> XS–XL<br/>· <b>Status:</b> backlog → ready → in-progress → under-review → to-be-tested → done<br/>· <b>Test:</b> canonical path not-tested → pending → pass (8 values in all - see 04) &nbsp;&nbsp; · <b>Lock:</b> &lt;holder&gt;@&lt;TTL-expiry&gt;<br/>+ body: goal · plan · verification step per substep<br/><br/><i>No separate ticket types - features, bug fixes, tasks, and user stories all use the same BL-XXXX shape.</i>"]
 ```
 
 **Step 0 is foundational.** The brief (product, target user, market, viability, tech stack, capability layers) is *your* work, not the methodology's. The methodology *records and operationalizes* those decisions; it does not invent them. Skipping this produces a velocity illusion - shipping confidently-built wrong product. See the "Step 0" callout in [How to use it](#how-to-use-it) for the long version.
@@ -300,12 +300,12 @@ Not legal advice - if you're under regulated-industry, data-residency, or classi
 
 ## Security & trust
 
-This repo is **markdown and git - no code, no dependencies, no build step, no install scripts, no telemetry.** Nothing runs when you clone or open it, which makes it auditable in minutes: inspect the tree and confirm there's nothing to execute. The usual code-scanning tooling (CodeQL, Dependabot, dependency audits) doesn't apply because there's no code or supply chain to scan.
+This repo is **markdown and git - no package dependencies, no build step, no install scripts, no telemetry.** Nothing runs when you clone or open it, which makes it auditable in minutes: inspect the tree and confirm there's nothing to execute. Code-scanning tooling has nothing to analyse in what you clone. **One narrower claim, stated precisely:** this repository's own CI runs a secret scan that uses two third-party GitHub Actions, pinned to commit SHAs - a dependency surface that is ours, not yours. See [SECURITY.md](SECURITY.md).
 
 The methodology's job is to govern *which instructions an AI agent obeys* - its central safety rule is **treat external content as data, not instructions.** [methodology/13_ai_safety_and_prompt_injection.md](methodology/13_ai_safety_and_prompt_injection.md) holds the prompt-injection threat model and the defensive rules; the same rules are carried into the [templates](templates/) so downstream agents load them directly.
 
 - **Report a concern:** [SECURITY.md](SECURITY.md) - private disclosure to [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
-- **Verify it yourself:** no `package.json` or source to run; `gitleaks detect` reports zero secrets, run on every push via [`.github/workflows/gitleaks.yml`](.github/workflows/gitleaks.yml).
+- **Verify it yourself:** no `package.json` or source to run; `gitleaks detect` reports zero secrets, run on every push via [`.github/workflows/gitleaks.yml`](.github/workflows/gitleaks.yml) - whose two actions are SHA-pinned, so you can read exactly what runs.
 
 ---
 
@@ -322,7 +322,7 @@ For modified versions, indicate you've made changes. Only obligation the license
 
 ## Status
 
-Battle-tested in one production project. Currently v1.31.0 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Currently v1.32.0 - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 

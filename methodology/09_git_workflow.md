@@ -467,7 +467,7 @@ If you need shared installation state (e.g., a shared package cache), use the pa
 
 ## What AI agents can and can't do in git — the operation table
 
-One table, three autonomy levels. ✓ = do it without asking. ⚠ = surface the intent and wait for an explicit yes. ✗ = never autonomously; the operation is destructive or irreversible, and the note says what it costs.
+One table, three autonomy levels, matching the [destructive classes in 11](11_human_roles.md#the-two-destructive-classes--and-what-a-users-yes-does-to-each). ✓ = do it without asking. ⚠ = **`approval-gated`**: surface the intent and wait for an explicit, scoped yes — then the agent may execute. ✗ = **`agent-prohibited`**: a human executes, always; the note says what the operation costs.
 
 Pairs with the [decision-ownership matrix in 11_human_roles.md](11_human_roles.md#the-decision-ownership-matrix), which covers decisions broadly. This table is git-operation-specific.
 
@@ -479,7 +479,7 @@ Pairs with the [decision-ownership matrix in 11_human_roles.md](11_human_roles.m
 | `git push origin <feature-branch>` | ✓ | Pushing the agent's own feature branch. |
 | `git fetch` / `git pull --ff-only` | ✓ | Idempotent sync (not strictly read-only — `pull --ff-only` updates local refs and the working tree, but only if a fast-forward is possible; the flag prevents accidental merges). |
 | `git checkout <branch>` (in a worktree the agent owns) | ✓ | In its own worktree, not the user's primary checkout. |
-| `git worktree add` / `git worktree remove` (own, clean) | ✓ | Manage agent's own isolation. `remove --force` is ✗ — see below. |
+| `git worktree add` / `git worktree remove` (own, clean) | ✓ | Manage agent's own isolation. `remove --force` is ⚠ — see below. |
 | `git merge <other>` (into agent's own feature branch) | ✓ | Bringing trunk into feature is normal. |
 | `git rebase <upstream>` (own feature branch, not pushed-and-shared) | ✓ | Rewriting your own un-shared history is fine. |
 | `gh pr create` / `gh pr comment` / `gh pr view` | ✓ | Standard PR workflow on agent's own branch. |
@@ -491,20 +491,26 @@ Pairs with the [decision-ownership matrix in 11_human_roles.md](11_human_roles.m
 | `git rebase --onto` | ⚠ | Rewrites commits onto a new base; can lose commits if mishandled. |
 | `git push --force` | ✗ | Overwrites the remote branch. Work others based on the previous version becomes orphaned. |
 | `git push --force-with-lease` | ✗ | Safer than `--force` but still rewrites; safe only if no one else has pushed since you pulled. |
-| `git reset --hard` | ✗ | Discards uncommitted changes and resets HEAD. Local-only work is gone. |
-| `git checkout -- <file>` / `git restore <file>` / `git checkout .` | ✗ | Discards uncommitted changes in the working tree. |
-| `git clean -fd` / `-fdx` | ✗ | Removes untracked files — and with `-x`, ignored files too, including `.gitignore`d contents. |
-| `git branch -D` | ✗ | Force-deletes a branch even if unmerged; its commits may become unreachable. |
-| `git worktree remove --force` | ✗ | Removes a worktree along with its uncommitted changes. |
+| `git reset --hard` | ⚠ | Discards uncommitted changes and resets HEAD. Local-only work is gone. |
+| `git checkout -- <file>` / `git restore <file>` / `git checkout .` | ⚠ | Discards uncommitted changes in the working tree. |
+| `git clean -fd` / `-fdx` | ⚠ | Removes untracked files — and with `-x`, ignored files too, including `.gitignore`d contents. |
+| `git branch -D` | ⚠ | Force-deletes a branch even if unmerged; its commits may become unreachable. |
+| `git worktree remove --force` | ⚠ | Removes a worktree along with its uncommitted changes. |
 | `git filter-branch` / `git filter-repo` | ✗ | Rewrites history. Heavy-handed; usually for secret-scrubbing. Always user-led. |
-| `rm -rf <repo>` | ✗ | Removes the working tree. |
+| `rm -rf <repo>` | ⚠ | Removes the working tree. |
 | Any direct push to the trunk | ✗ | Trunk lands via PR only. See [Branch protection](#branch-protection). |
 | Production deploys (`./deploy prod`, etc.) | ✗ | See [Production deploys](#production-deploys). |
 
-### Handling the ✗ rows
+### Handling the ⚠ rows (`approval-gated`)
 
-- **Agents surface, never execute.** "I'm about to run `git reset --hard origin/main`; this will discard your local uncommitted changes. Confirm?" — then wait.
-- **Humans run them with care.** First ask: *is there a safer alternative?* A revert instead of a force-push; a stash instead of a reset; archive-then-delete instead of `branch -D`.
+- **Surface first, execute second — never the reverse.** "I'm about to run `git reset --hard origin/main`; this will discard your local uncommitted changes. Confirm?" — then wait for an explicit yes. With that yes, the agent may run it.
+- **The yes is scoped to that operation.** It does not carry to the next reset, to the rest of the session, or to a similar-looking command on a different path. Ask again.
+- **Ask for the safer path before asking for approval.** A revert instead of a force-push; a stash instead of a reset; archive-then-delete instead of `branch -D`. An approval obtained for an operation that was not needed is still an avoidable loss.
+
+### Handling the ✗ rows (`agent-prohibited`)
+
+- **A human executes. Always.** The agent surfaces the intent and stops there. **A user's "yes" does not transfer the execute step** — it authorizes the human to proceed, not the agent to act. These rows are defined by *who acts*, not by who consents, so there is nothing for consent to unlock.
+- **Two of them are hard rules, not judgement calls.** Force-push to the trunk and direct commits to the trunk are forbidden outright: no approval makes them the right move. See [Branch protection](#branch-protection).
 - **Investigate unfamiliar state before deleting.** An unrecognized branch may be someone's in-flight work; an unrecognized file may be a partial fix. Look before you delete.
 
 ### Recovery when damage is done
@@ -609,6 +615,17 @@ Annotated tags carry the tagger's identity, timestamp, and message. Lightweight 
 ### Pushing the release
 
 Two pushes, never combined — `git push origin main` (the release commit), then `git push origin vX.Y.Z` (the tag). `--follow-tags` works if configured, but the two-step form makes the order visible and intentional.
+
+### Counts in a release entry carry an as-of marker
+
+A release entry that states a live repository total in the present tense — "the repo now has N tags for N releases" — is **false the moment the release's own tag is pushed**, because it was counted before that tag existed. The same is true of any figure the release itself changes: file counts, line totals, doc inventories.
+
+Two rules, both cheap:
+
+- **Write the count with an as-of marker**, so a snapshot is visibly a snapshot: `44 tags as of the release commit` rather than `44 tags`. For anything the release increments, state the arithmetic instead of the total: *"N prior tags; this release's annotated tag makes N+1."*
+- **Take every count after the final edit,** not while editing. A number measured mid-change is stale before it ships.
+
+Corrections go **forward**, in a later entry — a published CHANGELOG entry is history and is not rewritten. The failure mode this prevents is specific and recurring: each release corrects its predecessor's total, states its own the same way, and is wrong again one release later.
 
 ### Release notes vs. CHANGELOG
 
@@ -735,7 +752,7 @@ Most real projects have operational concerns beyond writing code: deploys, data 
 | Pattern | Why it matters |
 |---|---|
 | Document the deploy command(s) in the project instruction file. | Future contributors (and the AI) need to know how to ship. |
-| Mark which commands are user-only (AI never runs). | Production deploys, destructive backfills, data resets — these are the user's domain. |
+| Mark which commands are `agent-prohibited` (a human runs them). | Production deploys, destructive backfills, data resets — these touch real user state, so a user's approval authorizes the human to proceed, not the agent to act. |
 | Backup before any destructive operation. | A backup taken five minutes before a wrong-button-press is the cheapest recovery. |
 | Smoke-test after deploy. | A successful deploy that doesn't smoke-test isn't proven to have moved real state. |
 | Have a runbook for common ops. | Restarting a service, rotating a credential, rolling back a release — write the steps down so they can be followed under pressure. |
@@ -751,7 +768,7 @@ The methodology deliberately doesn't pick your deploy tooling, monitoring stack,
 
 ### The hard rule for operational work
 
-If your project has production state (real users, real data, real money), **never automate destructive operations without an explicit user-authorized step.** Automation is fine for backups, deploys to staging, scheduled jobs that don't destroy state. Automation that drops tables, rolls back data, or cancels payments needs a human in the loop.
+If your project has production state (real users, real data, real money), destructive operations against it are **`agent-prohibited`** — a human executes them, and an approval does not move that step to the agent. Automation is fine for backups, deploys to staging, and scheduled jobs that don't destroy state. Automation that drops tables, rolls back data, or cancels payments needs a human in the loop, not a confirmation prompt in front of a robot.
 
 ---
 
@@ -760,7 +777,7 @@ If your project has production state (real users, real data, real money), **neve
 - **Git → Working Principles** ([06_working_principles.md](06_working_principles.md)). Surgical-change discipline lives in the commit boundary. Frequent small commits make principles enforceable; one giant commit conceals violations.
 - **Git → Definition of Done** ([07_definition_of_done.md](07_definition_of_done.md)). The DoD's documentation gate, archive update, and lock release all land as parts of the PR. The PR is the artifact that proves DoD was met.
 - **Git → Backlog items** ([04_backlog_items.md](04_backlog_items.md)). Items are closed by PRs; commits reference items by ID. The audit trail between code and backlog is provided by git messages.
-- **Git → Lock mechanism** ([05_locks_and_parallel_work.md](05_locks_and_parallel_work.md)). Lock acquires and releases are commits. Branch protection ensures no one bypasses the lock by committing direct to trunk.
+- **Git → Lock mechanism** ([05_locks_and_parallel_work.md](05_locks_and_parallel_work.md)). Lock acquires and releases are commits, so **the ref they land on decides who can see them.** Branch protection does not enforce the lock — by keeping acquires off the trunk it is precisely what makes a feature-branch lock invisible to everyone else. A project that needs mutual exclusion rather than cooperative signalling uses the [shared-ref protocol](05_locks_and_parallel_work.md#the-shared-ref-protocol-real-mutual-exclusion-without-a-service).
 - **Git → Memory** ([08_lessons_and_memory.md](08_lessons_and_memory.md)). Some lessons learned are *about* git practice (a destructive-command incident becomes a memory entry; a coordination failure becomes one). Memory captures the lessons git history doesn't.
 
 ---
@@ -791,7 +808,7 @@ When a user explicitly directs a workflow exception (e.g., "force-push this to r
 
 When a contributor (human or AI) is uncertain whether an operation is allowed, the safe path is to ask. The cost of a question is small; the cost of an unintended destructive operation can be large.
 
-Destructive operations are the most-protected category. AI agents never run destructive operations autonomously. Humans run them with care and a recovery plan.
+Destructive operations are the most-protected category, and they split in two. **Workspace-destructive** operations are `approval-gated`: never autonomous, and the agent may execute after an explicit, scoped, per-operation yes. **Production-destructive** operations are `agent-prohibited`: a human executes, with care and a recovery plan, and consent does not transfer that step. The classes are defined once in [11_human_roles.md](11_human_roles.md#the-two-destructive-classes--and-what-a-users-yes-does-to-each).
 
 ---
 

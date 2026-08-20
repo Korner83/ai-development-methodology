@@ -245,7 +245,8 @@ The map below is a starting point — a default that fits most projects. Adapt t
 | Pricing, business model, contractual terms (the *decision* — operational price-list edits inside an approved model are AI-eligible) | | | | | ✓ |
 | Hiring / firing / team composition | | | | | ✓ |
 | Production deploy execution | | | | | ✓ |
-| Destructive operations (`rm -rf`, `DROP TABLE`, force-push, etc.) | | | | | ✓ |
+| Destructive **workspace** operations — `git reset --hard`, force-push, `branch -D`, `clean -fd` (**approval-gated**) | ✓ | | | ✓ | |
+| Destructive **production** operations — `DROP TABLE`, data resets, cancelling payments, `rm -rf` outside the workspace (**agent-prohibited**) | ✓ | | | | ✓ |
 | Anything affecting real user data in production | | | | | ✓ |
 | Anything involving money, payment, or financial systems | | | | | ✓ |
 | Anything with legal, compliance, or regulatory implications | | | | | ✓ |
@@ -256,7 +257,20 @@ The columns escalate left-to-right:
 - **AI decides** — the AI picks and acts. Used for low-risk, easily-reversible work.
 - **Human reviews** — the AI does the work; a human reads the diff before merge.
 - **Human decides** — the AI presents options with tradeoffs; a human picks. AI may then implement the picked option.
-- **Human-only** — the AI doesn't act, period. Often these are decisions the AI lacks the context to make well, or actions whose consequences exceed what an AI should autonomously cause.
+- **Human-only** — the AI doesn't act. Often these are decisions the AI lacks the context to make well, or actions whose consequences exceed what an AI should autonomously cause.
+
+### The two destructive classes — and what a user's "yes" does to each
+
+"Destructive" is not one category, and treating it as one is how a rule ends up meaning three different things in three places. Two classes, disjoint, every destructive operation in exactly one:
+
+| Class | Who executes | What an explicit user approval does |
+|---|---|---|
+| **`approval-gated`** | The agent may execute — **never autonomously** | A scoped, per-operation "yes" authorizes *that* operation. It does not generalize to the next one, or to the rest of the session. |
+| **`agent-prohibited`** | A human executes. Always. | **Nothing.** A "yes" does not transfer execution to the agent; it authorizes the human to proceed. |
+
+The line between them is **blast radius, not danger.** A destroyed working tree costs an afternoon and is often recoverable through the reflog. A dropped production table costs real users' data and is not. Both deserve a confirmation prompt; only one of them can ever be safely answered by the agent acting.
+
+This is also the boundary where the [authority ladder](00_README.md#authority-across-the-methodology) stops being unlimited. Explicit user direction outranks every other rule and can authorize an exception to any *approval-gated* operation. It does not hand an agent the execute step on an `agent-prohibited` one — that class is defined by *who acts*, not by who consents, so there is nothing for consent to unlock. **If a project wants a live yes to be able to override that too, it must say so explicitly; the default is that it cannot.**
 
 ### How to adapt
 
@@ -272,10 +286,10 @@ The matrix is not a contract with the AI — it's a contract among the humans ab
 
 Some decisions must be human-only regardless of how capable the AI is. The methodology's [hard rules](00_README.md#the-hard-rules) and the operational discipline in [09_git_workflow.md](09_git_workflow.md) name several:
 
-- Never run production deploys autonomously.
-- Never run destructive commands without explicit per-operation authorization.
-- Never force-push.
-- Never bypass pre-commit hooks.
+- Never run production deploys. **`agent-prohibited`** — a human executes.
+- Never run a destructive **production** operation. **`agent-prohibited`** — a human executes.
+- Never run a destructive **workspace** operation without explicit per-operation authorization. **`approval-gated`** — the agent may execute once authorized, never before.
+- Never force-push to the trunk, and never bypass pre-commit hooks. Prohibited outright, not gated: there is no approval that makes these the right move.
 
 These are non-negotiable across projects. Even if the matrix becomes more AI-permissive over time, these rows stay in the rightmost column.
 

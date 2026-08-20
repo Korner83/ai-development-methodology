@@ -5,12 +5,12 @@
 This is a **documentation and methodology project** — markdown plus git, nothing else.
 
 - **No executable code.** No JavaScript, Python, or other source to run.
-- **No dependencies.** No `package.json`, `requirements.txt`, lockfiles, or third-party packages.
+- **No package dependencies.** No `package.json`, `requirements.txt`, lockfiles, or third-party packages in the delivered artifact.
 - **No build step and no install scripts.** Nothing runs on clone, install, or open. There are no `preinstall` / `postinstall` / `prepare` hooks because there is no package manifest at all.
 - **No telemetry, no network calls, no credential collection.** The repo does not phone home, read your environment, or touch your secrets.
-- **One workflow, read-only.** The only GitHub Action is a secret scan ([`.github/workflows/gitleaks.yml`](.github/workflows/gitleaks.yml)) with `contents: read` permission.
+- **One workflow, and it is the whole CI dependency surface.** A secret scan ([`.github/workflows/gitleaks.yml`](.github/workflows/gitleaks.yml)) runs with `contents: read`. It uses two third-party actions — `actions/checkout` and `gitleaks/gitleaks-action` — **pinned to full commit SHAs rather than to mutable major tags**, because a major tag can be repointed by its owner and this job passes the repository `GITHUB_TOKEN` to the second one. This runs in *this* repository's CI only; it is not part of what an adopter clones or installs.
 
-Because there is no code and no supply chain, the usual code-scanning tooling (CodeQL, Dependabot, dependency audits, SBOMs) does not apply — there is nothing for it to analyze. The relevant risk surface is the *instructional content* itself.
+**The delivered artifact executes nothing on clone or open and has no package dependencies**, so the usual code-scanning tooling (CodeQL, dependency audits, SBOMs) has nothing to analyze. That is a narrower claim than "no supply chain": the two pinned GitHub Actions above *are* a dependency surface, they are simply this repository's rather than an adopter's, and Dependabot's `github-actions` ecosystem is the tool that applies to them. The main risk surface remains the *instructional content* itself.
 
 ## Scope
 
