@@ -12,8 +12,9 @@ _Last updated: 2026-08-20._
 
 ## Current focus
 
-**E10 — External baseline audit remediation.** `active`, **all 14 items closed**, staged for a single
-`v1.32.0`. Branch `claude/methodology-audit-plan-ccfebc`; **nothing committed, nothing merged.**
+**E10 — External baseline audit remediation.** `active`, **all 14 items closed**, released as `v1.32.0`
+in commit `656270b` on `claude/methodology-audit-plan-ccfebc`, open as **PR #35**. **Merged: no. Tagged:
+no.** `main` is still at v1.31.0 and the repo still has 46 tags.
 
 Every audit finding is addressed — the Critical, all five High, all four Medium. The epic stays `active`
 because its closing gate is a fresh cold re-audit, which this session cannot run on itself.
@@ -51,17 +52,23 @@ finding **6 of 16 conventions have ever been exercised**.
   The sweep's reasoning: a stamp in a template is a copy that goes stale on the adopter's disk where
   nothing can refresh it, while `SKILL.md` and `CHEATSHEET.md` are read *from* the repo and already carry
   one. The criterion was asking for the drift this epic spent its time removing.
-- **The seven version-pin sites still read `v1.31.0`** and move at release time, not before.
+- **The seven version-pin sites read `v1.32.0`** as of the release commit; `main` does not carry them yet.
+- **This file shipped four false claims inside the release commit.** It said "nothing committed, nothing
+  merged" and "the pins still read v1.31.0" — both true when written, both false the moment `656270b`
+  landed, because the same commit carried the file and the changes it denied. **It is the drift class E10
+  exists to fix, in the one file whose only job is telling the next session where things stand**, and no
+  check caught it because the checker was declined. Corrected in a follow-up commit; recorded rather than
+  quietly overwritten.
 
 ## Next steps
 
-1. **Review the diff.** Nothing is committed: 23 modified files, plus the E10 epic folder, root
-   `AGENTS.md`, `ADOPTION_PROFILE.md`, `RELEASE_EVIDENCE.md`, the convention sweep, and nine back-filled
-   `TEST.md` files.
-2. **Two maintainer decisions** from the sweep, neither blocking: retire the house-verbosity setting
-   (a removed section ⇒ **MAJOR**), and whether root `AGENTS.md` should carry the context-integrity canary
-   (the sweep recommends yes).
-3. **At release:** bump the seven version-pin sites to `v1.32.0`, rename `[Unreleased]`, annotated tag,
-   two pushes. **The pins move in the release commit, not before** — the ordering rule this epic added.
+1. **Merge PR #35** — `gh pr merge 35 --squash`. Checks were green (gitleaks passed on the newly
+   SHA-pinned workflow, which is what verifies the pins resolve).
+2. **Tag from `main` after merge**, two pushes, never combined:
+   `git checkout main && git pull --ff-only && git tag -a v1.32.0 -m "..." && git push origin v1.32.0`.
+   **46 tags as of the release commit; this tag makes 47**, matching the 47 changelog headings.
+3. **Two maintainer decisions** from the sweep, neither blocking: retire the house-verbosity setting
+   (a removed section ⇒ **MAJOR**), and whether root `AGENTS.md` should carry the context-integrity
+   canary (the sweep recommends yes).
 4. **Then a fresh cold re-audit.** It is E10's closing gate and **this session cannot satisfy it**; a
    session auditing its own work is the defect the epic repaired.
