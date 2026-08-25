@@ -7,7 +7,7 @@
 **Closed:** 2026-05-25 (v1.15.0 maintainer-authored batch — single-artifact epic, no formal items charted)
 **Owner:** maintainer + AI coding agent
 
-**Closure summary:** Shipped [`CHEATSHEET.md`](../../../../CHEATSHEET.md) at repo root. ~80 lines (under the 100-line cap). Covers: 4 planning layers, 3 discipline overlays + applied + evaluation, 4 working principles, hard rules, lock format + TTL, ROI heuristic, challenge-before-consenting prompt, tier matrix, milestones + scoring rubric, AUTONOMOUS_LOOP / HUMAN_NEEDED / FEEDBACK references, cross-AI two modes. Linked from main README. Methodology version v1.15.0 pinned.
+**Closure summary:** Shipped [`CHEATSHEET.md`](../../../../CHEATSHEET.md) at repo root. **97 lines at close; 99 today** (the "~80" recorded here until 2026-08-20 was never accurate — the same wrong figure was corrected in `EPICS.md` and `ARCHIVE.md` in v1.31.0 and missed here). It drifted to 144 and was over the 100-line cap from v1.20.0 until the v1.31.0 trim. Covers: 4 planning layers, 3 discipline overlays + applied + evaluation, 4 working principles, hard rules, lock format + TTL, ROI heuristic, challenge-before-consenting prompt, tier matrix, milestones + scoring rubric, AUTONOMOUS_LOOP / HUMAN_NEEDED / FEEDBACK references, cross-AI two modes. Linked from main README. Methodology version v1.15.0 pinned.
 
 ## Outcome (jobs-to-be-done)
 

@@ -7,61 +7,71 @@ written *before* a context reset, read *first* on resume, then **verified agains
 and item state**, which are authoritative when they disagree with this file.
 
 Overwritten, not appended. The durable record lives in commits, `ARCHIVE.md`, and memory.
-If a line here is worth keeping, it belongs in one of those instead.
 
-_Last updated: 2026-08-19 — after E09 closed (v1.31.0)._
+_Last updated: 2026-08-20._
 
 ## Current focus
 
-Nothing in flight. **No active epic**, no open items in any epic, working tree clean.
+**E10 — External baseline audit remediation.** `active`, **all 14 items closed**, released as `v1.32.0`
+in commit `656270b` on `claude/methodology-audit-plan-ccfebc`, open as **PR #35**. **Merged: no. Tagged:
+no.** `main` is still at v1.31.0 and the repo still has 46 tags.
 
-## Recent changes (this session)
+Every audit finding is addressed — the Critical, all five High, all four Medium. The epic stays `active`
+because its closing gate is a fresh cold re-audit, which this session cannot run on itself.
 
-- **v1.31.0**: E09 chartered → executed → closed. A landscape pass over six external repos
-  requested by the maintainer. **Four of the six yielded nothing new** — the value had already
-  been taken by earlier passes. Three items:
-  - **BL-0034** the skill now states it is written in the Agent Skills open format. Conformance
-    was verified field by field against the normative frontmatter table *before* the claim was
-    written, and the record is kept in the item so it can be re-run rather than trusted. Also
-    corrects an attribution: the README credited cross-tool support to the `skills` CLI, but the
-    portability comes from the format.
-  - **BL-0035** `Needs clarification` marker in `04` — a one-line greppable note for a question
-    the author could not answer; an unresolved one blocks `Status: ready`. Reuses the
-    frozen-intent marker shape. Wired into `00`'s pickup checklist, `ROLE_BRIEFS.md` brief 2, and
-    `AUTONOMOUS_LOOP.md`, where it gives BL-0033's never-self-answer caution somewhere to put the
-    halted question.
-  - **BL-0036** records: rejections in the charter, two deferrals in `FUTURE.md`, and Spec Kit's
-    convergence command logged against **BL-0023** in E06's `FUTURE.md` as a second independent
-    source for the brownfield ratify idea.
-- **Correction pass, same release.** An independent session re-derived every count from the tree
-  rather than the records and found **six stale enumerations, three of them gates**: the
-  `self-development/AUTONOMOUS_LOOP.md` Constraint 2 list governing what the loop may edit, a
-  Phase 1 exit criterion in the master plan, and `P1`'s self-evaluation gate scoped to 12 docs
-  against 14 — meaning `12` and `13` had never been inside the gate that exists to catch drift.
-  Also swept `P3` (the doc-currency pillar, and the stalest file in the repo), `P6`, `P9`, the tag
-  count, and the cheatsheet line count.
-- **`CHEATSHEET.md` back under its 100-line cap** — 144 → 99, over cap since v1.20.0. It was also
-  missing blast radius and role briefs, so trimming and wiring-in were one item, not two.
+## Shipped this session
+
+The skill parses under strict YAML (it did not — nobody on a spec-compliant loader could install it).
+Retired trunk exception gone; the skill defers to `00`'s authority ladder. **The lock's authority claim
+now matches what git enforces**, with an opt-in shared-ref protocol where the loser's push rejection *is*
+the compare-and-swap. **Destructive operations split** into `approval-gated` and `agent-prohibited` on
+blast radius — which resolves the "user direction overrides everything" vs "the AI doesn't act, period"
+conflict without amending either. **Trust follows provenance**, not filename. One `Test` enum, no subsets.
+`pass` reserved for the required level. Counts carry an as-of marker. Actions SHA-pinned and the
+supply-chain claim narrowed. Root `AGENTS.md` added. Adoption profile published, all ten epic folders
+brought to five files, release-evidence commands written down, a surface map added to `00`, and a sweep
+finding **6 of 16 conventions have ever been exercised**.
+
+## Decisions that shaped it
+
+- **No runnable elements, no new CI.** A committed integrity checker was declined. **F-08 and F-11 now
+  have a convention, not a control** — hand-maintained counts can drift again, and the next occurrence
+  will be found by a reader rather than a build. Stated in the charter rather than hidden.
+- **The cross-AI gate was removed** from this epic's exit criteria. The methodology's cross-AI convention
+  is untouched for adopters.
+- **The epic's own paperwork was cut back** partway through, after it grew larger than the doc changes it
+  described. An epic about overlapping normative copies is the worst place to add ceremony.
 
 ## Known deviations carried forward
 
-- **Cross-AI findings-verification was waived** for E09 by maintainer decision. E06, E07 and E08
-  each passed it before `Test: pass`; E06's returned 16 PASS / 2 FAIL with both failures real.
-  **E09 is the first landscape pass to close without it.** Flagged for the semi-annual evaluation
-  due 2026-11-25 — the question is whether this is a standing trade or a one-off.
-- **No template carries a methodology version stamp**, which a Phase 1 exit criterion in the
-  master plan requires. Surfaced during the correction pass and recorded as unmet rather than
-  quietly dropped.
+- **BL-0040 was held at `under-review`** on a frozen-intent criterion ("net-negative in lines") that the
+  work met in substance but not in letter, and closed only by explicit maintainer decision. The rule held
+  under inconvenience, which was the useful part. BL-0051 hit the same shape and was *trimmed to fit*
+  instead — two lines of merging beat a decision.
+- **The "every template carries a version stamp" criterion is recommended for removal**, not fulfilment.
+  The sweep's reasoning: a stamp in a template is a copy that goes stale on the adopter's disk where
+  nothing can refresh it, while `SKILL.md` and `CHEATSHEET.md` are read *from* the repo and already carry
+  one. The criterion was asking for the drift this epic spent its time removing.
+- **The seven version-pin sites read `v1.32.0`** as of the release commit; `main` does not carry them yet.
+- **This file shipped four false claims inside the release commit.** It said "nothing committed, nothing
+  merged" and "the pins still read v1.31.0" — both true when written, both false the moment `656270b`
+  landed, because the same commit carried the file and the changes it denied. **It is the drift class E10
+  exists to fix, in the one file whose only job is telling the next session where things stand**, and no
+  check caught it because the checker was declined. Corrected in a follow-up commit; recorded rather than
+  quietly overwritten.
 
 ## Next steps
 
-The backlog is not the binding constraint — the milestone is.
+**Both sweep decisions are answered (2026-08-20).** The context-integrity canary is **adopted** — live in
+root `AGENTS.md`, its first exercise in the repo that wrote it, at the cost of raising that file's budget
+from 50 to 60 rather than trimming the rule. The house-verbosity setting is **kept, marked unexercised**:
+a MAJOR bump is too steep for one paragraph, revisit 2026-11-25.
 
-1. **Phase 1 → Phase 2** still needs ≥ 2 external adopters and structured feedback. The
-   active-campaign route was closed by decision on 2026-08-19; the passive channels recorded in
-   [P5](../pillars/P5_adopter_discoverability.md) are the whole discovery surface.
-2. **Semi-annual self-evaluation due 2026-11-25.** Its charge now covers v1.25.0 through v1.31.0,
-   plus the two deviations above.
-3. If work is wanted before then, the cheapest source is the four Tier-2 ideas in
-   [E06's FUTURE.md](epics/E06-bmad-v6-landscape-pass/FUTURE.md) and the two in
-   [E09's](epics/E09-external-landscape-pass/FUTURE.md).
+1. **Merge PR #35** — `gh pr merge 35 --squash`. Checks green; gitleaks passed on the newly SHA-pinned
+   workflow, which is what verifies the pins resolve.
+2. **Tag from `main` after merge**, two pushes, never combined:
+   `git checkout main && git pull --ff-only && git tag -a v1.32.0 -m "..." && git push origin v1.32.0`.
+   **46 tags as of the release commit; this tag makes 47**, matching the 47 changelog headings.
+3. **Then a fresh cold re-audit of the tagged tree**, commissioned right after the tag by maintainer
+   decision. It is E10's closing gate and **this session cannot satisfy it**; a session auditing its own
+   work is the defect the epic repaired.

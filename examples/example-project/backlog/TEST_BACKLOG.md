@@ -6,7 +6,7 @@ _Cross-epic test scenarios that span multiple epics or don't belong to any singl
 
 | ID    | Scenario                                                                          | Affects (epics)   | Cadence              | Status   |
 |-------|-----------------------------------------------------------------------------------|-------------------|----------------------|----------|
-| QA-01 | Fresh-machine install timed end-to-end; target < 60s on macOS / Linux / Windows  | E01, E03 (pkging) | Per minor release    | not-run  |
+| QA-01 | Fresh-machine install timed end-to-end; target < 60s on macOS / Linux / Windows  | E01, E03 (pkging) | Per minor release    | not-tested  |
 | QA-02 | Note round-trip across capture → search → edit (with E02 search shipped)         | E01, E02          | Per minor release    | n/a (E02 not yet active) |
 | QA-03 | Calendar-event integration (when E02's calendar feature ships)                   | E02               | Per minor release    | n/a (E02 not yet active) |
 

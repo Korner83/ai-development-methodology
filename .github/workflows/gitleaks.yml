@@ -1,9 +1,14 @@
-# Secret scan. This repo is documentation-only (no code, no dependencies), so the
+# Secret scan. This repo is documentation-only, so the
 # only meaningful automated check is catching an accidentally committed secret.
 #
 # NOTE on licensing: gitleaks-action requires a GITLEAKS_LICENSE secret only for
 # GitHub *organization* accounts. This is a personal public repo, so none is needed.
 # If the repo ever moves under an organization, add a GITLEAKS_LICENSE secret.
+#
+# Both actions are pinned to full commit SHAs, not to the mutable v4/v2 major tags.
+# A major tag can be repointed by its owner at any commit, and this job hands
+# gitleaks the repository GITHUB_TOKEN. Re-check the pins in the semi-annual
+# doc-currency pass; the version comment says which release each SHA is.
 name: gitleaks
 
 on:
@@ -19,10 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
         with:
           fetch-depth: 0
       - name: Run gitleaks
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7  # v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

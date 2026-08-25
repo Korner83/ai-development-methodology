@@ -134,7 +134,7 @@ manual-QA queue lives in [../../TEST_BACKLOG.md](../../TEST_BACKLOG.md)._
 
 | ID    | Scenario                                                     | Status     |
 |-------|--------------------------------------------------------------|------------|
-| AT-01 | <Scenario verifying a binary exit criterion from the charter>| not-run    |
+| AT-01 | <Scenario verifying a binary exit criterion from the charter>| not-tested |
 | AT-02 | <Scenario verifying a binary exit criterion>                 | pass       |
 
 ## Regression scenarios to protect
@@ -166,7 +166,7 @@ Even in those cases, ship an empty `TEST.md` with the two/three table headers. A
 ### Conventions
 
 - **Acceptance-test IDs:** `AT-##` (epic-scoped, monotonic — separate counter per epic). Cross-epic QA in `TEST_BACKLOG.md` uses `QA-##`.
-- **Status column** mirrors the [Test enum](04_backlog_items.md#test-enum): `not-run` / `pending` / `partial` / `pass` / `fail: <detail>` / `manual-verified` / `n/a`.
+- **Status column** uses the [Test enum](04_backlog_items.md#test-enum) unchanged — all eight values, no subset: `not-tested` / `pending` / `manual-verified` / `partial` / `pass` / `fail: <detail>` / `regression-needed` / `n/a`. `04` is the only definition; this line names the values because the table is read without it.
 - When an acceptance test maps to a closed item, cite the item ID in the Status column (e.g., `pass — BL-0428`).
 - Regression scenarios are append-only after first inclusion — never delete; mark `deprecated` if no longer relevant.
 

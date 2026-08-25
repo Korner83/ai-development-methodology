@@ -664,12 +664,17 @@ These are not absolute. A trivial typo in a security-critical place still warran
 The level annotation lives on the **backlog item's `Test:` field** — not on the PR description, not on the commit message:
 
 ```
-Test: pass (L2)             — actual-UI verified, no cross-AI, no user
-Test: pass (L3)             — cross-AI validated, awaiting user gate
-Test: pass (L4)             — user-accepted
+Test: pass (L2)             — user-facing fix; L2 is this class's required level
+Test: pass (L4)             — new feature, user-accepted
 Test: pass                  — assumed L2 minimum (default for user-observable)
 Test: pass (L1, refactor)   — explicit lower bar with reason
+Test: partial (L3; L4 pending) — cross-AI done, user gate outstanding
 ```
+
+**Read the last two lines together.** `pass` records that the item reached *its required level*, not the
+highest level anyone ran. A new feature requires L4, so cross-AI validation at L3 with the user gate
+still outstanding is `partial`, never `pass (L3)`. The level in parentheses says which bar was cleared;
+the value before it says whether the bar was the right one.
 
 Storing the level on the item (not the PR) keeps the audit trail in the backlog where the rest of the item's history lives. A reviewer looking at a PR can glance at the linked BL-#### item to see which level was reached; the level travels with the item, not the (eventually-closed) PR. The level annotation is optional but useful for risk-tracking. A PR that ships a security-sensitive change at L2 is a red flag the reviewer can catch.
 
@@ -685,7 +690,11 @@ Naming the levels makes the choice explicit. When a contributor says "L3 wasn't 
 
 ### How this interacts with the DoD
 
-The Definition of Done's hard rule remains: `Status: done` requires `Test: pass`. The taxonomy doesn't soften it — it clarifies *what `pass` means* for the specific change. A change requiring L3 cannot be marked `Test: pass` after only L2.
+The Definition of Done's hard rule remains: `Status: done` requires `Test: pass`. The taxonomy doesn't soften it — it clarifies *what `pass` means* for the specific change.
+
+**`pass` is reserved for the highest level the item's change class requires.** A change requiring level *n* cannot be marked `Test: pass` after only level *n−1* — that holds at every step, not just L2→L3. Record intermediate progress as `partial (L<reached>; L<required> pending)`, or leave `Test: pending`; both keep the item out of `done`, which is the point.
+
+The trap this closes is specific. `Test:` is a machine-readable token and the DoD closes an item from any value beginning with `pass`, so a prose suffix — "awaiting user gate", "pending sign-off" — does not hold the gate. **An agent that writes `pass (L3)` on a change requiring L4 has already opened the door to `done`,** and the words after the dash will not stop it. If the required level has not been reached, the value is not `pass`.
 
 The DoD overlay for the project should name which change classes require which minimum level.
 

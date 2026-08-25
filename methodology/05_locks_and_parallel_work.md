@@ -1,6 +1,6 @@
 # 05 — Locks and parallel work
 
-> **Purpose:** define the file-based lock mechanism that lets multiple humans and AI agents work the same backlog concurrently without collision. The lock is the authority for who is currently working an item; it has a time-to-live (TTL), it is git-tracked, and it requires no external service.
+> **Purpose:** define the file-based lock mechanism that lets multiple humans and AI agents work the same backlog without colliding. **A lock has authority only where it is visible** — it is git-tracked, so a lock commit binds exactly the refs that carry it. It has a time-to-live (TTL) and requires no external service. Read ["What the lock does and does not guarantee"](#what-the-lock-does-and-does-not-guarantee) before relying on it for mutual exclusion; under a PR-only workflow the default form is cooperative signalling with late collision detection, and the [shared-ref protocol](#the-shared-ref-protocol-real-mutual-exclusion-without-a-service) is what makes it authoritative.
 
 The lock lives on the `Lock:` field of the backlog item's frontmatter table (see [04_backlog_items.md](04_backlog_items.md)). The protocol is small enough that humans and AI agents can both follow it, and audit-friendly enough that every change is a commit.
 
@@ -110,7 +110,7 @@ Before starting work on an item, every contributor (human or AI) must follow thi
 
 The lock state in your local checkout may be stale. If another contributor acquired the lock thirty seconds ago, your local file still shows it free. A `git pull` (or equivalent) before reading the field minimizes the race window.
 
-The race cannot be fully eliminated without an external coordinator, but with disciplined pull-before-acquire and small commits, the window is small enough that races are rare in practice.
+Pull-before-decide narrows the window; it does not close it, and on the default protocol nothing does — see ["What the lock does and does not guarantee"](#what-the-lock-does-and-does-not-guarantee). The race *can* be eliminated without an external coordinator, but only by moving every lock write onto one shared ref so git's own ref-update rules reject the loser; that is the [shared-ref protocol](#the-shared-ref-protocol-real-mutual-exclusion-without-a-service).
 
 ### Acquire-commit message template
 
@@ -138,9 +138,72 @@ Push the acquire commit immediately. The lock has no effect on other contributor
 Two contributors may try to acquire the same item at the same time. The outcomes:
 
 - **One push lands first.** The second contributor's push is rejected (non-fast-forward). They `git pull --rebase` (or merge), see the other contributor's lock now in place, and either abandon their acquire or stage it behind the first acquire.
-- **Both push to different branches that later merge.** The merge produces a conflict in the `Lock:` field. Resolve in favor of the earlier-acquired lock (use commit timestamps if needed). Notify the loser.
+- **Both push to different branches that later merge.** Both pushes succeed — different refs, no non-fast-forward — so **neither writer is stopped and both may do the work.** The merge produces a conflict in the `Lock:` field; resolve in favour of the earlier-acquired lock (use commit timestamps if needed) and notify the loser. Note what this is: *detection after the fact*, not acquisition. It recovers evidence; it does not prevent duplicated effort. See ["What the lock does and does not guarantee"](#what-the-lock-does-and-does-not-guarantee).
 
 Races are rare because each acquire is a small, fast commit; the window of vulnerability is seconds. Disciplined pull-before-acquire keeps the rate low enough that the merge-conflict path is the fallback, not the norm.
+
+---
+
+## What the lock does and does not guarantee
+
+**A lock has authority only where it is visible. A lock committed to a feature branch binds that branch and nothing else.**
+
+This matters because it collides with a rule this methodology states elsewhere. [`09`](09_git_workflow.md#branch-protection) requires every change to land on the trunk via a pull request and forbids direct trunk commits. So the acquire commit goes to the agent's own feature branch — and **a contributor who pulls the trunk cannot see it.** Two agents branch from the same trunk state, each reads `Lock: —`, each commits a different lock value, each pushes to a *different* ref. Both pushes succeed. Both do the work. The conflict appears when the branches merge, which is after the duplication, not before it.
+
+Git rejects a non-fast-forward update only when two writers update **the same ref**. The default protocol has them updating different refs, so there is no compare-and-swap on the backlog row and nothing to lose the race against.
+
+What the default protocol therefore provides, stated plainly:
+
+| Property | Default protocol | With the [shared-ref protocol](#the-shared-ref-protocol-real-mutual-exclusion-without-a-service) |
+|---|---|---|
+| Announces intent to anyone reading the same ref | ✅ | ✅ |
+| Survives a crashed holder (TTL) | ✅ | ✅ |
+| Auditable — every state change is a commit | ✅ | ✅ |
+| Detects a collision | At merge, after the work | At acquire, before the work |
+| **Prevents two contributors starting the same item** | ❌ | ✅ |
+
+**Cooperative signalling with late collision detection is a real and often sufficient property.** On a small team with short items and a shared habit of pulling first, duplicated pickups are rare and cheap. What it is not is mutual exclusion, and a project that needs the stronger guarantee — because agents run unattended, or because items are long enough that duplicated work is expensive — must use the shared-ref protocol or assign items out of band.
+
+**Never state the weaker property as the stronger one.** An adopter who believes the lock is authoritative when it is advisory will size their concurrency to a guarantee they do not have.
+
+## The shared-ref protocol: real mutual exclusion without a service
+
+Opt-in. It costs one extra round-trip per pickup and provides genuine compare-and-swap, still with no database, no lock service, and no new dependency.
+
+**The rule is one sentence: every lock write targets one ref that every contributor reads.**
+
+Pick the ref once, per project — a long-lived `locks` branch, or a dedicated `refs/locks/backlog` — and record it in the project instruction file. Then:
+
+```
+1. Fetch the lock ref. Read the item's Lock: field from it (never from your
+   feature branch).
+2. If it is held and unexpired by someone else, SKIP. Pick another item.
+3. If it is free or expired, commit your acquire on the lock ref and push it
+   to the lock ref.
+4. If the push is REJECTED (non-fast-forward), someone acquired between your
+   read and your write. You lost. Re-fetch and go to step 2 — do not retry
+   blindly, and do not force.
+5. Only after the push succeeds do you start work.
+```
+
+Step 4 is the whole mechanism. Because both writers target the same ref, the remote rejects the second one, and **the rejection is the compare-and-swap** — the same primitive a lock service would give you, supplied by git's ref update rules.
+
+Three things to get right:
+
+- **Never force-push the lock ref.** A force-push is exactly the operation that destroys the guarantee, which is why it is a hard rule everywhere else in this methodology too.
+- **Keep lock commits off the work branch.** Mixing them back in re-introduces the invisibility problem for anyone reading the lock ref.
+- **The TTL still applies.** Compare-and-swap prevents two live holders; it does nothing about a holder that dies. Expiry remains how a stuck lock clears.
+
+The cost is honest: one fetch and one push before work starts, and a second place to look. That is the price of the guarantee, and a project that does not need the guarantee should not pay it.
+
+### Choosing between them
+
+| Situation | Use |
+|---|---|
+| Small team, short items, everyone pulls before starting | Default — the cost of a rare duplicate is lower than the cost of the ceremony |
+| Unattended or overnight agent runs | Shared-ref — nobody is watching to notice the collision |
+| Items long or expensive enough that duplicated work hurts | Shared-ref |
+| An external tracker already owns assignment atomically | Neither — let the tracker be the authority and mirror it into the item |
 
 ---
 
@@ -451,7 +514,7 @@ At 14:30, `alice-laptop` would have read BL-0428 with no lock indication and may
 
 - **Locks → Backlog items** ([04_backlog_items.md](04_backlog_items.md)). The `Lock:` field lives on the item's frontmatter table. Acquiring usually pairs with a `Status: in-progress` change in the same commit.
 - **Locks → Definition of Done** ([07_definition_of_done.md](07_definition_of_done.md)). Gate 6 of the DoD includes "`Lock: —`" — a `done` item with a non-empty lock has not finished the DoD properly.
-- **Locks → Git workflow** ([09_git_workflow.md](09_git_workflow.md)). Lock acquires and releases are commits on the active branch (often the feature branch for the item's work). They follow the project's commit conventions.
+- **Locks → Git workflow** ([09_git_workflow.md](09_git_workflow.md)). Lock acquires and releases are commits, and **which ref they land on decides whether they bind anyone**. On the default protocol they land on the active branch — often the feature branch — and bind only it. On the [shared-ref protocol](#the-shared-ref-protocol-real-mutual-exclusion-without-a-service) they land on one ref every contributor reads. They follow the project's commit conventions either way.
 - **Locks → Working Principles** ([06_working_principles.md](06_working_principles.md)). Lock discipline is itself a "think before coding" practice — pulling, checking, and acquiring is the act of confirming you're not silently colliding.
 
 ---
@@ -488,6 +551,8 @@ The file-based lock with TTL is the recommended default because it has the lowes
 ## Authority
 
 Locks bind work — no contributor may start `in-progress` work on an item without holding its lock. The lock outranks intent; "I was going to work this" is not the same as "I hold this lock."
+
+**Binding is not the same as enforcing.** The rule above is an obligation on contributors; whether the mechanism can *stop* a second contributor depends on which protocol is in use — see ["What the lock does and does not guarantee"](#what-the-lock-does-and-does-not-guarantee). Under the default protocol the obligation is real and the enforcement is not; that is a discipline, not a guarantee, and it should be described as one.
 
 Locks do not bind discussion, research, or design. Anyone may read, discuss, or sketch ideas about an item without acquiring its lock. The lock applies to *exclusive work claims that produce committed changes.*
 

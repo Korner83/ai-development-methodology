@@ -100,7 +100,7 @@ Immediately below the heading, every item carries a frontmatter table with the f
 | Priority | P0 \| P1 \| P2 \| P3                   |
 | Effort   | XS \| S \| M \| L \| XL                |
 | Status   | backlog \| ready \| in-progress \| under-review \| to-be-tested \| done \| blocked \| rejected |
-| Test     | not-tested \| pass \| fail: <detail> \| regression-needed |
+| Test     | not-tested \| pending \| manual-verified \| partial \| pass \| fail: <detail> \| regression-needed \| n/a |
 | Deps     | BL-### or —                            |
 | Lock     | — or <holder>@<ISO-8601-timestamp>     |
 ```
@@ -990,7 +990,7 @@ If two contributors file new items in parallel and both compute the same "next" 
 
 - **Items → Epics** ([03_epics.md](03_epics.md)). Items live inside epics. Open/done counts in `EPICS.md` reflect item state.
 - **Items → Pillars** ([02_pillars.md](02_pillars.md)). Every item names a pillar. Pillar-level analysis (`rg "Pillar: P<#>" backlog/`) surfaces items across all epics.
-- **Items → Lock mechanism** ([05_locks_and_parallel_work.md](05_locks_and_parallel_work.md)). The `Lock:` field on the item is the authority for who is currently working it.
+- **Items → Lock mechanism** ([05_locks_and_parallel_work.md](05_locks_and_parallel_work.md)). The `Lock:` field records who is currently working the item — [authoritative only where it is visible](05_locks_and_parallel_work.md#what-the-lock-does-and-does-not-guarantee).
 - **Items → Working Principles** ([06_working_principles.md](06_working_principles.md)). The four principles apply when working any item: think first, simplify, be surgical, stop on a verifiable goal.
 - **Items → Definition of Done** ([07_definition_of_done.md](07_definition_of_done.md)). The DoD is the gate between `to-be-tested` and `done`. It is also why the `Test:` field is separate from `Status:`.
 - **Items → Memory** ([08_lessons_and_memory.md](08_lessons_and_memory.md)). A class of items failing in similar ways is a signal to capture a memory entry so the next contributor (human or AI) does not repeat the failure.

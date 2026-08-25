@@ -286,7 +286,7 @@ The most-used concepts across the set, defined once here for navigation.
 | Field | Allowed values | Defined in |
 |-------|----------------|------------|
 | Item `Status` | `backlog`, `ready`, `in-progress`, `under-review`, `to-be-tested`, `done`, `blocked`, `rejected` | [04_backlog_items.md](04_backlog_items.md) |
-| Item `Test` | `not-tested`, `pass`, `fail: <detail>`, `regression-needed` | [04_backlog_items.md](04_backlog_items.md) |
+| Item `Test` | `not-tested`, `pending`, `manual-verified`, `partial`, `pass`, `fail: <detail>`, `regression-needed`, `n/a` | [04_backlog_items.md](04_backlog_items.md) |
 | Item `Priority` | `P0`, `P1`, `P2`, `P3` | [04_backlog_items.md](04_backlog_items.md) |
 | Item `Effort` | `XS`, `S`, `M`, `L`, `XL` | [04_backlog_items.md](04_backlog_items.md) |
 | Epic `Status` | `planned`, `active`, `done`, `parked` | [03_epics.md](03_epics.md) |
@@ -320,6 +320,25 @@ Treat the hard-rules table above as the project's **constitution** — the non-n
 - **Once per autonomous-loop iteration** — the loop re-checks the constitution before picking the next item, so a long unattended run can't quietly drift past a rule (see [templates/AUTONOMOUS_LOOP.md](../templates/AUTONOMOUS_LOOP.md)).
 
 The check is cheap because the list is short. If the constitution ever grows long enough that re-reading it at each gate feels heavy, that is the signal to demote some entries to ordinary project rules — the constitution holds only the rules whose violation is *never* acceptable.
+
+### Where each rule is restated — change the canonical file, then these
+
+A rule that matters gets copied onto the surfaces people actually read: quick references, instruction files, the skill, worked examples. **Those copies are the ones that go wrong.** An external audit of this repository found that in almost every case the canonical sentence was correct and the surface shaped for *copying* was not — because nothing said which copies existed.
+
+**Change the canonical file first. Then walk this table.** A surface either reproduces the rule in full or carries none of it and links; a partial restatement is the failure mode, because it reads as complete.
+
+| Rule | Canonical | Restated in |
+|---|---|---|
+| `Status` and `Test` enums | [04](04_backlog_items.md#test-enum) | the enum table above · [`03`](03_epics.md) epic `TEST.md` column · CHEATSHEET · SKILL · examples |
+| The hard rules | the table above | CHEATSHEET · SKILL · `AGENTS.md` / `CLAUDE.md` templates |
+| `Status: done` requires `Test: pass` | [04](04_backlog_items.md#the-hard-rule) | the table above · [`07`](07_definition_of_done.md) Gate 6 and its pasteable checklist · CHEATSHEET · SKILL · both templates |
+| The six DoD gates | [07](07_definition_of_done.md) | CHEATSHEET · SKILL · both templates |
+| Destructive-operation classes | [11](11_human_roles.md#the-two-destructive-classes--and-what-a-users-yes-does-to-each) | [`09`](09_git_workflow.md) operation table · [`13`](13_ai_safety_and_prompt_injection.md) · both templates |
+| What the lock guarantees | [05](05_locks_and_parallel_work.md#what-the-lock-does-and-does-not-guarantee) | [`04`](04_backlog_items.md) · [`09`](09_git_workflow.md) · CHEATSHEET · SKILL |
+| Untrusted content and provenance | [13](13_ai_safety_and_prompt_injection.md) | its own pasteable block · both templates · SKILL |
+| Size budgets | [04](04_backlog_items.md) · [08](08_lessons_and_memory.md) | CHEATSHEET |
+
+**This table is a map, not a rule** — it adds nothing to obey. Its only job is to make the fan-out visible to whoever edits a canonical file, because the alternative is discovering it from a reader who tried to follow both copies.
 
 ---
 
