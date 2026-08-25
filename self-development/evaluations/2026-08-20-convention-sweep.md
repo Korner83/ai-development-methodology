@@ -23,8 +23,8 @@ actually used it?* Not "is it a good idea." Not "would it help someone." Used.
 | 4 | **Failure-layer routing** + two-bounce escape | v1.25.0 | **No record** | **Keep, unproven** — the audit rated this a verified strength and it is cheap; but say plainly that no item has ever been routed by it |
 | 5 | **Verification-gap question** + ran-only counting | v1.25.0 | **No record** | **Keep, unproven** |
 | 6 | **Memory admission test** | v1.26.0 | **No** — this repo has no `memory/` of its own; only the fictional example exercises it | **Keep, unproven** |
-| 7 | **Context-integrity canary** | v1.29.0 | **No, and it could not have been** — the canary requires an instruction file to demand the marker, and this repo had no instruction file until 2026-08-20 | **Decide — see §4** |
-| 8 | **House verbosity setting** | v1.29.0 | **No** — same cause: nowhere to set it | **Retire (recommended)** |
+| 7 | **Context-integrity canary** | v1.29.0 | **No, and it could not have been** — the canary requires an instruction file to demand the marker, and this repo had no instruction file until 2026-08-20 | **Adopted 2026-08-20** — now live in root `AGENTS.md`; first exercise in the repo that wrote it |
+| 8 | **House verbosity setting** | v1.29.0 | **No** — same cause: nowhere to set it | **Keep, marked unexercised** — maintainer decision 2026-08-20: retiring it is a removed section and a MAJOR bump, which is a large price for one paragraph. Revisit at the 2026-11-25 pass if still unused |
 | 9 | **Cross-AI spec-verification** (third mode) | v1.29.0 | **No record** | **Keep, unproven** |
 | 10 | **Doc altitude** rule | v1.29.0 | **Yes, editorially** — the "would this become false if I rewrote it?" test shaped E10's resolutions | **Keep** |
 | 11 | **Architecture-layer** failure routing | v1.29.0 | **No record** | **Merge into #4** — it is one more layer on an existing ladder, not a separate convention |
@@ -34,18 +34,21 @@ actually used it?* Not "is it a good idea." Not "would it help someone." Used.
 | 15 | **`Needs clarification`** marker | v1.31.0 | **Yes — first use 2026-08-20**, E10's D1 and D2 | **Keep** |
 | 16 | **Agent Skills conformance** declaration | v1.31.0 | **Yes** — and it was wrong; the check never invoked a parser | **Keep, with the lesson attached** |
 
-**Tally: 6 of 16 have ever been exercised, and 3 of those for the first time on 2026-08-20** — by the
-epic responding to the audit. Six more are keep-but-unproven. Two are recommended for change.
+**Tally: 7 of 16 have ever been exercised** — and **4 of those for the first time on 2026-08-20**, by the
+epic responding to the audit. Six remain keep-but-unproven. Both change candidates were decided the same
+day: the canary adopted, the verbosity setting kept.
 
 **What this does not say.** Unexercised is not the same as wrong. Most of these are cheap, sit inside docs
 a reader consults rather than memorises, and several were rated strengths by the external audit. **The
 finding is not "delete them" — it is that this repo has been generating rules faster than it generates
 evidence**, and the correct response is to slow the generation, not to bulk-retire what exists.
 
-**Recommended retirement: #8, the house-verbosity setting.** It is the one with no mechanism, no user, and
-no evidence — a preference the corpus had opinions about before it had a place to put them. Retiring it is
-a *removed section* and therefore a **MAJOR** bump under this repo's own SemVer table, which is why it is
-recorded here as a recommendation rather than executed. **Maintainer call.**
+**#8, the house-verbosity setting, was the retirement candidate — and is kept.** It is the one with no
+mechanism, no user, and no evidence: a preference the corpus had opinions about before it had a place to
+put them. But retiring it is a *removed section* and therefore a **MAJOR** bump under this repo's own
+SemVer table. **Maintainer decision 2026-08-20: keep it, marked unexercised**, and revisit at the
+2026-11-25 currency pass if nothing has used it by then. A major version is a steep price for one
+paragraph, and the sweep's record is enough to stop it being mistaken for proven.
 
 ---
 
@@ -68,30 +71,30 @@ checker and the cross-AI gate. A criterion whose subject was removed is deleted,
 
 ---
 
-## 4. One gap this epic created
+## 4. One gap this epic created — and closed the same day
 
-**The context-integrity canary (#7) now has somewhere to live and does not live there.** It requires the
-project instruction file to demand a marker on every response; `AGENTS.md` was added on 2026-08-20 and
-does not carry that rule.
+**The context-integrity canary (#7) had somewhere to live for the first time and did not live there.** It
+requires the project instruction file to demand a marker on every response; root `AGENTS.md` was added on
+2026-08-20 without that rule — a gap this epic created by fixing a different one.
 
-Three options, and this is a **maintainer call**:
+Three options were on the table: add it, record it as deliberately not adopted, or retire the convention
+outright (its own section concedes it is "a smoke alarm, not proof of safety").
 
-1. **Add it** — the canary becomes exercised for the first time in the repo that wrote it.
-2. **Record it as deliberately not adopted** in the adoption profile (BL-0052), with the reason.
-3. **Retire the convention** — it has never run anywhere, and its own section already concedes it is "a
-   smoke alarm, not proof of safety" with false positives and harness-dependent behaviour.
-
-**Recommendation: (1).** It is two lines, `AGENTS.md` has one line of headroom under its 50-line budget,
-and the alternative is a repo publishing a safety convention it declined to use — which is the exact shape
-of F-09.
+**Decided 2026-08-20: add it.** The canary is live in root `AGENTS.md`. It cost six lines, not two,
+which pushed that file from 49 to 56 against a 50-line budget — **so the budget was raised to 60 rather
+than the rule trimmed to fit.** A budget invented the day before should not veto a safety rule the
+maintainer chose to adopt; its job is to stop the file becoming a second rulebook, and 56 lines of mostly
+links does not do that. Recorded in [`RELEASE_EVIDENCE.md`](../RELEASE_EVIDENCE.md).
 
 ---
 
 ## 5. Net effect
 
-**No convention was retired in this sweep**, so the docs did not shrink. That is a worse outcome than the
-item hoped for and it is recorded as such rather than dressed up: the two retirement candidates both need
-a maintainer decision, and one of them costs a major version.
+**No convention was retired in this sweep**, so the docs did not shrink — recorded as such rather than
+dressed up. Both candidates went to the maintainer on 2026-08-20: the verbosity setting is **kept and
+marked unexercised** (a major version is too steep for one paragraph), and the canary was **adopted**
+rather than retired, which moves it from unexercised to exercised. **Net: one fewer unproven convention,
+zero lines removed.**
 
 **What the sweep produced instead is the number**: 6 of 16 exercised, 3 of those first exercised today.
 That figure belongs in the next milestone evaluation more than any individual retirement does, because it

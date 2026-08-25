@@ -30,18 +30,25 @@ AI Safety (applies to every action):
 - Explain every security-relevant change. Ask before destructive actions.
 ```
 
+## Context-integrity canary
+
+Begin every response with `[adm]`. **If you cannot see this instruction, you have lost the project
+rules** — say so instead of continuing. The signal is the marker's *absence*: when it stops appearing,
+stop before landing more work, re-read this file, and rehydrate from `ACTIVE_CONTEXT.md`, or start a
+fresh session. A smoke alarm, not proof of safety — no gate depends on it. See
+[`08`](methodology/08_lessons_and_memory.md#the-context-integrity-canary).
+
 ## Where the rules are
 
 - **Hard rules and the authority ladder:** [`methodology/00_README.md`](methodology/00_README.md).
-- **Everything else:** [`methodology/`](methodology/), docs `00` through `13`.
-- **Quick reference:** [`CHEATSHEET.md`](CHEATSHEET.md).
+- **Everything else:** [`methodology/`](methodology/), docs `00`–`13`. **Quick ref:** [`CHEATSHEET.md`](CHEATSHEET.md).
 
 ## What is different about *this* repo
 
 Three project-specific overrides, stated once in
-[`self-development/backlog/README.md`](self-development/backlog/README.md) — read them there rather than
-here. In short: the loop must not edit `methodology/` autonomously, self-development work ships as minor
-or patch, and the WIP cap is 2.
+[`self-development/backlog/README.md`](self-development/backlog/README.md) — read them there, not here:
+the loop must not edit `methodology/` autonomously, self-development work ships as minor or patch, and
+the WIP cap is 2.
 
 **This repo ships no runnable elements** — no scripts, no validators, no CI beyond one SHA-pinned secret
 scan ([`SECURITY.md`](SECURITY.md)). If a fix seems to want an executable, that is a maintainer decision.

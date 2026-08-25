@@ -62,13 +62,16 @@ finding **6 of 16 conventions have ever been exercised**.
 
 ## Next steps
 
-1. **Merge PR #35** — `gh pr merge 35 --squash`. Checks were green (gitleaks passed on the newly
-   SHA-pinned workflow, which is what verifies the pins resolve).
+**Both sweep decisions are answered (2026-08-20).** The context-integrity canary is **adopted** — live in
+root `AGENTS.md`, its first exercise in the repo that wrote it, at the cost of raising that file's budget
+from 50 to 60 rather than trimming the rule. The house-verbosity setting is **kept, marked unexercised**:
+a MAJOR bump is too steep for one paragraph, revisit 2026-11-25.
+
+1. **Merge PR #35** — `gh pr merge 35 --squash`. Checks green; gitleaks passed on the newly SHA-pinned
+   workflow, which is what verifies the pins resolve.
 2. **Tag from `main` after merge**, two pushes, never combined:
    `git checkout main && git pull --ff-only && git tag -a v1.32.0 -m "..." && git push origin v1.32.0`.
    **46 tags as of the release commit; this tag makes 47**, matching the 47 changelog headings.
-3. **Two maintainer decisions** from the sweep, neither blocking: retire the house-verbosity setting
-   (a removed section ⇒ **MAJOR**), and whether root `AGENTS.md` should carry the context-integrity
-   canary (the sweep recommends yes).
-4. **Then a fresh cold re-audit.** It is E10's closing gate and **this session cannot satisfy it**; a
-   session auditing its own work is the defect the epic repaired.
+3. **Then a fresh cold re-audit of the tagged tree**, commissioned right after the tag by maintainer
+   decision. It is E10's closing gate and **this session cannot satisfy it**; a session auditing its own
+   work is the defect the epic repaired.

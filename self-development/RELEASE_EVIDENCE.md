@@ -94,7 +94,7 @@ from its cap had no way to find them.
 | `README.md` | **350** | [P2](pillars/P2_doc_clarity.md) |
 | `CHEATSHEET.md` | **100** | E05's charter, a hard exit criterion. Currently at 99 — one line of margin |
 | `templates/ROLE_BRIEFS.md` | **200** | E08, self-imposed |
-| Root `AGENTS.md` | **50** | E10, self-imposed |
+| Root `AGENTS.md` | **60** | E10, self-imposed. Was 50; raised on 2026-08-20 when the maintainer chose to adopt the context-integrity canary, which needs ~6 lines. Trimming a safety rule to fit a number invented the day before would have been the wrong trade — the budget exists to stop the file becoming a second rulebook, not to block a rule |
 | `skills/.../SKILL.md` | **500** | the Agent Skills format's own recommendation |
 
 **None of these is enforced.** They are hand-checked budgets, and the cheatsheet spent eleven releases over

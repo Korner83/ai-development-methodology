@@ -17,8 +17,7 @@ was the convention. That is audit finding F-09.
 |---|---|---|
 | **Committed integrity checker / CI beyond a secret scan** | **omitted by decision** (2026-08-20) | This repo ships no runnable elements. The cost is real: every published count is hand-maintained, and the same tag-count error shipped three releases running. [`RELEASE_EVIDENCE.md`](RELEASE_EVIDENCE.md) writes the commands down instead — **weaker than a control, and stated as such** |
 | **Two-layer memory** ([`08`](../methodology/08_lessons_and_memory.md)) | **omitted** | This repo has no `memory/` directory. The methodology's memory discipline is exercised only by the fictional [`examples/example-project`](../examples/example-project/), not here. The memory admission test has therefore never run on real content |
-| **Context-integrity canary** ([`08`](../methodology/08_lessons_and_memory.md)) | **omitted — and it could not have been adopted** | It requires a project instruction file to demand a response marker, and this repo had none until 2026-08-20. **Open maintainer decision** — see [the sweep](evaluations/2026-08-20-convention-sweep.md) §4 |
-| **House verbosity setting** ([`08`](../methodology/08_lessons_and_memory.md)) | **omitted — same cause** | Nowhere to set it until today. Recommended for retirement in the sweep; retiring it costs a MAJOR bump, so it is a maintainer call |
+| **House verbosity setting** ([`08`](../methodology/08_lessons_and_memory.md)) | **omitted, kept published** | Nowhere to set it until today. The sweep put it forward for retirement; **maintainer decision 2026-08-20: keep it, marked unexercised** — a MAJOR bump is too steep for one paragraph. Revisit at the 2026-11-25 pass |
 | **UI verification loop, blast radius, most of `10`** | **not applicable** | Docs-only. There is no UI to verify and no consumer graph to enumerate. This is the single largest thing this instance does *not* exercise, and it is why [`STATUS.md`](../STATUS.md) says the self-application "exercises the planning, review, and memory disciplines far harder than it exercises the UI-verification and testing disciplines" |
 | **Cross-AI validation as a gate** | **adapted, then dropped for E10** | Run for E06/E07/E08 (E06's returned 16 PASS / 2 FAIL, both real). **Waived for E09** by decision, and **removed from E10's exit criteria** by decision on 2026-08-20. The convention remains published for adopters; this repo no longer gates on it |
 
@@ -44,9 +43,15 @@ Strategy → pillars → epics → items; the `BL-####` item format with its eig
 workflow including PR-only trunk; the AI-safety rules; semi-annual currency passes; milestone evaluation
 with its rubric.
 
-**Two of those were first exercised on 2026-08-20** — the `Needs clarification` marker and, under real
-pressure, frozen intent. The sweep records that **6 of 16 conventions added v1.25.0 → v1.31.0 have ever
-been used at all.**
+Plus, adopted the same day it first became possible: the **context-integrity canary**, now live in root
+[`AGENTS.md`](../AGENTS.md). It could not have been adopted before — it needs a project instruction file to
+demand a response marker, and this repo had none. It cost six lines, which **raised that file's
+self-imposed budget from 50 to 60 rather than trimming the rule**; a number invented the day before should
+not veto a safety rule.
+
+**Three of these were first exercised on 2026-08-20** — the `Needs clarification` marker, the canary, and,
+under real pressure, frozen intent. The sweep records that **7 of 16 conventions added v1.25.0 → v1.31.0
+have ever been used at all**, four of them for the first time that day.
 
 ---
 
@@ -57,7 +62,7 @@ been used at all.**
 - **The testing and UI-verification chapters are the least proven by this instance.** A docs repo cannot
   exercise them. If those are the parts you need, [`examples/example-project`](../examples/example-project/)
   is a worked sketch, not evidence.
-- **Do not copy the omissions.** No memory directory, no canary, no integrity checking — those are this
-  repo's choices under its own constraints, not recommendations.
+- **Do not copy the omissions.** No memory directory, no integrity checking, no house-verbosity setting —
+  those are this repo's choices under its own constraints, not recommendations.
 - **The honest headline** stays the one in [`STATUS.md`](../STATUS.md): one production project, one
   docs-only self-application, **no external adopters**, and a closed-beta verdict of NOT READY.
