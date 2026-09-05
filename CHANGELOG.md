@@ -7,6 +7,91 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.33.0 — 2026-08-25
+
+### Added: an intake epic, so focused mode gets used before it gets written
+
+Self-development only. **Nothing in `methodology/` changed and no convention was published** — that is the
+point of the release rather than a limitation of it.
+
+The maintainer raised a real gap: requirements churn, tickets land at short notice, and the four-layer
+cascade (strategy → pillars → epics → items) is a tax on work that will not outlive the sprint. The
+obvious response would have been to write a "focused mode" section into `04` and ship it. **Seven of the
+sixteen conventions added between v1.25.0 and v1.31.0 have ever been exercised**, and an external audit
+found ten live defects in the rules those passes were adding to — so the obvious response is the one this
+project has already proven it should stop making.
+
+- **`self-development/backlog/epics/E00-intake/`** (new, five files) — a **standing** epic that never
+  closes, holding real work that is not worth a charter. An intake item carries the full eight-field
+  table, frozen intent on its `Done means:`, the `Status`/`Test` hard rule, the six DoD gates, the lock
+  protocol, and a Code Map at Effort M+ — **identical to a cascade item.** The only thing it lacks is an
+  epic charter above it. **Nothing that protects correctness is relaxed**; what is skipped is a charter
+  the work was never going to earn.
+- **The design is deferred, not shipped.** `E00/FUTURE.md` holds focused mode as a methodology-level
+  proposal with the condition that would promote it: intake has held real items through a semi-annual
+  pass, the ratio has been reported once, and the eviction rule has fired at least once. Also recorded
+  there: allowing epic-less items outright would amend *"items live in exactly one epic"* and cost a
+  MAJOR, which is why a standing epic — where the hard rule stays literally true — was chosen instead.
+- **The measurement is the part worth having.** Report the share of closed items that arrive through
+  intake rather than the cascade, and **read a high ratio as evidence against the cascade**: if most real
+  work bypasses four planning layers, those layers are not earning their cost and should be trimmed rather
+  than enforced harder. **This project has no other mechanism that can tell it a planning layer is not
+  worth its cost** — it took an outside auditor to notice that nine of sixteen conventions had never been
+  used.
+
+### Fixed: a decision that was recorded and never executed
+
+- **`self-development/strategy/00_master_plan.md`** — the Phase 1 exit criterion requiring all six
+  templates to carry a methodology version stamp is **dropped, not fulfilled.** A stamp inside a template
+  is a copy that goes stale on the adopter's disk where nothing can refresh it; `SKILL.md` and
+  `CHEATSHEET.md` are read *from* the repo and both already carry one. **The criterion was asking for
+  exactly the drift v1.32.0 spent its time removing.**
+
+  The v1.32.0 convention sweep decided this on 2026-08-20 and **nobody carried it out** — the criterion
+  stayed open for five days while the release that decided it shipped. **A decision recorded and not
+  executed is the same failure as a claim asserted and not checked**, which is the finding class the last
+  release repaired. It was too small to charter and had no epic to belong to, so before `E00` existed it
+  had nowhere to go. It is intake's first closed item, and that is not a coincidence.
+
+### Recorded: a landscape triage that adopts nothing
+
+A pass over `alvinreal/awesome-opensource-ai` at maintainer request, held in `E00/FUTURE.md`. **Roughly
+nine tenths of the list is not applicable** — it catalogues inference engines, training frameworks,
+serving stacks and data pipelines, against a methodology that governs *projects using* agents. Same axis
+mismatch E09 found in `agent-engineer`, and the same reason four of its six sources yielded nothing.
+
+**One entry is worth reading: Agent File (`.af`)**, filed as BL-0058. Every other candidate solves state
+or coordination with a *running service*; Agent File solves portability with a *file format* — the same
+wager this methodology makes, reached independently by people building runtimes. It is the only entry on
+the list that can validate or falsify the core premise. The intended outcome is a compatibility sentence
+or a recorded rejection, **not a new convention either way.**
+
+Runners-up recorded with promotion triggers (KaibanJS, A2A Protocol), one entry recorded as the
+deliberately-declined alternative rather than a candidate (Conductor OSS — it *is* the external
+coordinator `05` refuses), and the rest rejected with reasons so the next pass does not re-triage them.
+**Method caveat, recorded because it bounds every verdict: the triage ranked candidates from one-line
+README descriptions and opened no repositories.**
+
+### A design finding from the first hour of use
+
+**A standing epic breaks the WIP cap on a literal reading.** `E00` is permanently `active`, so it would
+occupy one of two slots forever and leave a single slot for all real work. Resolved as a **declared
+deviation** — the cap limits concurrent *chartered* effort, and intake is not chartered effort — recorded
+in the charter and in `EPICS.md` rather than quietly re-read into the rule.
+
+Worth naming because of where it came from: **using the convention surfaced it in under an hour, and
+writing the convention would not have.** That is the argument for this release's whole shape.
+
+### Verification
+
+Repo-wide rendering-link and anchor check: **1,168 relative links across 132 markdown files, zero broken**
+(55 adopter-relative, resolving only after install). No file in `methodology/` was touched, so every line
+cap is unchanged from v1.32.0. Zero executable files. Both workflow `uses:` refs remain full commit SHAs.
+**47 tags as of this release commit; this release's annotated tag makes 48**, matching the 48 changelog
+headings this entry creates.
+
+---
+
 ## v1.32.0 — 2026-08-20
 
 ### Fixed: one answer per rule — the response to an external baseline audit
