@@ -8,70 +8,56 @@ and item state**, which are authoritative when they disagree with this file.
 
 Overwritten, not appended. The durable record lives in commits, `ARCHIVE.md`, and memory.
 
-_Last updated: 2026-08-20._
+_Last updated: 2026-08-25._
 
 ## Current focus
 
-**E10 — External baseline audit remediation.** `active`, **all 14 items closed**, released as `v1.32.0`
-in commit `656270b` on `claude/methodology-audit-plan-ccfebc`, open as **PR #35**. **Merged: no. Tagged:
-no.** `main` is still at v1.31.0 and the repo still has 46 tags.
+**E00 — Intake**, opened 2026-08-25 as a **standing** epic that never closes. Branch
+`claude/focused-mode-intake`, cut from `main` at `495b113` (v1.32.0).
 
-Every audit finding is addressed — the Critical, all five High, all four Medium. The epic stays `active`
-because its closing gate is a fresh cold re-audit, which this session cannot run on itself.
+It is the **dogfood run for focused mode**: same `BL-####` format, same frozen intent, same
+`Status`/`Test` hard rule, same six DoD gates, same lock — **no epic charter above it.** The design and
+the condition that would promote it into `methodology/` live in
+[`E00/FUTURE.md`](epics/E00-intake/FUTURE.md). **Nothing about focused mode is published as a convention,
+deliberately** — seven of sixteen conventions added v1.25.0 → v1.31.0 have ever been exercised, so this
+one gets used before it gets written. That ordering has never happened in this project.
 
 ## Shipped this session
 
-The skill parses under strict YAML (it did not — nobody on a spec-compliant loader could install it).
-Retired trunk exception gone; the skill defers to `00`'s authority ladder. **The lock's authority claim
-now matches what git enforces**, with an opt-in shared-ref protocol where the loser's push rejection *is*
-the compare-and-swap. **Destructive operations split** into `approval-gated` and `agent-prohibited` on
-blast radius — which resolves the "user direction overrides everything" vs "the AI doesn't act, period"
-conflict without amending either. **Trust follows provenance**, not filename. One `Test` enum, no subsets.
-`pass` reserved for the required level. Counts carry an as-of marker. Actions SHA-pinned and the
-supply-chain claim narrowed. Root `AGENTS.md` added. Adoption profile published, all ten epic folders
-brought to five files, release-evidence commands written down, a surface map added to `00`, and a sweep
-finding **6 of 16 conventions have ever been exercised**.
+- **`E00-intake`** with all five files. Three items filed, one closed.
+- **BL-0057 closed** — the template version-stamp criterion is **dropped**, not fulfilled. The v1.32.0
+  sweep decided that on 2026-08-20 and **nobody executed it**; it sat open in the master plan for five
+  days while the release it came from shipped. A decision recorded and not executed is the same failure as
+  a claim asserted and not checked. It had no epic and was too small to charter — **that is precisely the
+  gap intake closes, demonstrated on the first item rather than argued for.**
+- **BL-0058 / BL-0059 filed** — read the Agent File spec and decide on a conformance line; fold
+  architecture-layer routing into failure-layer routing (the sweep's second unexecuted decision).
+- **Landscape triage of `alvinreal/awesome-opensource-ai`** recorded in `E00/FUTURE.md` as BL-0061.
+  Roughly nine tenths is runtime infrastructure and not applicable. Agent File is the one pick, because it
+  is the only entry that solves state portability with a *file format* rather than a running service —
+  the same wager this methodology makes.
 
-## Decisions that shaped it
+## Design finding from the first hour
 
-- **No runnable elements, no new CI.** A committed integrity checker was declined. **F-08 and F-11 now
-  have a convention, not a control** — hand-maintained counts can drift again, and the next occurrence
-  will be found by a reader rather than a build. Stated in the charter rather than hidden.
-- **The cross-AI gate was removed** from this epic's exit criteria. The methodology's cross-AI convention
-  is untouched for adopters.
-- **The epic's own paperwork was cut back** partway through, after it grew larger than the doc changes it
-  described. An epic about overlapping normative copies is the worst place to add ceremony.
+**A standing epic breaks the WIP cap on a literal reading** — permanently `active` means one of two slots
+gone forever. Resolved as a **declared deviation**: the cap limits concurrent *chartered* effort and
+intake is not chartered effort. Recorded in `E00`'s charter and in `EPICS.md` rather than read into the
+rule. This is the kind of thing that surfaces from using a convention and not from writing one.
 
 ## Known deviations carried forward
 
-- **BL-0040 was held at `under-review`** on a frozen-intent criterion ("net-negative in lines") that the
-  work met in substance but not in letter, and closed only by explicit maintainer decision. The rule held
-  under inconvenience, which was the useful part. BL-0051 hit the same shape and was *trimmed to fit*
-  instead — two lines of merging beat a decision.
-- **The "every template carries a version stamp" criterion is recommended for removal**, not fulfilment.
-  The sweep's reasoning: a stamp in a template is a copy that goes stale on the adopter's disk where
-  nothing can refresh it, while `SKILL.md` and `CHEATSHEET.md` are read *from* the repo and already carry
-  one. The criterion was asking for the drift this epic spent its time removing.
-- **The seven version-pin sites read `v1.32.0`** as of the release commit; `main` does not carry them yet.
-- **This file shipped four false claims inside the release commit.** It said "nothing committed, nothing
-  merged" and "the pins still read v1.31.0" — both true when written, both false the moment `656270b`
-  landed, because the same commit carried the file and the changes it denied. **It is the drift class E10
-  exists to fix, in the one file whose only job is telling the next session where things stand**, and no
-  check caught it because the checker was declined. Corrected in a follow-up commit; recorded rather than
-  quietly overwritten.
+- **E10 is still `active` with zero open items.** Its closing gate is a fresh cold re-audit of the tagged
+  `v1.32.0` tree by a session that did not author the fixes. Unrun.
+- **No committed checker.** Counts stay hand-maintained; the next drift is found by a reader, not a build.
+- **AT-05 and AT-06 in `E00/TEST.md` are unrunnable yet** — the eviction rule has not fired and the intake
+  ratio has no reporting date until 2026-11-25. They are the two properties that decide whether intake was
+  worth building, and they are recorded as `not-tested` rather than omitted.
 
 ## Next steps
 
-**Both sweep decisions are answered (2026-08-20).** The context-integrity canary is **adopted** — live in
-root `AGENTS.md`, its first exercise in the repo that wrote it, at the cost of raising that file's budget
-from 50 to 60 rather than trimming the rule. The house-verbosity setting is **kept, marked unexercised**:
-a MAJOR bump is too steep for one paragraph, revisit 2026-11-25.
-
-1. **Merge PR #35** — `gh pr merge 35 --squash`. Checks green; gitleaks passed on the newly SHA-pinned
-   workflow, which is what verifies the pins resolve.
-2. **Tag from `main` after merge**, two pushes, never combined:
-   `git checkout main && git pull --ff-only && git tag -a v1.32.0 -m "..." && git push origin v1.32.0`.
-   **46 tags as of the release commit; this tag makes 47**, matching the 47 changelog headings.
-3. **Then a fresh cold re-audit of the tagged tree**, commissioned right after the tag by maintainer
-   decision. It is E10's closing gate and **this session cannot satisfy it**; a session auditing its own
-   work is the defect the epic repaired.
+1. **Ship this as `v1.33.0`** — self-development work is capped at minor or patch by project override, and
+   this adds new artifacts, so MINOR.
+2. **Work BL-0058 and BL-0059** when there is appetite; both are small and neither is urgent.
+3. **The re-audit of v1.32.0** remains E10's gate and this session's blind spot.
+4. **2026-11-25 semi-annual pass** — first intake-ratio report, first chance to fire the eviction rule,
+   and the re-pin check on the two SHA-pinned actions.

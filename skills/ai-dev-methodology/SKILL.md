@@ -10,7 +10,7 @@ A markdown + git methodology for running software projects where some contributo
 
 > **Full docs:** <https://github.com/Korner83/ai-development-methodology> · **One-page reference:** [CHEATSHEET](https://github.com/Korner83/ai-development-methodology/blob/main/CHEATSHEET.md)
 >
-> **Tracks methodology v1.32.0.** An installed copy carries no other date — compare against the [CHANGELOG](https://github.com/Korner83/ai-development-methodology/blob/main/CHANGELOG.md) if the repo's docs look newer than this file.
+> **Tracks methodology v1.33.0.** An installed copy carries no other date — compare against the [CHANGELOG](https://github.com/Korner83/ai-development-methodology/blob/main/CHANGELOG.md) if the repo's docs look newer than this file.
 
 Written in the [Agent Skills](https://agentskills.io) open format — a `SKILL.md` carrying `name` and `description` frontmatter — so any client that reads that format can load it.
 
