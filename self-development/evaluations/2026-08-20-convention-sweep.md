@@ -27,7 +27,7 @@ actually used it?* Not "is it a good idea." Not "would it help someone." Used.
 | 8 | **House verbosity setting** | v1.29.0 | **No** — same cause: nowhere to set it | **Keep, marked unexercised** — maintainer decision 2026-08-20: retiring it is a removed section and a MAJOR bump, which is a large price for one paragraph. Revisit at the 2026-11-25 pass if still unused |
 | 9 | **Cross-AI spec-verification** (third mode) | v1.29.0 | **No record** | **Keep, unproven** |
 | 10 | **Doc altitude** rule | v1.29.0 | **Yes, editorially** — the "would this become false if I rewrote it?" test shaped E10's resolutions | **Keep** |
-| 11 | **Architecture-layer** failure routing | v1.29.0 | **No record** | **Merge into #4** — it is one more layer on an existing ladder, not a separate convention |
+| 11 | **Architecture-layer** failure routing | v1.29.0 | **No record** | **Merged into #4 on 2026-09-05** (v1.34.0). It is now the top row of the routing table rather than a paragraph beside it. **The corpus carries one fewer named convention: 15, not 16.** Like the version-stamp criterion, this decision sat unexecuted for sixteen days — twice in one sweep |
 | 12 | **`ROLE_BRIEFS.md`** — six per-phase briefs | v1.30.0 | **No record** | **Keep, unproven** — a template is read when used, not memorised; low standing cost |
 | 13 | **Blast radius** as 7th verification dimension | v1.30.0 | **Not applicable here** — docs-only repo, no UI | **Keep** — untested by this instance, not unused in principle |
 | 14 | **Unattended mode ≠ answering your own questions** | v1.30.0 | **No** — the loop has not run since | **Keep** — now wired to #15, so it has a mechanism rather than a caution |
@@ -90,7 +90,7 @@ links does not do that. Recorded in [`RELEASE_EVIDENCE.md`](../RELEASE_EVIDENCE.
 
 ## 5. Net effect
 
-**No convention was retired in this sweep**, so the docs did not shrink — recorded as such rather than
+**No convention was retired *on the day of* the sweep**, so the docs did not shrink then — and both unexecuted decisions were carried out later, on 2026-09-05, through [`E00-intake`](../backlog/epics/E00-intake/ARCHIVE.md). **#11 is merged and the named-convention count is now 15.** The original wording is corrected forward rather than rewritten, because the sixteen-day gap between deciding and doing is the more useful record — recorded as such rather than
 dressed up. Both candidates went to the maintainer on 2026-08-20: the verbosity setting is **kept and
 marked unexercised** (a major version is too steep for one paragraph), and the canary was **adopted**
 rather than retired, which moves it from unexercised to exercised. **Net: one fewer unproven convention,

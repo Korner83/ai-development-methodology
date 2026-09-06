@@ -24,3 +24,9 @@ Per the methodology, self-evaluation is itself a methodology artifact — applie
 ## Status of this folder
 
 Seeded 2026-05-25 via BL-0006 (E02). First pass (`2026-05-first-pass.md`) is populated by BL-0007 through BL-0010 — currently a skeleton awaiting cold-read findings.
+
+## Commissioning an external audit
+
+[`AUDIT_BRIEF.md`](AUDIT_BRIEF.md) holds the pinned commit, the paste-able prompt, the rubric, and the
+prior audit's eleven findings with their claimed fixes — so an independent auditor can verify them rather
+than believe them. **Update the pin at each release; everything else is reusable.**

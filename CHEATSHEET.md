@@ -1,6 +1,6 @@
 # Cheatsheet — AI Development Methodology
 
-_One-page reference. For learning, read [`methodology/`](methodology/). For setup, see [`templates/`](templates/). Pinned-against methodology v1.33.0._
+_One-page reference. For learning, read [`methodology/`](methodology/). For setup, see [`templates/`](templates/). Pinned-against methodology v1.34.0._
 
 ## The 4 planning layers
 
@@ -82,13 +82,12 @@ Always **fresh session, different model where possible** [10](methodology/10_tes
 
 ## Routing review findings by failure layer
 
-Fix at the layer the defect entered; process top-down — an intent/plan finding moots the code findings below it.
+Fix at the layer the defect entered; process top-down — a finding at any layer moots those below it. Same item bounces twice at architecture/intent/plan → stop, surface it. [07](methodology/07_definition_of_done.md#routing-findings-by-failure-layer)
 
+- **Architecture** — requirements changed; the shape the items sit on no longer fits ⇒ strategy/pillar re-evaluation, never a bug.
 - **Intent** — approved goal is wrong ⇒ halt, human re-approves (frozen intent).
 - **Plan** — item/Code Map led the code astray ⇒ fix the item body and re-derive. Never patch code to compensate for a wrong plan.
 - **Code** — ordinary bug ⇒ patch. · **Out of scope** ⇒ file to `FUTURE.md` / new item, don't fix inline. · **Invalid** ⇒ reject with a one-line reason.
-
-Same item bounces twice at intent/plan → stop, surface it. [07](methodology/07_definition_of_done.md#routing-findings-by-failure-layer)
 
 ## Item-body conventions + size budgets
 

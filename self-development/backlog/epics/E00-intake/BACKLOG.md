@@ -3,7 +3,7 @@
 _Real work that is not worth a charter. Same item format, same gates, no epic above it.
 See the [charter](README.md) for what intake is and the eviction rule that empties it._
 
-**Filed so far: 3. Closed: 1.** Two of the three came out of E10's convention sweep as decisions that were
+**Filed so far: 5. Closed: 3.** Three of the five came out of E10's convention sweep as decisions that were
 recorded and then not executed — which is the same failure class as a claim asserted and not checked, and
 is precisely the kind of work that had nowhere to live before this file existed.
 
@@ -12,7 +12,6 @@ is precisely the kind of work that had nowhere to live before this file existed.
 | ID | Title | Priority | Effort | Status |
 |---------|------------------------------------------------------|----------|--------|-------------|
 | BL-0058 | Read the Agent File spec; decide on a conformance line | P2 | S | ready |
-| BL-0059 | Fold architecture-layer routing into failure-layer routing | P2 | XS | ready |
 
 ---
 
@@ -63,36 +62,3 @@ repositories. That is enough to pick; it is not enough to conclude. Runners-up r
 
 ---
 
-### BL-0059 — Fold architecture-layer routing into failure-layer routing
-
-| Field    | Value                              |
-|----------|------------------------------------|
-| Epic     | E00-intake                         |
-| Pillar   | P2                                 |
-| Priority | P2                                 |
-| Effort   | XS                                 |
-| Status   | ready                              |
-| Test     | not-tested                         |
-| Deps     | —                                  |
-| Lock     | —                                  |
-
-> **Frozen intent** — `Why / Description:` and `Done means:` approved by maintainer on 2026-08-25.
-
-**Why / Description:** The v1.32.0 convention sweep found that "architecture-layer failure routing"
-(v1.29.0) is not a separate convention — it is one more layer on the ladder that failure-layer routing
-(v1.25.0) already defines. The sweep's decision was **merge**, and like the version-stamp criterion that
-decision was recorded and not executed.
-
-Two names for one mechanism is the copy-surface problem in miniature: a reader who meets only the second
-one does not know the first exists.
-
-**Done means:**
-
-- [ ] The architecture layer is presented as the top rung of the existing routing ladder, not as its own
-      convention with its own name.
-- [ ] Exactly one place defines the ladder; every other mention links to it.
-- [ ] The count of named conventions goes **down by one**. A sweep that finds redundancy and then keeps
-      both names has done nothing.
-- [ ] `06` and `07` stay under their caps; net line change ≤ 0.
-
-**Files (probable):** `methodology/07_definition_of_done.md`, `methodology/06_working_principles.md`.

@@ -40,7 +40,7 @@ be fabricated evidence. The rule was not weakened to fit the practice.
 ## ID space
 
 - **Epic IDs:** `E<NN>` (zero-padded). Currently `E00` through `E10`; `E00` is the standing intake epic and does not close. Folder names carry the `E` prefix (`E01-examples-folder`), per "Standard epic-folder structure" in [`03_epics.md`](../../methodology/03_epics.md).
-- **Item IDs:** `BL-<####>` monotonic across all epics in this self-development backlog, and shared with `FUTURE.md` items so promotion needs no renumbering. Highest assigned: `BL-0061` (E00 `FUTURE.md`, 2026-08-25).
+- **Item IDs:** `BL-<####>` monotonic across all epics in this self-development backlog, and shared with `FUTURE.md` items so promotion needs no renumbering. Highest assigned: `BL-0062` (E00, 2026-09-05).
 
 Per the methodology's [project structure convention](../../templates/PROJECT_STRUCTURE.md): item IDs are repo-wide-monotonic within this backlog (so items can move between epics without renumbering and `grep BL-0042` is unambiguous within the self-development backlog).
 
@@ -63,6 +63,6 @@ Standard methodology workflow per [`methodology/04_backlog_items.md`](../../meth
 
 ## Status
 
-Bootstrapped on 2026-05-25; the bootstrap completed long ago. As of 2026-08-25: eleven epics, eight done, one parked (E04, will not resume), one active (E10), one standing (E00 intake). Item IDs run to `BL-0061`. The live rollup is [`EPICS.md`](EPICS.md) — this section records origin, not current state.
+Bootstrapped on 2026-05-25; the bootstrap completed long ago. As of 2026-09-05: eleven epics, eight done, one parked (E04, will not resume), one active (E10), one standing (E00 intake). Item IDs run to `BL-0062`. The live rollup is [`EPICS.md`](EPICS.md) — this section records origin, not current state.
 
 **This paragraph was stale by two epics, twenty-two item IDs and a WIP cap when an external audit read it.** It is the second-order form of the finding E10 exists to fix: a hand-maintained record drifts, and nothing notices until someone outside reads it. **No check will catch the next one** — a committed checker was declined — so the only defences are that this section says what it is (origin, not current state), that it points at the file that is, and that [`../RELEASE_EVIDENCE.md`](../RELEASE_EVIDENCE.md) makes the counts reproducible by anyone who cares to look.
