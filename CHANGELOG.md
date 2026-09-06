@@ -7,6 +7,59 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.34.0 — 2026-09-05
+
+### Changed: one fewer named convention, and an audit anyone can commission
+
+Two items through [`E00-intake`](self-development/backlog/epics/E00-intake/README.md) — the standing epic
+opened in v1.33.0. Both were work with no epic to belong to, which is what intake exists for; **both were
+also decisions this project had already made and not carried out.**
+
+- **`methodology/07_definition_of_done.md` + `CHEATSHEET.md` — "architecture-layer failure routing" is no
+  longer a convention of its own.** It was never a separate mechanism: it is one more rung on the ladder
+  that failure-layer routing already defines. **The architecture is now the top row of the routing table**,
+  where every other layer lives, and the paragraph that sat beside the table calling it a distinct thing is
+  gone. The cascade sentence generalised with it — from *"an intent- or plan-level finding cancels the
+  code-level findings below it"* to a finding at **any** layer cancelling those below, which is what the
+  ladder always meant.
+
+  `CHEATSHEET.md` restates the ladder and had **zero headroom** at 99 against a hard sub-100 criterion. The
+  new rung was paid for by merging that block's opening and closing lines rather than by raising the cap;
+  the file is now **98**. **Net across the release: −2 lines and −1 named concept.**
+
+  The v1.32.0 sweep decided this merge on 2026-08-20 and nobody executed it — **the second such case from
+  the same sweep**, after the template version-stamp criterion. Twice is a pattern, not an oversight, and
+  it is recorded in the sweep rather than smoothed over: *a decision recorded and not executed is the same
+  failure as a claim asserted and not checked.*
+
+- **`self-development/evaluations/AUDIT_BRIEF.md`** (new) — commissioning an independent audit is now a
+  paste rather than a design job. It carries the pinned commit and tree, a ready prompt, the twelve rubric
+  dimensions with the four core ones named, and **the prior audit's eleven findings alongside their claimed
+  fixes, so an auditor can check them instead of believing them.**
+
+  Two of its instructions are deliberately uncomfortable. **Do not trust the repository's own records** —
+  including `RELEASE_EVIDENCE.md`, whose commands are to be run rather than read. And **do not propose new
+  conventions**: a project that has shipped sixteen and exercised seven does not need an auditor adding to
+  the pile, so findings should more often subtract than add.
+
+  **The brief is not evidence and does not run the audit.** E10 stays `active` until a session that did not
+  author the fixes returns a verdict on the tagged tree.
+
+### Why this is the shape of the release
+
+Both changes point the same way, and it is the direction this project has historically not moved in: **one
+subtracts a concept, the other lowers the cost of being told it is wrong.** Nothing new was added to
+`methodology/` beyond a table row that replaced a paragraph.
+
+### Verification
+
+**1,175 relative links across 133 markdown files, zero broken** (55 adopter-relative). `07` at 545 of a
+1,050 cap; `CHEATSHEET.md` **98 of 100**; every other capped file untouched. Zero executable files. Both
+workflow `uses:` refs remain full commit SHAs. **48 tags as of this release commit; this release's
+annotated tag makes 49**, matching the 49 changelog headings this entry creates.
+
+---
+
 ## v1.33.0 — 2026-08-25
 
 ### Added: an intake epic, so focused mode gets used before it gets written
