@@ -55,6 +55,12 @@ The cost of stating an assumption is one sentence. The cost of building on the w
 - Validation exists at the system edge. Once data is past the edge, treat it as valid.
 - Backwards-compatibility shims, fallbacks for "the old shape," and feature flags for cleanups — none of these are simplicity. They are debt the next contributor pays.
 
+### Optional reusable-asset graduation
+
+When a project intends to reuse a solution across products, use evidence of real use to decide whether to extract it: **local solution** (one use) → **candidate pattern** (a second use exposes what is shared) → **validated asset** (a third meaningfully different application tests generality) → **productized asset** (named human owner, versioning, compatibility policy, documentation, tests, and support expectations).
+
+Three uses are evidence, not automatic promotion; three near-identical deployments may be one use case. Record the differences and remaining limits before claiming generality. This optional pattern does not require productization, delay an already justified shared helper, or replace the simplicity-first rule. Support expectations may explicitly be limited, but must be stated.
+
 ### The senior-engineer test
 
 When you are done, imagine a senior engineer reading your diff cold. Would they call it overcomplicated? If yes, simplify before you ship.

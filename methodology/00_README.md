@@ -1,6 +1,6 @@
 # 00 — Methodology
 
-> A self-contained, portable methodology for running a software project end-to-end. Designed for teams where humans and AI agents collaborate as peers. The same set of practices works whether the contributors are all human, all AI, or any mix.
+> A self-contained, portable methodology for running a software project end-to-end. Humans and AI agents contribute under human authority and accountability. The same practices support human-only teams, AI-led implementation, and mixed software squads, with assurance matched to consequences.
 
 This is the index. It explains why the methodology exists, how the pieces fit together, and how to read the rest of the docs.
 

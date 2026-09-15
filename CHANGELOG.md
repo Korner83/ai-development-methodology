@@ -7,6 +7,26 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.35.0 — Unreleased
+
+### Added: assurance and multidisciplinary software squads
+
+Maintainer-directed [E11](self-development/backlog/epics/E11-assurance-and-squads/README.md)
+extends software delivery across UX, customer, engineering, and verification responsibilities.
+A0–A3 assurance profiles set human accountability and evidence requirements alongside existing
+L0–L4 verification levels. A2/A3 require explicit human acceptance; critical work additionally
+requires qualified human specialist verification. Production execution remains human-only.
+
+Parallel squads declare implementation and verification queue limits. Epic capability ownership,
+conditional item fields, rotation readiness, and optional reusable-asset graduation make handoffs
+and reuse explicit. Templates, skill, and illustrative solo/squad examples are updated together.
+
+**Prepared, not released.** Local verification is recorded in [E11/TEST.md](self-development/backlog/epics/E11-assurance-and-squads/TEST.md).
+Independent review and maintainer acceptance remain pending. These additions have not been
+validated in external adoption. No executable tooling or additional CI is introduced.
+
+---
+
 ## v1.34.0 — 2026-09-05
 
 ### Changed: one fewer named convention, and an audit anyone can commission

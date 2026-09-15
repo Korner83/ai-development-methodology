@@ -116,6 +116,17 @@ The table comes *before* any body text. It is the at-a-glance summary of the ite
 
 ---
 
+### Assurance and accountable owner
+
+The [assurance profile](07_definition_of_done.md#assurance-profiles--consequences-determine-the-required-evidence) is selected before implementation. A0/A1 items may inherit it and their human owner from the project/epic without extra rows. **A2/A3 items require both rows**, even when inherited:
+
+```markdown
+| Assurance | A2 — material |
+| Accountable owner | <named human or human-held role with current holder recorded in the repo> |
+```
+
+In the body, record required reviewers/evidence and the human acceptance decision or durable reference, including date and accepted residual risks. The [profile rules](07_definition_of_done.md#assurance-profiles--consequences-determine-the-required-evidence) govern readiness, escalation, and completion; an absent row never downgrades risk. These fields add no Status or Test values.
+
 ## Priority enum
 
 ```
@@ -487,7 +498,7 @@ For XS and S items, `**Files (probable):**` is enough. At **Effort M and above**
 
 The rule that makes it work: **whoever plans the item drains their investigation into the Code Map instead of carrying it in their session.** Codebase knowledge gathered while planning — which files, which helpers already exist, which approach was rejected and why — dies with the planning session unless it lands in the item body.
 
-**The cold-handoff test:** could a fresh session, holding only this item body, start implementing without re-investigating the codebase? For an M+ item the answer must be yes. This extends the existing bar — "self-describing enough that a contributor who has never seen it can pick it up" — from *what* to build to *where and how*.
+**The cold-handoff test:** could a fresh session, holding this item and its repository links, start implementing without repeating the planner's investigation? For an M+ item the answer must be yes. **Rotation readiness** adds purpose, constraints, human ownership, verification commands/procedures, and relevant decisions/rejected alternatives to that check. A new human or AI must be able to plan or verify from those artifacts without private chats or personal prompts. Fix missing context before handoff; record an actual cold walkthrough only when one occurred.
 
 **The dispatch rule:** when the item is handed off — to a [subagent](05_locks_and_parallel_work.md#subagent-delegation), to tomorrow's session, to another contributor — the instruction is *"work BL-####,"* pointing at the item. Don't paste a summary of the item into the handoff prompt: the summary drifts from the item, and now two versions of the truth exist. If the item body isn't good enough to work from, fix the item body. (A subagent handed a *slice* of the item — research this, test that — is still told what its slice is; the rule is that the item's own goal and constraints are read from the item rather than restated around it. See [05 — Subagent delegation](05_locks_and_parallel_work.md#subagent-delegation).)
 

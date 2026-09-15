@@ -631,6 +631,8 @@ The previous sections describe *what* each layer of verification does. This sect
 
 ### The levels
 
+[A0–A3 assurance profiles](07_definition_of_done.md#assurance-profiles--consequences-determine-the-required-evidence) set accountability and additional evidence requirements; these L0–L4 levels describe verification methods/depth. Satisfy both. A fresh AI review counts toward A2 independence only when it follows the [independent-evidence requirements](11_human_roles.md#authorship-verification-and-acceptance); L3 agreement alone is not assurance, and L4 user testing does not replace A3 specialist verification. Pending required assurance or human acceptance keeps `Test` at `partial`/`pending`, not `pass` with a caveat.
+
 | Level | Name | What it covers | Time cost |
 |---|---|---|---|
 | **L0** | Type / compile | Static type check; build passes; no syntax or import errors. | Seconds |

@@ -270,7 +270,7 @@ The methodology is tool-agnostic. Only the project-instruction filename differs:
 
 **Good fit**
 
-- Humans and AI agents as peers - locks, tier matrix, and DoD all assume contributors arrive at AI velocity.
+- Humans and AI agents as active contributors under human authority and accountability — [risk-based assurance](methodology/07_definition_of_done.md#assurance-profiles--consequences-determine-the-required-evidence) supports multidisciplinary software squads.
 - Markdown + git as the substrate. No SaaS, no signup, no monthly cost; it lives where the code lives.
 - One human + one agent, up to a small team + several agents. The lock and WIP cap carry the range.
 - Long-running work where direction matters - the four-layer cascade is what stops months of silent drift.

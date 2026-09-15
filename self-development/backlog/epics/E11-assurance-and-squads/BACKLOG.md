@@ -4,8 +4,8 @@
 
 | ID | Title | Priority | Effort | Status |
 |---|---|---|---|---|
-| BL-0063 | Define assurance and squad operating rules | P1 | M | in-progress |
-| BL-0064 | Propagate adoption guidance and worked examples | P1 | M | ready |
+| BL-0063 | Define assurance and squad operating rules | P1 | M | under-review |
+| BL-0064 | Propagate adoption guidance and worked examples | P1 | M | in-progress |
 | BL-0065 | Verify consistency and prepare v1.35.0 | P1 | S | ready |
 
 ### BL-0063 — Define assurance and squad operating rules
@@ -16,10 +16,10 @@
 | Pillar | P1 |
 | Priority | P1 |
 | Effort | M |
-| Status | in-progress |
-| Test | pending |
+| Status | under-review |
+| Test | partial — local checks complete; independent review and acceptance pending |
 | Deps | — |
-| Lock | codex-e11@2026-09-15T16:02Z |
+| Lock | — |
 | Assurance | A2 — material |
 | Accountable owner | repository maintainer |
 
@@ -39,10 +39,10 @@
 | Pillar | P1 |
 | Priority | P1 |
 | Effort | M |
-| Status | ready |
-| Test | not-tested |
+| Status | in-progress |
+| Test | pending |
 | Deps | BL-0063 |
-| Lock | — |
+| Lock | codex-e11@2026-09-15T16:02Z |
 | Assurance | A2 — inherited operating-rule changes |
 | Accountable owner | repository maintainer |
 

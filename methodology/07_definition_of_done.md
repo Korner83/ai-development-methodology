@@ -244,6 +244,29 @@ The pattern is the same in every case: the additional gate has a binary pass/fai
 
 Document the project-specific additions in the project's instruction file so every contributor knows the full set.
 
+### Assurance profiles — consequences determine the required evidence
+
+**Acceptance is defined before implementation by observable criteria, the assurance profile, and the accountable human. The author does not decide what is "good enough" after seeing the result.** This applies to software-delivery work across engineering, UX, and customer-facing responsibilities.
+
+| Profile | Consequences and typical work | Required assurance in addition to applicable base gates |
+|---|---|---|
+| **A0 — Exploratory** | Bounded spike, disposable mock-up, learning prototype explicitly marked non-production | Record the learning objective, limits, and evidence; author self-check may suffice where existing gates allow it. No production use under this profile. |
+| **A1 — Standard** | Ordinary reversible product work and internal tools | Existing review, tests, DoD, and actual-product verification, with the project's accountable human identified. |
+| **A2 — Material** | Authentication/authorization, payments, sensitive data, consequential public API changes, significant architecture | Named human acceptance; independent verification against approved criteria and reproducible evidence; relevant security checks. |
+| **A3 — Critical** | Safety-critical or regulated consequences, including software decisions whose failure could materially harm people | A2 controls plus a named human domain owner, qualified human specialist verification/sign-off, and applicable compliance evidence. AI is never the sole verifier. |
+
+Classify the consequences of the work, not the contributor's job title or the industry label alone. A payment implementation is at least A2; a regulated financial decision may require A3. Existing human-only decisions and operations still apply at every profile.
+
+**Selection and inheritance:** record a project baseline and accountable human in the instruction file. A1 is the default for ordinary reversible work, never a fallback for unidentified risk. An epic may raise that baseline; an item inherits it and must rise further when its consequences demand it. Explicit A0 applies only to bounded non-production exploration. Reassess before reusing a prototype for delivery; its earlier checks are not production acceptance.
+
+Before `ready`, identify the effective profile, required evidence/reviewers, and accountable human. A human-held role is sufficient only when its current holder is discoverable in the repository. Missing assignments or uncertain classification block readiness. Escalate uncertainty or new material consequences to that human; update the requirements before affected work continues. An author cannot silently lower a profile or remove a required check. Any proposed reduction needs explicit human agreement with a recorded rationale, still meeting the consequence-based minimum and base gates. Approved acceptance criteria remain [frozen intent](04_backlog_items.md#frozen-intent--approved-goals-are-human-owned).
+
+**One verification system:** [L0–L4](10_testing_and_verification.md#verification-levels-matching-depth-to-risk) still describe verification methods/depth and the existing change-class requirements. A0–A3 add responsibility and assurance requirements, not alternative Test values or replacement levels. Meet both the applicable L requirements and this profile; neither can waive the other. The six gates and the two narrow Test exceptions remain unchanged. A0 is not permission to skip tests on testable behavior.
+
+Use the [conditional item fields](04_backlog_items.md#assurance-and-accountable-owner) to record A2/A3, with reviewer assignments, evidence references, acceptance decision, date, and residual risks in the body. [Author, verifier, and acceptor](11_human_roles.md#authorship-verification-and-acceptance) are distinct responsibilities. Required independent review or acceptance still pending means `Test: partial` (or `pending` before checks), never `pass` with a prose caveat. An unavailable required specialist blocks completion; use `blocked` and the human-needed protocol when human action is the blocker. `n/a` for untestable documentation does not waive required review or acceptance.
+
+**Release readiness for A2/A3:** before accepting release-bound work, link documented rollback or recovery arrangements, monitoring checks and escalation, and a named human operational owner. A legitimate non-release artifact records why these arrangements are not applicable; its profile still governs acceptance. Risk acceptance cannot excuse failed mandatory gates. [Production deploy execution](09_git_workflow.md) remains human-only, regardless of profile or approval.
+
 ---
 
 ## Maintaining living project documents
