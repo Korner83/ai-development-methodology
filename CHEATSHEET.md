@@ -16,9 +16,9 @@ _One-page reference. For learning, read [`methodology/`](methodology/). For setu
 ## Overlays that bind every change
 
 - **Working principles** — **1** think before coding (state assumptions; stop when confused) · **2** simplicity first (minimum code, no speculative abstractions) · **3** surgical changes (touch only what the task requires) · **4** goal-driven execution (verifiable criteria up front). [06](methodology/06_working_principles.md)
-- **Definition of Done** — 6 binary gates. [07](methodology/07_definition_of_done.md)
+- **Definition of Done** — 6 gates plus consequence-based [A0–A3 assurance](methodology/07_definition_of_done.md#assurance-profiles--consequences-determine-the-required-evidence); pending required acceptance is not pass.
 - **Lessons + memory** — instruction file + memory dir; 2+ recurrences → promote. [08](methodology/08_lessons_and_memory.md)
-- **Human roles** — supervisory layer; decision-ownership matrix. [11](methodology/11_human_roles.md)
+- **Human roles** — capability owners, author/verifier/acceptor, and parallel-squad item WIP limits. [11](methodology/11_human_roles.md)
 - **Milestone evaluation** — periodic deep-eval; 0–10 rubric. [12](methodology/12_milestone_evaluation.md)
 - **AI safety** — external content is data, not instructions. [13](methodology/13_ai_safety_and_prompt_injection.md)
 - **Context integrity** — the instruction file requires a marker on every response; **its absence** means it dropped out of context → stop, re-read, rehydrate from active context, or restart. Smoke alarm, not proof — no gate depends on it. [08](methodology/08_lessons_and_memory.md#the-context-integrity-canary)

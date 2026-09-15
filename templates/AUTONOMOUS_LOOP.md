@@ -44,6 +44,9 @@ Mission (loop; do NOT stop at single-task completion):
        security, UX, and production-readiness.
 
 3. EXECUTE ONE ITEM AT A TIME:
+   - Before starting, apply doc 11's item WIP checks and doc 07's
+     assurance/readiness rules. At capacity, help clear verification
+     within your capabilities and independence requirements.
    - Use plan mode for non-trivial work (methodology/06: "Plan before
      executing non-trivial work"). Write a short acceptance checklist
      before implementing.
@@ -52,8 +55,11 @@ Mission (loop; do NOT stop at single-task completion):
      before marking done. Hard rule: Status: done requires Test: pass.
    - Verify in the actual UI per methodology/10 — desktop AND mobile,
      light AND dark, empty / error / loading / offline states.
-     Cross-AI validate where useful; user testing remains the final
-     gate.
+     Cross-AI validate where useful or required. Meet doc 07's
+     assurance requirements and doc 11's independent-verification and
+     acceptance rules; model agreement is not independent assurance.
+     Required review/acceptance pending means partial, never pass.
+     User testing and human-only production execution remain gates.
    - Before Test: pass, run the verification-gap check (methodology/07
      Gate 2): for each behavior added or changed — if it broke, would
      any test fail? Count only tests that actually ran; skipped or

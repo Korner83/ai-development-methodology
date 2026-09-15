@@ -46,6 +46,7 @@ Draft the charter. Hold yourself to these:
   a criterion I can only satisfy by arguing is not binary.
 - The out-of-scope section is not optional. Name what a reasonable person
   would assume is included and is not, with the reasoning.
+- Cover assurance and human capability owners per docs 07 and 11.
 - Do not file items yet.
 
 Show me the charter and tell me which exit criterion you are least
@@ -67,7 +68,8 @@ docs/methodology/04_backlog_items.md and use its item format.
 Write for a cold session. The test: could someone implement this from the
 item alone, without re-investigating what you already worked out?
 
-- Every frontmatter field present. Use a dash, never omit a row.
+- Every required frontmatter field present; conditional assurance and
+  accountable-owner rows follow doc 04. Name required evidence/reviewers.
 - Acceptance criteria in EARS shape - a trigger and an observable
   response. "Works correctly" is not a criterion.
 - At Effort M or above, write the Code Map: drain what you learned about
@@ -95,6 +97,7 @@ Rules: [`06_working_principles.md`](../methodology/06_working_principles.md).
 Implement <item>. The four working principles in
 docs/methodology/06_working_principles.md bind this work.
 
+- Check assurance/readiness per doc 07 and both item queues per doc 11.
 - Touch only what the item requires. Note drive-by problems; do not fix
   them.
 - Minimum code that satisfies the criteria. No abstraction for one
@@ -119,7 +122,8 @@ Rules: [`07_definition_of_done.md`](../methodology/07_definition_of_done.md) (Ga
 
 ```
 Review this change against docs/methodology/07_definition_of_done.md.
-You did not write it. Do not defend it.
+You did not write it. Do not defend it. Check the assurance profile
+and independence requirements in docs 07 and 11 against real evidence.
 
 For each finding, name the layer the defect entered at - intent, plan,
 architecture, or code - and route the fix there. A plan-layer defect gets
@@ -145,6 +149,8 @@ Rules: [`10_testing_and_verification.md`](../methodology/10_testing_and_verifica
 
 ```
 Verify <item> per docs/methodology/10_testing_and_verification.md.
+Meet the assurance requirements in docs 07 and 11 too; record evidence
+and keep required independent review or human acceptance pending until real.
 
 Run the fix-test loop in the actual running app, not the test harness.
 When you fix something you find, restart from upstream of the fix - your

@@ -1,6 +1,6 @@
 # Examples
 
-This folder shows what an adopter project looks like when it adopts the methodology. Pinned to **v1.28.0**.
+This folder shows how adopters can apply the methodology. The fictional `example-project/` is pinned to **v1.28.0**; the [software-squad walkthrough](software-squads.md) illustrates **v1.35.0**. Neither is evidence of external adoption.
 
 ## Three artifact types, three purposes
 
@@ -13,6 +13,8 @@ This folder shows what an adopter project looks like when it adopts the methodol
 The three are complementary: read `methodology/` to understand the rules; read `self-development/` to see them on a real project; read `examples/` to see them on a synthetic project that strips out the meta-ness.
 
 ## What's in here
+
+- [Software squads](software-squads.md) — solo and three-person software delivery, assurance, capacity, and blocked acceptance (v1.35.0).
 
 - [`example-project/README.md`](example-project/README.md) — the fictional `tinker` project's intro.
 - [`example-project/strategy/00_master_plan.md`](example-project/strategy/00_master_plan.md) — strategy doc following the [01_strategy.md](../methodology/01_strategy.md) skeleton.
@@ -30,4 +32,4 @@ The three are complementary: read `methodology/` to understand the rules; read `
 
 ## Abstract-voice rule
 
-All content in this folder follows the same abstract-voice constraint as the methodology docs themselves: no real product names, no specific company references, no domain jargon revealing a source project. The example was reviewed by a fresh cross-AI session for abstract-voice compliance before ship.
+All content in this folder follows the same abstract-voice constraint as the methodology docs themselves: no real product names, no specific company references, no domain jargon revealing a source project. The original `example-project/` was reviewed by a fresh cross-AI session for abstract-voice compliance before ship. That historical review does not cover later examples; the squad walkthrough has author checks only until its release review is recorded.
