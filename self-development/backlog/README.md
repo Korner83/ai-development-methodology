@@ -27,20 +27,21 @@ self-development/backlog/
     ├── E07-agentic-workflow-pass/
     ├── E08-role-briefs/
     ├── E09-external-landscape-pass/
-    └── E10-external-audit-remediation/
+    ├── E10-external-audit-remediation/
+    └── E11-assurance-and-squads/
 ```
 
 **The five-file shape is the methodology's, per ["Standard epic-folder structure"](../../methodology/03_epics.md).**
 This diagram documented four for a long time and the filesystem matched the diagram rather than the
-methodology — an external audit caught it (F-09). **All eleven epics carry all five files.** The nine
+methodology — an external audit caught it (F-09). **All twelve epics carry all five files.** The nine
 back-filled `TEST.md` files are empty-but-present and point at the real verification record in each
 `ARCHIVE.md`; no acceptance scenarios were reconstructed, because back-filling rows that never ran would
 be fabricated evidence. The rule was not weakened to fit the practice.
 
 ## ID space
 
-- **Epic IDs:** `E<NN>` (zero-padded). Currently `E00` through `E10`; `E00` is the standing intake epic and does not close. Folder names carry the `E` prefix (`E01-examples-folder`), per "Standard epic-folder structure" in [`03_epics.md`](../../methodology/03_epics.md).
-- **Item IDs:** `BL-<####>` monotonic across all epics in this self-development backlog, and shared with `FUTURE.md` items so promotion needs no renumbering. Highest assigned: `BL-0062` (E00, 2026-09-05).
+- **Epic IDs:** `E<NN>` (zero-padded). Currently `E00` through `E11`; `E00` is the standing intake epic and does not close. Folder names carry the `E` prefix (`E01-examples-folder`), per "Standard epic-folder structure" in [`03_epics.md`](../../methodology/03_epics.md).
+- **Item IDs:** `BL-<####>` monotonic across all epics in this self-development backlog, and shared with `FUTURE.md` items so promotion needs no renumbering. Highest assigned: `BL-0065` (E11, 2026-09-15).
 
 Per the methodology's [project structure convention](../../templates/PROJECT_STRUCTURE.md): item IDs are repo-wide-monotonic within this backlog (so items can move between epics without renumbering and `grep BL-0042` is unambiguous within the self-development backlog).
 

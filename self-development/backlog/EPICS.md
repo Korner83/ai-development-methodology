@@ -1,6 +1,6 @@
 # Epics
 
-_Last refreshed: 2026-09-05 (E00 closed BL-0059 and BL-0062; 8 done, 1 active + 1 standing, 0 planned, 1 parked.)_
+_Last refreshed: 2026-09-15 (E11 chartered; 8 done, 2 active + 1 standing, 0 planned, 1 parked.)_
 
 ## Rollup
 
@@ -17,8 +17,9 @@ _Last refreshed: 2026-09-05 (E00 closed BL-0059 and BL-0062; 8 done, 1 active + 
 | [E08](epics/E08-role-briefs/README.md) | Role briefs per phase, plus a second pass over the E07 source | P1 Doc completeness + P9 Self-improvement velocity | **done** (2026-08-19) | Phase 1 | 0 / 4 | Chartered and closed same day at maintainer direction; 4 items shipped in v1.30.0. Personas rejected a third time; three further findings held with reasoning in the charter. |
 | [E09](epics/E09-external-landscape-pass/README.md) | External landscape pass over six repos (skills-spec conformance + item-level clarification marker) | P4 Tool compatibility + P1 Doc completeness | **done** (2026-08-19) | Phase 1 | 0 / 3 | Chartered and closed same day at maintainer direction; three items shipped in v1.31.0. Four of six sources rejected outright. Cross-AI findings-verification waived by maintainer decision — the first landscape pass to close without it. |
 | [E10](epics/E10-external-audit-remediation/README.md) | External baseline audit remediation | P2 Doc clarity + P8 Maintenance sustainability | **active** (2026-08-20) | Phase 1 | 0 / 14 | Chartered 2026-08-20 against an external cold audit of `be93a05` that returned **"Not sound for stated use"**. Ten of eleven findings still stood at v1.31.0. **Every Critical and High one is closed** and staged for a single `v1.32.0`: the skill parses, the trunk exception is gone, the `Test` enum has one definition, `pass` is reserved for the required level, destructive operations split into two disjoint classes, trust follows provenance, and the lock's authority claim matches what git enforces. **All fourteen items closed** — every Critical, High and Medium finding. Also shipped: SHA-pinned actions with the supply-chain claim narrowed, this repo's first root instruction file, an adoption profile, the surface map, the release-evidence commands, and a sweep finding that **only 6 of 16 conventions added v1.25.0–v1.31.0 have ever been exercised.** Stays `active` until the release lands and a fresh cold re-audit clears it — a session cannot audit its own work. **A committed checker and any new CI were declined — F-08 closes as a convention, not a control.** |
+| [E11](epics/E11-assurance-and-squads/README.md) | Assurance and multidisciplinary software squads | P1 Doc completeness + P2 Doc clarity | **active** (2026-09-15) | Phase 1 | 3 / 0 | v1.35.0 draft and local checks complete; independent verification and maintainer acceptance remain closing gates. |
 
-**Counts:** **1 active** (E10) + **1 standing** (E00, WIP-exempt), 0 planned, 8 done (E01, E02, E03, E05, E06, E07, E08, E09), 1 parked (E04 — will not resume). E00 does not close and does not consume a WIP slot; the exemption is declared in its charter rather than read into the rule.
+**Counts:** **2 active** (E10, E11) + **1 standing** (E00, WIP-exempt), 0 planned, 8 done (E01, E02, E03, E05, E06, E07, E08, E09), 1 parked (E04 — will not resume). E00 does not close and does not consume a WIP slot; the exemption is declared in its charter rather than read into the rule.
 
 ### WIP cap note
 
@@ -32,8 +33,8 @@ Inverse view: which epics touch each pillar.
 
 | Pillar | Active epics | Planned epics | Coverage status |
 |---|---|---|---|
-| P1 Doc completeness | E09 (secondary) | — | E01 + E05 (primary) done in v1.15.0; E06 (secondary) done in v1.25.0; E08 (primary) done in v1.30.0 — role briefs close the paste-able-prompt gap; E09 adds the item-level clarification marker (unreleased) |
-| P2 Doc clarity | E10 (primary) | — | E02 secondary (done v1.14.0); E03 primary (done v1.27.0 — 09 trimmed to 798 lines). E10 is the first clarity work driven by an outside reader rather than by the maintainer's own re-read, and it targets a failure the pillar had not named: the *authoritative* statement is usually right, and the surface shaped for copying is the one that is wrong |
+| P1 Doc completeness | E11 (primary) | — | E01 + E05 (primary) done in v1.15.0; E06 (secondary) done in v1.25.0; E08 (primary) done in v1.30.0 — role briefs close the paste-able-prompt gap; E09 adds the item-level clarification marker (unreleased) |
+| P2 Doc clarity | E10 (primary), E11 (secondary) | — | E02 secondary (done v1.14.0); E03 primary (done v1.27.0 — 09 trimmed to 798 lines). E10 is the first clarity work driven by an outside reader rather than by the maintainer's own re-read, and it targets a failure the pillar had not named: the *authoritative* statement is usually right, and the surface shaped for copying is the one that is wrong |
 | P3 Doc currency | — | — | E02 (primary) done 2026-05-25; next semi-annual pass due 2026-11-25 |
 | P4 Tool compatibility | E09 (primary) | — | E04 (primary) parked 2026-08-14 — `AGENTS.md` + adaptation is the accepted answer, so the pillar no longer waits on native templates. E09 revives the pillar from the other end: rather than shipping per-tool templates, state which open format the skill already conforms to (unreleased) |
 | P5 Adopter discoverability | E09 (tertiary) | — | Dormant (Phase 2 pillar) — E09's conformance line is the first change aimed at it since the campaign route was closed on 2026-08-19 |

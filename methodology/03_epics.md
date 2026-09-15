@@ -189,6 +189,11 @@ The `README.md` inside each epic folder is the charter. The template below is th
 **Target close:** YYYY-MM-DD or TBD
 **Owner:** <human role> + <agent role>
 
+## Assurance and capability owners
+
+**Assurance baseline:** <inherited project profile or higher; see doc 07>
+**Capability owners:** <customer intent; product/UX; technical delivery; verification coordination; accountable acceptance; security/compliance when applicable — human names or roles with current holders recorded in the repo>
+
 ## Outcome (jobs-to-be-done)
 
 When <actor> <context>, they want <goal>, so <benefit>.
@@ -248,7 +253,7 @@ The phase from the strategy roadmap (see [01_strategy.md](01_strategy.md)). An e
 
 #### Owner
 
-Name the human role (e.g., "product lead," "tech lead") and the agent role (e.g., "AI coding agent") responsible for execution. Roles, not people; the people may change but the role persists for the epic's lifetime.
+Name the human role (e.g., "product lead," "tech lead") and any agent role responsible for execution. Human roles must resolve to current holders in the repository. In the charter's assurance/capability section, follow [capability coverage](11_human_roles.md#capability-coverage-in-every-epic) and the [assurance baseline](07_definition_of_done.md#assurance-profiles--consequences-determine-the-required-evidence). One person may cover several capabilities; mark inapplicable capabilities with a reason. Keep this section current when contributors rotate.
 
 #### Outcome (jobs-to-be-done)
 
@@ -590,6 +595,14 @@ If the team has already aligned on the approach, skip planning and charter direc
 **Started:** 2026-03-04
 **Target close:** 2026-05-30
 **Owner:** product lead + AI coding agent
+
+## Assurance and capability owners
+
+**Assurance baseline:** A2 — access control and paid-content protection.
+**Capability owners:** product lead covers customer intent, product/UX, and
+accountable acceptance; tech lead covers delivery, verification coordination,
+security, and operations. Current holders are recorded in the project roster.
+The author does not perform independent verification; assign a fresh verifier.
 
 ## Outcome (jobs-to-be-done)
 

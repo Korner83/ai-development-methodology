@@ -1,6 +1,6 @@
 # 00 — Methodology
 
-> A self-contained, portable methodology for running a software project end-to-end. Designed for teams where humans and AI agents collaborate as peers. The same set of practices works whether the contributors are all human, all AI, or any mix.
+> A self-contained, portable methodology for running a software project end-to-end. Humans and AI agents contribute under human authority and accountability. The same practices support human-only teams, AI-led implementation, and mixed software squads, with assurance matched to consequences.
 
 This is the index. It explains why the methodology exists, how the pieces fit together, and how to read the rest of the docs.
 
@@ -534,7 +534,8 @@ The only project-specific decisions to make at adoption time:
 - The pillar set (which capabilities your product needs).
 - The phase sequence in the strategy master plan.
 - The TTL defaults for locks.
-- The project-specific overlay to the DoD (security scans, accessibility checks, etc.).
+- The project-specific DoD overlay, assurance baseline, and accountable human (see [07](07_definition_of_done.md#assurance-profiles--consequences-determine-the-required-evidence)).
+- Human capability owners for each epic and both item WIP limits for parallel squads (see [11](11_human_roles.md)).
 
 Everything else is in the docs.
 

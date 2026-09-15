@@ -6,7 +6,15 @@ Per the [methodology pattern](../../methodology/04_backlog_items.md#human_needed
 
 ## Active
 
-_(none)_
+### BL-0065 — Review and accept the v1.35.0 documentation update
+
+- **Source:** [E11 backlog](epics/E11-assurance-and-squads/BACKLOG.md#bl-0065--verify-consistency-and-prepare-v1350).
+- **Human owner:** repository maintainer.
+- **Needed:** arrange independent review of the final proposed tree and record acceptance for E11/BL-0063–0065 after considering [local evidence](epics/E11-assurance-and-squads/TEST.md). The approved plan does not supply the final acceptance verdict.
+- **Prepared:** canonical rules, adoption surfaces, examples, and local verification; v1.35.0 remains unreleased.
+- **Unblocks:** BL-0065 and E11 closure, then the normal human-controlled release process.
+- **Filed:** 2026-09-15.
+
 
 ## Recently unblocked (last 30 days)
 
@@ -32,6 +40,6 @@ _(none)_
 
 ## Status
 
-Seeded empty on 2026-05-25 as Step 2 of the self-development bootstrap. One entry has been filed and closed since: the distribution-drafts entry above, closed by decision rather than by action. The registry is empty again as of 2026-08-19.
+Seeded empty on 2026-05-25 as Step 2 of the self-development bootstrap. One entry has been filed and closed since: the distribution-drafts entry above, closed by decision rather than by action. The registry was empty again as of 2026-08-19; E11 added the active release-review entry on 2026-09-15.
 
 _(Older unblocked items live in their epic's `ARCHIVE.md`.)_

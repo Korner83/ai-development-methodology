@@ -55,6 +55,12 @@ have ever been used at all**, four of them for the first time that day.
 
 ---
 
+## v1.35.0 preparation — assurance and squads
+
+[E11](backlog/epics/E11-assurance-and-squads/README.md) explicitly adopts A2 for this material operating-rule change. The human repository maintainer owns intent, capability coverage, and acceptance; the AI author performs local checks. Independent review and human acceptance remain pending, so the items are not done. The new profiles do not authorize their own acceptance or change the authority of the reviewed base rules.
+
+This session has one sequential implementer, so parallel-squad numeric item limits are not applicable here. The existing two-active-epic cap still binds: E10 and E11 now occupy both slots. The earlier "never two active" observation in the adaptation table describes the pre-E11 history. Software-squad walkthroughs are illustrative; A0–A3, item queue limits, rotation readiness, and asset graduation remain unvalidated in external adoption.
+
 ## What an adopter should take from this
 
 - **The planning cascade and the item discipline are the load-bearing parts**, and they are exercised hard

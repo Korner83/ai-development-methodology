@@ -38,8 +38,12 @@ Your job, in order:
       Use the template in 03_epics.md. One primary pillar. Binary
       exit criteria. Folder naming uses the E<NN>-<slug> convention
       per 03_epics.md "Standard epic-folder structure."
-   d) The first 3–5 backlog items in that epic's BACKLOG.md. Use the
-      format in 04_backlog_items.md.
+   d) Project assurance baseline and accountable human per doc 07;
+      capability owners in the epic per doc 11. If implementers work
+      in parallel, declare both item WIP limits per doc 11.
+   e) The first 3–5 backlog items in that epic's BACKLOG.md. Use the
+      format in 04_backlog_items.md, including conditional assurance
+      fields, required reviewers, and evidence before implementation.
 
 4. Use plan mode (your tool's planning feature). Show me each
    artifact before moving to the next. Don't bundle.

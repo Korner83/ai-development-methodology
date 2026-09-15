@@ -77,6 +77,16 @@ Operating contract for every change:
 
 ---
 
+## Assurance and squad capacity
+
+- **Assurance baseline:** <<A1 for ordinary reversible work; assess consequences per [doc 07](docs/methodology/07_definition_of_done.md#assurance-profiles--consequences-determine-the-required-evidence)>>.
+- **Accountable human:** <<name or human-held role; link the current-holder roster>>.
+- **Capability owners:** <<link each epic charter; follow [doc 11](docs/methodology/11_human_roles.md#capability-coverage-in-every-epic)>>.
+- **Parallel implementation:** <<yes/no>>. If yes, declare **Implementation WIP: 3** and **Verification WIP: 2** as starter values; set them to actual project capacity. Apply [doc 11's queue rules](docs/methodology/11_human_roles.md#review-capacity-and-item-wip) before starting work.
+- Follow [doc 04](docs/methodology/04_backlog_items.md#assurance-and-accountable-owner) for conditional item fields and [doc 11](docs/methodology/11_human_roles.md#authorship-verification-and-acceptance) for independent verification and human acceptance. Pending assurance is not completion.
+
+---
+
 ## Tech stack
 
 <<List the languages, frameworks, key libraries, and platforms. Keep it short — readers should be able to scan it. Detail belongs in architecture docs.>>

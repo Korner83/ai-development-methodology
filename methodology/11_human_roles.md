@@ -2,7 +2,38 @@
 
 > **Purpose:** define how human contributors stay meaningfully engaged when AI agents do most of the implementation work. The bottleneck has shifted from writing code to specifying intent and supervising output; this doc says what humans *do* now that AI does most of the typing.
 
-The rest of the methodology assumes humans and AI agents collaborate as peers. This doc says what the *human side* of that collaboration looks like — and what stops working when humans drift out of the loop.
+Humans and AI agents collaborate as active contributors under explicitly asymmetric authority and accountability. AI may author and maintain most of the implementation; a named human remains accountable for its acceptance and operation. This doc says what the *human side* of that collaboration looks like — and what stops working when humans drift out of the loop.
+
+## Authorship, verification, and acceptance
+
+Contributing across traditional job boundaries is welcome when the contributor can do the work and its required evidence, review, and human authority are covered. AI-assisted competence does not transfer professional accountability to the AI. See [assurance profiles](07_definition_of_done.md#assurance-profiles--consequences-determine-the-required-evidence) for risk-based requirements.
+
+| Responsibility | Question | Who covers it |
+|---|---|---|
+| **Author** | Does the implementation or artifact address the approved intent? | A capable human or AI contributor, including someone working outside their usual title. |
+| **Verifier** | Does evidence show the approved criteria are met? | At A2, a separate human or fresh AI session; at A3, qualified human specialist participation is mandatory. |
+| **Acceptor** | Is the result suitable for its intended use at this risk? | The accountable human, using the required evidence and reviews. |
+
+For A0/A1, an author may also perform verification where existing gates permit; this does not remove human accountability, user testing, or human decision gates. At A2/A3, separate authorship from verification and obtain explicit human acceptance. The acceptor may also be the human author or verifier where domain/project rules permit, but independent verification cannot be the author's self-review. A solo contributor can use a fresh AI verifier for A2; A3 needs a qualified human verifier independent of the author, potentially a shared specialist.
+
+**Independent evidence, not model agreement:** the verifier starts from approved criteria and repository artifacts, checks assumptions against sources, and runs or independently inspects reproducible evidence rather than relying on the author's summary. Record verifier identity/session, scope, evidence, and findings. Cross-AI review is useful adversarial evidence, but different models can share blind spots or the same mistaken specification. It does not by itself establish independent assurance or replace domain review.
+
+**Accountable acceptance:** the human confirms intent, classification, required reviewers/checks, evidence sufficiency, operational ownership where relevant, and any acceptable residual risks. Record the decision on the item or link a durable acceptance record. This is responsibility for the delivered result, not a requirement to read every generated line. Required gates cannot be traded away as residual risk; unresolved required review or acceptance keeps the item open.
+
+### Capability coverage in every epic
+
+Every epic identifies human owners for customer intent/outcome, product/UX judgment, technical delivery, verification coordination, and accountable acceptance, plus security/compliance when applicable. Use names or human-held roles with current holders discoverable in the repository. Mark an inapplicable capability with a reason. The verification owner arranges the required verifier; ownership does not make an author independent.
+
+One person may cover several capabilities. A shared specialist may cover several squads. AI agents can perform work within these capabilities under the existing decision matrix; they are not the accountable owners. No specific job titles, headcount, or squad composition are prescribed. See the [charter](03_epics.md#epic-charter-template) and [solo/squad walkthroughs](../examples/software-squads.md).
+
+### Review capacity and item WIP
+
+Projects with parallel implementers must declare **Implementation WIP** and **Verification WIP** in the project instruction file, with one shared project-wide view across squads. Start with **3** and **2** respectively, then let the accountable human adjust to actual review capacity. Solo sequential work need not add numeric limits. These item limits supplement the separate [active-epic cap](03_epics.md#epic-rollup-epicsmd).
+
+- Implementation WIP counts items at `in-progress`; verification WIP counts the combined `under-review` and `to-be-tested` queue, including work actively being reviewed. Count each item once.
+- Before starting implementation, check both queues. If either is at or above its limit, stop starting implementation and help finish existing verification, evidence, or documentation within your capabilities and independence requirements. If only a human can unblock the queue, record the blocker and wait or take unrelated eligible non-implementation work.
+- Existing work may finish and cause a temporary verification overflow; record its real state, stop starts, and drain the queue. Do not hide inventory in `blocked` or mark it `done` to meet a number.
+- Failed verification takes priority over new work. Move it back to `in-progress` when an implementation slot is free; until then keep the truthful review/testing state with the failure and rework need recorded. A lock or a separate squad does not grant extra capacity. Resolve contention through the existing lock/coordination protocol; counts are cooperative signals, not enforced reservations.
 
 ---
 
