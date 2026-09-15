@@ -30,7 +30,7 @@ my-project/
 │   ├── HUMAN_NEEDED.md          # Items blocked on human agency (see 04)
 │   └── epics/
 │       └── E<NN>-<slug>/        # One folder per epic (E-prefix per 03)
-│           ├── README.md        # Epic charter (pillar, outcome, exit criteria)
+│           ├── README.md        # Epic charter (outcome, assurance, human owners, exit criteria)
 │           ├── BACKLOG.md       # Active items
 │           ├── ARCHIVE.md       # Done items
 │           ├── FUTURE.md        # Deferred items (out-of-scope this epic)

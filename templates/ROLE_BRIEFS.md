@@ -1,9 +1,7 @@
 # Role Briefs
 
-Short paste-able prompts for the phases of work that have documented rules but no prompt of their
-own. Two phases already have one — [`AGENT_KICKOFF.md`](AGENT_KICKOFF.md) for setting up a new
-project, [`AUTONOMOUS_LOOP.md`](AUTONOMOUS_LOOP.md) for long unattended runs. These six cover the
-rest.
+Six phase prompts complement [project kickoff](AGENT_KICKOFF.md) and the
+[autonomous loop](AUTONOMOUS_LOOP.md).
 
 **A brief is a stance, not a persona.** It says what posture the phase requires and points at the
 doc holding the rules. It deliberately does not restate those rules: a brief that repeats a rule
@@ -12,10 +10,7 @@ becomes a second copy that goes stale silently, which is the failure
 names as *when all the docs disagree, the docs all lose*. If a brief and its doc ever conflict, the
 doc wins and the brief is the bug.
 
-**Why stance matters at all:** the same agent, same repo, same context produces different work
-depending on what it thinks it is doing. An agent that believes it is implementing will rationalize
-a shaky plan into code; the same agent told it is reviewing will find the crack. The briefs exist to
-make that choice explicit instead of incidental.
+**Why stance matters:** an implementation session can rationalize its plan; a fresh reviewer challenges it. Make the stance explicit.
 
 **Paths:** prose links below are relative to this repo. Inside the fenced blocks, paths are written
 as `docs/methodology/…` because that is where the methodology lives once copied into an adopting

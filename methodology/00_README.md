@@ -534,7 +534,8 @@ The only project-specific decisions to make at adoption time:
 - The pillar set (which capabilities your product needs).
 - The phase sequence in the strategy master plan.
 - The TTL defaults for locks.
-- The project-specific overlay to the DoD (security scans, accessibility checks, etc.).
+- The project-specific DoD overlay, assurance baseline, and accountable human (see [07](07_definition_of_done.md#assurance-profiles--consequences-determine-the-required-evidence)).
+- Human capability owners for each epic and both item WIP limits for parallel squads (see [11](11_human_roles.md)).
 
 Everything else is in the docs.
 

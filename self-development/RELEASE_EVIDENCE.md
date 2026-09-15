@@ -53,14 +53,14 @@ git ls-files '*.md' | xargs wc -l | tail -1
 **Tag and release parity** — run *after* pushing the release tag:
 
 ```bash
-grep -c '^## v' CHANGELOG.md
+grep '^## v' CHANGELOG.md | grep -vc 'Unreleased'
 git tag | wc -l
 ```
 
-**Version pins all equal** — seven hand-maintained sites; any mismatch is a stale pin:
+**Version pins all equal** — eight current-version references at v1.35.0 preparation; historical workflow references are excluded:
 
 ```bash
-grep -rn "v1\.[0-9]\+\.[0-9]\+" README.md CHEATSHEET.md STATUS.md skills/ai-dev-methodology/SKILL.md | grep -v CHANGELOG
+grep -rn "v1\.[0-9]\+\.[0-9]\+" README.md CHEATSHEET.md STATUS.md skills/ai-dev-methodology/SKILL.md | grep -v "Current practice"
 ```
 
 **No executable files** — the no-runnable-elements stance, checked rather than asserted:
@@ -78,8 +78,8 @@ grep -rn 'uses:' .github/workflows/
 **Rendering links and anchors.** No one-liner does this honestly — it needs a parser that skips fenced
 blocks and inline code, resolves relative paths, and slugs headings GitHub-style (each space becomes one
 hyphen, so `— ` yields a double hyphen). Any such parser will do; what matters is reporting the method
-alongside the number, because two parsers disagree on adopter-relative links. **The template files carry
-55 links that resolve only after install** — count them separately or the total looks broken.
+alongside the number, because two parsers disagree on adopter-relative links. **As of the v1.35.0 prepared tree, the instruction templates carry
+65 links that resolve only after install** — count them separately or the total looks broken.
 
 ---
 
@@ -92,7 +92,7 @@ from its cap had no way to find them.
 |---|---|---|
 | Any `methodology/*.md` | **1,050** | E03's trim analysis — the soft cap that triggered splitting `09` |
 | `README.md` | **350** | [P2](pillars/P2_doc_clarity.md) |
-| `CHEATSHEET.md` | **100** | E05's charter, a hard exit criterion. Currently at 99 — one line of margin |
+| `CHEATSHEET.md` | **100** | E05's charter, a hard exit criterion. 98 lines at v1.35.0 preparation — two lines of margin |
 | `templates/ROLE_BRIEFS.md` | **200** | E08, self-imposed |
 | Root `AGENTS.md` | **60** | E10, self-imposed. Was 50; raised on 2026-08-20 when the maintainer chose to adopt the context-integrity canary, which needs ~6 lines. Trimming a safety rule to fit a number invented the day before would have been the wrong trade — the budget exists to stop the file becoming a second rulebook, not to block a rule |
 | `skills/.../SKILL.md` | **500** | the Agent Skills format's own recommendation |

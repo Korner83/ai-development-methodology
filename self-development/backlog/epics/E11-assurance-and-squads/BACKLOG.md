@@ -5,8 +5,8 @@
 | ID | Title | Priority | Effort | Status |
 |---|---|---|---|---|
 | BL-0063 | Define assurance and squad operating rules | P1 | M | under-review |
-| BL-0064 | Propagate adoption guidance and worked examples | P1 | M | in-progress |
-| BL-0065 | Verify consistency and prepare v1.35.0 | P1 | S | ready |
+| BL-0064 | Propagate adoption guidance and worked examples | P1 | M | under-review |
+| BL-0065 | Verify consistency and prepare v1.35.0 | P1 | S | blocked |
 
 ### BL-0063 — Define assurance and squad operating rules
 
@@ -39,12 +39,14 @@
 | Pillar | P1 |
 | Priority | P1 |
 | Effort | M |
-| Status | in-progress |
-| Test | pending |
-| Deps | BL-0063 |
-| Lock | codex-e11@2026-09-15T16:02Z |
+| Status | under-review |
+| Test | partial — local checks complete; independent review and acceptance pending |
+| Deps | — |
+| Lock | — |
 | Assurance | A2 — inherited operating-rule changes |
 | Accountable owner | repository maintainer |
+
+**Ordering:** Soft dependency on the canonical draft from BL-0063; final acceptance need not precede drafting adoption surfaces.
 
 **Why / Description:** Make the approved practices discoverable at project setup and daily use, with realistic software-squad examples.
 
@@ -62,17 +64,21 @@
 | Pillar | P2 |
 | Priority | P1 |
 | Effort | S |
-| Status | ready |
-| Test | not-tested |
-| Deps | BL-0063, BL-0064 |
+| Status | blocked |
+| Test | partial — local verification complete; independent review and acceptance pending |
+| Deps | — |
 | Lock | — |
 | Assurance | A2 — inherited release assurance |
 | Accountable owner | repository maintainer |
+
+**Ordering:** Soft dependency on the drafts from BL-0063/BL-0064; verify the integrated tree before their final acceptance.
 
 **Why / Description:** Verify the final documentation tree and prepare a reviewable release with honest evidence.
 
 **Done means:** Final-tree structural checks and all planned scenarios are recorded, release pins agree, line budgets hold, independent verification and maintainer acceptance are recorded, and no unperformed release or review is claimed.
 
 **Verification:** Follow [release evidence](../../../RELEASE_EVIDENCE.md); record commands/method and results in [TEST.md](TEST.md). No runtime product or automated behavioral suite exists in this docs-only repository; structural checks do not constitute specialist or independent assurance.
+
+**Blocker:** Repository maintainer must arrange independent review of the final tree and record acceptance. Local implementation and verification are complete; no release approval is inferred from the earlier plan approval. See [human-needed registry](../../HUMAN_NEEDED.md).
 
 **Frozen intent:** All three item goals and acceptance criteria derive from the user-approved implementation plan on 2026-09-15. Do not weaken them to close the items.

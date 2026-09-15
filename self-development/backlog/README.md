@@ -27,12 +27,13 @@ self-development/backlog/
     ├── E07-agentic-workflow-pass/
     ├── E08-role-briefs/
     ├── E09-external-landscape-pass/
-    └── E10-external-audit-remediation/
+    ├── E10-external-audit-remediation/
+    └── E11-assurance-and-squads/
 ```
 
 **The five-file shape is the methodology's, per ["Standard epic-folder structure"](../../methodology/03_epics.md).**
 This diagram documented four for a long time and the filesystem matched the diagram rather than the
-methodology — an external audit caught it (F-09). **All eleven epics carry all five files.** The nine
+methodology — an external audit caught it (F-09). **All twelve epics carry all five files.** The nine
 back-filled `TEST.md` files are empty-but-present and point at the real verification record in each
 `ARCHIVE.md`; no acceptance scenarios were reconstructed, because back-filling rows that never ran would
 be fabricated evidence. The rule was not weakened to fit the practice.
