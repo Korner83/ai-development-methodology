@@ -39,8 +39,8 @@ be fabricated evidence. The rule was not weakened to fit the practice.
 
 ## ID space
 
-- **Epic IDs:** `E<NN>` (zero-padded). Currently `E00` through `E10`; `E00` is the standing intake epic and does not close. Folder names carry the `E` prefix (`E01-examples-folder`), per "Standard epic-folder structure" in [`03_epics.md`](../../methodology/03_epics.md).
-- **Item IDs:** `BL-<####>` monotonic across all epics in this self-development backlog, and shared with `FUTURE.md` items so promotion needs no renumbering. Highest assigned: `BL-0062` (E00, 2026-09-05).
+- **Epic IDs:** `E<NN>` (zero-padded). Currently `E00` through `E11`; `E00` is the standing intake epic and does not close. Folder names carry the `E` prefix (`E01-examples-folder`), per "Standard epic-folder structure" in [`03_epics.md`](../../methodology/03_epics.md).
+- **Item IDs:** `BL-<####>` monotonic across all epics in this self-development backlog, and shared with `FUTURE.md` items so promotion needs no renumbering. Highest assigned: `BL-0065` (E11, 2026-09-15).
 
 Per the methodology's [project structure convention](../../templates/PROJECT_STRUCTURE.md): item IDs are repo-wide-monotonic within this backlog (so items can move between epics without renumbering and `grep BL-0042` is unambiguous within the self-development backlog).
 
