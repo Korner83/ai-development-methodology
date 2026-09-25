@@ -455,7 +455,15 @@ git worktree remove --force <path>                # DISCARDS uncommitted work
 git worktree prune                                # directory already deleted
 ```
 
-A *recurring failure to clean up* worktrees clutters the disk and the worktree list. Build cleanup into the end of the session. Note that `remove --force` is on the [✗ rows of the operation table](#what-ai-agents-can-and-cant-do-in-git--the-operation-table) — it discards uncommitted work in that tree.
+A *recurring failure to clean up* worktrees clutters the disk and the worktree list. Build cleanup into the end of the session. Note that `remove --force` is on the [⚠ (`approval-gated`) rows of the operation table](#what-ai-agents-can-and-cant-do-in-git--the-operation-table) — it discards uncommitted work in that tree.
+
+### Creation and cleanup hazards
+
+- **Branch from a freshly fetched base.** `git worktree add -b <branch> <path> <base>` resolves `<base>` against local refs, so a stale local ref gives a stale tree. Fetch first and branch from the remote-tracking ref (`origin/<base>`); add `--no-track` so a bare `git pull` in the new tree does not pull the base. See also [what the lock guarantees](05_locks_and_parallel_work.md#what-the-lock-does-and-does-not-guarantee).
+- **`post-checkout` hooks run when a worktree is created.** Hooks that install dependencies or run code generation often fail in a fresh tree that lacks their environment, and `git worktree add` then exits non-zero **although the tree was created and is usable.** Do not read the exit code as "creation failed"; re-run the hook once the environment is set up.
+- **In a bare-repo layout, never remove the default branch's checkout, even with force.** There every branch, including the default, lives in a linked worktree, and scripts and tooling resolve paths through that one.
+- **`git worktree lock` guards only against git itself.** It blocks git's own `prune`, `move` and `remove` unless forced twice; it does not stop anything from running `unlock`, and worktree managers commonly unlock before their own removals — yours included.
+- **Move aside before deleting.** When unsure whether an abandoned tree still holds work, relocate it with `git worktree move <path> <holding-dir>` rather than removing it. A move can be undone; `remove --force` cannot. If the tree is locked, someone has claimed it — ask rather than forcing.
 
 ### Symlink / junction caution
 

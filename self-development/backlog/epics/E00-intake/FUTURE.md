@@ -74,25 +74,3 @@ the stack than this methodology does.
 **Method caveat, recorded because it bounds every verdict above:** the triage ranked candidates from
 one-line README descriptions and opened no repositories.
 
----
-
-### BL-0068 — Worktree hygiene gaps in `09`
-
-Deferred from the same 2026-09-25 read of `agent-of-empires/agent-of-empires` (at `c2bc548`) that filed
-BL-0066 and BL-0067. Held here rather than filed so that three open intake items from one source do not
-trip the eviction rule on the strength of a shared *source* rather than a shared *theme*.
-
-`09`'s "Worktrees for parallel agents" section covers creation, removal and the symlink hazard. AoE's
-`docs/guides/worktrees.md` handles five cases it does not:
-
-- **Branch from a freshly fetched base**, not the local ref — otherwise the new tree starts stale. The same
-  visibility point as D1's lock finding: state is only authoritative where it has been fetched.
-- **`post-checkout` hooks fire on `git worktree add`** and commonly fail in a fresh tree that lacks the
-  environment they expect; the tree is still usable.
-- **Never remove the checkout holding the default branch**, even with force.
-- **`git worktree lock` is not a guard** against tooling that unlocks before its own removals.
-- **Relocate before deleting** — moving an abandoned tree aside keeps cleanup reversible, which matters
-  because `remove --force` sits on the ✗ rows of the operation table.
-
-*Promote if:* an adopter or this repo's own loop hits one of the five, or the next edit to `09`'s worktree
-section is already open. Not a new convention either way — five sentences inside an existing section.

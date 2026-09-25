@@ -63,6 +63,14 @@ The behavior test survives refactors. The implementation test breaks every time 
 
 A useful check: if you rewrote the implementation completely while preserving the externally-visible behavior, would the test still pass? If yes, it's testing behavior. If no, it's testing implementation.
 
+### Tests that wait on asynchronous work
+
+A test that has to wait for something — a background job, a queue, a UI update, a second process — **never waits a fixed time.** A `sleep(2)` is a guess about how fast the machine is: it passes on the author's machine, flakes in CI, and invites whoever sees the flake (often an agent) to raise the number, which makes the suite slower and the flake rarer without fixing it.
+
+- **Wait on something observable, with a deadline.** Poll a condition the test can see — the row exists, the element is visible, the message arrived — or block on a channel or barrier, and fail when the deadline passes.
+- **A deadline bounds failure; it does not establish completion.** Hitting the deadline is a failure, not permission to carry on. The test proceeds only when the condition holds.
+- **Before asserting that something did *not* happen, establish that it could have.** Trigger the cause and observe that it took effect, then assert the absence. Otherwise the assertion passes because nothing has run yet — a test that cannot fail, which is exactly what ["must fail" first](#why-must-fail-first) exists to catch.
+
 ### Run the full suite, not just the new tests
 
 A change can pass *its own* new tests while breaking three pre-existing ones. Running only the new tests would miss the regression.
