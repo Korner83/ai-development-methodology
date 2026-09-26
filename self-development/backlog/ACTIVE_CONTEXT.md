@@ -36,3 +36,7 @@ predates this branch. These are author checks, not independent assurance.
 
 E10 still awaits its independent re-audit; this task does not close it.
 BL-0058 remains the unrelated open intake item. No executable checker or new CI.
+
+2026-09-25: BL-0066/0067/0068 (E00, from an agent-of-empires read) implemented and
+staged as v1.36.0 — Unreleased, behind v1.35.0. Filing PR #39 and the implementation
+PR both await maintainer merge; the auto-mode classifier refused an agent merge.

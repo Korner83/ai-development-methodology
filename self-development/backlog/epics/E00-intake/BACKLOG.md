@@ -3,7 +3,7 @@
 _Real work that is not worth a charter. Same item format, same gates, no epic above it.
 See the [charter](README.md) for what intake is and the eviction rule that empties it._
 
-**Filed so far: 5. Closed: 3.** Three of the five came out of E10's convention sweep as decisions that were
+**Filed so far: 8. Closed: 6.** Three of the first five came out of E10's convention sweep as decisions that were
 recorded and then not executed — which is the same failure class as a claim asserted and not checked, and
 is precisely the kind of work that had nowhere to live before this file existed.
 

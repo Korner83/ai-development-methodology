@@ -73,3 +73,4 @@ the stack than this methodology does.
 
 **Method caveat, recorded because it bounds every verdict above:** the triage ranked candidates from
 one-line README descriptions and opened no repositories.
+

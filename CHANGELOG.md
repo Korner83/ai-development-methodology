@@ -7,6 +7,36 @@ This is the single source of truth for the changelog.
 
 ---
 
+## v1.36.0 — Unreleased
+
+### Changed: repo files that execute, tests that wait, and worktree hazards
+
+Three [`E00-intake`](self-development/backlog/epics/E00-intake/README.md) items from a read of
+[`agent-of-empires/agent-of-empires`](https://github.com/agent-of-empires/agent-of-empires) (at `c2bc548`), a
+session manager for parallel coding agents. Nothing about the tool is adopted; three ideas from its docs are.
+
+- **`methodology/13` — trust follows provenance now covers repo files that execute.** The rule already said
+  a modified `AGENTS.md` on an untrusted branch is *believed* because of where it sits. Agent config
+  committed to the repo — hook definitions, MCP server lists — is *run* because of where it sits, before
+  anyone reads the diff. Do not open an untrusted branch in a harness that auto-runs them. One new
+  threat-model row; the scope line now says 13 governs which repo-supplied agent config an agent lets run
+  as well as which instructions it obeys. **The pasteable block gained one line**, carried into root
+  `AGENTS.md` (57 of 60) and in substance into both templates. `SKILL.md` carries none of the provenance rule
+  and links to 13, so it is unchanged.
+- **`methodology/10` — tests that wait on asynchronous work never wait a fixed time.** Wait on an observable
+  condition with a deadline; a deadline bounds failure and does not establish completion; before asserting
+  that something did not happen, establish that it could have.
+- **`methodology/09` — five worktree hazards:** branch from a freshly fetched base, a failing
+  `post-checkout` hook makes `git worktree add` exit non-zero although the tree exists, never remove the
+  default branch's checkout in a bare-repo layout, `git worktree lock` guards only against git itself, and
+  move an abandoned tree aside before deleting it. **Also fixed:** the cleanup note said
+  `worktree remove --force` sits on the ✗ rows of the operation table; the table has always put it on ⚠.
+
+No new convention, enum, gate or checklist field. **Staged behind v1.35.0**, which is prepared and not yet
+released; the version stamps move when this ships.
+
+---
+
 ## v1.35.0 — Unreleased
 
 ### Added: assurance and multidisciplinary software squads
