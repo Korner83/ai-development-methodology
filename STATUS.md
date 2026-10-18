@@ -19,7 +19,9 @@ It works as designed in that one context. Whether the same shape transplants cle
 
 ## Assurance-and-squads update
 
-v1.35.0 is prepared on a feature branch, not released. [E11](self-development/backlog/epics/E11-assurance-and-squads/README.md) adds risk-based assurance and multidisciplinary software-squad guidance. Its walkthroughs and local documentation checks are not external adoption evidence; independent review and maintainer acceptance remain pending. The earlier evaluation verdict above is unchanged.
+v1.35.0 was merged into `main` through PR #38 but remains unreleased. [E11](self-development/backlog/epics/E11-assurance-and-squads/README.md) adds risk-based assurance and multidisciplinary software-squad guidance; independent review and maintainer acceptance remain pending. PR #40 subsequently merged the staged v1.36.0 changes, also unreleased. The latest tagged baseline is v1.34.0; see [distribution status](DISTRIBUTION.md). Neither merge supplies external adoption evidence or changes the evaluation verdict above.
+
+**Distribution decision, 2026-10-18:** the maintainer authorized preparation for six relevant directories and the housekeeping needed beforehand, revisiting the earlier passive-only position. Preparation, metadata corrections, and packages do not establish publication, adoption, release acceptance, or an improved milestone score.
 
 ## Maintenance commitment
 

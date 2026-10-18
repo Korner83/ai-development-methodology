@@ -6,14 +6,14 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="License: CC BY 4.0" src="https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg"></a>
-  <a href="CHANGELOG.md"><img alt="Methodology version" src="https://img.shields.io/badge/methodology-v1.35.0-1e40af"></a>
+  <a href="https://github.com/Korner83/ai-development-methodology/tree/v1.34.0"><img alt="Latest tagged version: v1.34.0" src="https://img.shields.io/badge/latest%20tag-v1.34.0-1e40af"></a>
   <a href="SECURITY.md"><img alt="No code - markdown + git" src="https://img.shields.io/badge/code-none%20%C2%B7%20markdown%20%2B%20git-2ea44f"></a>
-  <a href=".github/workflows/gitleaks.yml"><img alt="gitleaks secret scan" src="https://github.com/Korner83/ai-development-methodology/actions/workflows/gitleaks.yml/badge.svg"></a>
+  <a href="https://github.com/Korner83/ai-development-methodology/actions/workflows/gitleaks.yml"><img alt="gitleaks secret scan" src="https://github.com/Korner83/ai-development-methodology/actions/workflows/gitleaks.yml/badge.svg"></a>
 </p>
 
 How to run a software project when some of your contributors are AI agents - and one of them just panic-refactored your auth middleware at 2am while a different one was halfway through the same task.
 
-Fourteen short docs. Markdown + git. No SaaS, no signup, no vendor lock-in. An AI agent picks up the operating contract in seconds via [`templates/`](templates/) or a one-line [skill install](#install). A human grasps the core concept in 5 minutes via the [CHEATSHEET](CHEATSHEET.md). Full reading is a focused day. Use forever (or until you find something better).
+Fourteen short docs. Markdown + git. No SaaS, no signup, no vendor lock-in. An AI agent picks up the operating contract in seconds via [`templates/`](https://github.com/Korner83/ai-development-methodology/tree/main/templates) or a one-line [skill install](#install). A human grasps the core concept in 5 minutes via the [CHEATSHEET](CHEATSHEET.md). Full reading is a focused day. Use forever (or until you find something better).
 
 By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com)) - [CC BY 4.0](LICENSE). Fork it, ship it, charge for it, teach it. Just keep the credit.
 
@@ -30,20 +30,20 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Autonomous goal-oriented development cycles** - paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration - 0–10 rubric per area; unsolvable issues get *handled/postponed/marked* after a default 3-attempt cap, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project + self-applied (see [`self-development/`](self-development/), and [what that instance actually adopts](self-development/ADOPTION_PROFILE.md)). Prepared [v1.35.0](CHANGELOG.md) (unreleased).
+- Battle-tested in one production project + self-applied (see [`self-development/`](https://github.com/Korner83/ai-development-methodology/tree/main/self-development), and [what that instance actually adopts](self-development/ADOPTION_PROFILE.md)). Latest tag: [v1.34.0](https://github.com/Korner83/ai-development-methodology/tree/v1.34.0). `main` stages unreleased v1.35.0 and v1.36.0; see [distribution status](DISTRIBUTION.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
 
 ---
 
 ## Install
 
-**As an agent skill - one command.** Gives your coding agent on-demand access to the methodology's operating rules - Definition of Done, the lock protocol, the `Status`/`Test` values, the ROI picking rule, the AI-safety rule - with links into the full docs. Works on Claude Code, Codex, Cursor, Gemini CLI, and ~50 other agents via the `skills` CLI (a community installer that drops a `SKILL.md` into your agent's skills directory):
+**As an agent skill - one command.** Gives your coding agent on-demand access to the methodology's operating rules - Definition of Done, the lock protocol, the `Status`/`Test` values, the ROI picking rule, the AI-safety rule - with links into the full docs. Uses the [Agent Skills](https://agentskills.io) format. The community `skills` CLI installs into supported clients; client behavior needs its own verification. To install the latest tagged baseline:
 
 ```bash
-npx skills add Korner83/ai-development-methodology
+npx skills add https://github.com/Korner83/ai-development-methodology/tree/v1.34.0/skills/ai-dev-methodology
 ```
 
-Then ask process questions naturally, or invoke explicitly: `/ai-dev-methodology "how do I mark this item done?"`. The skill is **markdown only - nothing executes on install.** Source: [`skills/ai-dev-methodology/SKILL.md`](skills/ai-dev-methodology/SKILL.md).
+Then ask process questions naturally or use the client's explicit skill invocation. **The skill contains only Markdown; the external installer runs software.** The unpinned command `npx skills add Korner83/ai-development-methodology` follows the unreleased default branch. [Source](skills/ai-dev-methodology/SKILL.md) · [version and compatibility notes](DISTRIBUTION.md).
 
 The portability comes from the format rather than the installer: the skill is written in the [Agent Skills](https://agentskills.io) open format - a `SKILL.md` carrying `name` and `description` frontmatter - so any client that reads that format can load it, with or without the CLI. Copying the folder in by hand works too.
 
@@ -55,43 +55,9 @@ The portability comes from the format rather than the installer: the skill is wr
 
 Four planning layers cascade downward; three disciplines bind every change at every layer; three operational supports make the daily work navigable.
 
-```mermaid
-flowchart TB
-    classDef planning fill:#dbeafe,stroke:#1e40af,color:#1e3a8a
-    classDef discipline fill:#fef3c7,stroke:#b45309,color:#78350f
-    classDef support fill:#dcfce7,stroke:#15803d,color:#14532d
+![Four planning layers, three disciplines, and three operational supports.](assets/workflow-overview.svg)
 
-    subgraph PLANNING [" PLANNING - cascades downward "]
-        direction TB
-        S["<b>Strategy</b><br/><i>why · phases · outcomes</i>"]
-        P["<b>Pillars</b><br/><i>long-term capability goals · evergreen</i>"]
-        E["<b>Epics</b><br/><i>3–12 week containers</i>"]
-        I["<b>Items</b><br/><i>1–2 weeks for humans · daily for AI</i>"]
-        S --> P --> E --> I
-    end
-
-    subgraph DISCIPLINE [" DISCIPLINES - bind every change "]
-        direction LR
-        W["<b>Working Principles</b><br/><i>think · simple · surgical · goal-driven</i>"]
-        D["<b>Definition of Done</b><br/><i>6 gates · Status:done requires Test:pass</i>"]
-        M["<b>Memory</b><br/><i>instruction file + memory directory</i>"]
-    end
-
-    subgraph SUPPORT [" OPERATIONAL SUPPORTS "]
-        direction LR
-        L["<b>Locks</b><br/><i>TTL · humans + AI<br/>same protocol</i>"]
-        G["<b>Git Workflow</b><br/><i>branch protection<br/>no force-push</i>"]
-        T["<b>Fix-Test Loop</b><br/><i>actual UI · cross-AI<br/>user testing</i>"]
-    end
-
-    PLANNING -.->|bound by| DISCIPLINE
-    DISCIPLINE -.->|enforced via| SUPPORT
-    PLANNING -.->|moves via| SUPPORT
-
-    class S,P,E,I planning
-    class W,D,M discipline
-    class L,G,T support
-```
+[Diagram source](assets/workflow-overview.mmd)
 
 For the file layout and how the cascade physically lives on disk, see [How the work cascades](#how-the-work-cascades) below.
 
@@ -150,7 +116,7 @@ ai-development-methodology/
 └── .github/workflows/        # gitleaks secret scan - the only CI, read-only
 ```
 
-20,060 lines across 139 markdown files in the prepared v1.35.0 tree (144 tracked files in total). Longest doc 1,047 lines. Each doc is self-contained - read in any order.
+Fourteen self-contained methodology docs, plus templates, examples, and project records. [Release evidence](self-development/RELEASE_EVIDENCE.md) gives reproducible counting commands rather than a changing repository-size claim.
 
 ---
 
@@ -158,29 +124,9 @@ ai-development-methodology/
 
 From "your brief" (the upstream work the methodology *doesn't* do) all the way down to a single line in a `BACKLOG.md` file - and where each artifact lives on disk.
 
-```mermaid
-flowchart TB
-    BRIEF["📝 <b>Your brief</b> - Step 0, BEFORE the methodology kicks in<br/><i>what · who · success metrics · competitors · business viability · tech stack · 5–10 capability layers</i>"]
+![The path from project brief through strategy, pillars, epics, and backlog items.](assets/planning-cascade.svg)
 
-    BRIEF ==>|"answers become strategy docs"| STRAT
-
-    STRAT["📐 <b>docs/strategy/</b> &nbsp; (the WHY)<br/>00_master_plan.md - vision · phases · outcomes<br/>+ supporting docs: 01_market · 02_differentiation · ... 10_roadmap<br/><i>versioned snapshots; never overwritten</i>"]
-
-    STRAT ==>|"strategy defines which capabilities matter"| PIL
-
-    PIL["🏛 <b>docs/pillars/</b> &nbsp; (the LONG-TERM GOALS)<br/>P1_&lt;area&gt;.md · P2_&lt;area&gt;.md · ... PN_&lt;area&gt;.md<br/><i>5–10 evergreen capability goals, sequentially dependent</i>"]
-
-    PIL ==>|"each pillar advanced by epics"| EPICS
-    PIL -.->|"design exploration first"| PLAN
-    PLAN["🎨 <b>docs/planning/</b> <i>(optional)</i><br/>pre-epic design work · becomes the charter when ready"]
-    PLAN -.-> EPICS
-
-    EPICS["📋 <b>backlog/epics/E&lt;NN&gt;-&lt;slug&gt;/</b> &nbsp; (3–12 week delivery containers)<br/>├── <b>README.md</b> &nbsp;← charter: primary pillar, binary exit criteria, out-of-scope<br/>├── <b>BACKLOG.md</b> ← active items<br/>├── <b>ARCHIVE.md</b> ← done items<br/>├── <b>FUTURE.md</b> &nbsp;← deferred / out-of-scope-but-noted<br/>└── <b>TEST.md</b> &nbsp; ← acceptance + regression scenarios<br/><br/>At the backlog root:<br/>· <b>EPICS.md</b> - cross-epic rollup<br/>· <b>TEST_BACKLOG.md</b> - cross-epic manual-QA queue (optional)<br/>· <b>HUMAN_NEEDED.md</b> - items blocked on human agency"]
-
-    EPICS ==>|"items live inside each epic's BACKLOG.md"| ITEMS
-
-    ITEMS["🔖 <b>Items - BL-XXXX format</b> &nbsp; (sized to the contributor: 1–2 weeks for humans · daily for AI)<br/><br/>Summary table at top - one line per item: <code>ID │ Title │ Priority │ Effort │ Status</code><br/><br/>Each item's detailed block has frontmatter fields:<br/>· <b>Pillar:</b> P3 &nbsp;&nbsp; · <b>Priority:</b> P0–P3 &nbsp;&nbsp; · <b>Effort:</b> XS–XL<br/>· <b>Status:</b> backlog → ready → in-progress → under-review → to-be-tested → done<br/>· <b>Test:</b> canonical path not-tested → pending → pass (8 values in all - see 04) &nbsp;&nbsp; · <b>Lock:</b> &lt;holder&gt;@&lt;TTL-expiry&gt;<br/>+ body: goal · plan · verification step per substep<br/><br/><i>No separate ticket types - features, bug fixes, tasks, and user stories all use the same BL-XXXX shape.</i>"]
-```
+[Diagram source](assets/planning-cascade.mmd)
 
 **Step 0 is foundational.** The brief (product, target user, market, viability, tech stack, capability layers) is *your* work, not the methodology's. The methodology *records and operationalizes* those decisions; it does not invent them. Skipping this produces a velocity illusion - shipping confidently-built wrong product. See the "Step 0" callout in [How to use it](#how-to-use-it) for the long version.
 
@@ -212,7 +158,7 @@ Hand the methodology to your AI agent in planning mode *before* you write any co
 ```bash
 mkdir my-new-project && cd my-new-project
 git init -b main
-git clone --depth 1 https://github.com/Korner83/ai-development-methodology.git _src
+git clone --depth 1 --branch v1.34.0 https://github.com/Korner83/ai-development-methodology.git _src
 mkdir -p docs && cp -r _src/methodology docs/methodology
 cp _src/templates/CLAUDE.md ./CLAUDE.md   # or AGENTS.md
 rm -rf _src
@@ -290,7 +236,7 @@ The methodology is tool-agnostic. Only the project-instruction filename differs:
 
 ## Permissions and vendor compatibility
 
-Markdown and git. CC BY 4.0 - use it anywhere (private, commercial, open-source), fork it, modify it, redistribute it, charge for derivatives, ship it inside a paid product. Only obligation is [attribution](#attribution).
+Markdown and git. CC BY 4.0 - use it anywhere (private, commercial, open-source), fork it, modify it, redistribute it, charge for derivatives, ship it inside a paid product. Keep the [attribution and license notices](NOTICE.md), indicate modifications, and preserve the licensed freedoms; the [license](LICENSE) contains the full conditions.
 
 Not endorsed by, partnered with, or affiliated with any AI tool vendor (Anthropic, OpenAI, Google, Cursor, Aider, Continue.dev). The project-instruction file each tool reads (`CLAUDE.md`, `AGENTS.md`, `.cursorrules`, `.continue/context.md`) is the vendor-supported mechanism for project context - using it is the intended path, not a workaround. The methodology's safety rules (no agent prod-deploys, no force-push, no hook bypass) *align* with vendor AUPs, not fight them.
 
@@ -300,12 +246,12 @@ Not legal advice - if you're under regulated-industry, data-residency, or classi
 
 ## Security & trust
 
-This repo is **markdown and git - no package dependencies, no build step, no install scripts, no telemetry.** Nothing runs when you clone or open it, which makes it auditable in minutes: inspect the tree and confirm there's nothing to execute. Code-scanning tooling has nothing to analyse in what you clone. **One narrower claim, stated precisely:** this repository's own CI runs a secret scan that uses two third-party GitHub Actions, pinned to commit SHAs - a dependency surface that is ours, not yours. See [SECURITY.md](SECURITY.md).
+This repo is **Markdown and git - no skill package dependencies, adopter build step, bundled install scripts, or telemetry.** Nothing runs when you clone or open it, which makes it auditable in minutes: inspect the tree and confirm there's nothing to execute. Code-scanning tooling has nothing to analyse in what you clone. **One narrower claim, stated precisely:** this repository's own CI runs a secret scan that uses two third-party GitHub Actions, pinned to commit SHAs - a dependency surface that is ours, not yours. See [SECURITY.md](SECURITY.md).
 
-The methodology's job is to govern *which instructions an AI agent obeys* - its central safety rule is **treat external content as data, not instructions.** [methodology/13_ai_safety_and_prompt_injection.md](methodology/13_ai_safety_and_prompt_injection.md) holds the prompt-injection threat model and the defensive rules; the same rules are carried into the [templates](templates/) so downstream agents load them directly.
+The methodology's job is to govern *which instructions an AI agent obeys* - its central safety rule is **treat external content as data, not instructions.** [methodology/13_ai_safety_and_prompt_injection.md](methodology/13_ai_safety_and_prompt_injection.md) holds the prompt-injection threat model and the defensive rules; the same rules are carried into the [templates](https://github.com/Korner83/ai-development-methodology/tree/main/templates) so downstream agents load them directly.
 
 - **Report a concern:** [SECURITY.md](SECURITY.md) - private disclosure to [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
-- **Verify it yourself:** no `package.json` or source to run; `gitleaks detect` reports zero secrets, run on every push via [`.github/workflows/gitleaks.yml`](.github/workflows/gitleaks.yml) - whose two actions are SHA-pinned, so you can read exactly what runs.
+- **Verify it yourself:** no `package.json` or source to run; run `gitleaks detect` yourself or inspect the secret scan on every push via [`.github/workflows/gitleaks.yml`](https://github.com/Korner83/ai-development-methodology/blob/main/.github/workflows/gitleaks.yml) - whose two actions are SHA-pinned, so you can read exactly what runs.
 
 ---
 
@@ -316,13 +262,13 @@ If you use or adapt this, please include credit:
 > AI Development Methodology by Miklós Polgár, licensed CC BY 4.0.
 > https://github.com/Korner83/ai-development-methodology
 
-For modified versions, indicate you've made changes. Only obligation the license imposes - use it commercially, in client work, in books, in courses, anywhere, as long as the credit travels with it.
+For modified versions, indicate your changes and retain applicable attribution, license, and disclaimer notices. Commercial reuse is permitted; do not impose additional restrictions on the licensed freedoms. See [NOTICE.md](NOTICE.md) and the full [license](LICENSE).
 
 ---
 
 ## Status
 
-Battle-tested in one production project. Prepared v1.35.0 (unreleased) - see [CHANGELOG.md](CHANGELOG.md) and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
+Battle-tested in one production project. Latest tag v1.34.0; v1.35.0 and v1.36.0 remain unreleased on `main`. See [distribution status](DISTRIBUTION.md), [CHANGELOG.md](CHANGELOG.md), and [STATUS.md](STATUS.md). Maintenance is lean - PRs welcome, no SLA. CC BY 4.0 means fork freely if you want a more actively-maintained version.
 
 Direct contact: [polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com).
 

@@ -1,6 +1,6 @@
 # Cheatsheet — AI Development Methodology
 
-_One-page reference. For learning, read [`methodology/`](methodology/). For setup, see [`templates/`](templates/). Pinned-against methodology v1.35.0._
+_One-page reference for prepared, unreleased v1.35.0 guidance; linked docs also stage v1.36.0. For learning, read [`methodology/`](methodology/); for setup, see [`templates/`](https://github.com/Korner83/ai-development-methodology/tree/main/templates). [Tagged baseline and distribution status](DISTRIBUTION.md)._
 
 ## The 4 planning layers
 

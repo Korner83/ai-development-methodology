@@ -26,6 +26,7 @@ findings survived six releases.
 
 ## Regression scenarios to protect
 
+
 | Area | Scenario | Last verified |
 |------|----------|---------------|
 | No second format | An intake item is byte-comparable in shape to a cascade item | 2026-08-25 |
@@ -36,3 +37,21 @@ findings survived six releases.
 The last row is the one most likely to fail, and it fails quietly: the temptation will be to publish the
 convention because it now exists and looks tidy. **The trigger is written down so that decision has to be
 made against a stated condition rather than a feeling.**
+
+## BL-0069 — Pre-listing housekeeping, 2026-10-18
+
+Author verification on the housekeeping branch; this is not E10's independent re-audit or E11 acceptance.
+
+| Check | Observed result |
+|---|---|
+| Live discovery metadata | GitHub description now says fourteen docs, homepage points to the reachable Pages site, and claude-skills is present; the other thirteen topics are retained |
+| License presentation | LICENSE matches GitHub's standard CC-BY-4.0 template; author/source credit is retained in NOTICE.md and the detached skill; detection on the default branch awaits integration |
+| Skill format | Bundled skill-creator frontmatter validation passed |
+| Installer discovery | skills 1.7.2 on Node 24.14.0 found ai-dev-methodology from the v1.34.0 tree URL |
+| Project-level installation | Copy installation into a disposable project succeeded for Claude Code, Codex, and Cursor; no global installation or client behavior claim |
+| Source links | Markdown-token/HTML-attribute check against fetched base found no new unresolved relative paths or headings; pre-existing adopter-relative template references and doc-02 placeholder remain separately recorded |
+| README presentation | Static SVGs loaded; both diagrams visually inspected; local desktop and 390-pixel mobile preview checked, with no page-level horizontal overflow |
+| Hosted entry baseline | Before changes, 32 same-site README destinations checked; three 404 paths identified: templates/, self-development/, and the relative workflow URL. README now points those entries at canonical GitHub destinations |
+| Publication | No new directory submission, methodology tag, PR merge, or Release publication claimed |
+
+Pending: final hosted PR checks, merge approval, post-merge license detection, and the deployed Pages build. Local rendering does not stand in for those checks. The diagram source is retained; no runtime renderer or new CI is introduced.

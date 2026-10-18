@@ -7,6 +7,16 @@ This is the single source of truth for the changelog.
 
 ---
 
+## Unreleased — listing preparation
+
+Maintainer-requested housekeeping before directory submissions: distinguish the v1.34.0 tagged baseline from the unreleased v1.35.0/v1.36.0 default branch; make author/license credit travel with the skill; use the standard CC BY 4.0 legal text with a separate notice; and document distribution boundaries.
+
+The README uses static SVG diagrams, with its Mermaid sources preserved, so the existing GitHub Pages site does not display diagram code. Broken folder/workflow links and the stale repository-size claim are corrected. Static Pages metadata is explicit; installer and hosted-build disclosures are narrowed to what the repository actually supplies.
+
+This is preparation, not a new methodology release or closure of E10/E11. No executable code, runtime dependency, or additional CI is introduced. See [distribution status](DISTRIBUTION.md).
+
+---
+
 ## v1.36.0 — Unreleased
 
 ### Changed: repo files that execute, tests that wait, and worktree hazards
