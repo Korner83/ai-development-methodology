@@ -47,8 +47,9 @@ Author verification on the housekeeping branch; this is not E10's independent re
 | Live discovery metadata | GitHub description now says fourteen docs, homepage points to the reachable Pages site, and claude-skills is present; the other thirteen topics are retained |
 | License presentation | LICENSE matches GitHub's standard CC-BY-4.0 template; author/source credit is retained in NOTICE.md and the detached skill; detection on the default branch awaits integration |
 | Skill format | Bundled skill-creator frontmatter validation passed |
-| Installer discovery | skills 1.7.2 on Node 24.14.0 found ai-dev-methodology from the v1.34.0 tree URL |
-| Project-level installation | Copy installation into a disposable project succeeded for Claude Code, Codex, and Cursor; no global installation or client behavior claim |
+| Installer discovery | skills 1.7.2 on Node 24.14.0 found ai-dev-methodology from the selected latest-content commit ed65748 tree URL; the older v1.34.0 test is superseded |
+| Project-level installation | The latest-content listing.3 package installed by copy into a disposable project for Claude Code, Codex, and Cursor; no global installation or client behavior claim |
+| Latest-content package | Original skill/license bytes retained from merged main at ed65748; reversing only the declared byline/version/link edits reproduces the original operating rules. All 15 pinned-document/local-notice links resolve. The upload is an unreleased v1.36.0 preview including v1.35.0, not a new tag or release |
 | Source links | Markdown-token/HTML-attribute check against fetched base found no new unresolved relative paths or headings; pre-existing adopter-relative template references and doc-02 placeholder remain separately recorded |
 | README presentation | Static SVGs loaded; both diagrams visually inspected; local desktop and 390-pixel mobile preview checked, with no page-level horizontal overflow |
 | Hosted entry baseline | Before changes, 32 same-site README destinations checked; three 404 paths identified: templates/, self-development/, and the relative workflow URL. README now points those entries at canonical GitHub destinations |

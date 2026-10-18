@@ -9,7 +9,7 @@ This is the single source of truth for the changelog.
 
 ## Unreleased — listing preparation
 
-Maintainer-requested housekeeping before directory submissions: distinguish the v1.34.0 tagged baseline from the unreleased v1.35.0/v1.36.0 default branch; make author/license credit travel with the skill; use the standard CC BY 4.0 legal text with a separate notice; and document distribution boundaries.
+Maintainer-requested housekeeping before directory submissions: use the latest content (the unreleased v1.36.0 preview, including v1.35.0), distinguish it from the older v1.34.0 tag, make author/license credit travel with the skill, use the standard CC BY 4.0 legal text with a separate notice, and document distribution boundaries. Latest-content packages pin the merged source commit for reproducibility without inventing a release tag.
 
 The README uses static SVG diagrams, with its Mermaid sources preserved, so the existing GitHub Pages site does not display diagram code. Broken folder/workflow links and the stale repository-size claim are corrected. Static Pages metadata is explicit; installer and hosted-build disclosures are narrowed to what the repository actually supplies.
 

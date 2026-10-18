@@ -10,6 +10,9 @@ Public GitHub description, Pages homepage field, and claude-skills topic are cor
 The source change clarifies distribution versions, adds portable attribution and standard
 CC BY legal text, repairs entry links, and replaces README Mermaid blocks with static SVGs.
 No methodology rule, new executable, or CI gate is introduced.
+The maintainer selected latest content for listings: the unreleased v1.36.0 preview
+at ed65748, including v1.35.0. Package provenance pins that source; v1.34.0 uploads
+are superseded. This direction does not by itself approve a merge or release.
 
 ## Evidence and limits
 
@@ -25,8 +28,9 @@ or evidence that any listing was submitted. Do not upload its research/evidence 
    explicit operation approval under doc 09; no merge or release is implied by this baton.
 2. After integration, verify GitHub license detection and the actual Pages entry links,
    static diagrams, and metadata; then update BL-0069 against observed evidence.
-3. A prepared draft for the existing v1.34.0 Release page may reconcile the old latest-Release
-   display, but publishing it also requires explicit approval. Do not tag pending versions.
+3. The earlier v1.34.0 Release-page draft is superseded by the latest-content direction.
+   Do not publish it as the latest solution. Do not tag or release pending versions without
+   their own acceptance evidence and explicit operation approval.
 4. Continue any directory publication only after its own terms and delivery checks pass.
 
 ## Carried forward — not closed by housekeeping

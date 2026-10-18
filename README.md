@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="LICENSE"><img alt="License: CC BY 4.0" src="https://img.shields.io/badge/license-CC%20BY%204.0-blue.svg"></a>
-  <a href="https://github.com/Korner83/ai-development-methodology/tree/v1.34.0"><img alt="Latest tagged version: v1.34.0" src="https://img.shields.io/badge/latest%20tag-v1.34.0-1e40af"></a>
+  <a href="DISTRIBUTION.md"><img alt="Latest content: v1.36.0 preview" src="https://img.shields.io/badge/latest%20content-v1.36.0%20preview-1e40af"></a>
   <a href="SECURITY.md"><img alt="No code - markdown + git" src="https://img.shields.io/badge/code-none%20%C2%B7%20markdown%20%2B%20git-2ea44f"></a>
   <a href="https://github.com/Korner83/ai-development-methodology/actions/workflows/gitleaks.yml"><img alt="gitleaks secret scan" src="https://github.com/Korner83/ai-development-methodology/actions/workflows/gitleaks.yml/badge.svg"></a>
 </p>
@@ -30,20 +30,20 @@ By **Miklós Polgár** ([polgarmiklos@gmail.com](mailto:polgarmiklos@gmail.com))
 - **Autonomous goal-oriented development cycles** - paste-and-adapt `AUTONOMOUS_LOOP.md` prompt drives multi-hour unattended runs toward named milestones; tiered autonomy on authoritative artifacts (cosmetic auto-patch with cross-AI diff-verify; substantive maintainer-authored).
 - **Milestone-driven deep-eval** every Nth loop iteration - 0–10 rubric per area; unsolvable issues get *handled/postponed/marked* after a default 3-attempt cap, never forced.
 - **Plan before non-trivial work.** Use your tool's plan mode.
-- Battle-tested in one production project + self-applied (see [`self-development/`](https://github.com/Korner83/ai-development-methodology/tree/main/self-development), and [what that instance actually adopts](self-development/ADOPTION_PROFILE.md)). Latest tag: [v1.34.0](https://github.com/Korner83/ai-development-methodology/tree/v1.34.0). `main` stages unreleased v1.35.0 and v1.36.0; see [distribution status](DISTRIBUTION.md).
+- Battle-tested in one production project + self-applied (see [`self-development/`](https://github.com/Korner83/ai-development-methodology/tree/main/self-development), and [what that instance actually adopts](self-development/ADOPTION_PROFILE.md)). Use the latest content: **v1.36.0 preview**, including v1.35.0. Both remain unreleased; v1.34.0 is the older latest tag. See [distribution status](DISTRIBUTION.md).
 - **Quick reference:** [CHEATSHEET.md](CHEATSHEET.md). **Worked example:** [`examples/`](examples/).
 
 ---
 
 ## Install
 
-**As an agent skill - one command.** Gives your coding agent on-demand access to the methodology's operating rules - Definition of Done, the lock protocol, the `Status`/`Test` values, the ROI picking rule, the AI-safety rule - with links into the full docs. Uses the [Agent Skills](https://agentskills.io) format. The community `skills` CLI installs into supported clients; client behavior needs its own verification. To install the latest tagged baseline:
+**As an agent skill - one command.** Gives your coding agent on-demand access to the methodology's operating rules - Definition of Done, the lock protocol, the `Status`/`Test` values, the ROI picking rule, the AI-safety rule - with links into the full docs. Uses the [Agent Skills](https://agentskills.io) format. The community `skills` CLI installs into supported clients; client behavior needs its own verification. To install the latest default-branch content (currently the unreleased v1.36.0 preview):
 
 ```bash
-npx skills add https://github.com/Korner83/ai-development-methodology/tree/v1.34.0/skills/ai-dev-methodology
+npx skills add Korner83/ai-development-methodology
 ```
 
-Then ask process questions naturally or use the client's explicit skill invocation. **The skill contains only Markdown; the external installer runs software.** The unpinned command `npx skills add Korner83/ai-development-methodology` follows the unreleased default branch. [Source](skills/ai-dev-methodology/SKILL.md) · [version and compatibility notes](DISTRIBUTION.md).
+Then ask process questions naturally or use the client's explicit skill invocation. **The skill contains only Markdown; the external installer runs software.** The command follows `main`; use the [commit-pinned latest-content command](DISTRIBUTION.md#install-or-inspect) for a reproducible snapshot. [Source](skills/ai-dev-methodology/SKILL.md) · [version and compatibility notes](DISTRIBUTION.md).
 
 The portability comes from the format rather than the installer: the skill is written in the [Agent Skills](https://agentskills.io) open format - a `SKILL.md` carrying `name` and `description` frontmatter - so any client that reads that format can load it, with or without the CLI. Copying the folder in by hand works too.
 
@@ -158,7 +158,7 @@ Hand the methodology to your AI agent in planning mode *before* you write any co
 ```bash
 mkdir my-new-project && cd my-new-project
 git init -b main
-git clone --depth 1 --branch v1.34.0 https://github.com/Korner83/ai-development-methodology.git _src
+git clone --depth 1 --branch main https://github.com/Korner83/ai-development-methodology.git _src
 mkdir -p docs && cp -r _src/methodology docs/methodology
 cp _src/templates/CLAUDE.md ./CLAUDE.md   # or AGENTS.md
 rm -rf _src

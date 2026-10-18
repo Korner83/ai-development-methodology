@@ -44,6 +44,8 @@ is precisely the kind of work that had nowhere to live before this file existed.
 
 **Verification:** recorded in E00/TEST.md when observed. Checks still pending must remain unchecked.
 
+**Maintainer direction, 2026-10-18:** use the latest content for listings. The selected source is the merged v1.36.0 preview at ed65748, including v1.35.0; the older v1.34.0 tag remains historical context. This does not declare release acceptance or authorize a merge/tag/Release operation.
+
 ---
 
 ### BL-0058 — Read the Agent File spec; decide on a conformance line

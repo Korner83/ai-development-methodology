@@ -12,7 +12,7 @@ A markdown + git methodology for running software projects where some contributo
 
 > **Full docs:** <https://github.com/Korner83/ai-development-methodology> · **One-page reference:** [CHEATSHEET](https://github.com/Korner83/ai-development-methodology/blob/main/CHEATSHEET.md)
 >
-> **Default-branch preview:** this operating guide includes prepared v1.35.0 guidance; the linked docs also stage v1.36.0. Both remain unreleased. The latest tagged baseline is [v1.34.0](https://github.com/Korner83/ai-development-methodology/tree/v1.34.0); see [distribution status](https://github.com/Korner83/ai-development-methodology/blob/main/DISTRIBUTION.md) before choosing a version. Links below follow `main`.
+> **Latest content: v1.36.0 preview**, including v1.35.0 assurance/squad guidance in this operating guide and v1.36.0 changes in the full docs. Both remain unreleased. The older latest tag is [v1.34.0](https://github.com/Korner83/ai-development-methodology/tree/v1.34.0). The maintainer selected latest content for listings; see [distribution status](https://github.com/Korner83/ai-development-methodology/blob/main/DISTRIBUTION.md). Links below follow `main`.
 
 Written in the [Agent Skills](https://agentskills.io) open format — a `SKILL.md` carrying `name` and `description` frontmatter — so any client that reads that format can load it.
 
