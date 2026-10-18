@@ -1,0 +1,21 @@
+flowchart TB
+    BRIEF["📝 <b>Your brief</b> - Step 0, BEFORE the methodology kicks in<br/><i>what · who · success metrics · competitors · business viability · tech stack · 5–10 capability layers</i>"]
+
+    BRIEF ==>|"answers become strategy docs"| STRAT
+
+    STRAT["📐 <b>docs/strategy/</b> &nbsp; (the WHY)<br/>00_master_plan.md - vision · phases · outcomes<br/>+ supporting docs: 01_market · 02_differentiation · ... 10_roadmap<br/><i>versioned snapshots; never overwritten</i>"]
+
+    STRAT ==>|"strategy defines which capabilities matter"| PIL
+
+    PIL["🏛 <b>docs/pillars/</b> &nbsp; (the LONG-TERM GOALS)<br/>P1_&lt;area&gt;.md · P2_&lt;area&gt;.md · ... PN_&lt;area&gt;.md<br/><i>5–10 evergreen capability goals, sequentially dependent</i>"]
+
+    PIL ==>|"each pillar advanced by epics"| EPICS
+    PIL -.->|"design exploration first"| PLAN
+    PLAN["🎨 <b>docs/planning/</b> <i>(optional)</i><br/>pre-epic design work · becomes the charter when ready"]
+    PLAN -.-> EPICS
+
+    EPICS["📋 <b>backlog/epics/E&lt;NN&gt;-&lt;slug&gt;/</b> &nbsp; (3–12 week delivery containers)<br/>├── <b>README.md</b> &nbsp;← charter: primary pillar, binary exit criteria, out-of-scope<br/>├── <b>BACKLOG.md</b> ← active items<br/>├── <b>ARCHIVE.md</b> ← done items<br/>├── <b>FUTURE.md</b> &nbsp;← deferred / out-of-scope-but-noted<br/>└── <b>TEST.md</b> &nbsp; ← acceptance + regression scenarios<br/><br/>At the backlog root:<br/>· <b>EPICS.md</b> - cross-epic rollup<br/>· <b>TEST_BACKLOG.md</b> - cross-epic manual-QA queue (optional)<br/>· <b>HUMAN_NEEDED.md</b> - items blocked on human agency"]
+
+    EPICS ==>|"items live inside each epic's BACKLOG.md"| ITEMS
+
+    ITEMS["🔖 <b>Items - BL-XXXX format</b> &nbsp; (sized to the contributor: 1–2 weeks for humans · daily for AI)<br/><br/>Summary table at top - one line per item: <code>ID │ Title │ Priority │ Effort │ Status</code><br/><br/>Each item's detailed block has frontmatter fields:<br/>· <b>Pillar:</b> P3 &nbsp;&nbsp; · <b>Priority:</b> P0–P3 &nbsp;&nbsp; · <b>Effort:</b> XS–XL<br/>· <b>Status:</b> backlog → ready → in-progress → under-review → to-be-tested → done<br/>· <b>Test:</b> canonical path not-tested → pending → pass (8 values in all - see 04) &nbsp;&nbsp; · <b>Lock:</b> &lt;holder&gt;@&lt;TTL-expiry&gt;<br/>+ body: goal · plan · verification step per substep<br/><br/><i>No separate ticket types - features, bug fixes, tasks, and user stories all use the same BL-XXXX shape.</i>"]

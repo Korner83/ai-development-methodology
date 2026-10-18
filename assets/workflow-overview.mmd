@@ -1,0 +1,35 @@
+flowchart TB
+    classDef planning fill:#dbeafe,stroke:#1e40af,color:#1e3a8a
+    classDef discipline fill:#fef3c7,stroke:#b45309,color:#78350f
+    classDef support fill:#dcfce7,stroke:#15803d,color:#14532d
+
+    subgraph PLANNING [" PLANNING - cascades downward "]
+        direction TB
+        S["<b>Strategy</b><br/><i>why · phases · outcomes</i>"]
+        P["<b>Pillars</b><br/><i>long-term capability goals · evergreen</i>"]
+        E["<b>Epics</b><br/><i>3–12 week containers</i>"]
+        I["<b>Items</b><br/><i>1–2 weeks for humans · daily for AI</i>"]
+        S --> P --> E --> I
+    end
+
+    subgraph DISCIPLINE [" DISCIPLINES - bind every change "]
+        direction LR
+        W["<b>Working Principles</b><br/><i>think · simple · surgical · goal-driven</i>"]
+        D["<b>Definition of Done</b><br/><i>6 gates · Status:done requires Test:pass</i>"]
+        M["<b>Memory</b><br/><i>instruction file + memory directory</i>"]
+    end
+
+    subgraph SUPPORT [" OPERATIONAL SUPPORTS "]
+        direction LR
+        L["<b>Locks</b><br/><i>TTL · humans + AI<br/>same protocol</i>"]
+        G["<b>Git Workflow</b><br/><i>branch protection<br/>no force-push</i>"]
+        T["<b>Fix-Test Loop</b><br/><i>actual UI · cross-AI<br/>user testing</i>"]
+    end
+
+    PLANNING -.->|bound by| DISCIPLINE
+    DISCIPLINE -.->|enforced via| SUPPORT
+    PLANNING -.->|moves via| SUPPORT
+
+    class S,P,E,I planning
+    class W,D,M discipline
+    class L,G,T support

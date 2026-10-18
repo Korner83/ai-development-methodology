@@ -6,11 +6,11 @@ This is a **documentation and methodology project** — markdown plus git, nothi
 
 - **No executable code.** No JavaScript, Python, or other source to run.
 - **No package dependencies.** No `package.json`, `requirements.txt`, lockfiles, or third-party packages in the delivered artifact.
-- **No build step and no install scripts.** Nothing runs on clone, install, or open. There are no `preinstall` / `postinstall` / `prepare` hooks because there is no package manifest at all.
+- **No adopter build step or bundled install scripts.** The skill contains Markdown and supplies no executable components. The optional external `skills` installer runs software and is not part of this repository. There are no bundled `preinstall` / `postinstall` / `prepare` hooks because there is no package manifest.
 - **No telemetry, no network calls, no credential collection.** The repo does not phone home, read your environment, or touch your secrets.
-- **One workflow, and it is the whole CI dependency surface.** A secret scan ([`.github/workflows/gitleaks.yml`](.github/workflows/gitleaks.yml)) runs with `contents: read`. It uses two third-party actions — `actions/checkout` and `gitleaks/gitleaks-action` — **pinned to full commit SHAs rather than to mutable major tags**, because a major tag can be repointed by its owner and this job passes the repository `GITHUB_TOKEN` to the second one. This runs in *this* repository's CI only; it is not part of what an adopter clones or installs.
+- **One checked-in workflow.** A secret scan ([workflow](https://github.com/Korner83/ai-development-methodology/actions/workflows/gitleaks.yml)) runs with read-only contents permission. It uses actions/checkout and gitleaks/gitleaks-action, **pinned to full commit SHAs**, and passes the repository GITHUB_TOKEN to the second action. GitHub also hosts the existing Pages build; _config.yml supplies static site metadata. These hosting/build services and the optional external installer are separate from the Markdown skill an adopter installs.
 
-**The delivered artifact executes nothing on clone or open and has no package dependencies**, so the usual code-scanning tooling (CodeQL, dependency audits, SBOMs) has nothing to analyze. That is a narrower claim than "no supply chain": the two pinned GitHub Actions above *are* a dependency surface, they are simply this repository's rather than an adopter's, and Dependabot's `github-actions` ecosystem is the tool that applies to them. The main risk surface remains the *instructional content* itself.
+**The delivered skill has no executable components or package dependencies.** That is narrower than "no supply chain": the pinned secret-scan actions, GitHub-managed Pages hosting/build, and any installer the adopter chooses are separate surfaces. Static diagrams contain no scripts or external resource references. The skill's main risk surface remains the *instructional content* itself; it does not sandbox the receiving agent.
 
 ## Scope
 

@@ -6,11 +6,13 @@ license: CC-BY-4.0
 
 # AI Development Methodology — operating rules
 
+AI Development Methodology by **Miklós Polgár**, licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [Source and attribution](https://github.com/Korner83/ai-development-methodology/blob/main/NOTICE.md).
+
 A markdown + git methodology for running software projects where some contributors are AI agents. This skill is the **operating contract** — the rules an agent needs in-session. It is self-contained; the full docs live in the repo and are the canonical source:
 
 > **Full docs:** <https://github.com/Korner83/ai-development-methodology> · **One-page reference:** [CHEATSHEET](https://github.com/Korner83/ai-development-methodology/blob/main/CHEATSHEET.md)
 >
-> **Tracks methodology v1.35.0.** An installed copy carries no other date — compare against the [CHANGELOG](https://github.com/Korner83/ai-development-methodology/blob/main/CHANGELOG.md) if the repo's docs look newer than this file.
+> **Latest content: v1.36.0 preview**, including v1.35.0 assurance/squad guidance in this operating guide and v1.36.0 changes in the full docs. Both remain unreleased. The older latest tag is [v1.34.0](https://github.com/Korner83/ai-development-methodology/tree/v1.34.0). The maintainer selected latest content for listings; see [distribution status](https://github.com/Korner83/ai-development-methodology/blob/main/DISTRIBUTION.md). Links below follow `main`.
 
 Written in the [Agent Skills](https://agentskills.io) open format — a `SKILL.md` carrying `name` and `description` frontmatter — so any client that reads that format can load it.
 

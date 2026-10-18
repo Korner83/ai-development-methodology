@@ -4,6 +4,8 @@ How the methodology reaches adopters, and how it stays maintainable long-term wi
 
 ## Distribution channels
 
+**Maintainer direction, 2026-10-18:** prepare listings for Agensi, skills.sh, SkillsMP, Skills Directory, Skillget, and Awesome Claude Code, with repository housekeeping first. This authorizes preparation and relevant metadata corrections; publication, platform acceptance, release acceptance, and adoption evidence remain distinct. Keep GitHub canonical, preserve CC BY, and retain the lean maintenance commitment. No paid advertising or ongoing campaign is added.
+
 ### Primary (high signal, low effort)
 
 - **GitHub** (`Korner83/ai-development-methodology`) — canonical source. Where adopters find, read, fork. The repo is the product; everything else routes back to it.

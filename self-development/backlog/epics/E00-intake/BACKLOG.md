@@ -3,7 +3,7 @@
 _Real work that is not worth a charter. Same item format, same gates, no epic above it.
 See the [charter](README.md) for what intake is and the eviction rule that empties it._
 
-**Filed so far: 8. Closed: 6.** Three of the first five came out of E10's convention sweep as decisions that were
+**Filed so far: 9. Closed: 6.** Three of the first five came out of E10's convention sweep as decisions that were
 recorded and then not executed — which is the same failure class as a claim asserted and not checked, and
 is precisely the kind of work that had nowhere to live before this file existed.
 
@@ -12,6 +12,39 @@ is precisely the kind of work that had nowhere to live before this file existed.
 | ID | Title | Priority | Effort | Status |
 |---------|------------------------------------------------------|----------|--------|-------------|
 | BL-0058 | Read the Agent File spec; decide on a conformance line | P2 | S | ready |
+| BL-0069 | Prepare repository presentation and provenance before listings | P1 | S | under-review |
+
+---
+
+### BL-0069 — Prepare repository presentation and provenance before listings
+
+| Field | Value |
+|---|---|
+| Epic | E00-intake |
+| Pillar | P5 |
+| Priority | P1 |
+| Effort | S |
+| Status | under-review |
+| Test | partial — local checks passed; PR integration and hosted verification pending |
+| Deps | — |
+| Lock | — |
+
+**Why / Description:** The maintainer requested all necessary housekeeping before the six proposed directory listings. Public metadata, release/version signals, license recognition, detached-skill attribution, and the existing Pages presentation must agree with the evidence.
+
+**Done means:**
+
+- [x] Public metadata is accurate, with a verified documentation URL and relevant discovery topic.
+- [x] The same CC BY license is presented in standard legal text and portable attribution; no reuse permission is narrowed.
+- [x] Tagged and unreleased sources are explicit; pending E10/E11 acceptance is preserved.
+- [ ] README diagrams render as static images and entry-point links work on both GitHub and Pages.
+- [ ] Skill format, link/asset integrity, line budgets, no-executable scope, and appropriate hosted checks are verified.
+- [ ] The listing kit records the corrected state and remaining platform/client gates honestly.
+
+**Plan:** correct discovery metadata; fix presentation/provenance on a branch; validate the final tree and static presentation; prepare the normal PR handoff; refresh the local distribution kit. No directory submission or new methodology release is included.
+
+**Verification:** recorded in E00/TEST.md when observed. Checks still pending must remain unchecked.
+
+**Maintainer direction, 2026-10-18:** use the latest content for listings. The selected source is the merged v1.36.0 preview at ed65748, including v1.35.0; the older v1.34.0 tag remains historical context. This does not declare release acceptance or authorize a merge/tag/Release operation.
 
 ---
 

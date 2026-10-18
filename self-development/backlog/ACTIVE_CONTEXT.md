@@ -1,42 +1,43 @@
 # ACTIVE_CONTEXT.md — volatile working state
 
-_Last updated: 2026-09-15._
+_Last updated: 2026-10-18._
 
 ## Current focus
 
-Prepared the user-approved v1.35.0 assurance-and-squads plan on
-`codex/assurance-and-squads-v1.35`, based on `1d43c70` (v1.34.0).
-See [E11](epics/E11-assurance-and-squads/README.md) and its [items](epics/E11-assurance-and-squads/BACKLOG.md).
-E10 and E11 consume both active-epic slots; standing E00 is exempt.
+Maintainer-requested pre-listing housekeeping, E00/BL-0069, on
+codex/listing-housekeeping from freshly fetched main at ed65748.
+Public GitHub description, Pages homepage field, and claude-skills topic are corrected.
+The source change clarifies distribution versions, adds portable attribution and standard
+CC BY legal text, repairs entry links, and replaces README Mermaid blocks with static SVGs.
+No methodology rule, new executable, or CI gate is introduced.
+The maintainer selected latest content for listings: the unreleased v1.36.0 preview
+at ed65748, including v1.35.0. Package provenance pins that source; v1.34.0 uploads
+are superseded. This direction does not by itself approve a merge or release.
 
-## Decisions
+## Evidence and limits
 
-Software-delivery scope; A1 default with mandatory A2/A3 controls by risk.
-A2 verifier may be a separate human or fresh AI session using reproducible evidence;
-A3 requires qualified human specialist verification. Parallel squads declare both
-item WIP limits. Existing DoD, verification levels, and production restrictions remain.
-The user approved implementation, not the resulting review verdict or release.
+Source/skill checks and visual/installer evidence are recorded in E00/TEST.md.
+Installation is distinct from client triggering and behavioral verification.
+Local previews are distinct from the deployed Pages build; inspect it after integration.
+The separate local six-channel kit is a maintainer handoff, not a repository dependency
+or evidence that any listing was submitted. Do not upload its research/evidence bundle.
 
 ## Next steps
 
-1. Independent reviewer checks the final branch against the approved plan and E11/TEST.md.
-2. Maintainer records acceptance. BL-0063/0064 are under-review; BL-0065 is blocked
-   on that handoff, with all locks released and the human-needed registry updated.
-3. After review/acceptance, update item/epic states and complete the normal PR release
-   process. v1.35.0 pins are prepared; no tag or release has been created.
+1. Review the housekeeping PR and its hosted checks. Merge requires the maintainer's
+   explicit operation approval under doc 09; no merge or release is implied by this baton.
+2. After integration, verify GitHub license detection and the actual Pages entry links,
+   static diagrams, and metadata; then update BL-0069 against observed evidence.
+3. The earlier v1.34.0 Release-page draft is superseded by the latest-content direction.
+   Do not publish it as the latest solution. Do not tag or release pending versions without
+   their own acceptance evidence and explicit operation approval.
+4. Continue any directory publication only after its own terms and delivery checks pass.
 
-## Local verification
+## Carried forward — not closed by housekeeping
 
-Scenario walkthroughs and structural checks are recorded in E11/TEST.md.
-No new unresolved local links; valid skill YAML; template parity; current-version
-pins agree; line budgets preserved. The one doc-02 illustrative link placeholder
-predates this branch. These are author checks, not independent assurance.
-
-## Carried forward
-
-E10 still awaits its independent re-audit; this task does not close it.
-BL-0058 remains the unrelated open intake item. No executable checker or new CI.
-
-2026-09-25: BL-0066/0067/0068 (E00, from an agent-of-empires read) implemented and
-staged as v1.36.0 — Unreleased, behind v1.35.0. Filing PR #39 and the implementation
-PR both await maintainer merge; the auto-mode classifier refused an agent merge.
+v1.35.0 merged through PR #38 but remains unreleased. E11/BL-0063–0065 still await
+independent review and maintainer acceptance; the human-needed entry remains active.
+v1.36.0 changes merged through PR #40 and remain staged behind v1.35.0.
+Latest tagged baseline: v1.34.0. Latest published Release observed before housekeeping: v1.17.3.
+E10 still awaits its independent re-audit. E10 and E11 occupy both active-epic slots;
+standing E00 is exempt. BL-0058 is unrelated and remains ready.

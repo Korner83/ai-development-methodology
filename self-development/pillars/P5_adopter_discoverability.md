@@ -91,4 +91,6 @@ The pillar is *delivered* (evergreen) when:
 
 ## 7. Delivering epics
 
+**2026-10-18 update:** the maintainer requested preparation for six relevant listing channels and pre-listing housekeeping through E00/BL-0069, revisiting the passive-only decision above. The GitHub description, Pages homepage field, and an additional skill-discovery topic were corrected and verified. No new directory submission or adoption outcome is claimed; the earlier evaluation score remains unchanged.
+
 (None yet. Likely Phase 2 epics: "Awesome-list saturation" (target ≥3 listings); "First public adoption story" (write one or commission one); "Profile pinning + visible repo placement.")
