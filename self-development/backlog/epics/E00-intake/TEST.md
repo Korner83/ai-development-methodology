@@ -52,6 +52,7 @@ Author verification on the housekeeping branch; this is not E10's independent re
 | Source links | Markdown-token/HTML-attribute check against fetched base found no new unresolved relative paths or headings; pre-existing adopter-relative template references and doc-02 placeholder remain separately recorded |
 | README presentation | Static SVGs loaded; both diagrams visually inspected; local desktop and 390-pixel mobile preview checked, with no page-level horizontal overflow |
 | Hosted entry baseline | Before changes, 32 same-site README destinations checked; three 404 paths identified: templates/, self-development/, and the relative workflow URL. README now points those entries at canonical GitHub destinations |
+| CI maintenance | Official checkout v7.0.1 and Gitleaks v3.0.0 pinned to full SHAs; both declare Node 24. Gitleaks license matches the prior version; runner is Ubuntu 24.04 and checkout credentials are not persisted. Hosted result must be checked at the updated head |
 | Publication | No new directory submission, methodology tag, PR merge, or Release publication claimed |
 
 Pending: final hosted PR checks, merge approval, post-merge license detection, and the deployed Pages build. Local rendering does not stand in for those checks. The diagram source is retained; no runtime renderer or new CI is introduced.

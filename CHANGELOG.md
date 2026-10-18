@@ -13,6 +13,8 @@ Maintainer-requested housekeeping before directory submissions: distinguish the 
 
 The README uses static SVG diagrams, with its Mermaid sources preserved, so the existing GitHub Pages site does not display diagram code. Broken folder/workflow links and the stale repository-size claim are corrected. Static Pages metadata is explicit; installer and hosted-build disclosures are narrowed to what the repository actually supplies.
 
+The existing secret-scan workflow now pins the official Node 24 checkout/Gitleaks releases and Ubuntu 24.04, removing deprecated-runtime and floating-runner warnings. Checkout credentials are not persisted; full-history scanning and read-only permissions remain. The Gitleaks action license is byte-identical to the prior version.
+
 This is preparation, not a new methodology release or closure of E10/E11. No executable code, runtime dependency, or additional CI is introduced. See [distribution status](DISTRIBUTION.md).
 
 ---
